@@ -9,27 +9,39 @@ services:
       args:
         - PUID=${PUID}
         - PGID=${PGID}
-        - INSTALL_XDEBUG=${INSTALL_XDEBUG}
-    environment:
-      PHP_IDE_CONFIG: "serverName=Docker"
+    #        - INSTALL_XDEBUG=${INSTALL_XDEBUG}
+    #    environment:
+    #      PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
-      - /var/www/vendor/
+      #      - /var/www/vendor/
       - ./../:/var/www/
-    ports:
-      - ${NGINX_HOST_HTTP_PORT}:8080
 
-  postgres:
-    container_name: postgres
+  nginx:
+    container_name: nginx
     build:
-      context: ./postgres
+      context: ./nginx
     ports:
-      - ${POSTGRES_PORT}:5432
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - ${NGINX_HOST_HTTP_PORT}:80
     volumes:
-      - db_data:/var/lib/postgresql/data:rw
+      - ..:/var/www/:rw
+    depends_on:
+      - php-fpm
 
-volumes:
-  db_data:
+#    ports:
+#      - ${NGINX_HOST_HTTP_PORT}:8080
+
+#  postgres:
+#    container_name: postgres
+#    build:
+#      context: ./postgres
+#    ports:
+#      - ${POSTGRES_PORT}:5432
+#    environment:
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#    volumes:
+#      - db_data:/var/lib/postgresql/data:rw
+
+#volumes:
+#  db_data:
