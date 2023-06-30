@@ -6,7 +6,7 @@ RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 
 # /Xdebug
 #ARG INSTALL_XDEBUG=true
-#RUN pecl install xdebug
+#RUN pecl install xdebug && docker-php-ext-enable xdebug
 #    && mkdir /var/www/logs && chown www-data:www-data /var/www/logs
 
 
