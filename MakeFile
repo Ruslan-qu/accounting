@@ -13,10 +13,10 @@ build:
 	${DOCKER_COMPOSE} build
 
 start:
-	${DOCKER_COMPOSE} start
+	docker compose -f ./docker/docker-compose.yml start
 
 stop:
-	${DOCKER_COMPOSE} stop
+	docker compose -f ./docker/docker-compose.yml stop
 
 up:
 	${DOCKER_COMPOSE} up -d --remove-orphans
@@ -44,7 +44,7 @@ dc_restart:
 ##################
 
 app_bash:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
+	docker compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bash
 php: app_bash
 
 test:

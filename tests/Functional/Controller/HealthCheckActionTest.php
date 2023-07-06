@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional\Controller;
 
 use PHPUnit\Framework\TestCase;
@@ -11,10 +13,11 @@ class HealthCheckActionTest extends WebTestCase
     public function test_request_responded_successful_result(): void
     {
         $client = static::createClient();
-        $client->request(method: Request::METHOD_GET, uri: '/health-check');
+
+        $client->request(Request::METHOD_GET, '/health-check');
 
         $this->assertResponseIsSuccessful();
-        $jsonResult = json_decode($client->getResponse()->getContent(), associative: true);
-        $this->assertEquals($jsonResult['status'], actual: 'ok');
+        $jsonResult = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals($jsonResult['status'], 'ok');
     }
 }
