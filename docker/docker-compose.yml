@@ -29,7 +29,6 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - "MYSQL_ROOT_PASSWORD=_TMP"
-      - "MYSQL_DATABASE=lm"
       - "MYSQL_USER=lm"
       - "MYSQL_PASSWORD=symfony"
     ports:
