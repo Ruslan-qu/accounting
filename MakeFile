@@ -57,17 +57,8 @@ cache:
 # Database
 ##################
 
-db_migrate:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:migrate --no-interaction
-migrate: db_migrate
-
-db_diff:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:diff --no-interaction
-diff: db_diff
-
-db_drop:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console doctrine:schema:drop --force
-
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 
 ##################
 # Static code analysis

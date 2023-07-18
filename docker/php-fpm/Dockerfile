@@ -13,8 +13,8 @@ RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 #COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 #COPY ./docker/php-fpm/php.ini /usr/local/etc/php/conf.d/php.ini
 
-# /Postgres
-# RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
+# /mysql
+RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_mysql
 
 # /Nginx
 # RUN apk add --update --no-cache nginx
