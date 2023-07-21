@@ -27,3 +27,4 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 ### VisualStudioCode ###
+config/packages/imap.yaml
