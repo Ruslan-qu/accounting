@@ -10,12 +10,14 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
+        "php-imap/php-imap": "^2.0",
         "secit-pl/imap-bundle": "^1.5",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.3.*",
         "symfony/runtime": "6.3.*",
+        "symfony/twig-bundle": "6.3.*",
         "symfony/yaml": "6.3.*"
     },
     "require-dev": {

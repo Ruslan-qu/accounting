@@ -61,6 +61,15 @@ php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 
 ##################
+# make:controller
+##################
+
+php bin/console make:controller
+
+
+
+
+##################
 # Static code analysis
 ##################
 
