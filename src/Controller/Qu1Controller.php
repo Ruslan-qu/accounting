@@ -12,7 +12,7 @@ class Qu1Controller extends AbstractController
     public function index(): Response
     {
         return $this->render('qu1/index.html.twig', [
-            'controller_name' => 'Qu1Controller',
+            'title_logo' => 'Входящие документы',
         ]);
     }
 }
