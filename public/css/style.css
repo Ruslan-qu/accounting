@@ -12,7 +12,7 @@ html {
 
 body {
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -51,6 +51,7 @@ header .header_logo {
 header .header_logo a {
     text-decoration: none;
     color: #ffffff;
+    font-size: 18px;
 }
 
 

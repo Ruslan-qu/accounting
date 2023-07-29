@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Qu1Controller extends AbstractController
+class SalesController extends AbstractController
 {
-    #[Route('/qu1', name: 'app_qu1')]
+    #[Route('/sales', name: 'sales')]
     public function index(): Response
     {
-        return $this->render('qu1/index.html.twig', [
-            'title_logo' => 'Входящие документы',
+        return $this->render('sales/index.html.twig', [
+            'title_logo' => 'Продажи',
         ]);
     }
 }
