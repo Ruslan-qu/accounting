@@ -106,6 +106,10 @@ aside ul li a:hover {
     background: #F5F5F5;
 }
 
+main {
+    padding: 15px;
+}
+
 footer {
     text-align: center;
     color: #fff;

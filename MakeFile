@@ -56,8 +56,12 @@ cache:
 ##################
 # Database
 ##################
+php bin/console make:entity #создания или обновления
+
+php bin/console make:entity --regenerate # генерировать методы геттеров и сеттеров
 
 php bin/console make:migration
+
 php bin/console doctrine:migrations:migrate
 
 ##################

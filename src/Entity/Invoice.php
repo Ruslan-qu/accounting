@@ -24,7 +24,7 @@ class Invoice
     private ?Counterparty $id_counterparty = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
-    private ?IdDetailsManufacturer $Id_id_details = null;
+    private ?IdDetailsManufacturer $id_details = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     private ?IdDetailsManufacturer $id_manufacturer = null;
@@ -40,6 +40,18 @@ class Invoice
 
     #[ORM\Column]
     private ?int $unit_price = null;
+
+    #[ORM\Column]
+    private ?int $quantity_sold = null;
+
+    #[ORM\Column]
+    private ?int $price_sold = null;
+
+    #[ORM\Column]
+    private ?int $Sales = null;
+
+    #[ORM\Column]
+    private ?int $refund = null;
 
     public function getId(): ?int
     {
@@ -84,12 +96,12 @@ class Invoice
 
     public function getIdIdDetails(): ?int
     {
-        return $this->Id_id_details;
+        return $this->id_details;
     }
 
-    public function setIdIdDetails(int $Id_id_details): static
+    public function setIdIdDetails(int $id_details): static
     {
-        $this->Id_id_details = $Id_id_details;
+        $this->id_details = $id_details;
 
         return $this;
     }
@@ -150,6 +162,54 @@ class Invoice
     public function setUnitPrice(int $unit_price): static
     {
         $this->unit_price = $unit_price;
+
+        return $this;
+    }
+
+    public function getQuantitySold(): ?int
+    {
+        return $this->quantity_sold;
+    }
+
+    public function setQuantitySold(int $quantity_sold): static
+    {
+        $this->quantity_sold = $quantity_sold;
+
+        return $this;
+    }
+
+    public function getPriceSold(): ?int
+    {
+        return $this->price_sold;
+    }
+
+    public function setPriceSold(int $price_sold): static
+    {
+        $this->price_sold = $price_sold;
+
+        return $this;
+    }
+
+    public function getSales(): ?int
+    {
+        return $this->Sales;
+    }
+
+    public function setSales(int $Sales): static
+    {
+        $this->Sales = $Sales;
+
+        return $this;
+    }
+
+    public function getRefund(): ?int
+    {
+        return $this->refund;
+    }
+
+    public function setRefund(int $refund): static
+    {
+        $this->refund = $refund;
 
         return $this;
     }
