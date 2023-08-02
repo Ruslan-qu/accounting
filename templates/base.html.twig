@@ -36,9 +36,18 @@
             <div class="center_block_main">
                 <main>
                     {% block main %}
-                    
-
-                    
+                        <table>
+                            <thead>
+                                <tr>
+                                    {% block table_thead_tr %}
+                                    {% endblock %}	
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% block tbody %}
+                                {% endblock %}
+                            </tbody>
+                        </table>   
                     {% endblock %}
                 </main>
             </div>

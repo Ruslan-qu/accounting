@@ -110,6 +110,16 @@ main {
     padding: 15px;
 }
 
+table {
+    margin-top: 25px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
 footer {
     text-align: center;
     color: #fff;
