@@ -112,12 +112,22 @@ main {
 
 table {
     margin-top: 25px;
+
 }
 
 table,
 th,
 td {
     border: 1px solid black;
+}
+
+th {
+    padding: 5px;
+}
+
+td {
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 footer {

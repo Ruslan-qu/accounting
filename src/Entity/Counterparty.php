@@ -21,6 +21,9 @@ class Counterparty
     #[ORM\OneToMany(mappedBy: 'id_counterparty', targetEntity: Invoice::class)]
     private Collection $invoices;
 
+    #[ORM\Column(length: 33)]
+    private ?string $mail_counterparty = null;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -69,6 +72,18 @@ class Counterparty
                 $invoice->setIdCounterparty(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMailCounterparty(): ?string
+    {
+        return $this->mail_counterparty;
+    }
+
+    public function setMailCounterparty(string $mail_counterparty): static
+    {
+        $this->mail_counterparty = $mail_counterparty;
 
         return $this;
     }

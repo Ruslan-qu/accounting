@@ -4,6 +4,20 @@
 
 {% block logo %}{{title_logo}}{% endblock %}
 
+{% block form %}
+    {{ form_start(form) }}
+        {{ form_row(form.id_invoice) }}
+        {{ form_row(form.data_invoice)}}
+        {{ form_row(form.name_detail)}}
+        {{ form_row(form.quantity) }}
+        {{ form_row(form.unit_price)}}
+        {{ form_row(form.price) }}
+        {{ form_row(form.quantity_sold)}}
+        {{ form_row(form.price_sold) }}
+        <button class="btn" type="submit">Сохранить</button>
+    {{ form_end(form) }}                 
+{% endblock %}
+
 {% block table_thead_tr %}
 <th>№ Накладной</th>
 <th>Дата накладной</th>
@@ -11,7 +25,8 @@
 <th>№ Детали</th>
 <th>Производитель</th>
 <th>Описание детали</th>
-<th>Цена за шт</th>
+<th>Количество</th>
+<th>Цена шт</th>
 <th>Цена общая</th>
 <th>Продано шт</th>
 <th>Продано Цена</th>
@@ -27,10 +42,11 @@
     <td>5</td>
     <td>6</td>
     <td>7</td>
-<td>7</td>
-<td>7</td>
-<td>7</td>
-<td>7</td>
-<td>7</td>
+    <td>7</td>
+    <td>7</td>
+    <td>7</td>
+    <td>7</td>
+    <td>7</td>
+    <td>7</td>
 </tr>
 {% endblock %}
