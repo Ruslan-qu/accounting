@@ -15,14 +15,35 @@ class IncomingDocumentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id_invoice', IntegerType::class)
+            ->add('id_invoice', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
             ->add('data_invoice', DateType::class)
-            ->add('name_detail', TextType::class)
-            ->add('quantity', DateType::class)
-            ->add('price', IntegerType::class)
-            ->add('unit_price', IntegerType::class)
-            ->add('quantity_sold', IntegerType::class)
-            ->add('price_sold', IntegerType::class);
+            ->add('name_detail', TextType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
+            ->add('quantity', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
+            ->add('price', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
+            ->add('unit_price', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
+            ->add('quantity_sold', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px']
+            ])
+            ->add('price_sold', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 97px']
+            ]);
         //->add('id_counterparty', TextType::class)
         //->add('id_details', TextType::class)
         //->add('id_manufacturer', TextType::class);

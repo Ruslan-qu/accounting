@@ -6,16 +6,14 @@
 
 {% block form %}
     {{ form_start(form) }}
-        {{ form_row(form.id_invoice) }}
-        {{ form_row(form.data_invoice)}}
-        {{ form_row(form.name_detail)}}
-        {{ form_row(form.quantity) }}
-        {{ form_row(form.unit_price)}}
-        {{ form_row(form.price) }}
-        {{ form_row(form.quantity_sold)}}
-        {{ form_row(form.price_sold) }}
-        <button class="btn" type="submit">Сохранить</button>
-    {{ form_end(form) }}                 
+        <th>{{ form_row(form.id_invoice) }}</th>
+        <th>{{ form_row(form.data_invoice)}}</th>
+        <th>{{ form_row(form.name_detail)}}</th>
+        <th>{{ form_row(form.quantity) }}</th>
+        <th>{{ form_row(form.unit_price)}}</th>
+        <th>{{ form_row(form.price) }}</th>
+        <th><button class="btn" type="submit">Сохранить</button></th>
+                    
 {% endblock %}
 
 {% block table_thead_tr %}
@@ -34,7 +32,6 @@
 <th>Возврат</th>
 {% endblock %}	
 {% block tbody %}
-<tr>
     <td>1</td>
     <td>2</td>
     <td>3</td>
@@ -44,9 +41,9 @@
     <td>7</td>
     <td>7</td>
     <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-</tr>
+    <td>{{ form_row(form.quantity_sold) }}</td>
+    <td>{{ form_row(form.price_sold) }}</td>
+    <td><button class="sales" type="submit">Продано</button></td>
+    <td><button class="refund" type="submit">Возврат</button></td>
+    {{ form_end(form) }}
 {% endblock %}

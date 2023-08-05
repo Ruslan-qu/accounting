@@ -110,14 +110,18 @@ main {
     padding: 15px;
 }
 
-table {
+.form th {
+    border: 1px solid black;
+}
+
+.table table {
     margin-top: 25px;
 
 }
 
-table,
-th,
-td {
+.table table,
+.table th,
+.table td {
     border: 1px solid black;
 }
 

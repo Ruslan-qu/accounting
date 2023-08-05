@@ -36,8 +36,18 @@
             <div class="center_block_main">
                 <main>
                     {% block main %}
-                    {% block form %}
-                    {% endblock %}
+                        <div class="form">
+                        <fieldset>
+                        <legend>Добавить новую счет-фактуру</legend>
+                        <table>
+                            <tr>
+                            {% block form %}
+                            {% endblock %}
+                            </tr>
+                           </table> 
+                           <fieldset>
+                        </div> 
+                        <div class="table">  
                         <table>
                             <thead>
                                 <tr>
@@ -46,10 +56,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
                                 {% block tbody %}
                                 {% endblock %}
+                                </tr>
                             </tbody>
-                        </table>   
+                        </table> 
+                        </div> 
                     {% endblock %}
                 </main>
             </div>
