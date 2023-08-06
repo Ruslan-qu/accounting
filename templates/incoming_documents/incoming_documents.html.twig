@@ -6,7 +6,8 @@
 
 {% block form %}
     {{ form_start(form) }}
-        <th>{{ form_row(form.id_invoice) }}</th>
+        <th>{{ form_label(form.id_invoice) }}<br>
+        {{ form_widget(form.id_invoice) }}</th>
         <th>{{ form_row(form.data_invoice)}}</th>
         <th>{{ form_row(form.name_detail)}}</th>
         <th>{{ form_row(form.quantity) }}</th>
