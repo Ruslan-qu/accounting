@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block form %}
+    {{ form_start(form_p_n) }}
+        <th>{{ form_label(form_p_n.Id_details) }}<br>
+        {{ form_widget(form_p_n.Id_details) }}
+        {{ form_errors(form_p_n.Id_details) }}</th>
+        <th>{{ form_label(form_p_n.manufacturer) }}<br>
+        {{ form_widget(form_p_n.manufacturer) }}
+        {{ form_errors(form_p_n.manufacturer) }}</th>
+        <th><button class="save" type="submit">Сохранить</button></th>
+    {{ form_end(form_p_n) }}
+{% endblock %}
+
+{% block table_thead_tr %}
+<th>№</th>
+<th>№ Детали</th>
+<th>Производитель</th>
+<th>Удаление</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td><button class="delete" type="submit">Удалить</button></td>
+{% endblock %}

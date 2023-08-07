@@ -38,7 +38,7 @@
                     {% block main %}
                         <div class="form">
                         <fieldset>
-                        <legend>Добавить новую счет-фактуру</legend>
+                        <legend>{% block legend %}{% endblock legend%}</legend>
                         <table>
                             <tr>
                             {% block form %}

@@ -75,6 +75,26 @@ header button.green {
     cursor: pointer;
 }
 
+.save {
+    color: #ffffff;
+    padding: 7px 5px;
+    background-color: rgba(0, 136, 169, 1);
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sales,
+.refund,
+.delete {
+    color: #ffffff;
+    padding: 0px 10px;
+    background-color: rgba(0, 136, 169, 1);
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .center_block_main {
     display: flex;
     margin: auto 0;
