@@ -21,6 +21,7 @@ class IncomingDocumentsType extends AbstractType
             ])
             ->add('data_invoice', DateType::class, [
                 'label' => 'Дата нак-ой',
+                'widget' => 'single_text'
             ])
 
             ->add('name_detail', TextareaType::class, [
@@ -49,10 +50,14 @@ class IncomingDocumentsType extends AbstractType
             ->add('price_sold', IntegerType::class, [
                 'label' => false,
                 'attr' => ['style' => 'width: 97px', 'placeholder' => 'Цена']
+            ])
+            ->add('today_date', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
             ]);
-        //->add('id_counterparty', TextType::class)
-        //->add('id_details', TextType::class)
-        //->add('id_manufacturer', TextType::class);
+        //->add('id_counterparty', IntegerType::class)
+        //->add('id_details', IntegerType::class)
+        //->add('id_manufacturer', IntegerType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

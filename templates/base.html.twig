@@ -5,10 +5,10 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
         {% block stylesheets %}
-        {% endblock %}
+        {% endblock stylesheets %}
 
         {% block javascripts %}
-        {% endblock %}
+        {% endblock javascripts %}
     </head>
     <body>
         {% block body %}
@@ -37,31 +37,42 @@
                 <main>
                     {% block main %}
                         <div class="form">
-                        <fieldset>
-                        <legend>{% block legend %}{% endblock legend%}</legend>
-                        <table>
-                            <tr>
-                            {% block form %}
-                            {% endblock %}
-                            </tr>
-                           </table> 
+                            <fieldset>
+                                <legend>{% block legend %}{% endblock legend%}</legend>
+                                    <table>
+                                        <tr>
+                                            {% block form %}
+                                            {% endblock %}
+                                        </tr>
+                                    </table> 
+                           <fieldset>
+                        </div> 
+                        <div class="form_search">
+                            <fieldset>
+                                <legend>{% block legend_search %}{% endblock legend_search %}</legend>
+                                    <table>
+                                        <tr>
+                                            {% block form_search %}
+                                            {% endblock form_search %}
+                                        </tr>
+                                    </table> 
                            <fieldset>
                         </div> 
                         <div class="table">  
-                        <table>
-                            <thead>
-                                <tr>
-                                    {% block table_thead_tr %}
-                                    {% endblock %}	
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                {% block tbody %}
-                                {% endblock %}
-                                </tr>
-                            </tbody>
-                        </table> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_thead_tr %}
+                                        {% endblock %}	
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {% block tbody %}
+                                        {% endblock %}
+                                    </tr>
+                                </tbody>
+                            </table> 
                         </div> 
                     {% endblock %}
                 </main>

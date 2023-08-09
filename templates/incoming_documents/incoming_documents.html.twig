@@ -35,7 +35,7 @@
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
         <th><button class="save" type="submit">Сохранить</button></th>
-                    
+        
 {% endblock %}
 
 {% block table_thead_tr %}
@@ -50,6 +50,7 @@
 <th>Цена общая</th>
 <th>Продано шт</th>
 <th>Продано Цена</th>
+<th>Дата прод-жи</th>
 <th>Продано</th>
 <th>Возврат</th>
 {% endblock %}
@@ -66,6 +67,7 @@
     <td>7</td>
     <td>{{ form_row(form_i_d.quantity_sold) }}</td>
     <td>{{ form_row(form_i_d.price_sold) }}</td>
+    <td>{{ form_row(form_i_d.today_date) }}</td>
     <td><button class="sales" type="submit">Продано</button></td>
     <td><button class="refund" type="submit">Возврат</button></td>
     {{ form_end(form_i_d) }}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InvoiceRepository::class)]
@@ -16,8 +17,8 @@ class Invoice
     #[ORM\Column]
     private ?int $id_invoice = null;
 
-    #[ORM\Column]
-    private ?int $data_invoice = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $data_invoice = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,6 +53,9 @@ class Invoice
 
     #[ORM\Column]
     private ?int $refund = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $today_date = null;
 
     public function getId(): ?int
     {
@@ -210,6 +214,18 @@ class Invoice
     public function setRefund(int $refund): static
     {
         $this->refund = $refund;
+
+        return $this;
+    }
+
+    public function getTodayDate(): ?\DateTimeInterface
+    {
+        return $this->today_date;
+    }
+
+    public function setTodayDate(\DateTimeInterface $today_date): static
+    {
+        $this->today_date = $today_date;
 
         return $this;
     }
