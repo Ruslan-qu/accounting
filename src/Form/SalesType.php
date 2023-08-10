@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Form;
+
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use App\Entity\Invoice;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class SalesType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('quantity_sold', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 96px', 'placeholder' => 'шт']
+            ])
+            ->add('price_sold', IntegerType::class, [
+                'label' => false,
+                'attr' => ['style' => 'width: 97px', 'placeholder' => 'Цена']
+            ])
+            ->add('today_date', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Invoice::class,
+        ]);
+    }
+}

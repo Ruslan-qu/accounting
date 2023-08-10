@@ -38,23 +38,11 @@ class IncomingDocumentsType extends AbstractType
             ->add('price', IntegerType::class, [
                 'label' => 'Цена общая',
                 'attr' => ['style' => 'width: 80px']
-            ])
-            ->add('unit_price', IntegerType::class, [
+            ]);
+        /*->add('unit_price', IntegerType::class, [
                 'label' => 'Цена шт',
                 'attr' => ['style' => 'width: 80px']
-            ])
-            ->add('quantity_sold', IntegerType::class, [
-                'label' => false,
-                'attr' => ['style' => 'width: 96px', 'placeholder' => 'шт']
-            ])
-            ->add('price_sold', IntegerType::class, [
-                'label' => false,
-                'attr' => ['style' => 'width: 97px', 'placeholder' => 'Цена']
-            ])
-            ->add('today_date', DateType::class, [
-                'label' => false,
-                'widget' => 'single_text',
-            ]);
+            ]);*/
         //->add('id_counterparty', IntegerType::class)
         //->add('id_details', IntegerType::class)
         //->add('id_manufacturer', IntegerType::class);
