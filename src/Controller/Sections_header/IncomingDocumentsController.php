@@ -2,7 +2,7 @@
 
 namespace App\Controller\Sections_header;
 
-
+use DateTime;
 use App\Entity\Invoice;
 use App\Entity\IdDetailsManufacturer;
 use App\Form\IncomingDocumentsType;
@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class IncomingDocumentsController extends AbstractController
 {
@@ -26,31 +30,33 @@ class IncomingDocumentsController extends AbstractController
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_sales = $this->createForm(SalesType::class, $entity_sales);
-
+        //dd($entity_incoming_documents);
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
         $form_sales->handleRequest($request);
-
+        //dd($form_incoming_documents);
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
-            $entity_incoming_documents->setIdInvoice($request->request->get('id_invoice'));
-            $entity_incoming_documents->setDataInvoice($request->request->get('data_invoice'));
-            $entity_part_no->setIdDetails($request->request->get('Id_details'));;
-            $entity_part_no->setManufacturer($request->request->get('manufacturer'));;
-            $entity_incoming_documents->setNameDetail($request->request->get('name_detail'));
-            $entity_incoming_documents->setQuantity($request->request->get('quantity'));
+            //$i = $request->$form_incoming_documents;
+            //['incoming_documents']['data_invoice']
+            //dd(new \DateTime($request->request->all()['incoming_documents']['data_invoice']));
+            $entity_incoming_documents->setIdInvoice($request->request->all()['incoming_documents']['id_invoice']);
+            $entity_incoming_documents->setDataInvoice(new \DateTime($request->request->all()['incoming_documents']['data_invoice']));
+            $entity_part_no->setIdDetails($request->request->all()['part_no']['Id_details']);
+            $entity_part_no->setManufacturer($request->request->all()['part_no']['manufacturer']);
+            $entity_incoming_documents->setNameDetail($request->request->all()['incoming_documents']['name_detail']);
+            $entity_incoming_documents->setQuantity($request->request->all()['incoming_documents']['quantity']);
             /*$entity_incoming_documents->setUnitPrice(
                 $request->request->get('price') / $request->request->get('quantity')
             );*/
-            $entity_incoming_documents->setPrice($request->request->get('price'));
-
-            $em = $$doctrine->getDoctrine()->getManager();
+            $entity_incoming_documents->setPrice($request->request->all()['incoming_documents']['price']);
+            //dd($entity_incoming_documents);
+            $em = $doctrine->getManager();
             $em->persist($entity_incoming_documents);
             $em->flush();
-
-            $em = $$doctrine->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             $em->persist($entity_part_no);
             $em->flush();
             return $this->redirectToRoute('incoming_documents');

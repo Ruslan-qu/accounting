@@ -15,10 +15,10 @@ class IdDetailsManufacturer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 33)]
+    #[ORM\Column(length: 33, nullable: true)]
     private ?string $Id_details = null;
 
-    #[ORM\Column(length: 33)]
+    #[ORM\Column(length: 33, nullable: true)]
     private ?string $manufacturer = null;
 
     #[ORM\OneToMany(mappedBy: 'id_manufacturer', targetEntity: Invoice::class)]
