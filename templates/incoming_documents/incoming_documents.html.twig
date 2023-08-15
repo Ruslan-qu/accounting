@@ -14,10 +14,17 @@
         <th>{{ form_label(form_i_d.data_invoice) }}<br>
         {{ form_widget(form_i_d.data_invoice) }}
         {{ form_errors(form_i_d.data_invoice) }}</th>
+        <th>{{ form_label(form_i_d.id_counterparty) }}<br>
+        {{ form_widget(form_i_d.id_counterparty) }}
+        {{ form_errors(form_i_d.id_counterparty) }}</th>
+        {#{{ form_start(form_c) }}
+            <th>{{ form_label(form_c.counterparty) }}<br>
+            {{ form_widget(form_c.counterparty) }}
+            {{ form_errors(form_c.counterparty) }}</th>#}
         {{ form_start(form_p_n) }}
-            <th>{{ form_label(form_p_n.Id_details) }}<br>
-            {{ form_widget(form_p_n.Id_details) }}
-            {{ form_errors(form_p_n.Id_details) }}</th>
+            <th>{{ form_label(form_p_n.part_number) }}<br>
+            {{ form_widget(form_p_n.part_number) }}
+            {{ form_errors(form_p_n.part_number) }}</th>
             <th>{{ form_label(form_p_n.manufacturer) }}<br>
             {{ form_widget(form_p_n.manufacturer) }}
             {{ form_errors(form_p_n.manufacturer) }}</th>
@@ -27,13 +34,11 @@
         <th>{{ form_label(form_i_d.quantity) }}<br>
         {{ form_widget(form_i_d.quantity) }}
         {{ form_errors(form_i_d.quantity) }}</th>
-        {#<th>{{ form_label(form_i_d.unit_price) }}<br>
-        {{ form_widget(form_i_d.unit_price) }}
-        {{ form_errors(form_i_d.unit_price) }}</th>#}
         <th>{{ form_label(form_i_d.price) }}<br>
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
         <th><button class="save" type="submit" name="save">Сохранить</button></th>
+        {#{{ form_end(form_c) }}#}
         {{ form_end(form_p_n) }}   
     {{ form_end(form_i_d) }}   
 {% endblock %}

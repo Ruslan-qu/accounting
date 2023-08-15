@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Invoice;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Entity\Counterparty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class IncomingDocumentsType extends AbstractType
 {
@@ -38,14 +41,22 @@ class IncomingDocumentsType extends AbstractType
             ->add('price', IntegerType::class, [
                 'label' => 'Цена общая',
                 'attr' => ['style' => 'width: 80px']
+            ])
+            ->add('id_counterparty', EntityType::class, [
+                'label' => 'Поставщик',
+                'class' => Counterparty::class,
+                'choice_label' => 'counterparty',
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+            ->add('id_details', IntegerType::class, [
+                'label' => false
+            ])
+            ->add('id_manufacturer', IntegerType::class, [
+                'label' => false
             ]);
-        /*->add('unit_price', IntegerType::class, [
-                'label' => 'Цена шт',
-                'attr' => ['style' => 'width: 80px']
-            ]);*/
-        //->add('id_counterparty', IntegerType::class)
-        //->add('id_details', IntegerType::class)
-        //->add('id_manufacturer', IntegerType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

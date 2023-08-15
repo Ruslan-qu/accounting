@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\IdDetailsManufacturerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\IdDetailsManufacturerRepository;
 
 #[ORM\Entity(repositoryClass: IdDetailsManufacturerRepository::class)]
 class IdDetailsManufacturer
@@ -15,10 +16,12 @@ class IdDetailsManufacturer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 33, nullable: true)]
-    private ?string $Id_details = null;
+    #[Assert\Unique]
+    #[ORM\Column(length: 33, nullable: false)]
+    private ?string $part_number = null;
 
-    #[ORM\Column(length: 33, nullable: true)]
+    #[Assert\Unique]
+    #[ORM\Column(length: 33, nullable: false)]
     private ?string $manufacturer = null;
 
     #[ORM\OneToMany(mappedBy: 'id_manufacturer', targetEntity: Invoice::class)]
@@ -34,14 +37,14 @@ class IdDetailsManufacturer
         return $this->id;
     }
 
-    public function getIdDetails(): ?string
+    public function getPartNumber(): ?string
     {
-        return $this->Id_details;
+        return $this->part_number;
     }
 
-    public function setIdDetails(string $Id_details): static
+    public function setPartNumber(string $part_number): static
     {
-        $this->Id_details = $Id_details;
+        $this->part_number = $part_number;
 
         return $this;
     }

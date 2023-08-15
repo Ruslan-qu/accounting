@@ -95,12 +95,12 @@ class Invoice
         return $this;
     }
 
-    public function getIdIdDetails(): ?int
+    public function getIdDetails(): ?int
     {
         return $this->id_details;
     }
 
-    public function setIdIdDetails(int $id_details): static
+    public function setIdDetails(int $id_details): static
     {
         $this->id_details = $id_details;
 
