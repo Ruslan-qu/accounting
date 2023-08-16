@@ -24,11 +24,11 @@ class Invoice
     #[ORM\JoinColumn(nullable: true)]
     private ?Counterparty $id_counterparty = null;
 
-    #[ORM\ManyToOne(inversedBy: 'invoices')]
-    private ?IdDetailsManufacturer $id_details = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $id_details = null;
 
-    #[ORM\ManyToOne(inversedBy: 'invoices')]
-    private ?IdDetailsManufacturer $id_manufacturer = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $id_manufacturer = null;
 
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $name_detail = null;
@@ -107,12 +107,12 @@ class Invoice
         return $this;
     }
 
-    public function getIdManufacturer(): ?IdDetailsManufacturer
+    public function getIdManufacturer(): ?int
     {
         return $this->id_manufacturer;
     }
 
-    public function setIdManufacturer(?IdDetailsManufacturer $id_manufacturer): static
+    public function setIdManufacturer(int $id_manufacturer): static
     {
         $this->id_manufacturer = $id_manufacturer;
 

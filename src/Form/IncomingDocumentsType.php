@@ -50,13 +50,13 @@ class IncomingDocumentsType extends AbstractType
                     'style' => 'width: 100px ',
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
-            ])
-            ->add('id_details', IntegerType::class, [
+            ]);
+        /*->add('id_details', IntegerType::class, [
                 'label' => false
             ])
             ->add('id_manufacturer', IntegerType::class, [
                 'label' => false
-            ]);
+            ]);*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

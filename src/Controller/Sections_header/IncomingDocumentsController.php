@@ -2,6 +2,7 @@
 
 namespace App\Controller\Sections_header;
 
+use DateTime;
 use App\Entity\Invoice;
 use App\Form\SalesType;
 use App\Form\PartNoType;
@@ -40,20 +41,39 @@ class IncomingDocumentsController extends AbstractController
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
             //dd($request->request->all());
+            $part_number = $request->request->all()['part_no']['part_number'];
+            $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                ->count(['part_number' => $part_number]);
+            //dd($сount_part_number);
+            if ($сount_part_number == 0) {
+                $entity_part_no->setPartNumber($part_number);
+                $entity_part_no->setManufacturer(
+                    $request->request->all()['part_no']['manufacturer']
+                );
+                $em = $doctrine->getManager();
+                $em->persist($entity_part_no);
+                $em->flush();
+                $id_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    ->findOneBy(['part_number' => $part_number])->getId();
+
+                $entity_incoming_documents->setIdDetails($id_part_number);
+                $entity_incoming_documents->setIdManufacturer($id_part_number);
+            } else {
+                $id_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    ->findOneBy(['part_number' => $part_number])->getId();
+
+                $entity_incoming_documents->setIdDetails($id_part_number);
+                $entity_incoming_documents->setIdManufacturer($id_part_number);
+            }
+
             $entity_incoming_documents->setIdInvoice(
                 $request->request->all()['incoming_documents']['id_invoice']
             );
             $entity_incoming_documents->setDataInvoice(
-                new \DateTime($request->request->all()['incoming_documents']['data_invoice'])
+                new DateTime($request->request->all()['incoming_documents']['data_invoice'])
             );
             $entity_incoming_documents->setIdInvoice(
                 $request->request->all()['incoming_documents']['id_counterparty']
-            );
-            $entity_part_no->setPartNumber(
-                $request->request->all()['part_no']['part_number']
-            );
-            $entity_part_no->setManufacturer(
-                $request->request->all()['part_no']['manufacturer']
             );
             $entity_incoming_documents->setNameDetail(
                 $request->request->all()['incoming_documents']['name_detail']
@@ -68,11 +88,11 @@ class IncomingDocumentsController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($entity_incoming_documents);
             $em->flush();
-            $em = $doctrine->getManager();
-            $em->persist($entity_part_no);
-            $em->flush();
+
             return $this->redirectToRoute('incoming_documents');
         }
+
+
 
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
@@ -83,9 +103,4 @@ class IncomingDocumentsController extends AbstractController
             //'form_c' => $form_counterparty->createView(),
         ]);
     }
-
-    //private function FormCounterparty(ManagerRegistry $doctrine, Request $request): Response
-    //{
-
-    //}
 }
