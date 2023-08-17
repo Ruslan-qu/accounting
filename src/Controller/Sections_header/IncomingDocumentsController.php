@@ -53,17 +53,17 @@ class IncomingDocumentsController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
-                $id_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findOneBy(['part_number' => $part_number])->getId();
 
-                $entity_incoming_documents->setIdDetails($id_part_number);
-                $entity_incoming_documents->setIdManufacturer($id_part_number);
+                $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
+                $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
             } else {
-                $id_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findOneBy(['part_number' => $part_number])->getId();
 
-                $entity_incoming_documents->setIdDetails($id_part_number);
-                $entity_incoming_documents->setIdManufacturer($id_part_number);
+                $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
+                $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
             }
 
             $entity_incoming_documents->setIdInvoice(
@@ -93,14 +93,22 @@ class IncomingDocumentsController extends AbstractController
         }
 
 
-
+        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
+            ->findAll();
+        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
+            ->findAll();
+        $arr_counterparty = $doctrine->getRepository(Counterparty::class)
+            ->findAll();
+        //dd($arr_incoming_documents);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
             'form_s' => $form_sales->createView(),
-            //'form_c' => $form_counterparty->createView(),
+            'arr_incoming_documents' => $arr_incoming_documents,
+            'arr_part_no' => $arr_part_no,
+            //'arr_counterparty' => $arr_counterparty,
         ]);
     }
 }

@@ -61,20 +61,24 @@
 {% endblock %}
 
 {% block tbody %}
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    {{ form_start(form_s) }}
+    {% for  incoming_documents in arr_incoming_documents %}
+    <tr>
+    <td>{{ incoming_documents.getIdInvoice() }}</td>
+    <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y")}}</td>
+    <td>{{ dump(incoming_documents.getIdCounterparty())}}</td>
+    <td>{{ incoming_documents.getIdDetails() }}</td>
+    <td>{{ incoming_documents.getIdManufacturer() }}</td>
+    <td>{{ incoming_documents.getNameDetail() }}</td>
+    <td>{{ incoming_documents.getQuantity() }}</td>
+    <td>{{ incoming_documents.getPrice() / incoming_documents.getQuantity() }}</td>
+    <td>{{ incoming_documents.getPrice() }}</td>
+    {#{{ form_start(form_s) }}
         <td>{{ form_row(form_s.quantity_sold) }}</td>
         <td>{{ form_row(form_s.price_sold) }}</td>
         <td>{{ form_row(form_s.today_date) }}</td>
         <td><button class="sales" type="submit" name="sales">Продано</button></td>
-    {{ form_end(form_s) }}
+    {{ form_end(form_s) }}#}
     <td><button class="refund" type="submit" name="refund">Возврат</button></td>
+    </tr>
+    {% endfor %}
 {% endblock %}
