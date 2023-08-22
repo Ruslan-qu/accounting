@@ -8,26 +8,32 @@
 
 {% block form %}
     {{ form_start(form_i_d) }}
-        <th>{{ form_label(form_i_d.id_invoice) }}<br>
-        {{ form_widget(form_i_d.id_invoice) }}
-        {{ form_errors(form_i_d.id_invoice) }}</th>
+        <th>{{ form_label(form_i_d.number_document) }}<br>
+        {{ form_widget(form_i_d.number_document) }}
+        {{ form_errors(form_i_d.number_document) }}</th>
         <th>{{ form_label(form_i_d.data_invoice) }}<br>
         {{ form_widget(form_i_d.data_invoice) }}
         {{ form_errors(form_i_d.data_invoice) }}</th>
         <th>{{ form_label(form_i_d.id_counterparty) }}<br>
         {{ form_widget(form_i_d.id_counterparty) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
-        {#{{ form_start(form_c) }}
+        {#<th>{{ form_label(form_i_d.id_details) }}<br>
+        {{ form_widget(form_i_d.id_details) }}
+        {{ form_errors(form_i_d.id_details) }}</th>
+        <th>{{ form_label(form_i_d.id_manufacturer) }}<br>
+        {{ form_widget(form_i_d.id_manufacturer) }}
+        {{ form_errors(form_i_d.id_manufacturer) }}</th>
+        {{ form_start(form_c) }}
             <th>{{ form_label(form_c.counterparty) }}<br>
             {{ form_widget(form_c.counterparty) }}
             {{ form_errors(form_c.counterparty) }}</th>#}
         {{ form_start(form_p_n) }}
-            <th>{{ form_label(form_p_n.part_number) }}<br>
-            {{ form_widget(form_p_n.part_number) }}
-            {{ form_errors(form_p_n.part_number) }}</th>
-            <th>{{ form_label(form_p_n.manufacturer) }}<br>
-            {{ form_widget(form_p_n.manufacturer) }}
-            {{ form_errors(form_p_n.manufacturer) }}</th>
+            <th>{{ form_label(form_p_n.part_numbers) }}<br>
+            {{ form_widget(form_p_n.part_numbers) }}
+            {{ form_errors(form_p_n.part_numbers) }}</th>
+            <th>{{ form_label(form_p_n.manufacturers) }}<br>
+            {{ form_widget(form_p_n.manufacturers) }}
+            {{ form_errors(form_p_n.manufacturers) }}</th>
         <th>{{ form_label(form_i_d.name_detail) }}<br>
         {{ form_widget(form_i_d.name_detail) }}
         {{ form_errors(form_i_d.name_detail) }}</th>
@@ -38,8 +44,8 @@
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
         <th><button class="save" type="submit" name="save">Сохранить</button></th>
-        {#{{ form_end(form_c) }}#}
-        {{ form_end(form_p_n) }}   
+        {#{{ form_end(form_c) }}#} 
+        {{ form_end(form_p_n) }}
     {{ form_end(form_i_d) }}   
 {% endblock %}
 
@@ -61,17 +67,17 @@
 {% endblock %}
 
 {% block tbody %}
-    {% for  incoming_documents in arr_incoming_documents %}
+    {% for incoming_documents in arr_incoming_documents %}
     <tr>
-    <td>{{ incoming_documents.getIdInvoice() }}</td>
+    <td>{{ incoming_documents.getNumberDocument() }}</td>
     <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y")}}</td>
-    <td>{{ dump(incoming_documents.getIdCounterparty())}}</td>
-    <td>{{ incoming_documents.getIdDetails() }}</td>
-    <td>{{ incoming_documents.getIdManufacturer() }}</td>
+    <td>{{ incoming_documents.getIdCounterparty().getCounterparty() }}</td>
+    <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
+    <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
     <td>{{ incoming_documents.getNameDetail() }}</td>
     <td>{{ incoming_documents.getQuantity() }}</td>
-    <td>{{ incoming_documents.getPrice() / incoming_documents.getQuantity() }}</td>
-    <td>{{ incoming_documents.getPrice() }}</td>
+    <td>{{ (incoming_documents.getPrice() / 100 / incoming_documents.getQuantity())|number_format(2)}}</td>
+    <td>{{ incoming_documents.getPrice() / 100}}</td>
     {#{{ form_start(form_s) }}
         <td>{{ form_row(form_s.quantity_sold) }}</td>
         <td>{{ form_row(form_s.price_sold) }}</td>

@@ -40,40 +40,37 @@ class IncomingDocumentsController extends AbstractController
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
-            //dd($request->request->all());
-            $part_number = $request->request->all()['part_no']['part_number'];
+            //dd($request->request->all()['incoming_documents']['id_invoice']);
+            $part_number = $request->request->all()['part_no']['part_numbers'];
             $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->count(['part_number' => $part_number]);
+                ->count(['part_numbers' => $part_number]);
             //dd($сount_part_number);
             if ($сount_part_number == 0) {
-                $entity_part_no->setPartNumber($part_number);
-                $entity_part_no->setManufacturer(
-                    $request->request->all()['part_no']['manufacturer']
+                $entity_part_no->setPartNumbers($part_number);
+                $entity_part_no->setManufacturers(
+                    $request->request->all()['part_no']['manufacturers']
                 );
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
                 $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_number' => $part_number])->getId();
-
+                    ->findOneBy(['part_numbers' => $part_number]);
+                //dd($em);
                 $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
                 $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
             } else {
                 $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_number' => $part_number])->getId();
-
+                    ->findOneBy(['part_numbers' => $part_number]);
+                //dd($id_part_number_manufacturer);
                 $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
                 $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
             }
 
-            $entity_incoming_documents->setIdInvoice(
-                $request->request->all()['incoming_documents']['id_invoice']
+            $entity_incoming_documents->setNumberDocument(
+                $request->request->all()['incoming_documents']['number_document']
             );
             $entity_incoming_documents->setDataInvoice(
                 new DateTime($request->request->all()['incoming_documents']['data_invoice'])
-            );
-            $entity_incoming_documents->setIdInvoice(
-                $request->request->all()['incoming_documents']['id_counterparty']
             );
             $entity_incoming_documents->setNameDetail(
                 $request->request->all()['incoming_documents']['name_detail']
@@ -82,9 +79,9 @@ class IncomingDocumentsController extends AbstractController
                 $request->request->all()['incoming_documents']['quantity']
             );
             $entity_incoming_documents->setPrice(
-                $request->request->all()['incoming_documents']['price']
+                $request->request->all()['incoming_documents']['price'] * 100
             );
-
+            //dd($entity_incoming_documents);
             $em = $doctrine->getManager();
             $em->persist($entity_incoming_documents);
             $em->flush();
@@ -97,9 +94,9 @@ class IncomingDocumentsController extends AbstractController
             ->findAll();
         $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
             ->findAll();
-        $arr_counterparty = $doctrine->getRepository(Counterparty::class)
-            ->findAll();
-        //dd($arr_incoming_documents);
+        //$arr_counterparty = $doctrine->getRepository(Counterparty::class)
+        //    ->findAll();
+        //dd($arr_incoming_documents[2]->getIdCounterparty()->getCounterparty());
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',

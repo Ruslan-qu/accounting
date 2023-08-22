@@ -13,11 +13,11 @@ class PartNoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('part_number', TextType::class, [
+            ->add('part_numbers', TextType::class, [
                 'label' => '№ Детали',
                 'attr' => ['style' => 'width: 140px']
             ])
-            ->add('manufacturer', TextType::class, [
+            ->add('manufacturers', TextType::class, [
                 'label' => 'Производитель',
                 'attr' => ['style' => 'width: 140px']
             ]);

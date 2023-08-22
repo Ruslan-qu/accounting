@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,21 +16,12 @@ class Invoice
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $id_invoice = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $data_invoice = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Counterparty $id_counterparty = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $id_details = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $id_manufacturer = null;
 
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $name_detail = null;
@@ -54,21 +47,18 @@ class Invoice
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $today_date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'part_number')]
+    private ?IdDetailsManufacturer $id_details = null;
+
+    #[ORM\ManyToOne(inversedBy: 'manufacturer')]
+    private ?IdDetailsManufacturer $id_manufacturer = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $number_document = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdInvoice(): ?int
-    {
-        return $this->id_invoice;
-    }
-
-    public function setIdInvoice(int $id_invoice): static
-    {
-        $this->id_invoice = $id_invoice;
-
-        return $this;
     }
 
     public function getDataInvoice(): ?\DateTimeInterface
@@ -91,30 +81,6 @@ class Invoice
     public function setIdCounterparty(?Counterparty $id_counterparty): static
     {
         $this->id_counterparty = $id_counterparty;
-
-        return $this;
-    }
-
-    public function getIdDetails(): ?int
-    {
-        return $this->id_details;
-    }
-
-    public function setIdDetails(int $id_details): static
-    {
-        $this->id_details = $id_details;
-
-        return $this;
-    }
-
-    public function getIdManufacturer(): ?int
-    {
-        return $this->id_manufacturer;
-    }
-
-    public function setIdManufacturer(int $id_manufacturer): static
-    {
-        $this->id_manufacturer = $id_manufacturer;
 
         return $this;
     }
@@ -211,6 +177,42 @@ class Invoice
     public function setTodayDate(\DateTimeInterface $today_date): static
     {
         $this->today_date = $today_date;
+
+        return $this;
+    }
+
+    public function getIdDetails(): ?IdDetailsManufacturer
+    {
+        return $this->id_details;
+    }
+
+    public function setIdDetails(?IdDetailsManufacturer $id_details): static
+    {
+        $this->id_details = $id_details;
+
+        return $this;
+    }
+
+    public function getIdManufacturer(): ?IdDetailsManufacturer
+    {
+        return $this->id_manufacturer;
+    }
+
+    public function setIdManufacturer(?IdDetailsManufacturer $id_manufacturer): static
+    {
+        $this->id_manufacturer = $id_manufacturer;
+
+        return $this;
+    }
+
+    public function getNumberDocument(): ?int
+    {
+        return $this->number_document;
+    }
+
+    public function setNumberDocument(?int $number_document): static
+    {
+        $this->number_document = $number_document;
 
         return $this;
     }

@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -18,7 +18,7 @@ class IncomingDocumentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id_invoice', IntegerType::class, [
+            ->add('number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
                 'attr' => ['style' => 'width: 140px']
             ])
@@ -38,9 +38,12 @@ class IncomingDocumentsType extends AbstractType
                 'label' => 'Кол-во',
                 'attr' => ['style' => 'width: 50px']
             ])
-            ->add('price', IntegerType::class, [
+            ->add('price', NumberType::class, [
                 'label' => 'Цена общая',
-                'attr' => ['style' => 'width: 80px']
+                'attr' => ['style' => 'width: 80px'],
+                //'currency' => false,
+                //'divisor' => 100,
+                //'scale' => 2
             ])
             ->add('id_counterparty', EntityType::class, [
                 'label' => 'Поставщик',
@@ -52,10 +55,12 @@ class IncomingDocumentsType extends AbstractType
                 ]
             ]);
         /*->add('id_details', IntegerType::class, [
-                'label' => false
+                'label' => '№ Детали',
+                'attr' => ['style' => 'width: 140px'],
             ])
             ->add('id_manufacturer', IntegerType::class, [
-                'label' => false
+                'label' => 'Производитель',
+                'attr' => ['style' => 'width: 140px'],
             ]);*/
     }
 
