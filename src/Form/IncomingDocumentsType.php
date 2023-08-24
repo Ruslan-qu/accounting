@@ -43,7 +43,7 @@ class IncomingDocumentsType extends AbstractType
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
-                //'scale' => 2
+                //'scale' => 2,
             ])
             ->add('id_counterparty', EntityType::class, [
                 'label' => 'Поставщик',

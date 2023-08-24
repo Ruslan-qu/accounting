@@ -53,19 +53,18 @@ class IncomingDocumentsController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
-                $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_numbers' => $part_number]);
-                //dd($em);
-                $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
-                $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
-            } else {
-                $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_numbers' => $part_number]);
-                //dd($id_part_number_manufacturer);
-                $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
-                $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
-            }
-
+            } //else {
+            // $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
+            //    ->findOneBy(['part_numbers' => $part_number]);
+            //dd($id_part_number_manufacturer);
+            // $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
+            //$entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
+            // }
+            $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
+                ->findOneBy(['part_numbers' => $part_number]);
+            //dd($em);
+            $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
+            $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
             $entity_incoming_documents->setNumberDocument(
                 $request->request->all()['incoming_documents']['number_document']
             );
@@ -78,9 +77,15 @@ class IncomingDocumentsController extends AbstractController
             $entity_incoming_documents->setQuantity(
                 $request->request->all()['incoming_documents']['quantity']
             );
-            $entity_incoming_documents->setPrice(
-                $request->request->all()['incoming_documents']['price'] * 100
-            );
+            $price = $request->request->all()['incoming_documents']['price'];
+            if (strpos($price, ',')) {
+                $strPriceReplace = str_replace(',', '.', $price);
+                $entity_incoming_documents->setPrice($strPriceReplace * 100);
+            } else {
+                //dd($price);
+                $entity_incoming_documents->setPrice($price * 100);
+            }
+
             //dd($entity_incoming_documents);
             $em = $doctrine->getManager();
             $em->persist($entity_incoming_documents);
