@@ -43,6 +43,7 @@
         <th>{{ form_label(form_i_d.price) }}<br>
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
+        {{ form_start(form_i_d.price) }}
         <th><button class="save" type="submit" name="save">Сохранить</button></th>
         {#{{ form_end(form_c) }}#} 
         {{ form_end(form_p_n) }}
@@ -56,7 +57,7 @@
 <th>№ Детали</th>
 <th>Производитель</th>
 <th>Описание детали</th>
-<th>Количество</th>
+<th>Кол-во</th>
 <th>Цена шт</th>
 <th>Цена общая</th>
 <th>Продано шт</th>
@@ -64,7 +65,7 @@
 <th>Дата прод-жи</th>
 <th>Продано</th>
 <th>Возврат</th>
-{% endblock %}
+{% endblock table_thead_tr %}
 
 {% block tbody %}
     {% for incoming_documents in arr_incoming_documents %}
@@ -78,12 +79,21 @@
     <td>{{ incoming_documents.getQuantity() }}</td>
     <td>{{ (incoming_documents.getPrice() / 100 / incoming_documents.getQuantity())|number_format(2)}}</td>
     <td>{{ incoming_documents.getPrice() / 100}}</td>
-    {#{{ form_start(form_s) }}
-        <td>{{ form_row(form_s.quantity_sold) }}</td>
+    <form name="form_s" method="post">
+        <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
+        <td><input type="number" name="quantity_sold" required="required" 
+            style="width: 70px" placeholder="шт" /></td>
+        <td><input type="number" name="price_sold" required="required" 
+            style="width: 98px" placeholder="Цена" /></td>
+        <td><input type="date" name="today_date" required="required" /></td>
+        <td><button class="sales" type="submit" name="sales">Продано</button></td>    
+    </form>
+    {#{{ form_start(form_s) }}#}
+        {#<td>{{ form_row(form_s.quantity_sold) }}</td>
         <td>{{ form_row(form_s.price_sold) }}</td>
         <td>{{ form_row(form_s.today_date) }}</td>
-        <td><button class="sales" type="submit" name="sales">Продано</button></td>
-    {{ form_end(form_s) }}#}
+        <td><button class="sales" type="submit" name="sales">Продано</button></td>#}
+    {#{{ form_end(form_s) }}#}
     <td><button class="refund" type="submit" name="refund">Возврат</button></td>
     </tr>
     {% endfor %}

@@ -28,17 +28,17 @@ class IncomingDocumentsController extends AbstractController
 
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
-        $form_sales = $this->createForm(SalesType::class, $entity_sales);
+        //$form_sales = $this->createForm(SalesType::class, $entity_sales);
         $form_counterparty = $this->createForm(CounterpartyType::class, $entity_counterparty);
 
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
-        $form_sales->handleRequest($request);
+        //$form_sales->handleRequest($request);
         $form_counterparty->handleRequest($request);
-
+        //dd($request);
         if (
-            $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
-            && $form_part_no->isSubmitted() && $form_part_no->isValid()
+            $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid() && !$form_incoming_documents->isEmpty()
+            && $form_part_no->isSubmitted() && $form_part_no->isValid() && !$form_part_no->isEmpty()
         ) {
             //dd($request->request->all()['incoming_documents']['id_invoice']);
             $part_number = $request->request->all()['part_no']['part_numbers'];
@@ -93,21 +93,43 @@ class IncomingDocumentsController extends AbstractController
 
             return $this->redirectToRoute('incoming_documents');
         }
+        //$quantity_sold = $request->request->all()['quantity_sold'];
+        //$price_sold = $request->request->all()['price_sold'];
+        //$today_date = $request->request->all()['quantity_sold'];
+        dd($request->request->all());
+        if (
+            $request->request->all()['quantity_sold'] !== false
+            && $request->request->all()['price_sold'] !== false
+            && new DateTime($request->request->all()['today_date'] !== false)
+        ) {
+            $entity_sales->setQuantitySold(
+                $request->request->all()['quantity_sold']
+            );
+            $entity_sales->setPriceSold(
+                $request->request->all()['price_sold']
+            );
+            $entity_sales->setTodayDate(
+                new DateTime($request->request->all()['today_date'])
+            );
+            $em = $doctrine->getManager();
+            $em->persist($entity_sales);
+            $em->flush();
 
-
+            return $this->redirectToRoute('incoming_documents');
+        }
         $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
             ->findAll();
         $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
             ->findAll();
         //$arr_counterparty = $doctrine->getRepository(Counterparty::class)
         //    ->findAll();
-        //dd($arr_incoming_documents[2]->getIdCounterparty()->getCounterparty());
+        //dd($arr_part_no);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
-            'form_s' => $form_sales->createView(),
+            //'form_s' => $form_sales->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
             'arr_part_no' => $arr_part_no,
             //'arr_counterparty' => $arr_counterparty,

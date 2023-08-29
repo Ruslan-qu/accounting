@@ -40,7 +40,7 @@ class IncomingDocumentsType extends AbstractType
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Цена общая',
-                'attr' => ['style' => 'width: 80px'],
+                'attr' => ['style' => 'width: 80px']
                 //'currency' => false,
                 //'divisor' => 100,
                 //'scale' => 2,
