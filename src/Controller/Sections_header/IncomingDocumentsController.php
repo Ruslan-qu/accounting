@@ -22,23 +22,20 @@ class IncomingDocumentsController extends AbstractController
     public function AddIncomingDocuments(ManagerRegistry $doctrine, Request $request): Response
     {
         $entity_incoming_documents = new Invoice();
-        $entity_sales = new Invoice();
         $entity_counterparty = new Counterparty();
         $entity_part_no = new IdDetailsManufacturer();
 
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
-        //$form_sales = $this->createForm(SalesType::class, $entity_sales);
         $form_counterparty = $this->createForm(CounterpartyType::class, $entity_counterparty);
 
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
-        //$form_sales->handleRequest($request);
         $form_counterparty->handleRequest($request);
-        //dd($request);
+        //dd(3 % 3);
         if (
-            $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid() && !$form_incoming_documents->isEmpty()
-            && $form_part_no->isSubmitted() && $form_part_no->isValid() && !$form_part_no->isEmpty()
+            $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
+            && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
             //dd($request->request->all()['incoming_documents']['id_invoice']);
             $part_number = $request->request->all()['part_no']['part_numbers'];
@@ -53,13 +50,8 @@ class IncomingDocumentsController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
-            } //else {
-            // $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-            //    ->findOneBy(['part_numbers' => $part_number]);
-            //dd($id_part_number_manufacturer);
-            // $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
-            //$entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
-            // }
+            }
+
             $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                 ->findOneBy(['part_numbers' => $part_number]);
             //dd($em);
@@ -85,6 +77,9 @@ class IncomingDocumentsController extends AbstractController
                 //dd($price);
                 $entity_incoming_documents->setPrice($price * 100);
             }
+            $entity_incoming_documents->setSales(1);
+            $entity_incoming_documents->setRefund(1);
+
 
             //dd($entity_incoming_documents);
             $em = $doctrine->getManager();
@@ -93,15 +88,33 @@ class IncomingDocumentsController extends AbstractController
 
             return $this->redirectToRoute('incoming_documents');
         }
-        //$quantity_sold = $request->request->all()['quantity_sold'];
-        //$price_sold = $request->request->all()['price_sold'];
-        //$today_date = $request->request->all()['quantity_sold'];
-        dd($request->request->all());
+
+        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
+            ->findAll();
+        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
+            ->findAll();
+
+        return $this->render('incoming_documents/incoming_documents.html.twig', [
+            'title_logo' => 'Входящие документы',
+            'legend' => 'Добавить новую счет-фактуру',
+            'form_i_d' => $form_incoming_documents->createView(),
+            'form_p_n' => $form_part_no->createView(),
+            'arr_incoming_documents' => $arr_incoming_documents,
+            'arr_part_no' => $arr_part_no,
+        ]);
+    }
+
+    #[Route('/sales_parts', name: 'sales_parts')]
+    public function SalesParts(ManagerRegistry $doctrine, Request $request): Response
+    {
+        //dd($request->request->all()['id']);
         if (
-            $request->request->all()['quantity_sold'] !== false
-            && $request->request->all()['price_sold'] !== false
-            && new DateTime($request->request->all()['today_date'] !== false)
+            isset($_POST['quantity_sold'])
+            && isset($_POST['price_sold'])
+            && isset($_POST['today_date'])
         ) {
+            $id = $request->request->all()['id'];
+            $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
             $entity_sales->setQuantitySold(
                 $request->request->all()['quantity_sold']
             );
@@ -111,28 +124,23 @@ class IncomingDocumentsController extends AbstractController
             $entity_sales->setTodayDate(
                 new DateTime($request->request->all()['today_date'])
             );
-            $em = $doctrine->getManager();
-            $em->persist($entity_sales);
-            $em->flush();
+            $doctrine->getManager()->flush();
 
             return $this->redirectToRoute('incoming_documents');
         }
-        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
-            ->findAll();
-        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
-            ->findAll();
-        //$arr_counterparty = $doctrine->getRepository(Counterparty::class)
-        //    ->findAll();
-        //dd($arr_part_no);
-        return $this->render('incoming_documents/incoming_documents.html.twig', [
-            'title_logo' => 'Входящие документы',
-            'legend' => 'Добавить новую счет-фактуру',
-            'form_i_d' => $form_incoming_documents->createView(),
-            'form_p_n' => $form_part_no->createView(),
-            //'form_s' => $form_sales->createView(),
-            'arr_incoming_documents' => $arr_incoming_documents,
-            'arr_part_no' => $arr_part_no,
-            //'arr_counterparty' => $arr_counterparty,
-        ]);
+    }
+
+    #[Route('/refund', name: 'refund', methods: ['GET'])]
+    public function Refund(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $id = $request->query->get('refund');
+
+        $refund = $doctrine->getRepository(Invoice::class)->find($id);
+
+        $refund->setRefund(2);
+
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('incoming_documents');
     }
 }
