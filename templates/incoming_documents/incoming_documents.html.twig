@@ -79,9 +79,9 @@
     <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
     <td>{{ incoming_documents.getNameDetail() }}</td>
     <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
-    <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity()) |number_format(2) }}</td>
-    <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity()) 
-                * incoming_documents.getQuantitySold()) }}</td>
+    <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity())|number_format(2) }}</td>
+    <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
+                / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
     <form action="/sales_parts" name="form_sales" method="post">
         <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
         <td><input type="number" name="quantity_sold" required="required" 

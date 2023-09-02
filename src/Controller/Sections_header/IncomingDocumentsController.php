@@ -104,6 +104,7 @@ class IncomingDocumentsController extends AbstractController
         ]);
     }
 
+
     #[Route('/sales_parts', name: 'sales_parts')]
     public function SalesParts(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -115,8 +116,10 @@ class IncomingDocumentsController extends AbstractController
         ) {
             $id = $request->request->all()['id'];
             $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
+            $now_quantity_sold = $entity_sales->getQuantitySold();
             $entity_sales->setQuantitySold(
-                $request->request->all()['quantity_sold']
+                $now_quantity_sold +
+                    $request->request->all()['quantity_sold']
             );
             $entity_sales->setPriceSold(
                 $request->request->all()['price_sold']
@@ -125,6 +128,16 @@ class IncomingDocumentsController extends AbstractController
                 new DateTime($request->request->all()['today_date'])
             );
             $doctrine->getManager()->flush();
+            //dd($entity_sales->getQuantitySold());
+            $quantity_sold = $entity_sales->getQuantitySold();
+            $quantity = $entity_sales->getQuantity();
+
+            if ($quantity_sold == $quantity) {
+
+                $entity_sales->setSales(2);
+
+                $doctrine->getManager()->flush();
+            }
 
             return $this->redirectToRoute('incoming_documents');
         }
