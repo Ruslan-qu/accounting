@@ -85,7 +85,10 @@
     <form action="/sales_parts" name="form_sales" method="post">
         <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
         <td><input type="number" name="quantity_sold" required="required" 
-            style="width: 70px" placeholder="шт" /></td>
+            style="width: 70px" placeholder="шт" />
+                {% if incoming_documents.getId() == errors_id %}
+                    {{'Неверное <br> количество'}}
+                {% endif %}</td>
         <td><input type="number" name="price_sold" required="required" 
             style="width: 98px" placeholder="Цена" /></td>
         <td><input type="date" name="today_date" required="required" /></td>
