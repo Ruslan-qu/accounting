@@ -4,8 +4,8 @@ namespace App\Controller\Sections_header;
 
 use DateTime;
 use App\Entity\Invoice;
-use App\Form\SalesType;
 use App\Form\PartNoType;
+use App\Form\SearchType;
 use App\Entity\Counterparty;
 use App\Form\CounterpartyType;
 use App\Form\IncomingDocumentsType;
@@ -23,6 +23,38 @@ class IncomingDocumentsController extends AbstractController
     {
         $errors_id = $request->query->get('id');
 
+        $entity_incoming_documents = new Invoice();
+        $entity_part_no = new IdDetailsManufacturer();
+
+        $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
+        $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
+        $form_search_incoming_documents = $this->createForm(SearchType::class);
+
+        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
+            ->findAll();
+        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
+            ->findAll();
+
+
+        return $this->render('incoming_documents/incoming_documents.html.twig', [
+            'title_logo' => 'Входящие документы',
+            'legend' => 'Добавить новую счет-фактуру',
+            'legend_search' => 'Поиск',
+            'form_i_d' => $form_incoming_documents->createView(),
+            'form_p_n' => $form_part_no->createView(),
+            'form_i_d_search' => $form_search_incoming_documents->createView(),
+            'form_p_n_search' => $form_part_no->createView(),
+            'form_p_n_search_price' => $form_search_incoming_documents->createView(),
+            'arr_incoming_documents' => $arr_incoming_documents,
+            'arr_part_no' => $arr_part_no,
+            'errors_id' => $errors_id,
+        ]);
+    }
+
+
+    #[Route('/sales_incoming_documents', name: 'sales_incoming_documents')]
+    public function SalesIncomingDocuments(ManagerRegistry $doctrine, Request $request): Response
+    {
         $entity_incoming_documents = new Invoice();
         $entity_counterparty = new Counterparty();
         $entity_part_no = new IdDetailsManufacturer();
@@ -90,22 +122,6 @@ class IncomingDocumentsController extends AbstractController
 
             return $this->redirectToRoute('incoming_documents');
         }
-
-        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
-            ->findAll();
-        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
-            ->findAll();
-
-
-        return $this->render('incoming_documents/incoming_documents.html.twig', [
-            'title_logo' => 'Входящие документы',
-            'legend' => 'Добавить новую счет-фактуру',
-            'form_i_d' => $form_incoming_documents->createView(),
-            'form_p_n' => $form_part_no->createView(),
-            'arr_incoming_documents' => $arr_incoming_documents,
-            'arr_part_no' => $arr_part_no,
-            'errors_id' => $errors_id,
-        ]);
     }
 
 

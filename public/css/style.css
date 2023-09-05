@@ -75,6 +75,15 @@ header button.green {
     cursor: pointer;
 }
 
+.search {
+    color: #ffffff;
+    padding: 7px 23px;
+    background-color: rgba(0, 136, 169, 1);
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .save {
     color: #ffffff;
     padding: 7px 5px;
@@ -130,6 +139,7 @@ main {
     padding: 15px;
 }
 
+.form_search th,
 .form th {
     border: 1px solid black;
 }
@@ -152,6 +162,17 @@ th {
 td {
     padding-left: 2px;
     padding-right: 2px;
+}
+
+#search_id_counterparty input {
+    display: inline;
+
+
+}
+
+#search_id_counterparty label {
+    display: inline-block;
+    margin: 0 35% 0 3%
 }
 
 footer {
