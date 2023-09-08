@@ -45,44 +45,73 @@
         <th>{{ form_label(form_i_d.price) }}<br>
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
-        {{ form_start(form_i_d.price) }}
         <th><button class="save" type="submit" name="save">Сохранить</button></th>
-        {#{{ form_end(form_c) }}#} 
         {{ form_end(form_p_n) }}
     {{ form_end(form_i_d) }}   
 {% endblock %}
 
 {% block form_search %}
-    {{ form_start(form_i_d_search)}}
+
+    {{ form_start(form_search, {'action': path('incoming_documents')}) }}
+
+        <th>{{ form_label(form_search.number_document) }}<br>
+        {{ form_widget(form_search.number_document) }}
+        {{ form_errors(form_search.number_document) }}</th>
+
+        <th>{{ form_label(form_search.s_data_invoice) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_data_invoice) }}
+        {{ form_errors(form_search.s_data_invoice) }}<br>
+        {{'по '}}{{ form_widget(form_search.po_data_invoice) }}
+        {{ form_errors(form_search.po_data_invoice) }}</th>
+
+        <th>{{ form_label(form_search.id_counterparty) }}<br>
+        {{ form_widget(form_search.id_counterparty) }}
+        {{ form_errors(form_search.id_counterparty) }}</th>
+
+        <th>{{ form_label(form_search.part_numbers) }}<br>
+        {{ form_widget(form_search.part_numbers) }}
+        {{ form_errors(form_search.part_numbers) }}</th>
+
+        <th>{{ form_label(form_search.manufacturers) }}<br>
+        {{ form_widget(form_search.manufacturers) }}
+        {{ form_errors(form_search.manufacturers) }}</th>
+
+        <th>{{ form_label(form_search.s_price) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_price) }}
+        {{ form_errors(form_search.s_price) }}<br>
+        {{'по '}}{{ form_widget(form_search.po_price) }}
+        {{ form_errors(form_search.po_price) }}</th>
+
+        <th>{{ form_label(form_search.refund) }}<br>
+        {{ form_widget(form_search.refund) }}
+        {{ form_errors(form_search.refund) }}</th>
+
+        <th><button class="search" type="submit" name="search">Поиск</button></th>
+    {{ form_end(form_search) }}
+
+    {#{{ form_start(form_i_d_search)}}
         <th>{{ form_label(form_i_d_search.number_document) }}<br>
         {{ form_widget(form_i_d_search.number_document) }}
         {{ form_errors(form_i_d_search.number_document) }}</th>
-        <th>{{ form_label(form_i_d_search.s_data_invoice) }}<br>
-        {{ 'с  ' }}{{ form_widget(form_i_d_search.s_data_invoice) }}
-        {{ form_errors(form_i_d_search.s_data_invoice) }}<br>
-        {{ 'по ' }}{{ form_widget(form_i_d_search.po_data_invoice) }}
-        {{ form_errors(form_i_d_search.po_data_invoice) }}</th>
-        <th>{{ form_label(form_i_d_search.id_counterparty) }}<br>
-        {{ form_widget(form_i_d_search.id_counterparty) }}
-        {{ form_errors(form_i_d_search.id_counterparty) }}</th>
-    {{ form_start(form_p_n_search) }}
-        <th>{{ form_label(form_p_n_search.part_numbers) }}<br>
-        {{ form_widget(form_p_n_search.part_numbers) }}
-        {{ form_errors(form_p_n_search.part_numbers) }}</th>
-        <th>{{ form_label(form_p_n_search.manufacturers) }}<br>
-        {{ form_widget(form_p_n_search.manufacturers) }}
-        {{ form_errors(form_p_n_search.manufacturers) }}</th>
-        <th>{{ form_label(form_i_d_search.s_price) }}<br>
-        {{ 'с ' }}{{ form_widget(form_i_d_search.s_price) }}
-        {{ form_errors(form_i_d_search.s_price) }}
-        {{ ' по ' }}{{ form_widget(form_i_d_search.po_price) }}
-        {{ form_errors(form_i_d_search.po_price) }}</th>
-        <th>{{ form_label(form_i_d_search.refund) }}<br>
-        {{ form_widget(form_i_d_search.refund) }}
-        {{ form_errors(form_i_d_search.refund) }}</th>
+        <th>{{ form_label(form_i_d_search.data_invoice) }}<br>
+        {{ form_widget(form_i_d_search.data_invoice) }}
+        {{ form_errors(form_i_d_search.data_invoice) }}</th>
+        <th>{{ form_label(form_i_d_search.id_counterparty_search) }}<br>
+        {{ form_widget(form_i_d_search.id_counterparty_search) }}
+        {{ form_errors(form_i_d_search.id_counterparty_search) }}</th>
+        {{ form_start(form_p_n_search) }}
+            <th>{{ form_label(form_p_n_search.part_numbers) }}<br>
+            {{ form_widget(form_p_n_search.part_numbers) }}
+            {{ form_errors(form_p_n_search.part_numbers) }}</th>
+            <th>{{ form_label(form_p_n_search.manufacturers) }}<br>
+            {{ form_widget(form_p_n_search.manufacturers) }}
+            {{ form_errors(form_p_n_search.manufacturers) }}</th>
+        <th>{{ form_label(form_i_d_search.price) }}<br>
+        {{ form_widget(form_i_d_search.price) }}
+        {{ form_errors(form_i_d_search.price) }}</th>
         <th><button class="search" type="submit" name="search">Поиск</button></th>
-    {{ form_end(form_p_n_search) }}
-    {{ form_end(form_i_d_search) }} 
+        {{ form_end(form_p_n_search) }}
+    {{ form_end(form_i_d_search, {'render_rest': false}) }} #}
 {% endblock form_search %}
 
 {% block table_thead_tr %}

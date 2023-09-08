@@ -2,17 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Invoice;
 use App\Entity\Counterparty;
+use App\Entity\SearchInvoice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
-class SearchType extends AbstractType
+class SearchInvoiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,19 +22,22 @@ class SearchType extends AbstractType
             ->add('s_data_invoice', DateType::class, [
                 'label' => 'Дата нак-ой',
                 'widget' => 'single_text',
+                'required' => false,
                 'attr' => [
-                    'style' => 'margin: 0 0 0 7%'
+                    'style' => 'margin: 0 0 2% 7%'
                 ]
             ])
             ->add('po_data_invoice', DateType::class, [
-                'label' => 'Дата нак-ой',
+                'label' => false,
                 'widget' => 'single_text',
-                'attr' => [
-                    'style' => 'margin: 3% 0 0'
-                ]
+                'required' => false,
+                //'attr' => [
+                //    'style' => 'margin: 3% 0 0'
+                // ]
             ])
             ->add('s_price', NumberType::class, [
                 'label' => 'Цена',
+                'required' => false,
                 'attr' => ['style' => 'width: 80px']
                 //'currency' => false,
                 //'divisor' => 100,
@@ -40,6 +45,7 @@ class SearchType extends AbstractType
             ])
             ->add('po_price', NumberType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => ['style' => 'width: 80px']
                 //'currency' => false,
                 //'divisor' => 100,
@@ -47,6 +53,7 @@ class SearchType extends AbstractType
             ])
             ->add('number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
+                'required' => false,
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('id_counterparty', EntityType::class, [
@@ -54,6 +61,7 @@ class SearchType extends AbstractType
                 'class' => Counterparty::class,
                 'choice_label' => 'counterparty',
                 'expanded' => true,
+                'required' => false,
                 'attr' => [
                     // 'style' => 'input #search_id_counterparty_1 { padding: 10px 10px 10px 10px }'
                     // 'counterparty' => ['style' => 'margin: 10px 10px 10px 10px']
@@ -63,32 +71,31 @@ class SearchType extends AbstractType
                 ],
 
             ])
-            /*->add('id_details', IntegerType::class, [
-                'label' => '№ Детали',
-                'attr' => ['style' => 'width: 140px'],
-            ])
-            ->add('id_manufacturer', IntegerType::class, [
-                'label' => 'Производитель',
-                'attr' => ['style' => 'width: 140px'],
-            ])
             ->add('part_numbers', TextType::class, [
                 'label' => '№ Детали',
+                'required' => false,
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('manufacturers', TextType::class, [
                 'label' => 'Производитель',
+                'required' => false,
                 'attr' => ['style' => 'width: 140px']
-            ])*/
-            ->add('refund', IntegerType::class, [
-                'label' => 'Возврат',
-                'attr' => ['style' => 'width: 140px']
+            ])
+            ->add('refund', ChoiceType::class, [
+                'label' => 'Возвраты',
+                'choices'  => [
+                    'Возвраты' => 2,
+                ],
+                'expanded' => true,
+                'required' => false,
+                //'attr' => ['style' => 'width: 140px']
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        //$resolver->setDefaults([
-        //    'data_class' => Invoice::class,
-        // ]);
+        $resolver->setDefaults([
+            'data_class' => SearchInvoice::class,
+        ]);
     }
 }

@@ -5,9 +5,10 @@ namespace App\Controller\Sections_header;
 use DateTime;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
-use App\Form\SearchType;
 use App\Entity\Counterparty;
+use App\Entity\SearchInvoice;
 use App\Form\CounterpartyType;
+use App\Form\SearchInvoiceType;
 use App\Form\IncomingDocumentsType;
 use App\Entity\IdDetailsManufacturer;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,26 +26,37 @@ class IncomingDocumentsController extends AbstractController
 
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
+        $entity_search_invoice = new SearchInvoice();
 
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
-        $form_search_incoming_documents = $this->createForm(SearchType::class);
+        $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
 
+        dd($request);
+        // $form_search->handleRequest($request);
+
+        /*if (
+            $form_search_incoming_documents->isSubmitted() && $form_search_incoming_documents->isValid()
+        ) {
+            dd($form_search_incoming_documents);
+        }*/
         $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
             ->findAll();
         $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
             ->findAll();
 
-
+        //dd($form_search);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
             'legend_search' => 'Поиск',
+            'form_search' => $form_search_invoice->createView(),
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
-            'form_i_d_search' => $form_search_incoming_documents->createView(),
-            'form_p_n_search' => $form_part_no->createView(),
-            'form_p_n_search_price' => $form_search_incoming_documents->createView(),
+            //'form_i_d_search' => $form_incoming_documents->createView(),
+            //'form_i_d_search_date_price' => $form_incoming_documents->createView(),
+            //'form_p_n_search' => $form_part_no->createView(),
+            //'form_p_n_search_price' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
             'arr_part_no' => $arr_part_no,
             'errors_id' => $errors_id,

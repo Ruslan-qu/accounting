@@ -164,15 +164,31 @@ td {
     padding-right: 2px;
 }
 
-#search_id_counterparty input {
+#search_invoice_id_counterparty input {
     display: inline;
-
-
 }
 
-#search_id_counterparty label {
+#search_invoice_id_counterparty label {
     display: inline-block;
     margin: 0 35% 0 3%
+}
+
+#search_invoice_s_price {
+    margin: 0 0 2% 10%
+}
+
+div #search_invoice_id_counterparty_placeholder+label,
+div #search_invoice_id_counterparty_placeholder {
+    display: none;
+}
+
+div #search_invoice_refund_placeholder+label,
+div #search_invoice_refund_placeholder {
+    display: none;
+}
+
+#search_invoice_refund label {
+    display: none;
 }
 
 footer {
