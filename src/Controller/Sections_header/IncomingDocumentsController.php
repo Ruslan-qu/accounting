@@ -32,18 +32,60 @@ class IncomingDocumentsController extends AbstractController
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
 
-        dd($request);
-        // $form_search->handleRequest($request);
+        //dd($request);
+        $form_search_invoice->handleRequest($request);
 
-        /*if (
-            $form_search_incoming_documents->isSubmitted() && $form_search_incoming_documents->isValid()
+        if (
+            $form_search_invoice->isSubmitted()
         ) {
-            dd($form_search_incoming_documents);
-        }*/
-        $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
-            ->findAll();
-        $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
-            ->findAll();
+
+            //dd($request->request->all()['search_invoice']);
+            $arr_incoming_documents = [];
+            $arr_request = $request->request->all()['search_invoice'];
+            foreach ($arr_request as $key => $value) {
+                if ($value) {
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy([$key => $value]);
+                }
+            }
+
+            $number_document_search = $request->request->all()['search_invoice']['number_document'];
+            if ($number_document_search) {
+                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    ->findBy(['number_document' => $number_document_search]);
+            }
+
+            //  $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
+            //  $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
+
+
+            $id_counterparty_search = $request->request->all()['search_invoice']['id_counterparty'];
+            if ($id_counterparty_search) {
+                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    ->findBy(['id_counterparty' => $id_counterparty_search]);
+            }
+            $part_numbers_search = $request->request->all()['search_invoice']['id_details'];
+            if ($part_numbers_search) {
+                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    ->findBy(['id_details' => $part_numbers_search]);
+            }
+            $manufacturers_search = $request->request->all()['search_invoice']['id_manufacturer'];
+            if ($manufacturers_search) {
+                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    ->findBy(['id_manufacturer' => $manufacturers_search]);
+            }
+            //  $s_price_search = $request->request->all()['search_invoice']['s_price'];
+            //  $po_price_search = $request->request->all()['search_invoice']['po_price'];
+            // $refund_search = $request->request->all()['search_invoice']['refund'];
+
+            // dd($arr_incoming_documents);
+        } else {
+            $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
+                ->findAll();
+        }
+
+        //  $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
+        //       ->findAll();
 
         //dd($form_search);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
@@ -58,7 +100,7 @@ class IncomingDocumentsController extends AbstractController
             //'form_p_n_search' => $form_part_no->createView(),
             //'form_p_n_search_price' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            'arr_part_no' => $arr_part_no,
+            //'arr_part_no' => $arr_part_no,
             'errors_id' => $errors_id,
         ]);
     }
@@ -202,6 +244,14 @@ class IncomingDocumentsController extends AbstractController
 
         $doctrine->getManager()->flush();
 
+        return $this->redirectToRoute('incoming_documents');
+    }
+
+
+
+    #[Route('/reset', name: 'reset')]
+    public function Reset(ManagerRegistry $doctrine, Request $request): Response
+    {
         return $this->redirectToRoute('incoming_documents');
     }
 }

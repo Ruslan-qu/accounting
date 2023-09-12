@@ -21,9 +21,9 @@ class SearchInvoice
 
     private ?Counterparty $id_counterparty = null;
 
-    private ?string $part_numbers = null;
+    private ?string $id_details = null;
 
-    private ?string $manufacturers = null;
+    private ?string $id_manufacturer = null;
 
     private ?int $refund = null;
 
@@ -99,26 +99,26 @@ class SearchInvoice
         return $this;
     }
 
-    public function getPartNumbers(): ?string
+    public function getIdDetails(): ?string
     {
-        return $this->part_numbers;
+        return $this->id_details;
     }
 
-    public function setPartNumbers(?string $part_numbers): static
+    public function setIdDetails(?string $id_details): static
     {
-        $this->part_numbers = $part_numbers;
+        $this->id_details = $id_details;
 
         return $this;
     }
 
-    public function getManufacturers(): ?string
+    public function getIdManufacturer(): ?string
     {
-        return $this->manufacturers;
+        return $this->id_manufacturer;
     }
 
-    public function setManufacturers(?string $manufacturers): static
+    public function setIdManufacturer(?string $id_manufacturer): static
     {
-        $this->manufacturers = $manufacturers;
+        $this->id_manufacturer = $id_manufacturer;
 
         return $this;
     }

@@ -71,12 +71,12 @@ class SearchInvoiceType extends AbstractType
                 ],
 
             ])
-            ->add('part_numbers', TextType::class, [
+            ->add('id_details', TextType::class, [
                 'label' => '№ Детали',
                 'required' => false,
                 'attr' => ['style' => 'width: 140px']
             ])
-            ->add('manufacturers', TextType::class, [
+            ->add('id_manufacturer', TextType::class, [
                 'label' => 'Производитель',
                 'required' => false,
                 'attr' => ['style' => 'width: 140px']

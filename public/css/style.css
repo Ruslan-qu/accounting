@@ -75,6 +75,7 @@ header button.green {
     cursor: pointer;
 }
 
+.reset,
 .search {
     color: #ffffff;
     padding: 7px 23px;
