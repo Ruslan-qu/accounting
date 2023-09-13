@@ -45,4 +45,40 @@ class InvoiceRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByDate($s_data_invoice_search, $po_data_invoice_search): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d
+                FROM App\Entity\Invoice d
+                WHERE d.data_invoice >= :s_data_invoice
+                AND d.data_invoice <= :po_data_invoice'
+        )->setParameter('s_data_invoice', $s_data_invoice_search)
+            ->setParameter('po_data_invoice', $po_data_invoice_search);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByPrice($s_price, $po_price): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d
+                FROM App\Entity\Invoice d
+                WHERE d.price >= :s_price
+                AND d.price <= :po_price'
+        )->setParameter('s_price', $s_price)
+            ->setParameter('po_price', $po_price);
+
+        return $query->getResult();
+    }
 }

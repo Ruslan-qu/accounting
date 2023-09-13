@@ -114,7 +114,8 @@
 {% endblock table_thead_tr %}
 
 {% block tbody %}
-    {% for incoming_documents in arr_incoming_documents %}
+    {% for arr_search_invoice in arr_incoming_documents %}
+        {% for incoming_documents in arr_search_invoice %}
         <tr>
             {% if incoming_documents.getSales() == 1 
             and incoming_documents.getRefund() == 1 %}
@@ -145,5 +146,6 @@
                 </form>
             {% endif %}
         </tr>
+        {% endfor %}
     {% endfor %}
 {% endblock %}

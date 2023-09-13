@@ -49,6 +49,7 @@ class IncomingDocumentsType extends AbstractType
                 'label' => 'Поставщик',
                 'class' => Counterparty::class,
                 'choice_label' => 'counterparty',
+                'required' => false,
                 'attr' => [
                     'style' => 'width: 100px ',
                     'style' => 'padding: 1px 3px 1px 5px'

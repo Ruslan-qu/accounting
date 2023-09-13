@@ -60,15 +60,12 @@ class SearchInvoiceType extends AbstractType
                 'label' => 'Поставщик',
                 'class' => Counterparty::class,
                 'choice_label' => 'counterparty',
-                'expanded' => true,
+                // 'expanded' => true,
                 'required' => false,
                 'attr' => [
-                    // 'style' => 'input #search_id_counterparty_1 { padding: 10px 10px 10px 10px }'
-                    // 'counterparty' => ['style' => 'margin: 10px 10px 10px 10px']
-                    // 'style' => 'width: 100px ',
-                    //'style' => 'padding: 10px 10px 10px 10px'
-                    //'style' => 'margin: 0 0 0 10%'
-                ],
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
 
             ])
             ->add('id_details', TextType::class, [
