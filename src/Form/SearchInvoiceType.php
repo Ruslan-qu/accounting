@@ -37,19 +37,20 @@ class SearchInvoiceType extends AbstractType
             ])
             ->add('s_price', NumberType::class, [
                 'label' => 'Цена',
+                //'scale' => 2,
                 'required' => false,
-                'attr' => ['style' => 'width: 80px']
+                'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
-                //'scale' => 2,
+
             ])
             ->add('po_price', NumberType::class, [
                 'label' => false,
                 'required' => false,
-                'attr' => ['style' => 'width: 80px']
+                'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
-                //'scale' => 2,
+                //'scale' => 1,
             ])
             ->add('number_document', IntegerType::class, [
                 'label' => 'Номер накладной',

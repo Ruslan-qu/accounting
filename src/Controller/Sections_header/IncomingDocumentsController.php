@@ -21,8 +21,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class IncomingDocumentsController extends AbstractController
 {
     #[Route('/incoming_documents', name: 'incoming_documents')]
-    public function AddIncomingDocuments(ManagerRegistry $doctrine, Request $request): Response
-    {
+    public function AddIncomingDocuments(
+        ManagerRegistry $doctrine,
+        Request $request,
+        InvoiceRepository $InvoiceRepository
+    ): Response {
         $errors_id = $request->query->get('id');
 
         $entity_incoming_documents = new Invoice();
@@ -59,8 +62,7 @@ class IncomingDocumentsController extends AbstractController
             $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
             $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
             if ($s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findByDate($s_data_invoice_search, $po_data_invoice_search);
+                $arr_incoming_documents[] = $InvoiceRepository->findByDate($s_data_invoice_search, $po_data_invoice_search);
                 //dd($arr_incoming_documents);
             }
             if ($s_data_invoice_search && !$po_data_invoice_search) {
@@ -70,6 +72,7 @@ class IncomingDocumentsController extends AbstractController
             if (!$s_data_invoice_search && $po_data_invoice_search) {
                 $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                     ->findBy(['data_invoice' => new DateTime($po_data_invoice_search)]);
+                // dd($arr_incoming_documents);
             }
 
 
@@ -95,23 +98,42 @@ class IncomingDocumentsController extends AbstractController
                 $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                     ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
             }
+
             $s_price_search = $request->request->all()['search_invoice']['s_price'];
             $po_price_search = $request->request->all()['search_invoice']['po_price'];
 
             if ($s_price_search && $po_price_search) {
 
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findByPrice($s_price_search, $po_price_search);
+            }
+
+            if ($s_price_search && !$po_price_search) {
+
+                if (strpos($s_price_search, ',')) {
+                    $sPriceReplace = str_replace(',', '.', $s_price_search);
+                    $s_price = $sPriceReplace * 100;
+                } else {
+                    //dd($price);
+                    $s_price = $s_price_search * 100;
+                }
 
                 $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findByPrice($s_data_invoice_search, $po_data_invoice_search);
-                //dd($arr_incoming_documents);
+                    ->findBy(['price' => $s_price]);
             }
-            if ($s_data_invoice_search && !$po_data_invoice_search) {
+
+            if (!$s_price_search && $po_price_search) {
+
+                if (strpos($po_price_search, ',')) {
+                    $pPriceReplace = str_replace(',', '.', $po_price_search);
+                    $p_price = $pPriceReplace * 100;
+                } else {
+                    //dd($po_price_search);
+                    $p_price = $po_price_search * 100;
+                }
+                //dd($p_price);
                 $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['data_invoice' => new DateTime($s_data_invoice_search)]);
-            }
-            if (!$s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['data_invoice' => new DateTime($po_data_invoice_search)]);
+                    ->findBy(['price' => $p_price]);
             }
 
             // $refund_search = $request->request->all()['search_invoice']['refund'];
