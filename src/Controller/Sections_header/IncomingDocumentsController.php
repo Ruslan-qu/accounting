@@ -45,13 +45,6 @@ class IncomingDocumentsController extends AbstractController
 
             //dd($request->request->all()['search_invoice']);
             $arr_incoming_documents = [];
-            /*$arr_request = $request->request->all()['search_invoice'];
-            foreach ($arr_request as $key => $value) {
-                if ($value) {
-                    $arr_search_invoice[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy([$key => $value]);
-                }
-            }*/
 
             $number_document_search = $request->request->all()['search_invoice']['number_document'];
             if ($number_document_search) {
@@ -62,16 +55,17 @@ class IncomingDocumentsController extends AbstractController
             $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
             $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
             if ($s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $InvoiceRepository->findByDate($s_data_invoice_search, $po_data_invoice_search);
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findByDate($s_data_invoice_search, $po_data_invoice_search);
                 //dd($arr_incoming_documents);
             }
             if ($s_data_invoice_search && !$po_data_invoice_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['data_invoice' => new DateTime($s_data_invoice_search)]);
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findBySDate($s_data_invoice_search);
             }
             if (!$s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['data_invoice' => new DateTime($po_data_invoice_search)]);
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findByPoDate($po_data_invoice_search);
                 // dd($arr_incoming_documents);
             }
 
@@ -110,33 +104,22 @@ class IncomingDocumentsController extends AbstractController
 
             if ($s_price_search && !$po_price_search) {
 
-                if (strpos($s_price_search, ',')) {
-                    $sPriceReplace = str_replace(',', '.', $s_price_search);
-                    $s_price = $sPriceReplace * 100;
-                } else {
-                    //dd($price);
-                    $s_price = $s_price_search * 100;
-                }
-
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['price' => $s_price]);
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findBySPrice($s_price_search);
             }
 
             if (!$s_price_search && $po_price_search) {
 
-                if (strpos($po_price_search, ',')) {
-                    $pPriceReplace = str_replace(',', '.', $po_price_search);
-                    $p_price = $pPriceReplace * 100;
-                } else {
-                    //dd($po_price_search);
-                    $p_price = $po_price_search * 100;
-                }
-                //dd($p_price);
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['price' => $p_price]);
+                $arr_incoming_documents[] = $InvoiceRepository
+                    ->findByPoPrice($po_price_search);
             }
 
-            // $refund_search = $request->request->all()['search_invoice']['refund'];
+            $refund_search = $request->request->all()['search_invoice']['refund'];
+
+            if ($refund_search) {
+                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    ->findBy(['refund' => $refund_search]);
+            }
 
             // dd($arr_incoming_documents);
         } else {

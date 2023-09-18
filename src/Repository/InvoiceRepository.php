@@ -75,6 +75,30 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
+    public function findBySDate($s_data_invoice_search): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.data_invoice >= :s_data_invoice')
+            ->setParameter('s_data_invoice', $s_data_invoice_search)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByPoDate($po_data_invoice_search): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.data_invoice <= :po_data_invoice')
+            ->setParameter('po_data_invoice', $po_data_invoice_search)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
     public function findByPrice($s_price_search, $po_price_search): array
     {
         //dd($s_price_search);
@@ -115,6 +139,90 @@ class InvoiceRepository extends ServiceEntityRepository
                 * $value->getQuantitySold());
             //dd($price);
             if ($price >= $s_price_search && $price <= $po_price_search) {
+                //dd($value);
+                $query[] = $value;
+            }
+            // dd($price);
+        }
+        //dd($query);
+        return $query;
+    }
+
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findBySPrice($s_price_search): array
+    {
+        //dd($s_price_search);
+        if (strpos($s_price_search, ',')) {
+            $s_price_search = str_replace(',', '.', $s_price_search);
+            $s_price = $s_price_search * 100;
+            //dd($s_price_search);
+        } else {
+            //dd($s_price_search);
+            $s_price = $s_price_search * 100;
+        }
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d
+                FROM App\Entity\Invoice d
+                WHERE d.price >= :s_price'
+        )->setParameter('s_price', $s_price);
+        //dd($query->getResult());
+        $arr_result = $query->getResult();
+
+        $query = [];
+
+        foreach ($arr_result as $key => $value) {
+            //dd($value);
+            $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
+                * $value->getQuantitySold());
+            //dd($price);
+            if ($price >= $s_price_search) {
+                //dd($value);
+                $query[] = $value;
+            }
+            // dd($price);
+        }
+        //dd($query);
+        return $query;
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByPoPrice($po_price_search): array
+    {
+
+        if (strpos($po_price_search, ',')) {
+            $po_price_search = str_replace(',', '.', $po_price_search);
+            $p_price = $po_price_search * 100;
+        } else {
+            //dd($price);
+            $p_price = $po_price_search * 100;
+        }
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d
+                FROM App\Entity\Invoice d
+                WHERE d.price <= :p_price'
+        )->setParameter('p_price', $p_price);
+        //dd($query->getResult());
+        $arr_result = $query->getResult();
+
+        $query = [];
+
+        foreach ($arr_result as $key => $value) {
+            //dd($value);
+            $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
+                * $value->getQuantitySold());
+            //dd($price);
+            if ($price <= $po_price_search) {
                 //dd($value);
                 $query[] = $value;
             }
