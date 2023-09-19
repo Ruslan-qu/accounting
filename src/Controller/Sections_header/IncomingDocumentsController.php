@@ -80,17 +80,22 @@ class IncomingDocumentsController extends AbstractController
             if ($part_numbers_search) {
                 $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findBy(['part_numbers' => $part_numbers_search]);
-                //dd($arr_details_manufacturer[0]->getId());
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
+                if ($arr_details_manufacturer) {
+                    //dd($arr_details_manufacturer[0]->getId());
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
+                }
             }
             $manufacturers_search = $request->request->all()['search_invoice']['id_manufacturer'];
             if ($manufacturers_search) {
+                // dd($manufacturers_search);
                 $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findBy(['manufacturers' => $manufacturers_search]);
-                // dd($arr_details_manufacturer[0]->getId());
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
+                if ($arr_details_manufacturer) {
+                    //dd($arr_details_manufacturer);
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
+                }
             }
 
             $s_price_search = $request->request->all()['search_invoice']['s_price'];
@@ -113,24 +118,11 @@ class IncomingDocumentsController extends AbstractController
                 $arr_incoming_documents[] = $InvoiceRepository
                     ->findByPoPrice($po_price_search);
             }
-
-            $refund_search = $request->request->all()['search_invoice']['refund'];
-
-            if ($refund_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['refund' => $refund_search]);
-            }
-
-            // dd($arr_incoming_documents);
         } else {
-            $arr_incoming_documents = $doctrine->getRepository(Invoice::class)
+            $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                 ->findAll();
         }
 
-        //  $arr_part_no = $doctrine->getRepository(IdDetailsManufacturer::class)
-        //       ->findAll();
-
-        //dd($form_search);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
@@ -138,12 +130,7 @@ class IncomingDocumentsController extends AbstractController
             'form_search' => $form_search_invoice->createView(),
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
-            //'form_i_d_search' => $form_incoming_documents->createView(),
-            //'form_i_d_search_date_price' => $form_incoming_documents->createView(),
-            //'form_p_n_search' => $form_part_no->createView(),
-            //'form_p_n_search_price' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            //'arr_part_no' => $arr_part_no,
             'errors_id' => $errors_id,
         ]);
     }
@@ -163,7 +150,7 @@ class IncomingDocumentsController extends AbstractController
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
-        //dd($request->query->get('errors'));
+        dd(preg_replace('#[^a-zа-яё\d]#ui', '', $request->request->all()['incoming_documents']['name_detail']));
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
@@ -276,10 +263,10 @@ class IncomingDocumentsController extends AbstractController
     }
 
 
-    #[Route('/refund', name: 'refund', methods: ['GET'])]
+    #[Route('/refund_part', name: 'refund_part', methods: ['GET'])]
     public function Refund(ManagerRegistry $doctrine, Request $request): Response
     {
-        $id = $request->query->get('refund');
+        $id = $request->query->get('refund_part');
 
         $refund = $doctrine->getRepository(Invoice::class)->find($id);
 

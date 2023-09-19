@@ -19,16 +19,6 @@
         <th>{{ form_label(form_i_d.id_counterparty) }}<br>
         {{ form_widget(form_i_d.id_counterparty) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
-        {#<th>{{ form_label(form_i_d.id_details) }}<br>
-        {{ form_widget(form_i_d.id_details) }}
-        {{ form_errors(form_i_d.id_details) }}</th>
-        <th>{{ form_label(form_i_d.id_manufacturer) }}<br>
-        {{ form_widget(form_i_d.id_manufacturer) }}
-        {{ form_errors(form_i_d.id_manufacturer) }}</th>
-        {{ form_start(form_c) }}
-            <th>{{ form_label(form_c.counterparty) }}<br>
-            {{ form_widget(form_c.counterparty) }}
-            {{ form_errors(form_c.counterparty) }}</th>#}
         {{ form_start(form_p_n) }}
             <th>{{ form_label(form_p_n.part_numbers) }}<br>
             {{ form_widget(form_p_n.part_numbers) }}
@@ -82,10 +72,6 @@
         {{'по '}}{{ form_widget(form_search.po_price) }}
         {{ form_errors(form_search.po_price) }}</th>
 
-        <th>{{ form_label(form_search.refund) }}<br>
-        {{ form_widget(form_search.refund) }}
-        {{ form_errors(form_search.refund) }}</th>
-
         <th><button class="search" type="submit" name="search">Поиск</button></th>
         
     {{ form_end(form_search) }}
@@ -116,64 +102,36 @@
 {% block tbody %}
     {% for arr_search_invoice in arr_incoming_documents %}
         {% for incoming_documents in arr_search_invoice %}
-        <tr>
-            {#{% if incoming_documents.getRefund() == 2 %}
-                <td>{{ incoming_documents.getNumberDocument() }}</td>
-                <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y") }}</td>
-                <td>{{ incoming_documents.getIdCounterparty().getCounterparty() }}</td>
-                <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
-                <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
-                <td>{{ incoming_documents.getNameDetail() }}</td>
-                <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
-                <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
-                <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
-                            / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
-                <form action="/sales_parts" name="form_sales" method="post">
-                    <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
-                    <td><input type="number" name="quantity_sold" required="required" 
-                        style="width: 70px" placeholder="шт" />
-                            {% if incoming_documents.getId() == errors_id %}
-                                {{'Неверное <br> количество'}}
-                            {% endif %}</td>
-                    <td><input type="number" name="price_sold" required="required" 
-                        style="width: 98px" placeholder="Цена" /></td>
-                    <td><input type="date" name="today_date" required="required" /></td>
-                    <td><button class="sales" type="submit" name="sales">Продано</button></td>    
-                </form>
-                <form action="/refund" name="refund" method="get">
-                    <td><button class="refund" type="submit" name="refund" value="{{ incoming_documents.getId() }}">Возврат</button></td>
-                </form>
-            {% else %}#}
-            {% if incoming_documents.getSales() == 1 
-            and incoming_documents.getRefund() == 1 %}
-                <td>{{ incoming_documents.getNumberDocument() }}</td>
-                <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y") }}</td>
-                <td>{{ incoming_documents.getIdCounterparty().getCounterparty() }}</td>
-                <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
-                <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
-                <td>{{ incoming_documents.getNameDetail() }}</td>
-                <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
-                <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
-                <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
-                            / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
-                <form action="/sales_parts" name="form_sales" method="post">
-                    <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
-                    <td><input type="number" name="quantity_sold" required="required" 
-                        style="width: 70px" placeholder="шт" />
-                            {% if incoming_documents.getId() == errors_id %}
-                                {{'Неверное <br> количество'}}
-                            {% endif %}</td>
-                    <td><input type="number" name="price_sold" required="required" 
-                        style="width: 98px" placeholder="Цена" /></td>
-                    <td><input type="date" name="today_date" required="required" /></td>
-                    <td><button class="sales" type="submit" name="sales">Продано</button></td>    
-                </form>
-                <form action="/refund" name="refund" method="get">
-                    <td><button class="refund" type="submit" name="refund" value="{{ incoming_documents.getId() }}">Возврат</button></td>
-                </form>
-            {% endif %}
-            {% endif %}
-        </tr>
+            <tr>
+                {% if incoming_documents.getSales() == 1 
+                and incoming_documents.getRefund() == 1 %}
+                    <td>{{ incoming_documents.getNumberDocument() }}</td>
+                    <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y") }}</td>
+                    <td>{{ incoming_documents.getIdCounterparty().getCounterparty() }}</td>
+                    <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
+                    <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
+                    <td>{{ incoming_documents.getNameDetail() }}</td>
+                    <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
+                    <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
+                    <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
+                                / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
+                    <form action="/sales_parts" name="form_sales" method="post">
+                        <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
+                        <td><input type="number" name="quantity_sold" required="required" 
+                            style="width: 70px" placeholder="шт" />
+                                {% if incoming_documents.getId() == errors_id %}
+                                    {{'Неверное <br> количество'}}
+                                {% endif %}</td>
+                        <td><input type="number" name="price_sold" required="required" 
+                            style="width: 98px" placeholder="Цена" /></td>
+                        <td><input type="date" name="today_date" required="required" /></td>
+                        <td><button class="sales" type="submit" name="sales">Продано</button></td>    
+                    </form>
+                    <form action="/refund_part" name="refund_part" method="get">
+                        <td><button class="refund" type="submit" name="refund_part" value="{{ incoming_documents.getId() }}">Возврат</button></td>
+                    </form>
+                {% endif %}
+            </tr>
         {% endfor %}
     {% endfor %}
 {% endblock %}

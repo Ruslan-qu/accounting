@@ -78,8 +78,8 @@ class SearchInvoiceType extends AbstractType
                 'label' => 'Производитель',
                 'required' => false,
                 'attr' => ['style' => 'width: 140px']
-            ])
-            ->add('refund', ChoiceType::class, [
+            ]);
+        /*->add('refund', ChoiceType::class, [
                 'label' => 'Возвраты',
                 'choices'  => [
                     'Возвраты' => 2,
@@ -87,7 +87,7 @@ class SearchInvoiceType extends AbstractType
                 'expanded' => true,
                 'required' => false,
                 //'attr' => ['style' => 'width: 140px']
-            ]);
+            ]);*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

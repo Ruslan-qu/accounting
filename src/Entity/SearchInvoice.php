@@ -25,7 +25,7 @@ class SearchInvoice
 
     private ?string $id_manufacturer = null;
 
-    private ?int $refund = null;
+    // private ?int $refund = null;
 
     public function getSDataInvoice(): ?\DateTimeInterface
     {
@@ -123,7 +123,7 @@ class SearchInvoice
         return $this;
     }
 
-    public function getRefund(): ?int
+    /* public function getRefund(): ?int
     {
         return $this->refund;
     }
@@ -133,5 +133,5 @@ class SearchInvoice
         $this->refund = $refund;
 
         return $this;
-    }
+    }*/
 }
