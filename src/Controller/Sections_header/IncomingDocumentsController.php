@@ -150,43 +150,64 @@ class IncomingDocumentsController extends AbstractController
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
-        dd(preg_replace('#[^a-zа-яё\d]#ui', '', $request->request->all()['incoming_documents']['name_detail']));
+        //dd($request->request->all());
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
             //dd($request->request->all()['incoming_documents']['id_invoice']);
-            $part_number = $request->request->all()['part_no']['part_numbers'];
+            $part_number_mb_strtolower_preg_replace = mb_strtolower(preg_replace(
+                '#[^a-zа-яё\d]#ui',
+                '',
+                $request->request->all()['part_no']['part_numbers']
+            ));
             $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->count(['part_numbers' => $part_number]);
+                ->count(['part_numbers' => $part_number_mb_strtolower_preg_replace]);
             //dd($сount_part_number);
             if ($сount_part_number == 0) {
-                $entity_part_no->setPartNumbers($part_number);
+
+                $entity_part_no->setPartNumbers($part_number_mb_strtolower_preg_replace);
+
                 $entity_part_no->setManufacturers(
-                    $request->request->all()['part_no']['manufacturers']
+                    mb_strtolower(preg_replace(
+                        '#[^a-zа-яё\d]#ui',
+                        '',
+                        $request->request->all()['part_no']['manufacturers']
+                    ))
                 );
+                //dd($entity_part_no);
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
             }
 
             $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->findOneBy(['part_numbers' => $part_number]);
-            //dd($em);
+                ->findOneBy(['part_numbers' => $part_number_mb_strtolower_preg_replace]);
+
             $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
+
             $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
+
             $entity_incoming_documents->setNumberDocument(
                 $request->request->all()['incoming_documents']['number_document']
             );
+
             $entity_incoming_documents->setDataInvoice(
                 new DateTime($request->request->all()['incoming_documents']['data_invoice'])
             );
+
             $entity_incoming_documents->setNameDetail(
-                $request->request->all()['incoming_documents']['name_detail']
+                mb_strtolower(preg_replace(
+                    '#[^a-zа-яё\d]#ui',
+                    '',
+                    $request->request->all()['incoming_documents']['name_detail']
+                ))
             );
+
             $entity_incoming_documents->setQuantity(
                 $request->request->all()['incoming_documents']['quantity']
             );
+
             $price = $request->request->all()['incoming_documents']['price'];
             if (strpos($price, ',')) {
                 $strPriceReplace = str_replace(',', '.', $price);

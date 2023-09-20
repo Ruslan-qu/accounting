@@ -10,33 +10,45 @@
 
 {% block form %}
     {{ form_start(form_i_d, {'action': path('sales_incoming_documents')}) }}
+
         <th>{{ form_label(form_i_d.number_document) }}<br>
         {{ form_widget(form_i_d.number_document) }}
         {{ form_errors(form_i_d.number_document) }}</th>
+
         <th>{{ form_label(form_i_d.data_invoice) }}<br>
         {{ form_widget(form_i_d.data_invoice) }}
         {{ form_errors(form_i_d.data_invoice) }}</th>
+
         <th>{{ form_label(form_i_d.id_counterparty) }}<br>
         {{ form_widget(form_i_d.id_counterparty) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
+
         {{ form_start(form_p_n) }}
+
             <th>{{ form_label(form_p_n.part_numbers) }}<br>
             {{ form_widget(form_p_n.part_numbers) }}
             {{ form_errors(form_p_n.part_numbers) }}</th>
+
             <th>{{ form_label(form_p_n.manufacturers) }}<br>
             {{ form_widget(form_p_n.manufacturers) }}
             {{ form_errors(form_p_n.manufacturers) }}</th>
+
         <th>{{ form_label(form_i_d.name_detail) }}<br>
         {{ form_widget(form_i_d.name_detail) }}
         {{ form_errors(form_i_d.name_detail) }}</th>
+
         <th>{{ form_label(form_i_d.quantity) }}<br>
         {{ form_widget(form_i_d.quantity) }}
         {{ form_errors(form_i_d.quantity) }}</th>
+
         <th>{{ form_label(form_i_d.price) }}<br>
         {{ form_widget(form_i_d.price) }}
         {{ form_errors(form_i_d.price) }}</th>
+
         <th><button class="save" type="submit" name="save">Сохранить</button></th>
+
         {{ form_end(form_p_n) }}
+
     {{ form_end(form_i_d) }}   
 {% endblock %}
 
@@ -112,7 +124,8 @@
                     <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
                     <td>{{ incoming_documents.getNameDetail() }}</td>
                     <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
-                    <td>{{ ((incoming_documents.getPrice() / 100) / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
+                    <td>{{ ((incoming_documents.getPrice() / 100) 
+                                / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
                     <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
                                 / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
                     <form action="/sales_parts" name="form_sales" method="post">
