@@ -25,6 +25,11 @@ class Invoice
     private ?Counterparty $id_counterparty = null;
 
     #[ORM\Column(length: 33, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/\d/',
+        match: false,
+        message: 'Ваше имя не может содержать цифру',
+    )]
     private ?string $name_detail = null;
 
     #[ORM\Column(nullable: true)]

@@ -4,7 +4,6 @@ namespace App\Controller\Sections_header;
 
 use DateTime;
 use App\Entity\Invoice;
-use App\Repository\InvoiceRepository;
 use App\Form\PartNoType;
 use App\Entity\Counterparty;
 use App\Entity\SearchInvoice;
@@ -12,10 +11,12 @@ use App\Form\CounterpartyType;
 use App\Form\SearchInvoiceType;
 use App\Form\IncomingDocumentsType;
 use App\Entity\IdDetailsManufacturer;
+use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class IncomingDocumentsController extends AbstractController
@@ -137,7 +138,7 @@ class IncomingDocumentsController extends AbstractController
 
 
     #[Route('/sales_incoming_documents', name: 'sales_incoming_documents')]
-    public function SalesIncomingDocuments(ManagerRegistry $doctrine, Request $request): Response
+    public function SalesIncomingDocuments(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
     {
         $entity_incoming_documents = new Invoice();
         $entity_counterparty = new Counterparty();
@@ -150,12 +151,14 @@ class IncomingDocumentsController extends AbstractController
         $form_incoming_documents->handleRequest($request);
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
-        //dd($request->request->all());
+
+        $errors = $validator->validate($entity_incoming_documents);
+        //dd(new Response());
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
-            //dd($request->request->all()['incoming_documents']['id_invoice']);
+            dd($request->request->all());
             $part_number_mb_strtolower_preg_replace = mb_strtolower(preg_replace(
                 '#[^a-zа-яё\d]#ui',
                 '',
@@ -226,6 +229,10 @@ class IncomingDocumentsController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('incoming_documents');
+        } else {
+            $errorsString = (string) $errors;
+            //dd($errors[0]->getMessage());
+            return $this->redirectToRoute('incoming_documents', [$errors]);
         }
     }
 

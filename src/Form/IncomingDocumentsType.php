@@ -7,6 +7,7 @@ use App\Entity\Counterparty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -29,6 +30,13 @@ class IncomingDocumentsType extends AbstractType
 
             ->add('name_detail', TextareaType::class, [
                 'label' => 'Описание детали',
+                /* 'constraints' => [
+                    new Regex([
+                        'pattern' => '/\d/',
+                        'match' => false,
+                        'message' => 'Ваше имя не может содержать цифру'
+                    ]),
+                ],*/
                 'attr' => [
                     'rows' => '1',
                     'cols' => '18'
