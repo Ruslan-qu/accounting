@@ -26,9 +26,10 @@ class Invoice
 
     #[ORM\Column(length: 33, nullable: true)]
     #[Assert\Regex(
-        pattern: '/\d/',
-        match: false,
-        message: 'Ваше имя не может содержать цифру',
+        pattern: '/^[а-яё]\d/ui',
+        #match: false,
+        message: 'Форма содержит цифры, 
+        недопустимы символы',
     )]
     private ?string $name_detail = null;
 

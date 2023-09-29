@@ -158,7 +158,7 @@ class IncomingDocumentsController extends AbstractController
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
-            dd($request->request->all());
+            //dd($request->request->all());
             $part_number_mb_strtolower_preg_replace = mb_strtolower(preg_replace(
                 '#[^a-zа-яё\d]#ui',
                 '',
@@ -201,7 +201,7 @@ class IncomingDocumentsController extends AbstractController
 
             $entity_incoming_documents->setNameDetail(
                 mb_strtolower(preg_replace(
-                    '#[^a-zа-яё\d]#ui',
+                    '#[^а-яё\d]#ui',
                     '',
                     $request->request->all()['incoming_documents']['name_detail']
                 ))
@@ -230,9 +230,15 @@ class IncomingDocumentsController extends AbstractController
 
             return $this->redirectToRoute('incoming_documents');
         } else {
-            $errorsString = (string) $errors;
-            //dd($errors[0]->getMessage());
-            return $this->redirectToRoute('incoming_documents', [$errors]);
+
+            //dd($errors[0]->getmessage());
+            $message = $errors[0]->getmessage();
+            $propertyPath = $errors[0]->getpropertyPath();
+            $this->addFlash(
+                $propertyPath,
+                $message
+            );
+            return $this->redirectToRoute('incoming_documents');
         }
     }
 
