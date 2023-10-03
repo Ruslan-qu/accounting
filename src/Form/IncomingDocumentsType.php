@@ -30,13 +30,13 @@ class IncomingDocumentsType extends AbstractType
 
             ->add('name_detail', TextareaType::class, [
                 'label' => 'Описание детали',
-                /* 'constraints' => [
+                'constraints' => [
                     new Regex([
-                        'pattern' => '/\d/',
-                        'match' => false,
+                        'pattern' => '/^[а-яё]+[\d\s]*$/ui',
+                        //'match' => false,
                         'message' => 'Ваше имя не может содержать цифру'
                     ]),
-                ],*/
+                ],
                 'attr' => [
                     'rows' => '1',
                     'cols' => '18'

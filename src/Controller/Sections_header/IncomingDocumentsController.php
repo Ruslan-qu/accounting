@@ -138,8 +138,11 @@ class IncomingDocumentsController extends AbstractController
 
 
     #[Route('/sales_incoming_documents', name: 'sales_incoming_documents')]
-    public function SalesIncomingDocuments(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
-    {
+    public function SalesIncomingDocuments(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator
+    ): Response {
         $entity_incoming_documents = new Invoice();
         $entity_counterparty = new Counterparty();
         $entity_part_no = new IdDetailsManufacturer();
@@ -152,7 +155,7 @@ class IncomingDocumentsController extends AbstractController
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
 
-        $errors = $validator->validate($entity_incoming_documents);
+        $errors = $validator->validate($form_incoming_documents);
         //dd(new Response());
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
@@ -231,13 +234,16 @@ class IncomingDocumentsController extends AbstractController
             return $this->redirectToRoute('incoming_documents');
         } else {
 
-            //dd($errors[0]->getmessage());
+            //dd($errors);
+
             $message = $errors[0]->getmessage();
             $propertyPath = $errors[0]->getpropertyPath();
             $this->addFlash(
                 $propertyPath,
                 $message
             );
+
+
             return $this->redirectToRoute('incoming_documents');
         }
     }

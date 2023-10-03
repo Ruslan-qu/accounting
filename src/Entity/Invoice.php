@@ -25,12 +25,11 @@ class Invoice
     private ?Counterparty $id_counterparty = null;
 
     #[ORM\Column(length: 33, nullable: true)]
-    #[Assert\Regex(
-        pattern: '/^[а-яё]\d/ui',
+    /*#[Assert\Regex(
+        pattern: '/^[а-яё]+[\d\s]*$/ui',
         #match: false,
-        message: 'Форма содержит цифры, 
-        недопустимы символы',
-    )]
+        message: 'Форма содержит недопустимые символы',
+    )]*/
     private ?string $name_detail = null;
 
     #[ORM\Column(nullable: true)]
