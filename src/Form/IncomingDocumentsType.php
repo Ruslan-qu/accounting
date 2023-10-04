@@ -34,7 +34,7 @@ class IncomingDocumentsType extends AbstractType
                     new Regex([
                         'pattern' => '/^[а-яё]+[\d\s]*$/ui',
                         //'match' => false,
-                        'message' => 'Ваше имя не может содержать цифру'
+                        'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
                 'attr' => [

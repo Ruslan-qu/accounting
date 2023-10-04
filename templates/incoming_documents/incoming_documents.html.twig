@@ -26,17 +26,23 @@
         {{ form_start(form_p_n) }}
 
             <th>{{ form_label(form_p_n.part_numbers) }}<br>
-            {{ form_widget(form_p_n.part_numbers) }}
+            {{ form_widget(form_p_n.part_numbers) }}<br>
+            {% for message in app.flashes('children[part_numbers].data') %}
+            {{ message }}
+            {% endfor %}
             {{ form_errors(form_p_n.part_numbers) }}</th>
 
             <th>{{ form_label(form_p_n.manufacturers) }}<br>
-            {{ form_widget(form_p_n.manufacturers) }}
+            {{ form_widget(form_p_n.manufacturers) }}<br>
+            {% for message in app.flashes('children[manufacturers].data') %}
+            {{ message }}
+            {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
 
         <th>{{ form_label(form_i_d.name_detail) }}<br>
         {{ form_widget(form_i_d.name_detail) }}<br>
         {#{% if app.flashes('name_detail') %}#}
-        {% for message in app.flashes('name_detail') %}
+        {% for message in app.flashes('children[name_detail].data') %}
         {{ message }}
         {% endfor %}
        {#} {% endif %}#}
