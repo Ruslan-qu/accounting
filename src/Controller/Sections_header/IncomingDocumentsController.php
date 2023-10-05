@@ -155,7 +155,8 @@ class IncomingDocumentsController extends AbstractController
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
 
-        $errors = $validator->validate($form_incoming_documents);
+        $errors_incoming_documents = $validator->validate($form_incoming_documents);
+        $errors_part_no = $validator->validate($form_part_no);
         //dd(new Response());
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
@@ -234,14 +235,29 @@ class IncomingDocumentsController extends AbstractController
             return $this->redirectToRoute('incoming_documents');
         } else {
 
-            // dd($errors[0]->getpropertyPath());
-
-            $message = $errors[0]->getmessage();
-            $propertyPath = $errors[0]->getpropertyPath();
-            $this->addFlash(
-                $propertyPath,
-                $message
-            );
+            // dd($errors);
+            if ($errors_incoming_documents) {
+                foreach ($errors_incoming_documents as $key) {
+                    //dd($key);
+                    $message = $key->getmessage();
+                    $propertyPath = $key->getpropertyPath();
+                    $this->addFlash(
+                        $propertyPath,
+                        $message
+                    );
+                }
+            }
+            if ($errors_part_no) {
+                foreach ($errors_part_no as $key) {
+                    //dd($key);
+                    $message = $key->getmessage();
+                    $propertyPath = $key->getpropertyPath();
+                    $this->addFlash(
+                        $propertyPath,
+                        $message
+                    );
+                }
+            }
 
 
             return $this->redirectToRoute('incoming_documents');

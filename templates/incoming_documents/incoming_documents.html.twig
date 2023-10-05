@@ -41,7 +41,7 @@
 
         <th>{{ form_label(form_i_d.name_detail) }}<br>
         {{ form_widget(form_i_d.name_detail) }}<br>
-        {#{% if app.flashes('name_detail') %}#}
+        {#{% if app.flashes('children[name_detail].data') %}#}
         {% for message in app.flashes('children[name_detail].data') %}
         {{ message }}
         {% endfor %}
