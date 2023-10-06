@@ -235,7 +235,20 @@ class IncomingDocumentsController extends AbstractController
             return $this->redirectToRoute('incoming_documents');
         } else {
 
-            // dd($errors);
+            //dd($request->request->all());
+            $value_form_incoming_documents_and_part_no = $request->request->all();
+            if ($value_form_incoming_documents_and_part_no) {
+                foreach ($value_form_incoming_documents_and_part_no as $key => $values) {
+                    //dd($values);
+                    if (is_iterable($values)) {
+                        foreach ($values as $key => $value) {
+                            //dd($key);
+                            $this->addFlash($key, $value);
+                        }
+                    }
+                }
+            }
+
             if ($errors_incoming_documents) {
                 foreach ($errors_incoming_documents as $key) {
                     //dd($key);

@@ -38,9 +38,18 @@
             {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
-
+          
+        {% for a in app.flashes('name_detail') %}
+        {% set name_detailf = 'h' %}
+        {{ name_detailf }}
+        {% endfor %}
+        
         <th>{{ form_label(form_i_d.name_detail) }}<br>
-        {{ form_widget(form_i_d.name_detail) }}<br>
+        
+        {{ form_widget(form_i_d.name_detail, {value : 'b'}) }}<br>
+        
+        
+        
         {#{% if app.flashes('children[name_detail].data') %}#}
         {% for message in app.flashes('children[name_detail].data') %}
         {{ message }}
