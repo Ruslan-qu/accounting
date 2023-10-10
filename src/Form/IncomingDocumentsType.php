@@ -32,7 +32,7 @@ class IncomingDocumentsType extends AbstractType
                 'label' => 'Описание детали',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[а-яё]+[\d\s]*$/ui',
+                        'pattern' => '/^[а-яё\d\s]*$/ui',
                         //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
@@ -48,6 +48,13 @@ class IncomingDocumentsType extends AbstractType
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Цена общая',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[\d]+[\.,]?[\d]*$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 80px']
                 //'currency' => false,
                 //'divisor' => 100,

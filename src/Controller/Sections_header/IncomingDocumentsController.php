@@ -163,21 +163,21 @@ class IncomingDocumentsController extends AbstractController
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
             //dd($request->request->all());
-            $part_number_mb_strtolower_preg_replace = mb_strtolower(preg_replace(
-                '#[^a-zа-яё\d]#ui',
+            $part_number_strtolower_preg_replace = strtolower(preg_replace(
+                '#[^a-z\d]#i',
                 '',
                 $request->request->all()['part_no']['part_numbers']
             ));
             $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->count(['part_numbers' => $part_number_mb_strtolower_preg_replace]);
+                ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
             //dd($сount_part_number);
             if ($сount_part_number == 0) {
 
-                $entity_part_no->setPartNumbers($part_number_mb_strtolower_preg_replace);
+                $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
 
                 $entity_part_no->setManufacturers(
-                    mb_strtolower(preg_replace(
-                        '#[^a-zа-яё\d]#ui',
+                    strtolower(preg_replace(
+                        '#[^a-z\d \-&]#i',
                         '',
                         $request->request->all()['part_no']['manufacturers']
                     ))
@@ -189,7 +189,7 @@ class IncomingDocumentsController extends AbstractController
             }
 
             $id_part_number_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->findOneBy(['part_numbers' => $part_number_mb_strtolower_preg_replace]);
+                ->findOneBy(['part_numbers' => $part_number_strtolower_preg_replace]);
 
             $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
 
@@ -205,7 +205,7 @@ class IncomingDocumentsController extends AbstractController
 
             $entity_incoming_documents->setNameDetail(
                 mb_strtolower(preg_replace(
-                    '#[^а-яё\d]#ui',
+                    '#[^а-яё\d\s\.,]#ui',
                     '',
                     $request->request->all()['incoming_documents']['name_detail']
                 ))
@@ -235,7 +235,7 @@ class IncomingDocumentsController extends AbstractController
             return $this->redirectToRoute('incoming_documents');
         } else {
 
-            //dd($request->request->all());
+            //dd($errors_incoming_documents);
             $value_form_incoming_documents_and_part_no = $request->request->all();
             if ($value_form_incoming_documents_and_part_no) {
                 foreach ($value_form_incoming_documents_and_part_no as $key => $values) {

@@ -9,47 +9,67 @@
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
 {% block form %}
+    
     {{ form_start(form_i_d, {'action': path('sales_incoming_documents')}) }}
 
+        {#{{ dump(app.flashes('children[price]')[0]) }}#}
+        {% set number_document = '' %}
+        {% set data_invoice = '' %}
+        {% set id_counterparty = '' %}
+        {% set part_numbers = '' %}
+        {% set manufacturers = '' %}
+        {% set name_detail = '' %}
+        {% set quantity = '' %}
+        {% set price = '' %}
+
+        {% for value_number_document in app.flashes('number_document') %}  
+        {% set number_document = value_number_document %}
+        {% endfor %}
         <th>{{ form_label(form_i_d.number_document) }}<br>
-        {{ form_widget(form_i_d.number_document) }}
+        {{ form_widget(form_i_d.number_document, {value : number_document}) }}
         {{ form_errors(form_i_d.number_document) }}</th>
 
+        {% for value_data_invoice in app.flashes('data_invoice') %}  
+        {% set data_invoice = value_data_invoice %}
+        {% endfor %}
         <th>{{ form_label(form_i_d.data_invoice) }}<br>
-        {{ form_widget(form_i_d.data_invoice) }}
+        {{ form_widget(form_i_d.data_invoice, {value : data_invoice}) }}
         {{ form_errors(form_i_d.data_invoice) }}</th>
 
+        {% for value_id_counterparty in app.flashes('id_counterparty') %}  
+        {% set id_counterparty = value_id_counterparty %}
+        {% endfor %}
         <th>{{ form_label(form_i_d.id_counterparty) }}<br>
-        {{ form_widget(form_i_d.id_counterparty) }}
+        {{ form_widget(form_i_d.id_counterparty, {value : id_counterparty}) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
 
         {{ form_start(form_p_n) }}
 
+            {% for value_part_numbers in app.flashes('part_numbers') %}  
+            {% set part_numbers = value_part_numbers %}
+            {% endfor %}
             <th>{{ form_label(form_p_n.part_numbers) }}<br>
-            {{ form_widget(form_p_n.part_numbers) }}<br>
+            {{ form_widget(form_p_n.part_numbers, {value : part_numbers}) }}<br>
             {% for message in app.flashes('children[part_numbers].data') %}
             {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.part_numbers) }}</th>
 
+            {% for value_manufacturers in app.flashes('manufacturers') %}  
+            {% set manufacturers = value_manufacturers %}
+            {% endfor %}
             <th>{{ form_label(form_p_n.manufacturers) }}<br>
-            {{ form_widget(form_p_n.manufacturers) }}<br>
+            {{ form_widget(form_p_n.manufacturers, {value : manufacturers}) }}<br>
             {% for message in app.flashes('children[manufacturers].data') %}
             {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
-          
-        {% for a in app.flashes('name_detail') %}
-        {% set name_detailf = 'h' %}
-        {{ name_detailf }}
+
+        {% for value_name_detail in app.flashes('name_detail') %}  
+        {% set name_detail = value_name_detail %}
         {% endfor %}
-        
         <th>{{ form_label(form_i_d.name_detail) }}<br>
-        
-        {{ form_widget(form_i_d.name_detail, {value : 'b'}) }}<br>
-        
-        
-        
+        {{ form_widget(form_i_d.name_detail, {value : name_detail}) }}<br>    
         {#{% if app.flashes('children[name_detail].data') %}#}
         {% for message in app.flashes('children[name_detail].data') %}
         {{ message }}
@@ -57,12 +77,24 @@
        {#} {% endif %}#}
         {{ form_errors(form_i_d.name_detail) }}</th>
 
+        {% for value_quantity in app.flashes('quantity') %}  
+        {% set quantity = value_quantity %}
+        {% endfor %}
         <th>{{ form_label(form_i_d.quantity) }}<br>
-        {{ form_widget(form_i_d.quantity) }}
+        {{ form_widget(form_i_d.quantity, {value : quantity}) }}
         {{ form_errors(form_i_d.quantity) }}</th>
 
+        {% for value_price in app.flashes('price') %}  
+        {% set price = value_price %}
+        {% endfor %}
         <th>{{ form_label(form_i_d.price) }}<br>
-        {{ form_widget(form_i_d.price) }}
+        {{ form_widget(form_i_d.price, {value : price}) }}<br>
+        {% for message in app.flashes('children[price]') %}
+        {{ message }}
+        {% endfor %}
+        {% for message in app.flashes('children[price].data') %}
+        {{ message }}
+        {% endfor %}
         {{ form_errors(form_i_d.price) }}</th>
 
         <th><button class="save" type="submit" name="save">Сохранить</button></th>

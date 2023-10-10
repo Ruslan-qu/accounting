@@ -18,7 +18,7 @@ class PartNoType extends AbstractType
                 'label' => '№ Детали',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]*[\d]+$/u',
+                        'pattern' => '/^[\da-z]*$/i',
                         //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
@@ -29,7 +29,7 @@ class PartNoType extends AbstractType
                 'label' => 'Производитель',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]+[\d]*[ \-&]?$/u',
+                        'pattern' => '/^[\da-z]*[ \-&]?[\da-z]*$/i',
                         //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
