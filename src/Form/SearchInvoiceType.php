@@ -7,6 +7,7 @@ use App\Entity\SearchInvoice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,18 +36,32 @@ class SearchInvoiceType extends AbstractType
                 //    'style' => 'margin: 3% 0 0'
                 // ]
             ])
-            ->add('s_price', NumberType::class, [
+            ->add('s_price', IntegerType::class, [
                 'label' => 'Цена',
                 //'scale' => 2,
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\d*/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
 
             ])
-            ->add('po_price', NumberType::class, [
+            ->add('po_price', IntegerType::class, [
                 'label' => false,
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\d*/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
@@ -55,6 +70,13 @@ class SearchInvoiceType extends AbstractType
             ->add('number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\d*/i',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('id_counterparty', EntityType::class, [
@@ -72,11 +94,25 @@ class SearchInvoiceType extends AbstractType
             ->add('id_details', TextType::class, [
                 'label' => '№ Детали',
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[\da-z]*$/i',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('id_manufacturer', TextType::class, [
                 'label' => 'Производитель',
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[\da-z]*[ \-&]?[\da-z]*$/i',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 140px']
             ]);
         /*->add('refund', ChoiceType::class, [

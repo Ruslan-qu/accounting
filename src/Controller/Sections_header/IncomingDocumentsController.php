@@ -25,7 +25,8 @@ class IncomingDocumentsController extends AbstractController
     public function AddIncomingDocuments(
         ManagerRegistry $doctrine,
         Request $request,
-        InvoiceRepository $InvoiceRepository
+        InvoiceRepository $InvoiceRepository,
+        ValidatorInterface $validator
     ): Response {
         $errors_id = $request->query->get('id');
 
@@ -40,84 +41,112 @@ class IncomingDocumentsController extends AbstractController
         //dd($request);
         $form_search_invoice->handleRequest($request);
 
-        if (
-            $form_search_invoice->isSubmitted()
-        ) {
+        $errors_search_invoice = $validator->validate($form_search_invoice);
 
-            //dd($request->request->all()['search_invoice']);
-            $arr_incoming_documents = [];
+        if ($form_search_invoice->isSubmitted()) {
+            if ($form_search_invoice->isValid()) {
 
-            $number_document_search = $request->request->all()['search_invoice']['number_document'];
-            if ($number_document_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['number_document' => $number_document_search]);
-            }
+                //dd($request->request->all()['search_invoice']);
+                $arr_incoming_documents = [];
 
-            $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
-            $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
-            if ($s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findByDate($s_data_invoice_search, $po_data_invoice_search);
-                //dd($arr_incoming_documents);
-            }
-            if ($s_data_invoice_search && !$po_data_invoice_search) {
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findBySDate($s_data_invoice_search);
-            }
-            if (!$s_data_invoice_search && $po_data_invoice_search) {
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findByPoDate($po_data_invoice_search);
-                // dd($arr_incoming_documents);
-            }
-
-
-            $id_counterparty_search = $request->request->all()['search_invoice']['id_counterparty'];
-            if ($id_counterparty_search) {
-                $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                    ->findBy(['id_counterparty' => $id_counterparty_search]);
-                //dd($arr_incoming_documents);
-            }
-            $part_numbers_search = $request->request->all()['search_invoice']['id_details'];
-            if ($part_numbers_search) {
-                $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findBy(['part_numbers' => $part_numbers_search]);
-                if ($arr_details_manufacturer) {
-                    //dd($arr_details_manufacturer[0]->getId());
+                $number_document_search = $request->request->all()['search_invoice']['number_document'];
+                if ($number_document_search) {
                     $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
+                        ->findBy(['number_document' => $number_document_search]);
                 }
-            }
-            $manufacturers_search = $request->request->all()['search_invoice']['id_manufacturer'];
-            if ($manufacturers_search) {
-                // dd($manufacturers_search);
-                $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findBy(['manufacturers' => $manufacturers_search]);
-                if ($arr_details_manufacturer) {
-                    //dd($arr_details_manufacturer);
+
+                $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
+                $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
+                if ($s_data_invoice_search && $po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByDate($s_data_invoice_search, $po_data_invoice_search);
+                    //dd($arr_incoming_documents);
+                }
+                if ($s_data_invoice_search && !$po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findBySDate($s_data_invoice_search);
+                }
+                if (!$s_data_invoice_search && $po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByPoDate($po_data_invoice_search);
+                    // dd($arr_incoming_documents);
+                }
+
+
+                $id_counterparty_search = $request->request->all()['search_invoice']['id_counterparty'];
+                if ($id_counterparty_search) {
                     $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
+                        ->findBy(['id_counterparty' => $id_counterparty_search]);
+                    //dd($arr_incoming_documents);
                 }
-            }
+                $part_numbers_search = $request->request->all()['search_invoice']['id_details'];
+                if ($part_numbers_search) {
+                    $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        ->findBy(['part_numbers' => $part_numbers_search]);
+                    if ($arr_details_manufacturer) {
+                        //dd($arr_details_manufacturer[0]->getId());
+                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                            ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
+                    }
+                }
+                $manufacturers_search = $request->request->all()['search_invoice']['id_manufacturer'];
+                if ($manufacturers_search) {
+                    // dd($manufacturers_search);
+                    $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        ->findBy(['manufacturers' => $manufacturers_search]);
+                    if ($arr_details_manufacturer) {
+                        //dd($arr_details_manufacturer);
+                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                            ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
+                    }
+                }
 
-            $s_price_search = $request->request->all()['search_invoice']['s_price'];
-            $po_price_search = $request->request->all()['search_invoice']['po_price'];
+                $s_price_search = $request->request->all()['search_invoice']['s_price'];
+                $po_price_search = $request->request->all()['search_invoice']['po_price'];
 
-            if ($s_price_search && $po_price_search) {
+                if ($s_price_search && $po_price_search) {
 
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findByPrice($s_price_search, $po_price_search);
-            }
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByPrice($s_price_search, $po_price_search);
+                }
 
-            if ($s_price_search && !$po_price_search) {
+                if ($s_price_search && !$po_price_search) {
 
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findBySPrice($s_price_search);
-            }
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findBySPrice($s_price_search);
+                }
 
-            if (!$s_price_search && $po_price_search) {
+                if (!$s_price_search && $po_price_search) {
 
-                $arr_incoming_documents[] = $InvoiceRepository
-                    ->findByPoPrice($po_price_search);
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByPoPrice($po_price_search);
+                }
+            } else {
+
+                $value_form_search_invoice = $request->request->all();
+                if ($value_form_search_invoice) {
+                    foreach ($value_form_search_invoice as $key => $values) {
+                        //dd($values);
+                        if (is_iterable($values)) {
+                            foreach ($values as $key => $value) {
+                                //dd($key);
+                                $this->addFlash($key, $value);
+                            }
+                        }
+                    }
+                }
+
+                if ($errors_search_invoice) {
+                    foreach ($errors_search_invoice as $key) {
+                        //dd($key);
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
             }
         } else {
             $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
