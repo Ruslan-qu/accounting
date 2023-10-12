@@ -46,57 +46,57 @@ class IncomingDocumentsController extends AbstractController
         if ($form_search_invoice->isSubmitted()) {
             if ($form_search_invoice->isValid()) {
 
-                //dd($request->request->all()['search_invoice']);
-                $arr_incoming_documents = [];
+                // dd($request->request->all());
+                $arr_incoming_documents1 = [];
 
-                $number_document_search = $request->request->all()['search_invoice']['number_document'];
+                $number_document_search = $request->request->all()['search_invoice']['search_number_document'];
                 if ($number_document_search) {
-                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['number_document' => $number_document_search]);
                 }
 
                 $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
                 $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
                 if ($s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findByDate($s_data_invoice_search, $po_data_invoice_search);
                     //dd($arr_incoming_documents);
                 }
                 if ($s_data_invoice_search && !$po_data_invoice_search) {
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findBySDate($s_data_invoice_search);
                 }
                 if (!$s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findByPoDate($po_data_invoice_search);
                     // dd($arr_incoming_documents);
                 }
 
 
-                $id_counterparty_search = $request->request->all()['search_invoice']['id_counterparty'];
+                $id_counterparty_search = $request->request->all()['search_invoice']['search_id_counterparty'];
                 if ($id_counterparty_search) {
-                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                    $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['id_counterparty' => $id_counterparty_search]);
                     //dd($arr_incoming_documents);
                 }
-                $part_numbers_search = $request->request->all()['search_invoice']['id_details'];
+                $part_numbers_search = strtolower($request->request->all()['search_invoice']['id_details']);
                 if ($part_numbers_search) {
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
                     if ($arr_details_manufacturer) {
                         //dd($arr_details_manufacturer[0]->getId());
-                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
                     }
                 }
-                $manufacturers_search = $request->request->all()['search_invoice']['id_manufacturer'];
+                $manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
                 if ($manufacturers_search) {
                     // dd($manufacturers_search);
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['manufacturers' => $manufacturers_search]);
                     if ($arr_details_manufacturer) {
                         //dd($arr_details_manufacturer);
-                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
                     }
                 }
@@ -106,23 +106,40 @@ class IncomingDocumentsController extends AbstractController
 
                 if ($s_price_search && $po_price_search) {
 
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findByPrice($s_price_search, $po_price_search);
                 }
 
                 if ($s_price_search && !$po_price_search) {
 
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findBySPrice($s_price_search);
                 }
 
                 if (!$s_price_search && $po_price_search) {
 
-                    $arr_incoming_documents[] = $InvoiceRepository
+                    $arr_incoming_documents1[] = $InvoiceRepository
                         ->findByPoPrice($po_price_search);
                 }
-            } else {
+                //dd($arr_incoming_documents[0][0]->getId());
+                $newArray = [];
+                $Fruits = [];
+                foreach ($arr_incoming_documents1 as $key => $value) {
 
+                    foreach ($value as $key => $line) {
+                        //dd($line->getId());
+                        if (!in_array($line->getId(), $Fruits)) {
+                            $Fruits[] = $line->getId();
+                            $newArray[$key] = $line;
+                        }
+                    }
+                }
+                $arr_incoming_documents[] = $newArray;
+                $newArray = NULL;
+                $Fruits = NULL;
+                //dd($arr_incoming_documents);
+            } else {
+                // dd($request->request->all());
                 $value_form_search_invoice = $request->request->all();
                 if ($value_form_search_invoice) {
                     foreach ($value_form_search_invoice as $key => $values) {
@@ -147,6 +164,7 @@ class IncomingDocumentsController extends AbstractController
                         );
                     }
                 }
+                return $this->redirectToRoute('incoming_documents');
             }
         } else {
             $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)

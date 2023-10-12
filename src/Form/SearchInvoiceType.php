@@ -40,13 +40,6 @@ class SearchInvoiceType extends AbstractType
                 'label' => 'Цена',
                 //'scale' => 2,
                 'required' => false,
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/\d*/',
-                        //'match' => false,
-                        'message' => 'Форма содержит недопустимые символы'
-                    ]),
-                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
@@ -55,31 +48,17 @@ class SearchInvoiceType extends AbstractType
             ->add('po_price', IntegerType::class, [
                 'label' => false,
                 'required' => false,
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/\d*/',
-                        //'match' => false,
-                        'message' => 'Форма содержит недопустимые символы'
-                    ]),
-                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
                 //'scale' => 1,
             ])
-            ->add('number_document', IntegerType::class, [
+            ->add('search_number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
                 'required' => false,
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/\d*/i',
-                        //'match' => false,
-                        'message' => 'Форма содержит недопустимые символы'
-                    ]),
-                ],
                 'attr' => ['style' => 'width: 140px']
             ])
-            ->add('id_counterparty', EntityType::class, [
+            ->add('search_id_counterparty', EntityType::class, [
                 'label' => 'Поставщик',
                 'class' => Counterparty::class,
                 'choice_label' => 'counterparty',

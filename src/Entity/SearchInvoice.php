@@ -17,9 +17,9 @@ class SearchInvoice
 
     private ?int $po_price = null;
 
-    private ?int $number_document = null;
+    private ?int $search_number_document = null;
 
-    private ?Counterparty $id_counterparty = null;
+    private ?Counterparty $search_id_counterparty = null;
 
     private ?string $id_details = null;
 
@@ -75,26 +75,26 @@ class SearchInvoice
         return $this;
     }
 
-    public function getNumberDocument(): ?int
+    public function getSearchNumberDocument(): ?int
     {
-        return $this->number_document;
+        return $this->search_number_document;
     }
 
-    public function setNumberDocument(?int $number_document): static
+    public function setSearchNumberDocument(?int $search_number_document): static
     {
-        $this->number_document = $number_document;
+        $this->search_number_document = $search_number_document;
 
         return $this;
     }
 
-    public function getIdCounterparty(): ?Counterparty
+    public function getSearchIdCounterparty(): ?Counterparty
     {
-        return $this->id_counterparty;
+        return $this->search_id_counterparty;
     }
 
-    public function setIdCounterparty(?Counterparty $id_counterparty): static
+    public function setSearchIdCounterparty(?Counterparty $search_id_counterparty): static
     {
-        $this->id_counterparty = $id_counterparty;
+        $this->search_id_counterparty = $search_id_counterparty;
 
         return $this;
     }

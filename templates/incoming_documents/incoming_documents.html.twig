@@ -107,7 +107,7 @@
 {% block form_search %}
 
     {{ form_start(form_search, {'action': path('incoming_documents')}) }}
-
+{#{{ dump(app.flashes()) }}#}
         {% set number_document_search = '' %}
         {% set s_data_invoice_search = '' %}
         {% set po_data_invoice_search = '' %}
@@ -117,17 +117,15 @@
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
 
-        {% for value_number_document_search in app.flashes('number_document') %}  
+        {% for value_number_document_search in app.flashes('search_number_document') %}  
         {% set number_document_search = value_number_document_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.number_document) }}<br>
-        {{ form_widget(form_search.number_document, {value : number_document_search}) }}<br>
-        {% for message in app.flashes('children[number_document].data') %}
-        {{ message }}
-        {% endfor %}</th>
+        <th>{{ form_label(form_search.search_number_document) }}<br>
+        {{ form_widget(form_search.search_number_document, {value : number_document_search}) }}
+        {{ form_errors(form_search.search_number_document) }}</th>
 
         {% for value_data_invoice_search in app.flashes('s_data_invoice') %}  
-        {% set s_data_invoice_search = value_price %}
+        {% set s_data_invoice_search = value_data_invoice_search %}
         {% endfor %}
         <th>{{ form_label(form_search.s_data_invoice) }}<br>
         {{'с '}}{{ form_widget(form_search.s_data_invoice, {value : s_data_invoice_search}) }}
@@ -136,23 +134,14 @@
         {% set po_data_invoice_search = value_price %}
         {% endfor %}
         {{'по '}}{{ form_widget(form_search.po_data_invoice, {value : po_data_invoice_search}) }}<br>
-        {% for message in app.flashes('children[s_data_invoice].data') %}
-        {{ message }}
-        {% endfor %}
-        {% for message in app.flashes('children[po_data_invoice].data') %}
-        {{ message }}
-        {% endfor %}
         {{ form_errors(form_search.po_data_invoice) }}</th>
 
-        {% for value_id_counterparty_search in app.flashes('id_counterparty') %}  
+        {% for value_id_counterparty_search in app.flashes('search_id_counterparty') %}  
         {% set id_counterparty_search = value_id_counterparty_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.id_counterparty) }}<br>
-        {{ form_widget(form_search.id_counterparty, {value : id_counterparty_search}) }}<br>
-        {% for message in app.flashes('children[id_counterparty].data') %}
-        {{ message }}
-        {% endfor %}
-        {{ form_errors(form_search.id_counterparty) }}</th>
+        <th>{{ form_label(form_search.search_id_counterparty) }}<br>
+        {{ form_widget(form_search.search_id_counterparty, {value : id_counterparty_search}) }}
+        {{ form_errors(form_search.search_id_counterparty) }}</th>
 
         {% for value_id_details_search in app.flashes('id_details') %}  
         {% set id_details_search = value_id_details_search %}
@@ -183,13 +172,7 @@
         {% for value_po_price_search in app.flashes('po_price') %}  
         {% set po_price_search = value_po_price_search %}
         {% endfor %}
-        {{'по '}}{{ form_widget(form_search.po_price, {value : po_price_search}) }}<br>
-        {% for message in app.flashes('children[s_price].data') %}
-        {{ message }}
-        {% endfor %}
-        {% for message in app.flashes('children[po_price].data') %}
-        {{ message }}
-        {% endfor %}
+        {{'по '}}{{ form_widget(form_search.po_price, {value : po_price_search}) }}
         {{ form_errors(form_search.po_price) }}</th>
 
         <th><button class="search" type="submit" name="search">Поиск</button></th>
