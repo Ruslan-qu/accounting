@@ -47,27 +47,27 @@ class IncomingDocumentsController extends AbstractController
             if ($form_search_invoice->isValid()) {
 
                 // dd($request->request->all());
-                $arr_incoming_documents1 = [];
+                $arr_incoming_documents_search = [];
 
                 $number_document_search = $request->request->all()['search_invoice']['search_number_document'];
                 if ($number_document_search) {
-                    $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
+                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['number_document' => $number_document_search]);
                 }
 
                 $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
                 $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
                 if ($s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByDate($s_data_invoice_search, $po_data_invoice_search);
                     //dd($arr_incoming_documents);
                 }
                 if ($s_data_invoice_search && !$po_data_invoice_search) {
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findBySDate($s_data_invoice_search);
                 }
                 if (!$s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPoDate($po_data_invoice_search);
                     // dd($arr_incoming_documents);
                 }
@@ -75,7 +75,7 @@ class IncomingDocumentsController extends AbstractController
 
                 $id_counterparty_search = $request->request->all()['search_invoice']['search_id_counterparty'];
                 if ($id_counterparty_search) {
-                    $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
+                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['id_counterparty' => $id_counterparty_search]);
                     //dd($arr_incoming_documents);
                 }
@@ -85,7 +85,7 @@ class IncomingDocumentsController extends AbstractController
                         ->findBy(['part_numbers' => $part_numbers_search]);
                     if ($arr_details_manufacturer) {
                         //dd($arr_details_manufacturer[0]->getId());
-                        $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
                     }
                 }
@@ -96,7 +96,7 @@ class IncomingDocumentsController extends AbstractController
                         ->findBy(['manufacturers' => $manufacturers_search]);
                     if ($arr_details_manufacturer) {
                         //dd($arr_details_manufacturer);
-                        $arr_incoming_documents1[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
                     }
                 }
@@ -106,25 +106,25 @@ class IncomingDocumentsController extends AbstractController
 
                 if ($s_price_search && $po_price_search) {
 
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPrice($s_price_search, $po_price_search);
                 }
 
                 if ($s_price_search && !$po_price_search) {
 
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findBySPrice($s_price_search);
                 }
 
                 if (!$s_price_search && $po_price_search) {
 
-                    $arr_incoming_documents1[] = $InvoiceRepository
+                    $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPoPrice($po_price_search);
                 }
                 //dd($arr_incoming_documents[0][0]->getId());
                 $newArray = [];
                 $Fruits = [];
-                foreach ($arr_incoming_documents1 as $key => $value) {
+                foreach ($arr_incoming_documents_search as $key => $value) {
 
                     foreach ($value as $key => $line) {
                         //dd($line->getId());
@@ -135,8 +135,8 @@ class IncomingDocumentsController extends AbstractController
                     }
                 }
                 $arr_incoming_documents[] = $newArray;
-                $newArray = NULL;
-                $Fruits = NULL;
+                unset($newArray);
+                unset($Fruits);
                 //dd($arr_incoming_documents);
             } else {
                 // dd($request->request->all());
@@ -170,7 +170,7 @@ class IncomingDocumentsController extends AbstractController
             $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                 ->findAll();
         }
-
+        //dd($arr_incoming_documents);
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',

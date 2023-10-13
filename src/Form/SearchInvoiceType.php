@@ -40,6 +40,13 @@ class SearchInvoiceType extends AbstractType
                 'label' => 'Цена',
                 //'scale' => 2,
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
@@ -48,6 +55,13 @@ class SearchInvoiceType extends AbstractType
             ->add('po_price', IntegerType::class, [
                 'label' => false,
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 80px'],
                 //'currency' => false,
                 //'divisor' => 100,
@@ -56,6 +70,13 @@ class SearchInvoiceType extends AbstractType
             ->add('search_number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
                 'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('search_id_counterparty', EntityType::class, [

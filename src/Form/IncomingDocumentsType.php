@@ -21,6 +21,13 @@ class IncomingDocumentsType extends AbstractType
         $builder
             ->add('number_document', IntegerType::class, [
                 'label' => 'Номер накладной',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 140px']
             ])
             ->add('data_invoice', DateType::class, [
@@ -44,6 +51,13 @@ class IncomingDocumentsType extends AbstractType
             ])
             ->add('quantity', IntegerType::class, [
                 'label' => 'Кол-во',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
                 'attr' => ['style' => 'width: 50px']
             ])
             ->add('price', NumberType::class, [
