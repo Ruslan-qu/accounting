@@ -326,9 +326,13 @@ class IncomingDocumentsController extends AbstractController
 
 
     #[Route('/sales_parts', name: 'sales_parts')]
-    public function SalesParts(ManagerRegistry $doctrine, Request $request): Response
-    {
-        //dd($request->request->all()['id']);
+    public function SalesParts(
+        ManagerRegistry $doctrine,
+        Request $request,
+        InvoiceRepository $InvoiceRepository,
+        ValidatorInterface $validator
+    ): Response {
+        //dd($request->request->all());
 
         if (
             isset($_POST['quantity_sold'])
@@ -337,8 +341,10 @@ class IncomingDocumentsController extends AbstractController
         ) {
             $id = $request->request->all()['id'];
             $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
-
+            //dd($entity_sales);
             $quantity = $entity_sales->getQuantity();
+            $entity_price = $InvoiceRepository->findByIdPrice($id);
+            //$price = $entity_price->getQuantity();
 
             $quantity_sold = $request->request->all()['quantity_sold'];
             $now_quantity_sold = $entity_sales->getQuantitySold();

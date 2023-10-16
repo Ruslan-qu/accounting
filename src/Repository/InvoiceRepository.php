@@ -231,4 +231,32 @@ class InvoiceRepository extends ServiceEntityRepository
         //dd($query);
         return $query;
     }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByIdPrice($id): array
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d
+                FROM App\Entity\Invoice d
+                WHERE d.id = :id'
+        )->setParameter('id', $id);
+        dd($query->getResult()[0]->getPrice());
+        $arr_result = $query->getResult();
+
+        $query = [];
+
+        foreach ($arr_result as $key => $value) {
+            //dd($value);
+            $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
+                * $value->getQuantitySold());
+            //dd($price);
+        }
+        //dd($query);
+        return $query;
+    }
 }
