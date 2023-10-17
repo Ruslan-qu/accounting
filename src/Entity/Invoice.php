@@ -40,19 +40,10 @@ class Invoice
     private ?int $price = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $quantity_sold = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $price_sold = null;
-
-    #[ORM\Column(nullable: true)]
     private ?int $Sales = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $refund = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $today_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'part_number')]
     private ?IdDetailsManufacturer $id_details = null;
@@ -62,6 +53,14 @@ class Invoice
 
     #[ORM\Column(nullable: true)]
     private ?int $number_document = null;
+
+    #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: Sold::class)]
+    private Collection $solds;
+
+    public function __construct()
+    {
+        $this->solds = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,30 +127,6 @@ class Invoice
         return $this;
     }
 
-    public function getQuantitySold(): ?int
-    {
-        return $this->quantity_sold;
-    }
-
-    public function setQuantitySold(int $quantity_sold): static
-    {
-        $this->quantity_sold = $quantity_sold;
-
-        return $this;
-    }
-
-    public function getPriceSold(): ?int
-    {
-        return $this->price_sold;
-    }
-
-    public function setPriceSold(int $price_sold): static
-    {
-        $this->price_sold = $price_sold;
-
-        return $this;
-    }
-
     public function getSales(): ?int
     {
         return $this->Sales;
@@ -172,18 +147,6 @@ class Invoice
     public function setRefund(int $refund): static
     {
         $this->refund = $refund;
-
-        return $this;
-    }
-
-    public function getTodayDate(): ?\DateTimeInterface
-    {
-        return $this->today_date;
-    }
-
-    public function setTodayDate(\DateTimeInterface $today_date): static
-    {
-        $this->today_date = $today_date;
 
         return $this;
     }
@@ -220,6 +183,36 @@ class Invoice
     public function setNumberDocument(?int $number_document): static
     {
         $this->number_document = $number_document;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sold>
+     */
+    public function getSolds(): Collection
+    {
+        return $this->solds;
+    }
+
+    public function addSold(Sold $sold): static
+    {
+        if (!$this->solds->contains($sold)) {
+            $this->solds->add($sold);
+            $sold->setInvoice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSold(Sold $sold): static
+    {
+        if ($this->solds->removeElement($sold)) {
+            // set the owning side to null (unless already changed)
+            if ($sold->getInvoice() === $this) {
+                $sold->setInvoice(null);
+            }
+        }
 
         return $this;
     }

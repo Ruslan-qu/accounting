@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SearchInvoiceRepository::class)]
 class SearchInvoice
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
     private ?\DateTimeInterface $s_data_invoice = null;
 
     private ?\DateTimeInterface $po_data_invoice = null;
@@ -26,6 +31,11 @@ class SearchInvoice
     private ?string $id_manufacturer = null;
 
     // private ?int $refund = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getSDataInvoice(): ?\DateTimeInterface
     {

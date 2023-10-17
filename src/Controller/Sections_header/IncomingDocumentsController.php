@@ -13,9 +13,11 @@ use App\Form\IncomingDocumentsType;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -340,16 +342,47 @@ class IncomingDocumentsController extends AbstractController
             && isset($_POST['today_date'])
         ) {
             $id = $request->request->all()['id'];
+            $quantity_sold = $request->request->all()['quantity_sold'];
+            $price_sold = $request->request->all()['price_sold'];
+
             $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
             //dd($entity_sales);
             $quantity = $entity_sales->getQuantity();
-            $entity_price = $InvoiceRepository->findByIdPrice($id);
-            //$price = $entity_price->getQuantity();
+            //$price = $InvoiceRepository->findIdPrice($id);
+            //dd($request->request->all());
+            $validator = Validation::createValidator();
 
-            $quantity_sold = $request->request->all()['quantity_sold'];
+            $input = [
+                'quantity' => $quantity_sold,
+                'price' => $price_sold,
+            ];
+
+            $constraint = new Assert\Collection([
+                'quantity' => new Assert\Range(
+                    min: 0,
+                    max: $quantity,
+                    notInRangeMessage: 'Форма содержит недопустимое число',
+                ),
+                'price' => new Assert\Range(
+                    min: 0,
+                    minMessage: 'Форма содержит недопустимое число',
+                ),
+            ]);
+
+            $errors = $validator->validate($input, $constraint);
+            //dd($violations);
+
+            if (!$errors->count()) {
+                // ... это валидный адрес электронной почты, сделать что-либо
+            } else {
+                // это *не* валидный адрес электронной почты
+                $errorMessage = $errors[0]->getMessage();
+
+                // ... сделать что-либо с ошибкой
+            }
+            /*$quantity_sold = $request->request->all()['quantity_sold'];
             $now_quantity_sold = $entity_sales->getQuantitySold();
-
-            $sum_quantity_sold = $quantity_sold + $now_quantity_sold;
+            $sum_quantity_sold = $quantity_sold + $now_quantity_sold;*/
 
             if ($quantity_sold > 0 && $quantity_sold <= $quantity && $sum_quantity_sold <= $quantity) {
 
