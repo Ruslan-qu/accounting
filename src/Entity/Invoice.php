@@ -40,6 +40,9 @@ class Invoice
     private ?int $price = null;
 
     #[ORM\Column(nullable: true)]
+    private ?int $quantity_sold = null;
+
+    #[ORM\Column(nullable: true)]
     private ?int $Sales = null;
 
     #[ORM\Column(nullable: true)]
@@ -123,6 +126,18 @@ class Invoice
     public function setPrice(int $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getQuantitySold(): ?int
+    {
+        return $this->quantity_sold;
+    }
+
+    public function setQuantitySold(int $quantity_sold): static
+    {
+        $this->quantity_sold = $quantity_sold;
 
         return $this;
     }

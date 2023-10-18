@@ -218,6 +218,10 @@
 {% endblock table_thead_tr %}
 
 {% block tbody %}
+    {% set quantity_sold = '' %}
+    {% set price_sold = '' %}
+    {% set date_sold = '' %}
+
         {% for arr_search_invoice in arr_incoming_documents %}
             {% if arr_search_invoice %}
                 {% for incoming_documents in arr_search_invoice %}
@@ -248,17 +252,31 @@
                             <form action="/sales_parts" name="form_sales" method="post">
 
                                 <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
+{% for id_sold in app.flashes('id') %}
 
+
+{% if incoming_documents.getId() == id_sold %}
+                                {% for value_quantity_sold in app.flashes('quantity_sold') %}  
+                                {% set quantity_sold = value_quantity_sold %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
                                 <td><input type="number" name="quantity_sold" required="required" 
-                                    style="width: 70px" placeholder="шт" />
-                                        {% if incoming_documents.getId() == errors_id %}
+                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
+                                        {#{% if incoming_documents.getId() == errors_id %}
                                             {{'Неверное <br> количество'}}
-                                        {% endif %}</td>
+                                        {% endif %}</td>#}
 
+                                {% for value_price_sold in app.flashes('price_sold') %}  
+                                {% set price_sold = value_price_sold %}
+                                {% endfor %}
                                 <td><input type="number" name="price_sold" required="required" 
-                                    style="width: 98px" placeholder="Цена" /></td>
+                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" /></td>
 
-                                <td><input type="date" name="today_date" required="required" /></td>
+                                {% for value_date_sold in app.flashes('date_sold') %}  
+                                {% set date_sold = value_date_sold %}
+                                {% endfor %}
+                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 
                                 <td><button class="sales" type="submit" name="sales">Продано</button></td>  
 

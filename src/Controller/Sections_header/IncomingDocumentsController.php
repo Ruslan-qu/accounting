@@ -3,6 +3,8 @@
 namespace App\Controller\Sections_header;
 
 use DateTime;
+use App\Entity\Sold;
+use DateTimeImmutable;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\Counterparty;
@@ -30,7 +32,7 @@ class IncomingDocumentsController extends AbstractController
         InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
-        $errors_id = $request->query->get('id');
+        //$errors_id = $request->query->get('id');
 
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
@@ -181,7 +183,7 @@ class IncomingDocumentsController extends AbstractController
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            'errors_id' => $errors_id,
+            //'errors_id' => $errors_id,
         ]);
     }
 
@@ -339,26 +341,37 @@ class IncomingDocumentsController extends AbstractController
         if (
             isset($_POST['quantity_sold'])
             && isset($_POST['price_sold'])
-            && isset($_POST['today_date'])
+            && isset($_POST['date_sold'])
         ) {
+
+            $entity_sold = new Sold();
+
             $id = $request->request->all()['id'];
             $quantity_sold = $request->request->all()['quantity_sold'];
             $price_sold = $request->request->all()['price_sold'];
 
             $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
-            //dd($entity_sales);
+            //dd($entity_sales->getSolds()->getOwner());
             $quantity = $entity_sales->getQuantity();
+            $entity_quantity_sold = $entity_sales->getQuantitySold();
+            $sum_quantity_sold = $quantity_sold + $entity_quantity_sold;
             //$price = $InvoiceRepository->findIdPrice($id);
             //dd($request->request->all());
             $validator = Validation::createValidator();
 
             $input = [
                 'quantity' => $quantity_sold,
+                'sum_quantity_sold' => $sum_quantity_sold,
                 'price' => $price_sold,
             ];
 
             $constraint = new Assert\Collection([
                 'quantity' => new Assert\Range(
+                    min: 0,
+                    max: $quantity,
+                    notInRangeMessage: 'Форма содержит недопустимое число',
+                ),
+                'sum_quantity_sold' => new Assert\Range(
                     min: 0,
                     max: $quantity,
                     notInRangeMessage: 'Форма содержит недопустимое число',
@@ -370,37 +383,35 @@ class IncomingDocumentsController extends AbstractController
             ]);
 
             $errors = $validator->validate($input, $constraint);
-            //dd($violations);
+            //dd($entity_sales);
 
             if (!$errors->count()) {
-                // ... это валидный адрес электронной почты, сделать что-либо
-            } else {
-                // это *не* валидный адрес электронной почты
-                $errorMessage = $errors[0]->getMessage();
-
-                // ... сделать что-либо с ошибкой
-            }
-            /*$quantity_sold = $request->request->all()['quantity_sold'];
-            $now_quantity_sold = $entity_sales->getQuantitySold();
-            $sum_quantity_sold = $quantity_sold + $now_quantity_sold;*/
-
-            if ($quantity_sold > 0 && $quantity_sold <= $quantity && $sum_quantity_sold <= $quantity) {
-
 
                 $entity_sales->setQuantitySold(
-                    $now_quantity_sold +
+                    $entity_quantity_sold +
                         $request->request->all()['quantity_sold']
                 );
-                $entity_sales->setPriceSold(
+
+                $entity_sold->setInvoice($entity_sales);
+
+                $entity_sold->setQuantitySold(
+                    $request->request->all()['quantity_sold']
+                );
+
+                $entity_sold->setPriceSold(
                     $request->request->all()['price_sold']
                 );
-                $entity_sales->setTodayDate(
-                    new DateTime($request->request->all()['today_date'])
+                $entity_sold->setDateSold(
+                    new DateTimeImmutable($request->request->all()['date_sold'])
                 );
-                $doctrine->getManager()->flush();
+
+                $em = $doctrine->getManager();
+                $em->persist($entity_sold);
+                $em->flush();
+                // $doctrine->getManager()->flush();
                 //dd($entity_sales->getQuantitySold());
                 $quantity_sold = $entity_sales->getQuantitySold();
-                $quantity = $entity_sales->getQuantity();
+                //  $quantity = $entity_sales->getQuantity();
 
                 if ($quantity_sold == $quantity) {
 
@@ -411,9 +422,24 @@ class IncomingDocumentsController extends AbstractController
 
                 return $this->redirectToRoute('incoming_documents');
             } else {
+                $value_sold = $request->request->all();
+                if ($value_sold) {
+                    foreach ($value_sold as $key => $value) {
+                        $this->addFlash($key, $value);
+                    }
+                }
+                return $this->redirectToRoute('incoming_documents');
+            }
+
+
+            /* if ($quantity_sold > 0 && $quantity_sold <= $quantity && $sum_quantity_sold <= $quantity) {
+
+
+                
+            } else {
 
                 return $this->redirectToRoute('incoming_documents', ['id' => $id]);
-            }
+            }*/
         }
     }
 
