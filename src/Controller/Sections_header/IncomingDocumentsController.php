@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,16 @@ class IncomingDocumentsController extends AbstractController
         InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
-        //$errors_id = $request->query->get('id');
+
+        $session = new Session();
+        $session->start();
+        // dd($session->getFlashBag()->has('sales'));
+        if ($session->getFlashBag()->has('sales')) {
+            $errors_id = $session->getFlashBag()->get('sales')[0];
+        } else {
+            $errors_id = '';
+        }
+
 
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
@@ -42,7 +52,7 @@ class IncomingDocumentsController extends AbstractController
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
 
-        //dd($request);
+        //dd();
         $form_search_invoice->handleRequest($request);
 
         $errors_search_invoice = $validator->validate($form_search_invoice);
@@ -183,7 +193,7 @@ class IncomingDocumentsController extends AbstractController
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            //'errors_id' => $errors_id,
+            'errors_id' => $errors_id,
         ]);
     }
 
@@ -346,7 +356,7 @@ class IncomingDocumentsController extends AbstractController
 
             $entity_sold = new Sold();
 
-            $id = $request->request->all()['id'];
+            $id = $request->request->all()['sales'];
             $quantity_sold = $request->request->all()['quantity_sold'];
             $price_sold = $request->request->all()['price_sold'];
 
@@ -422,6 +432,7 @@ class IncomingDocumentsController extends AbstractController
 
                 return $this->redirectToRoute('incoming_documents');
             } else {
+                //dd($request->request->all());
                 $value_sold = $request->request->all();
                 if ($value_sold) {
                     foreach ($value_sold as $key => $value) {
@@ -461,7 +472,7 @@ class IncomingDocumentsController extends AbstractController
 
 
     #[Route('/reset', name: 'reset')]
-    public function Reset(ManagerRegistry $doctrine, Request $request): Response
+    public function Reset(): Response
     {
         return $this->redirectToRoute('incoming_documents');
     }

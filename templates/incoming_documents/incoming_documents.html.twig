@@ -218,9 +218,6 @@
 {% endblock table_thead_tr %}
 
 {% block tbody %}
-    {% set quantity_sold = '' %}
-    {% set price_sold = '' %}
-    {% set date_sold = '' %}
 
         {% for arr_search_invoice in arr_incoming_documents %}
             {% if arr_search_invoice %}
@@ -250,35 +247,43 @@
                                         / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
 
                             <form action="/sales_parts" name="form_sales" method="post">
-
-                                <input type="hidden" name="id" required="required" value="{{ incoming_documents.getId() }}" />
-{% for id_sold in app.flashes('id') %}
-
-
-{% if incoming_documents.getId() == id_sold %}
+{#{{ dump(incoming_documents.getId()) }} <br/>#}
+                                
+                                {% set quantity_sold = '' %}
+                                {% set price_sold = '' %}
+                                {% set date_sold = '' %}
+                               
+                                {% if incoming_documents.getId() == id_sold %}
+{{ dump(incoming_documents.getId()) }}
                                 {% for value_quantity_sold in app.flashes('quantity_sold') %}  
                                 {% set quantity_sold = value_quantity_sold %}
                                 {% endfor %}
-                                {% endif %}
+                                {% for value_price_sold in app.flashes('price_sold') %}  
+                                {% set price_sold = value_price_sold %}
                                 {% endfor %}
+                                {% for value_date_sold in app.flashes('date_sold') %}  
+                                {% set date_sold = value_date_sold %}
+                                {% endfor %}
+                                {% endif %}
+                                {#{% else %}
+                                {% set quantity_sold = '' %}
+                                {% set price_sold = '' %}
+                                {% set date_sold = '' %}#}
+                                
                                 <td><input type="number" name="quantity_sold" required="required" 
                                     style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
                                         {#{% if incoming_documents.getId() == errors_id %}
                                             {{'Неверное <br> количество'}}
                                         {% endif %}</td>#}
 
-                                {% for value_price_sold in app.flashes('price_sold') %}  
-                                {% set price_sold = value_price_sold %}
-                                {% endfor %}
+                                
                                 <td><input type="number" name="price_sold" required="required" 
                                     style="width: 98px" placeholder="Цена" value="{{ price_sold }}" /></td>
 
-                                {% for value_date_sold in app.flashes('date_sold') %}  
-                                {% set date_sold = value_date_sold %}
-                                {% endfor %}
+                                
                                 <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 
-                                <td><button class="sales" type="submit" name="sales">Продано</button></td>  
+                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
 
                             </form>
 
