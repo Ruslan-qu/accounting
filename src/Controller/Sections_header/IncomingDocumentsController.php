@@ -37,11 +37,7 @@ class IncomingDocumentsController extends AbstractController
         $session = new Session();
         $session->start();
         // dd($session->getFlashBag()->has('sales'));
-        if ($session->getFlashBag()->has('sales')) {
-            $errors_id = $session->getFlashBag()->get('sales')[0];
-        } else {
-            $errors_id = '';
-        }
+
 
 
         $entity_incoming_documents = new Invoice();
@@ -57,6 +53,7 @@ class IncomingDocumentsController extends AbstractController
 
         $errors_search_invoice = $validator->validate($form_search_invoice);
 
+        $arr_incoming_documents = [];
         if ($form_search_invoice->isSubmitted()) {
             if ($form_search_invoice->isValid()) {
 
@@ -180,11 +177,19 @@ class IncomingDocumentsController extends AbstractController
                 }
                 return $this->redirectToRoute('incoming_documents');
             }
-        } else {
+        } /*else {
             $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                 ->findAll();
-        }
+        }*/
         //dd($arr_incoming_documents);
+
+        if ($session->getFlashBag()->has('sales')) {
+            $error_id = $session->getFlashBag()->get('sales')[0];
+            $arr_incoming_documents_error[] = $doctrine->getRepository(Invoice::class)
+                ->find($error_id);
+            $arr_incoming_documents[] = $arr_incoming_documents_error;
+            // dd($arr_incoming_documents);
+        }
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
@@ -193,7 +198,7 @@ class IncomingDocumentsController extends AbstractController
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            'errors_id' => $errors_id,
+            //'errors_id' => $errors_id,
         ]);
     }
 
@@ -370,25 +375,24 @@ class IncomingDocumentsController extends AbstractController
             $validator = Validation::createValidator();
 
             $input = [
-                'quantity' => $quantity_sold,
-                'sum_quantity_sold' => $sum_quantity_sold,
-                'price' => $price_sold,
+                'quantity_sold_error' => $quantity_sold,
+                'sum_quantity_sold_error' => $sum_quantity_sold,
+                'price_sold_error' => $price_sold,
             ];
 
             $constraint = new Assert\Collection([
-                'quantity' => new Assert\Range(
-                    min: 0,
+                'quantity_sold_error' => new Assert\Range(
+                    min: 1,
                     max: $quantity,
-                    notInRangeMessage: 'Форма содержит недопустимое число',
+                    notInRangeMessage: 'Недопустимое число',
                 ),
-                'sum_quantity_sold' => new Assert\Range(
-                    min: 0,
+                'sum_quantity_sold_error' => new Assert\Range(
+                    min: 1,
                     max: $quantity,
-                    notInRangeMessage: 'Форма содержит недопустимое число',
                 ),
-                'price' => new Assert\Range(
-                    min: 0,
-                    minMessage: 'Форма содержит недопустимое число',
+                'price_sold_error' => new Assert\Range(
+                    min: 1,
+                    minMessage: 'Недопустимое число',
                 ),
             ]);
 
@@ -439,6 +443,20 @@ class IncomingDocumentsController extends AbstractController
                         $this->addFlash($key, $value);
                     }
                 }
+
+                // dd($errors);
+                if ($errors) {
+                    foreach ($errors as $key) {
+                        //dd($key);
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
+
                 return $this->redirectToRoute('incoming_documents');
             }
 

@@ -201,6 +201,9 @@
 {% endblock form_search %}
 
 {% block table_thead_tr %}
+{% if arr_incoming_documents %}
+ {% for arr_search_invoice in arr_incoming_documents %}
+{% if arr_search_invoice %}
     <th>№ Накладной</th>
     <th>Дата накладной</th>
     <th>Поставщик</th>
@@ -215,13 +218,27 @@
     <th>Дата прод-жи</th>
     <th>Продано</th>
     <th>Возврат</th>
+{% endif %}
+{% endfor %}
+{% else %}
+    <h2>Видите параметры в поиск</h2> 
+{% endif %}
 {% endblock table_thead_tr %}
 
 {% block tbody %}
+{{ dump(app.flashes()) }}
+    {% set id_sold = '' %}
+    
+    {% for value_id_sold in app.flashes('sales') %}  
+    {% set id_sold = value_id_sold %}
+    {% endfor %}
+
+
 
         {% for arr_search_invoice in arr_incoming_documents %}
             {% if arr_search_invoice %}
                 {% for incoming_documents in arr_search_invoice %}
+
                     <tr>
                         {% if incoming_documents.getSales() == 1 
                         and incoming_documents.getRefund() == 1 %}
@@ -254,16 +271,16 @@
                                 {% set date_sold = '' %}
                                
                                 {% if incoming_documents.getId() == id_sold %}
-{{ dump(incoming_documents.getId()) }}
-                                {% for value_quantity_sold in app.flashes('quantity_sold') %}  
-                                {% set quantity_sold = value_quantity_sold %}
-                                {% endfor %}
-                                {% for value_price_sold in app.flashes('price_sold') %}  
-                                {% set price_sold = value_price_sold %}
-                                {% endfor %}
-                                {% for value_date_sold in app.flashes('date_sold') %}  
-                                {% set date_sold = value_date_sold %}
-                                {% endfor %}
+
+                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
+                                        {% set quantity_sold = value_quantity_sold %}
+                                    {% endfor %}
+                                    {% for value_price_sold in app.flashes('price_sold') %}  
+                                        {% set price_sold = value_price_sold %}
+                                    {% endfor %}
+                                    {% for value_date_sold in app.flashes('date_sold') %}  
+                                        {% set date_sold = value_date_sold %}
+                                    {% endfor %}
                                 {% endif %}
                                 {#{% else %}
                                 {% set quantity_sold = '' %}
@@ -272,14 +289,22 @@
                                 
                                 <td><input type="number" name="quantity_sold" required="required" 
                                     style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                        {#{% if incoming_documents.getId() == errors_id %}
-                                            {{'Неверное <br> количество'}}
-                                        {% endif %}</td>#}
+                                        {% if incoming_documents.getId() == id_sold %}
+                                            {% for message in app.flashes('[quantity_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}
+                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
+                                            {% endfor %}
+                                        {% endif %}</td>
 
                                 
                                 <td><input type="number" name="price_sold" required="required" 
-                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" /></td>
-
+                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
+                                        {% if incoming_documents.getId() == id_sold %}
+                                            {% for message in app.flashes('[price_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}
+                                        {% endif %}</td>
                                 
                                 <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 
@@ -296,7 +321,7 @@
                     </tr>   
                 {% endfor %}
             {% else %}
-                <h2>Данные не найдены.</h2>  
+                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             {% endif %}
         {% endfor %}
     
