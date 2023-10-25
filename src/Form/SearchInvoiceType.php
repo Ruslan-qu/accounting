@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class SearchInvoiceType extends AbstractType
 {
@@ -114,6 +115,22 @@ class SearchInvoiceType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
+            ])
+
+            ->add('search_name_details', TextareaType::class, [
+                'label' => 'Описание детали',
+                'required' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[а-яё\d\s]*$/ui',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
+                'attr' => [
+                    'rows' => '1',
+                    'cols' => '18'
+                ]
             ]);
         /*->add('refund', ChoiceType::class, [
                 'label' => 'Возвраты',

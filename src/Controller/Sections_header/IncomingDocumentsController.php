@@ -23,9 +23,11 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+/*класс сохраняет, поиск по данным, продажу */
 
 class IncomingDocumentsController extends AbstractController
 {
+    /*функция поиска по данным */
     #[Route('/incoming_documents', name: 'incoming_documents')]
     public function AddIncomingDocuments(
         ManagerRegistry $doctrine,
@@ -33,27 +35,24 @@ class IncomingDocumentsController extends AbstractController
         InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
-
+        /*Подключаем сессии, для передачи ошибок валидации*/
         $session = new Session();
         $session->start();
-        // dd($session->getFlashBag()->has('sales'));
-
-
-
+        /*Подключаем класс базы данных*/
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
         $entity_search_invoice = new SearchInvoice();
-
+        /*Подключаем формы */
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
-
-        //dd();
+        /*Валидация формы */
         $form_search_invoice->handleRequest($request);
-
+        /*Валидация формы */
         $errors_search_invoice = $validator->validate($form_search_invoice);
-
+        /* Массив для передачи в твиг списка по поиску */
         $arr_incoming_documents = [];
+        /*Валидация формы */
         if ($form_search_invoice->isSubmitted()) {
             if ($form_search_invoice->isValid()) {
 
@@ -92,12 +91,12 @@ class IncomingDocumentsController extends AbstractController
                 }
                 $part_numbers_search = strtolower($request->request->all()['search_invoice']['id_details']);
                 if ($part_numbers_search) {
-                    $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    $arr_details_manufacturer_details = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
-                    if ($arr_details_manufacturer) {
+                    if ($arr_details_manufacturer_details) {
                         //dd($arr_details_manufacturer[0]->getId());
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
-                            ->findBy(['id_details' => $arr_details_manufacturer[0]->getId()]);
+                            ->findBy(['id_details' => $arr_details_manufacturer_details[0]->getId()]);
                     }
                 }
                 $manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
@@ -109,6 +108,18 @@ class IncomingDocumentsController extends AbstractController
                         //dd($arr_details_manufacturer);
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
+                    }
+                }
+                //dd($request->request->all());
+                $search_name_details = strtolower($request->request->all()['search_invoice']['search_name_details']);
+                if ($search_name_details) {
+                    // dd($manufacturers_search);
+                    $arr_details_manufacturer_name = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        ->findBy(['name_details' => $search_name_details]);
+                    if ($arr_details_manufacturer_name) {
+                        //dd($arr_details_manufacturer);
+                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
+                            ->findBy(['id_name_detail' => $arr_details_manufacturer_name[0]->getId()]);
                     }
                 }
 
@@ -248,6 +259,15 @@ class IncomingDocumentsController extends AbstractController
                         $request->request->all()['part_no']['manufacturers']
                     ))
                 );
+
+                $entity_part_no->setNameDetails(
+                    mb_strtolower(preg_replace(
+                        '#[^а-яё\d\s\.,]#ui',
+                        '',
+                        $request->request->all()['part_no']['name_details']
+                    ))
+                );
+
                 //dd($entity_part_no);
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
@@ -261,20 +281,14 @@ class IncomingDocumentsController extends AbstractController
 
             $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
 
+            $entity_incoming_documents->setIdNameDetail($id_part_number_manufacturer);
+
             $entity_incoming_documents->setNumberDocument(
                 $request->request->all()['incoming_documents']['number_document']
             );
 
             $entity_incoming_documents->setDataInvoice(
                 new DateTime($request->request->all()['incoming_documents']['data_invoice'])
-            );
-
-            $entity_incoming_documents->setNameDetail(
-                mb_strtolower(preg_replace(
-                    '#[^а-яё\d\s\.,]#ui',
-                    '',
-                    $request->request->all()['incoming_documents']['name_detail']
-                ))
             );
 
             $entity_incoming_documents->setQuantity(

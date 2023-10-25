@@ -24,13 +24,8 @@ class Invoice
     #[ORM\JoinColumn(nullable: true)]
     private ?Counterparty $id_counterparty = null;
 
-    #[ORM\Column(length: 33, nullable: true)]
-    /*#[Assert\Regex(
-        pattern: '/^[а-яё]+[\d\s]*$/ui',
-        #match: false,
-        message: 'Форма содержит недопустимые символы',
-    )]*/
-    private ?string $name_detail = null;
+    #[ORM\ManyToOne(inversedBy: 'name_detail')]
+    private ?IdDetailsManufacturer $id_name_detail = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
@@ -94,14 +89,14 @@ class Invoice
         return $this;
     }
 
-    public function getNameDetail(): ?string
+    public function getIdNameDetail(): ?IdDetailsManufacturer
     {
-        return $this->name_detail;
+        return $this->id_name_detail;
     }
 
-    public function setNameDetail(string $name_detail): static
+    public function setIdNameDetail(?IdDetailsManufacturer $id_name_detail): static
     {
-        $this->name_detail = $name_detail;
+        $this->id_name_detail = $id_name_detail;
 
         return $this;
     }

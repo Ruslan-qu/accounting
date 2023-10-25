@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PartNoType extends AbstractType
 {
@@ -35,6 +36,21 @@ class PartNoType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
+            ])
+
+            ->add('name_details', TextareaType::class, [
+                'label' => 'Описание детали',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[а-яё\d\s]*$/ui',
+                        //'match' => false,
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
+                ],
+                'attr' => [
+                    'rows' => '1',
+                    'cols' => '18'
+                ]
             ]);
     }
 

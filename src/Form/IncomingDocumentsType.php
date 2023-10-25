@@ -35,20 +35,7 @@ class IncomingDocumentsType extends AbstractType
                 'widget' => 'single_text'
             ])
 
-            ->add('name_detail', TextareaType::class, [
-                'label' => 'Описание детали',
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^[а-яё\d\s]*$/ui',
-                        //'match' => false,
-                        'message' => 'Форма содержит недопустимые символы'
-                    ]),
-                ],
-                'attr' => [
-                    'rows' => '1',
-                    'cols' => '18'
-                ]
-            ])
+
             ->add('quantity', IntegerType::class, [
                 'label' => 'Кол-во',
                 'constraints' => [

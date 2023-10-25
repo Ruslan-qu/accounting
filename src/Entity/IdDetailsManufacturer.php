@@ -23,16 +23,23 @@ class IdDetailsManufacturer
     #[ORM\OneToMany(mappedBy: 'id_manufacturer', targetEntity: Invoice::class)]
     private Collection $manufacturer;
 
+    #[ORM\OneToMany(mappedBy: 'id_name_detail', targetEntity: Invoice::class)]
+    private Collection $name_detail;
+
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $part_numbers = null;
 
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $manufacturers = null;
 
+    #[ORM\Column(length: 33, nullable: true)]
+    private ?string $name_details = null;
+
     public function __construct()
     {
         $this->part_number = new ArrayCollection();
         $this->manufacturer = new ArrayCollection();
+        $this->name_detail = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +107,36 @@ class IdDetailsManufacturer
         return $this;
     }
 
+    /**
+     * @return Collection<int, Invoice>
+     */
+    public function getNameDetail(): Collection
+    {
+        return $this->name_detail;
+    }
+
+    public function addNameDetail(Invoice $name_detail): static
+    {
+        if (!$this->name_detail->contains($name_detail)) {
+            $this->name_detail->add($name_detail);
+            $name_detail->setIdNameDetail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNameDetail(Invoice $name_detail): static
+    {
+        if ($this->name_detail->removeElement($name_detail)) {
+            // set the owning side to null (unless already changed)
+            if ($name_detail->getIdNameDetail() === $this) {
+                $name_detail->setIdNameDetail(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getPartNumbers(): ?string
     {
         return $this->part_numbers;
@@ -120,6 +157,18 @@ class IdDetailsManufacturer
     public function setManufacturers(?string $manufacturers): static
     {
         $this->manufacturers = $manufacturers;
+
+        return $this;
+    }
+
+    public function getNameDetails(): ?string
+    {
+        return $this->name_details;
+    }
+
+    public function setNameDetails(?string $name_details): static
+    {
+        $this->name_details = $name_details;
 
         return $this;
     }

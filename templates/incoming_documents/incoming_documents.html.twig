@@ -18,7 +18,7 @@
         {% set id_counterparty = '' %}
         {% set part_numbers = '' %}
         {% set manufacturers = '' %}
-        {% set name_detail = '' %}
+        {% set name_details = '' %}
         {% set quantity = '' %}
         {% set price = '' %}
 
@@ -68,17 +68,17 @@
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
 
-        {% for value_name_detail in app.flashes('name_detail') %}  
-        {% set name_detail = value_name_detail %}
-        {% endfor %}
-        <th>{{ form_label(form_i_d.name_detail) }}<br>
-        {{ form_widget(form_i_d.name_detail, {value : name_detail}) }}<br>    
-        {#{% if app.flashes('children[name_detail].data') %}#}
-        {% for message in app.flashes('children[name_detail].data') %}
-        {{ message }}
-        {% endfor %}
-       {#} {% endif %}#}
-        {{ form_errors(form_i_d.name_detail) }}</th>
+            {% for value_name_detail in app.flashes('name_details') %}  
+            {% set name_details = value_name_detail %}
+            {% endfor %}
+            <th>{{ form_label(form_p_n.name_details) }}<br>
+            {{ form_widget(form_p_n.name_details, {value : name_details}) }}<br>    
+            {#{% if app.flashes('children[name_detail].data') %}#}
+            {% for message in app.flashes('children[name_details].data') %}
+            {{ message }}
+            {% endfor %}
+            {#} {% endif %}#}
+            {{ form_errors(form_p_n.name_details) }}</th>
 
         {% for value_quantity in app.flashes('quantity') %}  
         {% set quantity = value_quantity %}
@@ -120,6 +120,7 @@
         {% set id_counterparty_search = '' %}
         {% set id_details_search = '' %}
         {% set id_manufacturer_search = '' %}
+        {% set name_details_search = '' %}
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
 
@@ -171,6 +172,16 @@
         {{ message }}
         {% endfor %}
         {{ form_errors(form_search.id_manufacturer) }}</th>
+
+        {% for value_isearch_name_details in app.flashes('search_name_details') %}  
+        {% set name_details_search = value_id_manufacturer_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.search_name_details) }}<br>
+        {{ form_widget(form_search.search_name_details, {value : name_details_search}) }}<br>
+        {% for message in app.flashes('children[search_name_details].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.search_name_details) }}</th>
 
         {% for value_s_price_search in app.flashes('s_price') %}  
         {% set s_price_search = value_s_price_search %}
@@ -226,12 +237,12 @@
 {% endblock table_thead_tr %}
 
 {% block tbody %}
-{{ dump(app.flashes()) }}
+{#{{ dump(app.flashes()) }}
     {% set id_sold = '' %}
     
     {% for value_id_sold in app.flashes('sales') %}  
     {% set id_sold = value_id_sold %}
-    {% endfor %}
+    {% endfor %}#}
 
 
 
@@ -253,7 +264,7 @@
 
                             <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
 
-                            <td>{{ incoming_documents.getNameDetail() }}</td>
+                            <td>{{ incoming_documents.getIdNameDetail(). getNameDetails() }}</td>
 
                             <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
 
@@ -270,7 +281,7 @@
                                 {% set price_sold = '' %}
                                 {% set date_sold = '' %}
                                
-                                {% if incoming_documents.getId() == id_sold %}
+                                {#{% if incoming_documents.getId() == id_sold %}#}
 
                                     {% for value_quantity_sold in app.flashes('quantity_sold') %}  
                                         {% set quantity_sold = value_quantity_sold %}
@@ -281,30 +292,30 @@
                                     {% for value_date_sold in app.flashes('date_sold') %}  
                                         {% set date_sold = value_date_sold %}
                                     {% endfor %}
-                                {% endif %}
-                                {#{% else %}
+                                {#{% endif %}
+                                {% else %}
                                 {% set quantity_sold = '' %}
                                 {% set price_sold = '' %}
                                 {% set date_sold = '' %}#}
                                 
                                 <td><input type="number" name="quantity_sold" required="required" 
                                     style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                        {% if incoming_documents.getId() == id_sold %}
+                                       {#} {% if incoming_documents.getId() == id_sold %}#}
                                             {% for message in app.flashes('[quantity_sold_error]') %}
                                             {{ message }}
                                             {% endfor %}
                                             {% for message in app.flashes('[sum_quantity_sold_error]') %}
                                             {% endfor %}
-                                        {% endif %}</td>
+                                        {#{% endif %}#}</td>
 
                                 
                                 <td><input type="number" name="price_sold" required="required" 
                                     style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
-                                        {% if incoming_documents.getId() == id_sold %}
+                                        {#{% if incoming_documents.getId() == id_sold %}#}
                                             {% for message in app.flashes('[price_sold_error]') %}
                                             {{ message }}
                                             {% endfor %}
-                                        {% endif %}</td>
+                                        {#{% endif %}#}</td>
                                 
                                 <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 

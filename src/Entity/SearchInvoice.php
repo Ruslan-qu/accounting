@@ -30,6 +30,8 @@ class SearchInvoice
 
     private ?string $id_manufacturer = null;
 
+    private ?string $search_name_details = null;
+
     // private ?int $refund = null;
 
     public function getId(): ?int
@@ -129,6 +131,18 @@ class SearchInvoice
     public function setIdManufacturer(?string $id_manufacturer): static
     {
         $this->id_manufacturer = $id_manufacturer;
+
+        return $this;
+    }
+
+    public function getSearchNameDetails(): ?string
+    {
+        return $this->search_name_details;
+    }
+
+    public function setSearchNameDetails(?string $search_name_details): static
+    {
+        $this->search_name_details = $search_name_details;
 
         return $this;
     }
