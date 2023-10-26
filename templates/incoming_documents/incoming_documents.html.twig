@@ -229,6 +229,7 @@
     <th>Дата прод-жи</th>
     <th>Продано</th>
     <th>Возврат</th>
+    <th>Удалить</th>
 {% endif %}
 {% endfor %}
 {% else %}
@@ -326,6 +327,11 @@
                             <form action="/refund_part" name="refund_part" method="get">
 
                                 <td><button class="refund" type="submit" name="refund_part" value="{{ incoming_documents.getId() }}">Возврат</button></td>
+                                
+                            </form>
+                            <form action="/delete_invoice" name="delete_invoice" method="post">
+
+                                <td><button class="delete" type="submit" name="delete_invoice" value="{{ incoming_documents.getId() }}">Удалить</button></td>
                                 
                             </form>
                         {% endif %}

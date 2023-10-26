@@ -35,30 +35,38 @@ class IncomingDocumentsController extends AbstractController
         InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
+
         /*Подключаем сессии, для передачи ошибок валидации*/
         $session = new Session();
         $session->start();
+
         /*Подключаем класс базы данных*/
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
         $entity_search_invoice = new SearchInvoice();
+
         /*Подключаем формы */
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
+
         /*Валидация формы */
         $form_search_invoice->handleRequest($request);
-        /*Валидация формы */
+
+        /*Подключаем валидацию форм */
         $errors_search_invoice = $validator->validate($form_search_invoice);
+
         /* Массив для передачи в твиг списка по поиску */
         $arr_incoming_documents = [];
+
         /*Валидация формы */
         if ($form_search_invoice->isSubmitted()) {
             if ($form_search_invoice->isValid()) {
 
-                // dd($request->request->all());
+                /* Массив для сбора списка по поиску */
                 $arr_incoming_documents_search = [];
 
+                /* собераем списка по поиску */
                 $number_document_search = $request->request->all()['search_invoice']['search_number_document'];
                 if ($number_document_search) {
                     $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
@@ -70,7 +78,6 @@ class IncomingDocumentsController extends AbstractController
                 if ($s_data_invoice_search && $po_data_invoice_search) {
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByDate($s_data_invoice_search, $po_data_invoice_search);
-                    //dd($arr_incoming_documents);
                 }
                 if ($s_data_invoice_search && !$po_data_invoice_search) {
                     $arr_incoming_documents_search[] = $InvoiceRepository
@@ -79,7 +86,6 @@ class IncomingDocumentsController extends AbstractController
                 if (!$s_data_invoice_search && $po_data_invoice_search) {
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPoDate($po_data_invoice_search);
-                    // dd($arr_incoming_documents);
                 }
 
 
@@ -87,37 +93,33 @@ class IncomingDocumentsController extends AbstractController
                 if ($id_counterparty_search) {
                     $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['id_counterparty' => $id_counterparty_search]);
-                    //dd($arr_incoming_documents);
                 }
+
                 $part_numbers_search = strtolower($request->request->all()['search_invoice']['id_details']);
                 if ($part_numbers_search) {
                     $arr_details_manufacturer_details = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
                     if ($arr_details_manufacturer_details) {
-                        //dd($arr_details_manufacturer[0]->getId());
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_details' => $arr_details_manufacturer_details[0]->getId()]);
                     }
                 }
+
                 $manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
                 if ($manufacturers_search) {
-                    // dd($manufacturers_search);
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['manufacturers' => $manufacturers_search]);
                     if ($arr_details_manufacturer) {
-                        //dd($arr_details_manufacturer);
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
                     }
                 }
-                //dd($request->request->all());
+
                 $search_name_details = strtolower($request->request->all()['search_invoice']['search_name_details']);
                 if ($search_name_details) {
-                    // dd($manufacturers_search);
                     $arr_details_manufacturer_name = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['name_details' => $search_name_details]);
                     if ($arr_details_manufacturer_name) {
-                        //dd($arr_details_manufacturer);
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_name_detail' => $arr_details_manufacturer_name[0]->getId()]);
                     }
@@ -125,31 +127,24 @@ class IncomingDocumentsController extends AbstractController
 
                 $s_price_search = $request->request->all()['search_invoice']['s_price'];
                 $po_price_search = $request->request->all()['search_invoice']['po_price'];
-
                 if ($s_price_search && $po_price_search) {
-
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPrice($s_price_search, $po_price_search);
                 }
-
                 if ($s_price_search && !$po_price_search) {
-
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findBySPrice($s_price_search);
                 }
-
                 if (!$s_price_search && $po_price_search) {
-
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPoPrice($po_price_search);
                 }
-                //dd($arr_incoming_documents[0][0]->getId());
+
+                /* Удаляем дубли из списка по поиску */
                 $newArray = [];
                 $Fruits = [];
                 foreach ($arr_incoming_documents_search as $key => $value) {
-
                     foreach ($value as $key => $line) {
-                        //dd($line->getId());
                         if (!in_array($line->getId(), $Fruits)) {
                             $Fruits[] = $line->getId();
                             $newArray[$key] = $line;
@@ -159,25 +154,23 @@ class IncomingDocumentsController extends AbstractController
                 $arr_incoming_documents[] = $newArray;
                 unset($newArray);
                 unset($Fruits);
-                //dd($arr_incoming_documents);
             } else {
-                // dd($request->request->all());
+
+                /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
                 $value_form_search_invoice = $request->request->all();
                 if ($value_form_search_invoice) {
                     foreach ($value_form_search_invoice as $key => $values) {
-                        //dd($values);
                         if (is_iterable($values)) {
                             foreach ($values as $key => $value) {
-                                //dd($key);
                                 $this->addFlash($key, $value);
                             }
                         }
                     }
                 }
 
+                /* Выводим сообщения ошибки в форму поиска, через сессии  */
                 if ($errors_search_invoice) {
                     foreach ($errors_search_invoice as $key) {
-                        //dd($key);
                         $message = $key->getmessage();
                         $propertyPath = $key->getpropertyPath();
                         $this->addFlash(
@@ -188,19 +181,18 @@ class IncomingDocumentsController extends AbstractController
                 }
                 return $this->redirectToRoute('incoming_documents');
             }
-        } /*else {
-            $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                ->findAll();
-        }*/
-        //dd($arr_incoming_documents);
+        }
 
+        /* Валидация форм продажи, выводим ошибки валидации, 
+        вбитые данные в форм продажи если форма не прошла валидацию, через сессии  */
         if ($session->getFlashBag()->has('sales')) {
             $error_id = $session->getFlashBag()->get('sales')[0];
             $arr_incoming_documents_error[] = $doctrine->getRepository(Invoice::class)
                 ->find($error_id);
             $arr_incoming_documents[] = $arr_incoming_documents_error;
-            // dd($arr_incoming_documents);
         }
+
+
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
             'legend' => 'Добавить новую счет-фактуру',
@@ -209,21 +201,24 @@ class IncomingDocumentsController extends AbstractController
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
-            //'errors_id' => $errors_id,
         ]);
     }
 
 
+    /*функция сохранения счет-фактур , номера , производителей, описания деталей */
     #[Route('/sales_incoming_documents', name: 'sales_incoming_documents')]
     public function SalesIncomingDocuments(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator
     ): Response {
+
+        /* Подключаем сущности  */
         $entity_incoming_documents = new Invoice();
         $entity_counterparty = new Counterparty();
         $entity_part_no = new IdDetailsManufacturer();
 
+        /* Подключаем форм */
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_counterparty = $this->createForm(CounterpartyType::class, $entity_counterparty);
@@ -232,22 +227,26 @@ class IncomingDocumentsController extends AbstractController
         $form_part_no->handleRequest($request);
         $form_counterparty->handleRequest($request);
 
+        /* Подключаем валидацию  */
         $errors_incoming_documents = $validator->validate($form_incoming_documents);
         $errors_part_no = $validator->validate($form_part_no);
-        //dd(new Response());
+
+        /*Валидация формы ручного сохранения счет-фактур , номера , производителей, описания деталей */
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()
             && $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
-            //dd($request->request->all());
+
             $part_number_strtolower_preg_replace = strtolower(preg_replace(
                 '#[^a-z\d]#i',
                 '',
                 $request->request->all()['part_no']['part_numbers']
             ));
+
             $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
                 ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
-            //dd($сount_part_number);
+
+            /* Валидация дулей номеров деталей, сохранения номера , производителей, описания деталей */
             if ($сount_part_number == 0) {
 
                 $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
@@ -268,7 +267,6 @@ class IncomingDocumentsController extends AbstractController
                     ))
                 );
 
-                //dd($entity_part_no);
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
@@ -300,14 +298,12 @@ class IncomingDocumentsController extends AbstractController
                 $strPriceReplace = str_replace(',', '.', $price);
                 $entity_incoming_documents->setPrice($strPriceReplace * 100);
             } else {
-                //dd($price);
                 $entity_incoming_documents->setPrice($price * 100);
             }
+
             $entity_incoming_documents->setSales(1);
             $entity_incoming_documents->setRefund(1);
 
-
-            //dd($entity_incoming_documents);
             $em = $doctrine->getManager();
             $em->persist($entity_incoming_documents);
             $em->flush();
@@ -315,34 +311,21 @@ class IncomingDocumentsController extends AbstractController
             return $this->redirectToRoute('incoming_documents');
         } else {
 
-            //dd($errors_incoming_documents);
+            /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
             $value_form_incoming_documents_and_part_no = $request->request->all();
             if ($value_form_incoming_documents_and_part_no) {
                 foreach ($value_form_incoming_documents_and_part_no as $key => $values) {
-                    //dd($values);
                     if (is_iterable($values)) {
                         foreach ($values as $key => $value) {
-                            //dd($key);
                             $this->addFlash($key, $value);
                         }
                     }
                 }
             }
 
+            /* Выводим ошибки валидации, через сессии */
             if ($errors_incoming_documents) {
                 foreach ($errors_incoming_documents as $key) {
-                    //dd($key);
-                    $message = $key->getmessage();
-                    $propertyPath = $key->getpropertyPath();
-                    $this->addFlash(
-                        $propertyPath,
-                        $message
-                    );
-                }
-            }
-            if ($errors_part_no) {
-                foreach ($errors_part_no as $key) {
-                    //dd($key);
                     $message = $key->getmessage();
                     $propertyPath = $key->getpropertyPath();
                     $this->addFlash(
@@ -352,40 +335,51 @@ class IncomingDocumentsController extends AbstractController
                 }
             }
 
+            if ($errors_part_no) {
+                foreach ($errors_part_no as $key) {
+                    $message = $key->getmessage();
+                    $propertyPath = $key->getpropertyPath();
+                    $this->addFlash(
+                        $propertyPath,
+                        $message
+                    );
+                }
+            }
 
             return $this->redirectToRoute('incoming_documents');
         }
     }
 
 
+    /* Функция формы продажи */
     #[Route('/sales_parts', name: 'sales_parts')]
     public function SalesParts(
         ManagerRegistry $doctrine,
         Request $request,
-        InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
-        //dd($request->request->all());
 
+        /* Валидация формы продажи */
         if (
             isset($_POST['quantity_sold'])
             && isset($_POST['price_sold'])
             && isset($_POST['date_sold'])
         ) {
-
+            /* Подключаем сущности */
             $entity_sold = new Sold();
 
+            /* Выводим данные и формы */
             $id = $request->request->all()['sales'];
             $quantity_sold = $request->request->all()['quantity_sold'];
             $price_sold = $request->request->all()['price_sold'];
 
+            /* Выводим по ид из базы данных */
             $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
-            //dd($entity_sales->getSolds()->getOwner());
             $quantity = $entity_sales->getQuantity();
             $entity_quantity_sold = $entity_sales->getQuantitySold();
             $sum_quantity_sold = $quantity_sold + $entity_quantity_sold;
-            //$price = $InvoiceRepository->findIdPrice($id);
-            //dd($request->request->all());
+
+            /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
             $validator = Validation::createValidator();
 
             $input = [
@@ -411,10 +405,11 @@ class IncomingDocumentsController extends AbstractController
             ]);
 
             $errors = $validator->validate($input, $constraint);
-            //dd($entity_sales);
 
+            /* Валидация формы */
             if (!$errors->count()) {
 
+                /* Запись в базу данных */
                 $entity_sales->setQuantitySold(
                     $entity_quantity_sold +
                         $request->request->all()['quantity_sold']
@@ -436,10 +431,8 @@ class IncomingDocumentsController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->persist($entity_sold);
                 $em->flush();
-                // $doctrine->getManager()->flush();
-                //dd($entity_sales->getQuantitySold());
+
                 $quantity_sold = $entity_sales->getQuantitySold();
-                //  $quantity = $entity_sales->getQuantity();
 
                 if ($quantity_sold == $quantity) {
 
@@ -450,7 +443,7 @@ class IncomingDocumentsController extends AbstractController
 
                 return $this->redirectToRoute('incoming_documents');
             } else {
-                //dd($request->request->all());
+                /* Выводим вбитые данные в форму продаж если форма не прошла валидацию, через сессии  */
                 $value_sold = $request->request->all();
                 if ($value_sold) {
                     foreach ($value_sold as $key => $value) {
@@ -458,7 +451,7 @@ class IncomingDocumentsController extends AbstractController
                     }
                 }
 
-                // dd($errors);
+                /* Выводим ошибки валидации, через сессии  */
                 if ($errors) {
                     foreach ($errors as $key) {
                         //dd($key);
@@ -473,20 +466,10 @@ class IncomingDocumentsController extends AbstractController
 
                 return $this->redirectToRoute('incoming_documents');
             }
-
-
-            /* if ($quantity_sold > 0 && $quantity_sold <= $quantity && $sum_quantity_sold <= $quantity) {
-
-
-                
-            } else {
-
-                return $this->redirectToRoute('incoming_documents', ['id' => $id]);
-            }*/
         }
     }
 
-
+    /* Функция возврата , изменяем данные в базе данных ячейке возврат  */
     #[Route('/refund_part', name: 'refund_part', methods: ['GET'])]
     public function Refund(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -502,10 +485,26 @@ class IncomingDocumentsController extends AbstractController
     }
 
 
-
+    /* функция сброса */
     #[Route('/reset', name: 'reset')]
     public function Reset(): Response
     {
+        return $this->redirectToRoute('incoming_documents');
+    }
+
+    /* функция удаления */
+    #[Route('/delete_invoice', name: 'delete_invoice')]
+    public function deleteInvoice(ManagerRegistry $doctrine, Request $request): Response
+    {
+
+        $id_delete_invoice = $request->request->all()['delete_invoice'];
+
+        $delete_invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_invoice);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($delete_invoice);
+        $entityManager->flush();
+
         return $this->redirectToRoute('incoming_documents');
     }
 }

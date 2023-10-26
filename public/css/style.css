@@ -98,10 +98,10 @@ header button.green {
 .refund,
 .delete {
     color: #ffffff;
-    padding: 0px 10px;
+    padding: 1px 6px;
     background-color: rgba(0, 136, 169, 1);
     border: 1px solid gray;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
 }
 
