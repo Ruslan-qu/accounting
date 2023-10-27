@@ -9,16 +9,19 @@
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
 {% block form %}
+
+{#Форма сохранения счет-фактур#}
     
     {{ form_start(form_i_d, {'action': path('sales_incoming_documents')}) }}
 
         {#{{ dump(app.flashes('children[price]')[0]) }}#}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set number_document = '' %}
         {% set data_invoice = '' %}
         {% set id_counterparty = '' %}
         {% set part_numbers = '' %}
         {% set manufacturers = '' %}
-        {% set name_details = '' %}
+        {#{% set name_details = '' %}#}
         {% set quantity = '' %}
         {% set price = '' %}
 
@@ -68,17 +71,15 @@
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
 
-            {% for value_name_detail in app.flashes('name_details') %}  
+            {#{% for value_name_detail in app.flashes('name_details') %}  
             {% set name_details = value_name_detail %}
             {% endfor %}
             <th>{{ form_label(form_p_n.name_details) }}<br>
             {{ form_widget(form_p_n.name_details, {value : name_details}) }}<br>    
-            {#{% if app.flashes('children[name_detail].data') %}#}
             {% for message in app.flashes('children[name_details].data') %}
             {{ message }}
             {% endfor %}
-            {#} {% endif %}#}
-            {{ form_errors(form_p_n.name_details) }}</th>
+            {{ form_errors(form_p_n.name_details) }}</th>#}
 
         {% for value_quantity in app.flashes('quantity') %}  
         {% set quantity = value_quantity %}
@@ -111,16 +112,17 @@
 {% endblock %}
 
 {% block form_search %}
-    
+    {#Форма поиска счет-фактур#}
     {{ form_start(form_search, {'action': path('incoming_documents')}) }}
 {#{{ dump(app.flashes()) }}#}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set number_document_search = '' %}
         {% set s_data_invoice_search = '' %}
         {% set po_data_invoice_search = '' %}
         {% set id_counterparty_search = '' %}
         {% set id_details_search = '' %}
         {% set id_manufacturer_search = '' %}
-        {% set name_details_search = '' %}
+        {#{% set name_details_search = '' %}#}
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
 
@@ -173,7 +175,7 @@
         {% endfor %}
         {{ form_errors(form_search.id_manufacturer) }}</th>
 
-        {% for value_isearch_name_details in app.flashes('search_name_details') %}  
+        {#{% for value_isearch_name_details in app.flashes('search_name_details') %}  
         {% set name_details_search = value_id_manufacturer_search %}
         {% endfor %}
         <th>{{ form_label(form_search.search_name_details) }}<br>
@@ -181,7 +183,7 @@
         {% for message in app.flashes('children[search_name_details].data') %}
         {{ message }}
         {% endfor %}
-        {{ form_errors(form_search.search_name_details) }}</th>
+        {{ form_errors(form_search.search_name_details) }}</th>#}
 
         {% for value_s_price_search in app.flashes('s_price') %}  
         {% set s_price_search = value_s_price_search %}
@@ -212,6 +214,7 @@
 {% endblock form_search %}
 
 {% block table_thead_tr %}
+{#Таблица#}
 {% if arr_incoming_documents %}
  {% for arr_search_invoice in arr_incoming_documents %}
 {% if arr_search_invoice %}
@@ -219,8 +222,6 @@
     <th>Дата накладной</th>
     <th>Поставщик</th>
     <th>№ Детали</th>
-    <th>Производитель</th>
-    <th>Описание детали</th>
     <th>Кол-во</th>
     <th>Цена шт</th>
     <th>Цена общая</th>
@@ -238,15 +239,7 @@
 {% endblock table_thead_tr %}
 
 {% block tbody %}
-{#{{ dump(app.flashes()) }}
-    {% set id_sold = '' %}
-    
-    {% for value_id_sold in app.flashes('sales') %}  
-    {% set id_sold = value_id_sold %}
-    {% endfor %}#}
-
-
-
+        {#выводит таблицу по поиску#}
         {% for arr_search_invoice in arr_incoming_documents %}
             {% if arr_search_invoice %}
                 {% for incoming_documents in arr_search_invoice %}
@@ -263,9 +256,9 @@
 
                             <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
 
-                            <td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
+                            {#<td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
 
-                            <td>{{ incoming_documents.getIdNameDetail(). getNameDetails() }}</td>
+                            <td>{{ incoming_documents.getIdNameDetail(). getNameDetails() }}</td>#}
 
                             <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
 
@@ -276,13 +269,11 @@
                                         / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
 
                             <form action="/sales_parts" name="form_sales" method="post">
-{#{{ dump(incoming_documents.getId()) }} <br/>#}
-                                
+
+                                {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
                                 {% set quantity_sold = '' %}
                                 {% set price_sold = '' %}
                                 {% set date_sold = '' %}
-                               
-                                {#{% if incoming_documents.getId() == id_sold %}#}
 
                                     {% for value_quantity_sold in app.flashes('quantity_sold') %}  
                                         {% set quantity_sold = value_quantity_sold %}
@@ -293,30 +284,21 @@
                                     {% for value_date_sold in app.flashes('date_sold') %}  
                                         {% set date_sold = value_date_sold %}
                                     {% endfor %}
-                                {#{% endif %}
-                                {% else %}
-                                {% set quantity_sold = '' %}
-                                {% set price_sold = '' %}
-                                {% set date_sold = '' %}#}
                                 
                                 <td><input type="number" name="quantity_sold" required="required" 
                                     style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                       {#} {% if incoming_documents.getId() == id_sold %}#}
                                             {% for message in app.flashes('[quantity_sold_error]') %}
                                             {{ message }}
                                             {% endfor %}
                                             {% for message in app.flashes('[sum_quantity_sold_error]') %}
-                                            {% endfor %}
-                                        {#{% endif %}#}</td>
+                                            {% endfor %}</td>
 
                                 
                                 <td><input type="number" name="price_sold" required="required" 
                                     style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
-                                        {#{% if incoming_documents.getId() == id_sold %}#}
                                             {% for message in app.flashes('[price_sold_error]') %}
                                             {{ message }}
-                                            {% endfor %}
-                                        {#{% endif %}#}</td>
+                                            {% endfor %}</td>
                                 
                                 <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 

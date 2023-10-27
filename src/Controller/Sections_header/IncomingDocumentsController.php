@@ -105,7 +105,7 @@ class IncomingDocumentsController extends AbstractController
                     }
                 }
 
-                $manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
+                /*$manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
                 if ($manufacturers_search) {
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['manufacturers' => $manufacturers_search]);
@@ -123,7 +123,7 @@ class IncomingDocumentsController extends AbstractController
                         $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_name_detail' => $arr_details_manufacturer_name[0]->getId()]);
                     }
-                }
+                }*/
 
                 $s_price_search = $request->request->all()['search_invoice']['s_price'];
                 $po_price_search = $request->request->all()['search_invoice']['po_price'];
@@ -259,13 +259,13 @@ class IncomingDocumentsController extends AbstractController
                     ))
                 );
 
-                $entity_part_no->setNameDetails(
+                /*$entity_part_no->setNameDetails(
                     mb_strtolower(preg_replace(
                         '#[^а-яё\d\s\.,]#ui',
                         '',
                         $request->request->all()['part_no']['name_details']
                     ))
-                );
+                );*/
 
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
@@ -279,7 +279,7 @@ class IncomingDocumentsController extends AbstractController
 
             $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
 
-            $entity_incoming_documents->setIdNameDetail($id_part_number_manufacturer);
+            /*$entity_incoming_documents->setIdNameDetail($id_part_number_manufacturer);*/
 
             $entity_incoming_documents->setNumberDocument(
                 $request->request->all()['incoming_documents']['number_document']

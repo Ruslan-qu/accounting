@@ -24,7 +24,6 @@ class IncomingDocumentsType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^\d+$/',
-                        //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
@@ -41,7 +40,6 @@ class IncomingDocumentsType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^\d+$/',
-                        //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
@@ -52,15 +50,12 @@ class IncomingDocumentsType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[\d]+[\.,]?[\d]*$/',
-                        //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
                 'attr' => ['style' => 'width: 80px']
-                //'currency' => false,
-                //'divisor' => 100,
-                //'scale' => 2,
             ])
+
             ->add('id_counterparty', EntityType::class, [
                 'label' => 'Поставщик',
                 'class' => Counterparty::class,

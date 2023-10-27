@@ -23,8 +23,8 @@ class IdDetailsManufacturer
     #[ORM\OneToMany(mappedBy: 'id_manufacturer', targetEntity: Invoice::class)]
     private Collection $manufacturer;
 
-    #[ORM\OneToMany(mappedBy: 'id_name_detail', targetEntity: Invoice::class)]
-    private Collection $name_detail;
+    /* #[ORM\OneToMany(mappedBy: 'id_name_detail', targetEntity: Invoice::class)]
+    private Collection $name_detail;*/
 
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $part_numbers = null;
@@ -32,14 +32,29 @@ class IdDetailsManufacturer
     #[ORM\Column(length: 33, nullable: true)]
     private ?string $manufacturers = null;
 
-    #[ORM\Column(length: 33, nullable: true)]
-    private ?string $name_details = null;
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersDetailsList')]
+    private ?DetailsList $id_part_name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersCarBrands')]
+    private ?CarBrands $id_car_brand = null;
+
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersSides')]
+    private ?Sides $id_Side = null;
+
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersBodies')]
+    private ?Bodies $id_body = null;
+
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersAvailability')]
+    private ?Availability $id_in_stock = null;
+
+    /*#[ORM\Column(length: 33, nullable: true)]
+    private ?string $name_details = null;*/
 
     public function __construct()
     {
         $this->part_number = new ArrayCollection();
         $this->manufacturer = new ArrayCollection();
-        $this->name_detail = new ArrayCollection();
+        //$this->name_detail = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,10 +122,8 @@ class IdDetailsManufacturer
         return $this;
     }
 
-    /**
-     * @return Collection<int, Invoice>
-     */
-    public function getNameDetail(): Collection
+
+    /* public function getNameDetail(): Collection
     {
         return $this->name_detail;
     }
@@ -135,7 +148,7 @@ class IdDetailsManufacturer
         }
 
         return $this;
-    }
+    }*/
 
     public function getPartNumbers(): ?string
     {
@@ -161,7 +174,7 @@ class IdDetailsManufacturer
         return $this;
     }
 
-    public function getNameDetails(): ?string
+    /*public function getNameDetails(): ?string
     {
         return $this->name_details;
     }
@@ -169,6 +182,66 @@ class IdDetailsManufacturer
     public function setNameDetails(?string $name_details): static
     {
         $this->name_details = $name_details;
+
+        return $this;
+    }*/
+
+    public function getIdPartName(): ?DetailsList
+    {
+        return $this->id_part_name;
+    }
+
+    public function setIdPartName(?DetailsList $id_part_name): static
+    {
+        $this->id_part_name = $id_part_name;
+
+        return $this;
+    }
+
+    public function getIdCarBrand(): ?CarBrands
+    {
+        return $this->id_car_brand;
+    }
+
+    public function setIdCarBrand(?CarBrands $id_car_brand): static
+    {
+        $this->id_car_brand = $id_car_brand;
+
+        return $this;
+    }
+
+    public function getIdSide(): ?Sides
+    {
+        return $this->id_Side;
+    }
+
+    public function setIdSide(?Sides $id_Side): static
+    {
+        $this->id_Side = $id_Side;
+
+        return $this;
+    }
+
+    public function getIdBody(): ?Bodies
+    {
+        return $this->id_body;
+    }
+
+    public function setIdBody(?Bodies $id_body): static
+    {
+        $this->id_body = $id_body;
+
+        return $this;
+    }
+
+    public function getIdInStock(): ?Availability
+    {
+        return $this->id_in_stock;
+    }
+
+    public function setIdInStock(?Availability $id_in_stock): static
+    {
+        $this->id_in_stock = $id_in_stock;
 
         return $this;
     }

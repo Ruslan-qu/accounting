@@ -30,7 +30,7 @@ class SearchInvoice
 
     private ?string $id_manufacturer = null;
 
-    private ?string $search_name_details = null;
+    // private ?string $search_name_details = null;
 
     // private ?int $refund = null;
 
@@ -135,7 +135,7 @@ class SearchInvoice
         return $this;
     }
 
-    public function getSearchNameDetails(): ?string
+    /*public function getSearchNameDetails(): ?string
     {
         return $this->search_name_details;
     }
@@ -147,7 +147,7 @@ class SearchInvoice
         return $this;
     }
 
-    /* public function getRefund(): ?int
+    public function getRefund(): ?int
     {
         return $this->refund;
     }

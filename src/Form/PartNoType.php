@@ -26,6 +26,7 @@ class PartNoType extends AbstractType
                 ],
                 'attr' => ['style' => 'width: 140px']
             ])
+
             ->add('manufacturers', TextType::class, [
                 'label' => 'Производитель',
                 'constraints' => [
@@ -36,9 +37,9 @@ class PartNoType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
-            ])
+            ]);
 
-            ->add('name_details', TextareaType::class, [
+        /*->add('name_details', TextareaType::class, [
                 'label' => 'Описание детали',
                 'constraints' => [
                     new Regex([
@@ -51,7 +52,7 @@ class PartNoType extends AbstractType
                     'rows' => '1',
                     'cols' => '18'
                 ]
-            ]);
+            ]);*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

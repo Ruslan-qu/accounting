@@ -104,6 +104,7 @@ class SearchInvoiceType extends AbstractType
                 ],
                 'attr' => ['style' => 'width: 140px']
             ])
+
             ->add('id_manufacturer', TextType::class, [
                 'label' => 'Производитель',
                 'required' => false,
@@ -115,9 +116,9 @@ class SearchInvoiceType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
-            ])
+            ]);
 
-            ->add('search_name_details', TextareaType::class, [
+        /*->add('search_name_details', TextareaType::class, [
                 'label' => 'Описание детали',
                 'required' => false,
                 'constraints' => [
@@ -131,8 +132,8 @@ class SearchInvoiceType extends AbstractType
                     'rows' => '1',
                     'cols' => '18'
                 ]
-            ]);
-        /*->add('refund', ChoiceType::class, [
+            ])
+        ->add('refund', ChoiceType::class, [
                 'label' => 'Возвраты',
                 'choices'  => [
                     'Возвраты' => 2,

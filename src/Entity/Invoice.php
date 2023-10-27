@@ -24,8 +24,8 @@ class Invoice
     #[ORM\JoinColumn(nullable: true)]
     private ?Counterparty $id_counterparty = null;
 
-    #[ORM\ManyToOne(inversedBy: 'name_detail')]
-    private ?IdDetailsManufacturer $id_name_detail = null;
+    /*#[ORM\ManyToOne(inversedBy: 'name_detail')]
+    private ?IdDetailsManufacturer $id_name_detail = null;*/
 
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
@@ -54,6 +54,9 @@ class Invoice
 
     #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: Sold::class)]
     private Collection $solds;
+
+    #[ORM\ManyToOne(inversedBy: 'invoices_payment_method')]
+    private ?PaymentMethod $id_payment_method = null;
 
     public function __construct()
     {
@@ -89,7 +92,7 @@ class Invoice
         return $this;
     }
 
-    public function getIdNameDetail(): ?IdDetailsManufacturer
+    /* public function getIdNameDetail(): ?IdDetailsManufacturer
     {
         return $this->id_name_detail;
     }
@@ -99,7 +102,7 @@ class Invoice
         $this->id_name_detail = $id_name_detail;
 
         return $this;
-    }
+    }*/
 
     public function getQuantity(): ?int
     {
@@ -223,6 +226,18 @@ class Invoice
                 $sold->setInvoice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdPaymentMethod(): ?PaymentMethod
+    {
+        return $this->id_payment_method;
+    }
+
+    public function setIdPaymentMethod(?PaymentMethod $id_payment_method): static
+    {
+        $this->id_payment_method = $id_payment_method;
 
         return $this;
     }
