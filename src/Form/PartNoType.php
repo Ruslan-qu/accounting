@@ -2,9 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Sides;
+use App\Entity\CarBrands;
+use App\Entity\DetailsList;
 use App\Entity\IdDetailsManufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,9 +41,9 @@ class PartNoType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
-            ]);
+            ])
 
-        /*->add('name_details', TextareaType::class, [
+            ->add('name_detail', TextareaType::class, [
                 'label' => 'Описание детали',
                 'constraints' => [
                     new Regex([
@@ -52,7 +56,40 @@ class PartNoType extends AbstractType
                     'rows' => '1',
                     'cols' => '18'
                 ]
-            ]);*/
+            ])
+
+            ->add('id_part_name', EntityType::class, [
+                'label' => 'Название детали',
+                'class' => DetailsList::class,
+                'choice_label' => 'part_name',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
+            ->add('id_car_brand', EntityType::class, [
+                'label' => 'Марка',
+                'class' => CarBrands::class,
+                'choice_label' => 'car_brand',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
+            ->add('id_Side', EntityType::class, [
+                'label' => 'Сторона',
+                'class' => Sides::class,
+                'choice_label' => 'side',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

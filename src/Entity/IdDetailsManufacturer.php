@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,6 +47,12 @@ class IdDetailsManufacturer
 
     #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersAvailability')]
     private ?Availability $id_in_stock = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $name_detail = null;
+
+    #[ORM\ManyToOne(inversedBy: 'AxlesIdDetailsManufacturer')]
+    private ?Axles $id_axle = null;
 
     /*#[ORM\Column(length: 33, nullable: true)]
     private ?string $name_details = null;*/
@@ -242,6 +249,30 @@ class IdDetailsManufacturer
     public function setIdInStock(?Availability $id_in_stock): static
     {
         $this->id_in_stock = $id_in_stock;
+
+        return $this;
+    }
+
+    public function getNameDetail(): ?string
+    {
+        return $this->name_detail;
+    }
+
+    public function setNameDetail(?string $name_detail): static
+    {
+        $this->name_detail = $name_detail;
+
+        return $this;
+    }
+
+    public function getIdAxle(): ?Axles
+    {
+        return $this->id_axle;
+    }
+
+    public function setIdAxle(?Axles $id_axle): static
+    {
+        $this->id_axle = $id_axle;
 
         return $this;
     }

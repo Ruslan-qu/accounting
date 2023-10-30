@@ -8,12 +8,31 @@
 
 {% block form %}
     {{ form_start(form_p_n) }}
+
         <th>{{ form_label(form_p_n.part_numbers) }}<br>
         {{ form_widget(form_p_n.part_numbers) }}
         {{ form_errors(form_p_n.part_numbers) }}</th>
+
         <th>{{ form_label(form_p_n.manufacturers) }}<br>
         {{ form_widget(form_p_n.manufacturers) }}
         {{ form_errors(form_p_n.manufacturers) }}</th>
+
+        <th>{{ form_label(form_p_n.name_detail) }}<br>
+        {{ form_widget(form_p_n.name_detail) }}
+        {{ form_errors(form_p_n.name_detail) }}</th>
+
+        <th>{{ form_label(form_p_n.id_part_name) }}<br>
+        {{ form_widget(form_p_n.id_part_name) }}
+        {{ form_errors(form_p_n.id_part_name) }}</th>
+
+        <th>{{ form_label(form_p_n.id_car_brand) }}<br>
+        {{ form_widget(form_p_n.id_car_brand) }}
+        {{ form_errors(form_p_n.id_car_brand) }}</th>
+
+        <th>{{ form_label(form_p_n.id_Side) }}<br>
+        {{ form_widget(form_p_n.id_Side) }}
+        {{ form_errors(form_p_n.id_Side) }}</th>
+
         <th><button class="save" type="submit">Сохранить</button></th>
     {{ form_end(form_p_n) }}
 {% endblock %}
