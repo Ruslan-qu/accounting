@@ -31,12 +31,12 @@ class PaymentMethod
         return $this->id;
     }
 
-    public function getCash(): ?string
+    public function getMethod(): ?string
     {
         return $this->method;
     }
 
-    public function setCash(?string $method): static
+    public function setMethod(?string $method): static
     {
         $this->method = $method;
 

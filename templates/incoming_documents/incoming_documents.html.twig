@@ -8,7 +8,7 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form %}
+{% block form_sales %}
 
 {#Форма сохранения счет-фактур#}
     
@@ -24,6 +24,7 @@
         {#{% set name_details = '' %}#}
         {% set quantity = '' %}
         {% set price = '' %}
+        {% set id_payment_method = '' %}
 
         {% for value_number_document in app.flashes('number_document') %}  
         {% set number_document = value_number_document %}
@@ -49,25 +50,25 @@
         {{ form_widget(form_i_d.id_counterparty, {value : id_counterparty}) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
 
-        {{ form_start(form_p_n) }}
+        {#{{ form_start(form_p_n) }}#}
 
             {% for value_part_numbers in app.flashes('part_numbers') %}  
-            {% set part_numbers = value_part_numbers %}
+                {% set part_numbers = value_part_numbers %}
             {% endfor %}
             <th>{{ form_label(form_p_n.part_numbers) }}<br>
             {{ form_widget(form_p_n.part_numbers, {value : part_numbers}) }}<br>
             {% for message in app.flashes('children[part_numbers].data') %}
-            {{ message }}
+                {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.part_numbers) }}</th>
 
             {% for value_manufacturers in app.flashes('manufacturers') %}  
-            {% set manufacturers = value_manufacturers %}
+                {% set manufacturers = value_manufacturers %}
             {% endfor %}
             <th>{{ form_label(form_p_n.manufacturers) }}<br>
             {{ form_widget(form_p_n.manufacturers, {value : manufacturers}) }}<br>
             {% for message in app.flashes('children[manufacturers].data') %}
-            {{ message }}
+                {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
 
@@ -81,6 +82,8 @@
             {% endfor %}
             {{ form_errors(form_p_n.name_details) }}</th>#}
 
+        {#{{ form_end(form_p_n) }}#}
+        
         {% for value_quantity in app.flashes('quantity') %}  
         {% set quantity = value_quantity %}
         {% endfor %}
@@ -104,12 +107,19 @@
         {% endfor %}
         {{ form_errors(form_i_d.price) }}</th>
 
-        <th><button class="save" type="submit" name="save">Сохранить</button></th>
+        {% for value_id_payment_method in app.flashes('id_payment_method') %}  
+        {% set id_payment_method = value_id_payment_method %}
+        {% endfor %}
+        <th>{{ form_label(form_i_d.id_payment_method) }}<br>
+        {{ form_widget(form_i_d.id_payment_method, {value : id_payment_method}) }}
+        {{ form_errors(form_i_d.id_payment_method) }}</th>
 
-        {{ form_end(form_p_n) }}
+        <th><button class="save" type="submit" name="save">Сохранить</button></th>     
 
-    {{ form_end(form_i_d) }}   
-{% endblock %}
+    {{ form_end(form_i_d) }}
+   
+{% endblock form_sales %}
+
 
 {% block form_search %}
     {#Форма поиска счет-фактур#}

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SideRepository;
+use App\Repository\SidesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SideRepository::class)]
+#[ORM\Entity(repositoryClass: SidesRepository::class)]
 class Sides
 {
     #[ORM\Id]
@@ -15,15 +15,15 @@ class Sides
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 17, nullable: true)]
+    #[ORM\Column(length: 33, nullable: true)]
     private ?string $side = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_Side', targetEntity: IdDetailsManufacturer::class)]
-    private Collection $idDetailsManufacturersSides;
+    #[ORM\OneToMany(mappedBy: 'id_side', targetEntity: IdDetailsManufacturer::class)]
+    private Collection $SidesIdDetailsManufacturers;
 
     public function __construct()
     {
-        $this->idDetailsManufacturersSides = new ArrayCollection();
+        $this->SidesIdDetailsManufacturers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,27 +46,27 @@ class Sides
     /**
      * @return Collection<int, IdDetailsManufacturer>
      */
-    public function getIdDetailsManufacturersSides(): Collection
+    public function getSidesIdDetailsManufacturers(): Collection
     {
-        return $this->idDetailsManufacturersSides;
+        return $this->SidesIdDetailsManufacturers;
     }
 
-    public function addIdDetailsManufacturersSide(IdDetailsManufacturer $idDetailsManufacturersSide): static
+    public function addSidesIdDetailsManufacturer(IdDetailsManufacturer $sidesIdDetailsManufacturer): static
     {
-        if (!$this->idDetailsManufacturersSides->contains($idDetailsManufacturersSide)) {
-            $this->idDetailsManufacturersSides->add($idDetailsManufacturersSide);
-            $idDetailsManufacturersSide->setIdSide($this);
+        if (!$this->SidesIdDetailsManufacturers->contains($sidesIdDetailsManufacturer)) {
+            $this->SidesIdDetailsManufacturers->add($sidesIdDetailsManufacturer);
+            $sidesIdDetailsManufacturer->setIdSide($this);
         }
 
         return $this;
     }
 
-    public function removeIdDetailsManufacturersSide(IdDetailsManufacturer $idDetailsManufacturersSide): static
+    public function removeSidesIdDetailsManufacturer(IdDetailsManufacturer $sidesIdDetailsManufacturer): static
     {
-        if ($this->idDetailsManufacturersSides->removeElement($idDetailsManufacturersSide)) {
+        if ($this->SidesIdDetailsManufacturers->removeElement($sidesIdDetailsManufacturer)) {
             // set the owning side to null (unless already changed)
-            if ($idDetailsManufacturersSide->getIdSide() === $this) {
-                $idDetailsManufacturersSide->setIdSide(null);
+            if ($sidesIdDetailsManufacturer->getIdSide() === $this) {
+                $sidesIdDetailsManufacturer->setIdSide(null);
             }
         }
 

@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Axles;
 use App\Entity\Sides;
+use App\Entity\Bodies;
 use App\Entity\CarBrands;
 use App\Entity\DetailsList;
+use App\Entity\Availability;
 use App\Entity\IdDetailsManufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -80,10 +83,43 @@ class PartNoType extends AbstractType
                 ]
             ])
 
-            ->add('id_Side', EntityType::class, [
+            ->add('id_side', EntityType::class, [
                 'label' => 'Сторона',
                 'class' => Sides::class,
                 'choice_label' => 'side',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
+            ->add('id_body', EntityType::class, [
+                'label' => 'Кузов',
+                'class' => Bodies::class,
+                'choice_label' => 'body',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
+            ->add('id_axle', EntityType::class, [
+                'label' => 'Перед Зад',
+                'class' => Axles::class,
+                'choice_label' => 'axle',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
+            ->add('id_in_stock', EntityType::class, [
+                'label' => 'Наличие',
+                'class' => Availability::class,
+                'choice_label' => 'in_stock',
                 'required' => false,
                 'attr' => [
                     'style' => 'width: 100px ',

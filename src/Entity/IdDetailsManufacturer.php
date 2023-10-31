@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Sides;
 use Doctrine\DBAL\Types\Types;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\IdDetailsManufacturerRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: IdDetailsManufacturerRepository::class)]
 class IdDetailsManufacturer
@@ -39,9 +40,6 @@ class IdDetailsManufacturer
     #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersCarBrands')]
     private ?CarBrands $id_car_brand = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersSides')]
-    private ?Sides $id_Side = null;
-
     #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersBodies')]
     private ?Bodies $id_body = null;
 
@@ -53,6 +51,9 @@ class IdDetailsManufacturer
 
     #[ORM\ManyToOne(inversedBy: 'AxlesIdDetailsManufacturer')]
     private ?Axles $id_axle = null;
+
+    #[ORM\ManyToOne(inversedBy: 'SidesIdDetailsManufacturers')]
+    private ?Sides $id_side = null;
 
     /*#[ORM\Column(length: 33, nullable: true)]
     private ?string $name_details = null;*/
@@ -217,18 +218,6 @@ class IdDetailsManufacturer
         return $this;
     }
 
-    public function getIdSide(): ?Sides
-    {
-        return $this->id_Side;
-    }
-
-    public function setIdSide(?Sides $id_Side): static
-    {
-        $this->id_Side = $id_Side;
-
-        return $this;
-    }
-
     public function getIdBody(): ?Bodies
     {
         return $this->id_body;
@@ -273,6 +262,18 @@ class IdDetailsManufacturer
     public function setIdAxle(?Axles $id_axle): static
     {
         $this->id_axle = $id_axle;
+
+        return $this;
+    }
+
+    public function getIdSide(): ?Sides
+    {
+        return $this->id_side;
+    }
+
+    public function setIdSide(?Sides $id_side): static
+    {
+        $this->id_side = $id_side;
 
         return $this;
     }

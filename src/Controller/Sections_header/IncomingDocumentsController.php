@@ -301,6 +301,8 @@ class IncomingDocumentsController extends AbstractController
                 $entity_incoming_documents->setPrice($price * 100);
             }
 
+
+
             $entity_incoming_documents->setSales(1);
             $entity_incoming_documents->setRefund(1);
 
