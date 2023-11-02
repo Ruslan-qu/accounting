@@ -100,7 +100,7 @@
 
 {% block form_search %}
     {#Форма поиска счет-фактур#}
-   {#{{ form_start(form_search, {'action': path('incoming_documents')}) }}#}
+  {# {{ form_start(),{'action': path('part_no')} }}#}
 {#{{ dump(app.flashes()) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
@@ -166,9 +166,12 @@
         {{ form_widget(form_p_n_search.id_axle, {value : search_id_axle}) }}
         {{ form_errors(form_p_n_search.id_axle) }}</th>
 
-        <th><button class="search" type="submit" name="search">Поиск</button></th>
+        <th>{{ form_label(form_p_n_search.button, 'Поиск') }}<br>
+        {{ form_widget(form_p_n_search.button) }}</th>
+
+        {#<th><button class="search" type="submit" name="search">Поиск</button></th>
         
-    {#{{ form_end(form_search) }}#}
+    {{ form_end() }}#}
 
     <form action="/reset" name="reset">
     <th><button class="reset" type="submit" name="reset" value="reset">Сбросить</button></th>
@@ -197,21 +200,25 @@
                     <tr>
                         {% if part_no.getIdInStock() == 1 %}
 
-                            {#<td>{{ part_no.getPartNumbers() }}</td>
+                            <td>{{ part_no.getPartNumbers() }}</td>
 
                             <td>{{ part_no.getManufacturers() }}</td>
 
-                            <td>{{ part_no.getIdPartName().getCounterparty() }}</td>
+                            <td>{{ part_no.getNameDetail() }}</td>
 
-                            <td>{{ part_no.getIdDetails().getPartNumbers() }}</td>
+                            <td>{{ part_no.getIdPartName().getPartName() }}</td>
 
-                            {#<td>{{ part_no.getIdManufacturer().getManufacturers() }}</td>
+                            <td>{{ part_no.getIdCarBrand().getCarBrand() }}</td>
 
-                            <td>{{ part_no.getIdNameDetail(). getNameDetails() }}</td>#}
+                            <td>{{ part_no.getIdSide().getSide() }}</td>
 
-                            {#<td>{{ part_no.getQuantity() - incoming_documents.getQuantitySold() }}</td>
+                            <td>{{ part_no.getIdBody().getBody() }}</td>
 
-                            <form action="/sales_parts" name="form_sales" method="post">
+                            <td>{{ part_no.getIdAxle().getAxle() }}</td>
+
+                            <td>{{ part_no.getIdAxle().getAxle() }}</td>
+
+                           {# <form action="/sales_parts" name="form_sales" method="post">
 
                                 {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
                                {# {% set quantity_sold = '' %}
@@ -258,12 +265,12 @@
 
                                 <td><button class="delete" type="submit" name="delete_invoice" value="{{ incoming_documents.getId() }}">Удалить</button></td>
                                 
-                            </form>
+                            </form>#}
                         {% endif %}
                     </tr>   
                 {% endfor %}
             {% else %}
                 <h2>Данные не найдены. Видите параметры в поиск</h2>  
             {% endif %}
-        {% endfor %}#}
+        {% endfor %}
 {% endblock tbody %}

@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PartNoType extends AbstractType
@@ -125,7 +126,8 @@ class PartNoType extends AbstractType
                     'style' => 'width: 100px ',
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
-            ]);
+            ])
+            ->add('button', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
