@@ -30,20 +30,26 @@ class PartNoController extends AbstractController
         $entity_part_no = new IdDetailsManufacturer();
 
         /*Подключаем формы */
-        $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
+        $form_p_n_search = $this->createForm(PartNoType::class, $entity_part_no, [
+            'action' => $this->generateUrl('part_no'),
+        ]);
+
+        $form_p_n_sales = $this->createForm(PartNoType::class, $entity_part_no, [
+            'action' => $this->generateUrl('sales_part_no'),
+        ]);
 
         /*Валидация формы */
-        $form_part_no->handleRequest($request);
+        $form_p_n_search->handleRequest($request);
 
         /*Подключаем валидацию форм */
-        $errors_search_part_no = $validator->validate($form_part_no);
+        $errors_search_part_no = $validator->validate($form_p_n_search);
 
         /* Массив для передачи в твиг списка по поиску */
         $arr_part_no = [];
 
         /*Валидация формы */
-        if ($form_part_no->isSubmitted()) {
-            if ($form_part_no->isValid()) {
+        if ($form_p_n_search->isSubmitted()) {
+            if ($form_p_n_search->isValid()) {
 
                 /* Массив для сбора списка по поиску */
                 $arr_part_no_search = [];
@@ -132,8 +138,8 @@ class PartNoController extends AbstractController
             'title_logo' => 'Детали',
             'legend' => 'Добавить новую деталь',
             'legend_search' => 'Поиск',
-            'form_p_n_sales' => $form_part_no->createView(),
-            'form_p_n_search' => $form_part_no->createView(),
+            'form_p_n_sales' => $form_p_n_sales->createView(),
+            'form_p_n_search' => $form_p_n_search->createView(),
             'arr_part_no' => $arr_part_no,
         ]);
     }

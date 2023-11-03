@@ -94,7 +94,8 @@
         {{ form_widget(form_p_n_sales.id_in_stock, {value : sales_id_in_stock}) }}
         {{ form_errors(form_p_n_sales.id_in_stock) }}</th>
 
-        <th><button class="save" type="submit">Сохранить</button></th>
+        <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
+        {#<th><button class="save" type="submit">Сохранить</button></th>#}
    {#{{ form_end(form_p_n) }}#}
 {% endblock form_sales %}
 
@@ -166,8 +167,7 @@
         {{ form_widget(form_p_n_search.id_axle, {value : search_id_axle}) }}
         {{ form_errors(form_p_n_search.id_axle) }}</th>
 
-        <th>{{ form_label(form_p_n_search.button, 'Поиск') }}<br>
-        {{ form_widget(form_p_n_search.button) }}</th>
+        <th>{{ form_widget(form_p_n_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
 
         {#<th><button class="search" type="submit" name="search">Поиск</button></th>
         
