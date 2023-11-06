@@ -46,7 +46,7 @@ class PartNoController extends AbstractController
 
         /* Массив для передачи в твиг списка по поиску */
         $arr_part_no = [];
-
+        // dd($request);
         /*Валидация формы */
         if ($form_p_n_search->isSubmitted()) {
             if ($form_p_n_search->isValid()) {
@@ -164,7 +164,7 @@ class PartNoController extends AbstractController
 
         /* Подключаем валидацию  */
         $errors_part_no = $validator->validate($form_part_no);
-
+        // dd($request);
         /*Валидация формы ручного сохранения счет-фактур , номера , производителей, описания деталей */
         if (
             $form_part_no->isSubmitted() && $form_part_no->isValid()
@@ -173,7 +173,7 @@ class PartNoController extends AbstractController
             $part_number_strtolower_preg_replace = strtolower(preg_replace(
                 '#[^a-z\d]#i',
                 '',
-                $request->request->all()['form_p_n_sales']['part_numbers']
+                $request->request->all()['part_no']['part_numbers']
             ));
 
             $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
@@ -188,7 +188,7 @@ class PartNoController extends AbstractController
                     strtolower(preg_replace(
                         '#[^a-z\d \-&]#i',
                         '',
-                        $request->request->all()['form_p_n_sales']['manufacturers']
+                        $request->request->all()['part_no']['manufacturers']
                     ))
                 );
 
@@ -196,7 +196,7 @@ class PartNoController extends AbstractController
                     mb_strtolower(preg_replace(
                         '#[^а-яё\d\s\.,]#ui',
                         '',
-                        $request->request->all()['form_p_n_sales']['name_detail']
+                        $request->request->all()['part_no']['name_detail']
                     ))
                 );
 

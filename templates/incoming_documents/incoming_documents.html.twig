@@ -226,23 +226,23 @@
 {% block table_thead_tr %}
 {#Таблица#}
 {% if arr_incoming_documents %}
- {% for arr_search_invoice in arr_incoming_documents %}
-{% if arr_search_invoice %}
-    <th>№ Накладной</th>
-    <th>Дата накладной</th>
-    <th>Поставщик</th>
-    <th>№ Детали</th>
-    <th>Кол-во</th>
-    <th>Цена шт</th>
-    <th>Цена общая</th>
-    <th>Продано шт</th>
-    <th>Продано Цена</th>
-    <th>Дата прод-жи</th>
-    <th>Продано</th>
-    <th>Возврат</th>
-    <th>Удалить</th>
-{% endif %}
-{% endfor %}
+    {% for arr_search_invoice in arr_incoming_documents %}
+        {% if arr_search_invoice %}
+            <th>№ Накладной</th>
+            <th>Дата накладной</th>
+            <th>Поставщик</th>
+            <th>№ Детали</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Цена общая</th>
+            <th>Продано шт</th>
+            <th>Продано Цена</th>
+            <th>Дата прод-жи</th>
+            <th>Продано</th>
+            <th>Возврат</th>
+            <th>Удалить</th>
+        {% endif %}
+    {% endfor %}
 {% else %}
     <h2>Видите параметры в поиск</h2> 
 {% endif %}

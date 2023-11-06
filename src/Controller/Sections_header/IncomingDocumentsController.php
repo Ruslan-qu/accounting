@@ -230,7 +230,7 @@ class IncomingDocumentsController extends AbstractController
         /* Подключаем валидацию  */
         $errors_incoming_documents = $validator->validate($form_incoming_documents);
         $errors_part_no = $validator->validate($form_part_no);
-
+        //dd($request);
         /*Валидация формы ручного сохранения счет-фактур , номера , производителей, описания деталей */
         if (
             $form_incoming_documents->isSubmitted() && $form_incoming_documents->isValid()

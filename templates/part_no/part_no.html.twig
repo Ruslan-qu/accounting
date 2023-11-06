@@ -10,7 +10,7 @@
 
 {% block form_sales %}
 {#Форма сохранения деталей#}
-    {#{{ form_start(form_p_n) }}#}
+    {{ form_start(form_p_n_sales) }}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set sales_part_numbers = '' %}
         {% set sales_manufacturers = '' %}
@@ -96,13 +96,14 @@
 
         <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
         {#<th><button class="save" type="submit">Сохранить</button></th>#}
-   {#{{ form_end(form_p_n) }}#}
+   {{ form_end(form_p_n_sales) }}
 {% endblock form_sales %}
 
 {% block form_search %}
     {#Форма поиска счет-фактур#}
-  {# {{ form_start(),{'action': path('part_no')} }}#}
+  {#{{ form_start(form_p_n_search) }}#}
 {#{{ dump(app.flashes()) }}#}
+<form action="/part_no" name="search">
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
         {% set search_manufacturers = '' %}
@@ -125,8 +126,8 @@
         {#{% for value_manufacturers in app.flashes('manufacturers') %}  
             {% set search_manufacturers = value_manufacturers %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_search.manufacturers) }}<br>
-        {{ form_widget(form_p_n_search.manufacturers, {value : search_manufacturers}) }}<br>
+        <th>{{ form_label(form_p_n_search.manufacturers) }}<br>#}
+        {#{{ form_widget(form_p_n_search.manufacturers, { 'attr': {'class': 'hidden-row'}}) }}<br>
         {% for message in app.flashes('children[manufacturers].data') %}
             {{ message }}
         {% endfor %}
@@ -171,8 +172,8 @@
 
         {#<th><button class="search" type="submit" name="search">Поиск</button></th>
         
-    {{ form_end() }}#}
-
+    {{ form_end(form_p_n_search) }}#}
+    </form>
     <form action="/reset" name="reset">
     <th><button class="reset" type="submit" name="reset" value="reset">Сбросить</button></th>
     </form>
@@ -180,15 +181,23 @@
 {% endblock form_search %}
 
 {% block table_thead_tr %}
-    <th>№ Детали</th>
-    <th>Производитель</th>
-    <th>Описание детали</th>
-    <th>Название детали</th>
-    <th>Марка</th>
-    <th>Сторона</th>
-    <th>Кузов</th>
-    <th>Перед Зад</th>
-    <th>Удаление</th>
+{% if arr_part_no %}
+    {% for arr_search_part_no in arr_part_no %}
+        {% if arr_search_part_no %}
+            <th>№ Детали</th>
+            <th>Производитель</th>
+            <th>Описание детали</th>
+            <th>Название детали</th>
+            <th>Марка</th>
+            <th>Сторона</th>
+            <th>Кузов</th>
+            <th>Перед Зад</th>
+            <th>Удаление</th>
+            {% endif %}
+    {% endfor %}
+{% else %}
+    <h2>Видите параметры в поиск</h2> 
+{% endif %}
 {% endblock table_thead_tr %}
 
 {% block tbody %}

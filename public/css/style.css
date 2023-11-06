@@ -137,12 +137,17 @@ aside ul li a:hover {
 }
 
 main {
-    padding: 15px;
+    padding: 0;
 }
 
-.form_search th,
+.form_search th {
+    border: 1px solid black;
+
+}
+
 .form th {
     border: 1px solid black;
+
 }
 
 .table table {
@@ -150,8 +155,14 @@ main {
 
 }
 
-.table table,
-.table th,
+.table table {
+    border: 1px solid black;
+}
+
+.table th {
+    border: 1px solid black;
+}
+
 .table td {
     border: 1px solid black;
 }
