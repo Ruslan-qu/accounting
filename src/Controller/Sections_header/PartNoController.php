@@ -30,13 +30,9 @@ class PartNoController extends AbstractController
         $entity_part_no = new IdDetailsManufacturer();
 
         /*Подключаем формы */
-        $form_p_n_search = $this->createForm(PartNoType::class, $entity_part_no, [
-            'action' => $this->generateUrl('part_no'),
-        ]);
+        $form_p_n_search = $this->createForm(PartNoType::class, $entity_part_no);
 
-        $form_p_n_sales = $this->createForm(PartNoType::class, $entity_part_no, [
-            'action' => $this->generateUrl('sales_part_no'),
-        ]);
+        $form_p_n_sales = $this->createForm(PartNoType::class, $entity_part_no);
 
         /*Валидация формы */
         $form_p_n_search->handleRequest($request);
@@ -46,7 +42,7 @@ class PartNoController extends AbstractController
 
         /* Массив для передачи в твиг списка по поиску */
         $arr_part_no = [];
-        // dd($request);
+        //dd($request);
         /*Валидация формы */
         if ($form_p_n_search->isSubmitted()) {
             if ($form_p_n_search->isValid()) {
@@ -55,42 +51,42 @@ class PartNoController extends AbstractController
                 $arr_part_no_search = [];
 
                 /* собераем списка по поиску */
-                $part_numbers_search = $request->request->all()['form_p_n_search']['part_numbers'];
+                $part_numbers_search = $request->request->all()['part_no']['part_numbers'];
                 if ($part_numbers_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
                 }
 
-                $id_part_name_search = $request->request->all()['form_p_n_search']['id_part_name'];
+                $id_part_name_search = $request->request->all()['part_no']['id_part_name'];
                 if ($id_part_name_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_part_name' => $id_part_name_search]);
                 }
 
-                $id_car_brand_search = $request->request->all()['form_p_n_search']['id_car_brand'];
+                $id_car_brand_search = $request->request->all()['part_no']['id_car_brand'];
                 if ($id_car_brand_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_car_brand' => $id_car_brand_search]);
                 }
 
-                $id_side_search = $request->request->all()['form_p_n_search']['id_side'];
+                $id_side_search = $request->request->all()['part_no']['id_side'];
                 if ($id_side_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_side' => $id_side_search]);
                 }
 
-                $id_body_search = $request->request->all()['form_p_n_search']['id_body'];
+                $id_body_search = $request->request->all()['part_no']['id_body'];
                 if ($id_body_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_body' => $id_body_search]);
                 }
 
-                $id_axle_search = $request->request->all()['form_p_n_search']['id_axle'];
+                $id_axle_search = $request->request->all()['part_no']['id_axle'];
                 if ($id_axle_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_axle' => $id_axle_search]);
                 }
-
+                //dd($arr_part_no_search);
                 /* Удаляем дубли из списка по поиску */
                 $newArray = [];
                 $Fruits = [];
@@ -102,9 +98,10 @@ class PartNoController extends AbstractController
                         }
                     }
                 }
-                $arr_incoming_documents[] = $newArray;
+                $arr_part_no[] = $newArray;
                 unset($newArray);
                 unset($Fruits);
+                // dd($arr_part_no);
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
@@ -113,17 +110,17 @@ class PartNoController extends AbstractController
                     foreach ($value_form_part_no as $key => $values) {
                         if (is_iterable($values)) {
                             foreach ($values as $key => $value) {
-                                $this->addFlash($key, $value);
+                                $this->addFlash($key . '_search', $value);
                             }
                         }
                     }
                 }
-
+                //dd($errors_search_part_no);
                 /* Выводим сообщения ошибки в форму поиска, через сессии  */
                 if ($errors_search_part_no) {
                     foreach ($errors_search_part_no as $key) {
                         $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath();
+                        $propertyPath = $key->getpropertyPath() . '_search';
                         $this->addFlash(
                             $propertyPath,
                             $message
@@ -132,8 +129,10 @@ class PartNoController extends AbstractController
                 }
                 return $this->redirectToRoute('part_no');
             }
+        } else {
+            $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)->findAll();
         }
-
+        //dd($arr_part_no);
         return $this->render('part_no/part_no.html.twig', [
             'title_logo' => 'Детали',
             'legend' => 'Добавить новую деталь',
@@ -214,7 +213,7 @@ class PartNoController extends AbstractController
                 foreach ($value_form_part_no as $key => $values) {
                     if (is_iterable($values)) {
                         foreach ($values as $key => $value) {
-                            $this->addFlash($key, $value);
+                            $this->addFlash($key . '_sales', $value);
                         }
                     }
                 }
@@ -224,7 +223,8 @@ class PartNoController extends AbstractController
             if ($errors_part_no) {
                 foreach ($errors_part_no as $key) {
                     $message = $key->getmessage();
-                    $propertyPath = $key->getpropertyPath();
+                    $propertyPath = $key->getpropertyPath() . '_sales';
+                    //dd($propertyPath);
                     $this->addFlash(
                         $propertyPath,
                         $message
@@ -234,5 +234,12 @@ class PartNoController extends AbstractController
 
             return $this->redirectToRoute('part_no');
         }
+    }
+
+    /* функция сброса */
+    #[Route('/reset_part_no', name: 'reset_part_no')]
+    public function Reset(): Response
+    {
+        return $this->redirectToRoute('part_no');
     }
 }
