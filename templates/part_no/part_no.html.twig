@@ -194,6 +194,7 @@
             <th>Сторона</th>
             <th>Кузов</th>
             <th>Перед Зад</th>
+            <th>Наличие</th>
             <th>Изменить</th>
             <th>Удаление</th>
         {% endif %}
@@ -209,23 +210,23 @@
             {% if arr_search_part_no %}
                {% for part_no in arr_search_part_no %}
                     <tr>
-                        {% if part_no.getIdInStock().getInStock() == 'есть' %}
+                        <td>{{ part_no.getPartNumbers() }}</td>
 
-                            <td>{{ part_no.getPartNumbers() }}</td>
+                        <td>{{ part_no.getManufacturers() }}</td>
 
-                            <td>{{ part_no.getManufacturers() }}</td>
+                        <td>{{ part_no.getNameDetail() }}</td>
 
-                            <td>{{ part_no.getNameDetail() }}</td>
+                        <td>{{ part_no.getIdPartName().getPartName()|default('') }}</td>
 
-                            <td>{{ part_no.getIdPartName().getPartName() }}</td>
+                        <td>{{ part_no.getIdCarBrand().getCarBrand()|default('') }}</td>
 
-                            <td>{{ part_no.getIdCarBrand().getCarBrand() }}</td>
+                        <td>{{ part_no.getIdSide().getSide()|default('') }}</td>
 
-                            <td>{{ part_no.getIdSide().getSide() }}</td>
+                        <td>{{ part_no.getIdBody().getBody()|default('') }}</td>
 
-                            <td>{{ part_no.getIdBody().getBody() }}</td>
+                        <td>{{ part_no.getIdAxle().getAxle()|default('') }}</td>
 
-                            <td>{{ part_no.getIdAxle().getAxle() }}</td>
+                        <td>{{ part_no.getIdInStock().getInStock()|default('') }}</td>
 
                            {# <form action="/sales_parts" name="form_sales" method="post">
 
@@ -275,7 +276,6 @@
                                 <td><button class="delete" type="submit" name="delete_invoice" value="{{ incoming_documents.getId() }}">Удалить</button></td>
                                 
                             </form>#}
-                        {% endif %}
                     </tr>   
                 {% endfor %}
             {% else %}

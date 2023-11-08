@@ -7,6 +7,7 @@ use App\Entity\Sold;
 use DateTimeImmutable;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
+use App\Entity\Availability;
 use App\Entity\Counterparty;
 use App\Entity\SearchInvoice;
 use App\Form\CounterpartyType;
@@ -218,6 +219,7 @@ class IncomingDocumentsController extends AbstractController
         $entity_counterparty = new Counterparty();
         $entity_part_no = new IdDetailsManufacturer();
 
+
         /* Подключаем форм */
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
@@ -258,6 +260,8 @@ class IncomingDocumentsController extends AbstractController
                         $request->request->all()['part_no']['manufacturers']
                     ))
                 );
+
+                $entity_part_no->setIdInStock($doctrine->getRepository(Availability::class)->find(1));
 
                 /*$entity_part_no->setNameDetails(
                     mb_strtolower(preg_replace(
