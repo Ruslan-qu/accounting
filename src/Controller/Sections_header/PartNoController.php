@@ -86,6 +86,13 @@ class PartNoController extends AbstractController
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_axle' => $id_axle_search]);
                 }
+
+                $id_in_stock_search = $request->request->all()['part_no']['id_in_stock'];
+                if ($id_in_stock_search) {
+                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        ->findBy(['id_in_stock' => $id_in_stock_search]);
+                }
+
                 //dd($arr_part_no_search);
                 /* Удаляем дубли из списка по поиску */
                 $newArray = [];
@@ -240,6 +247,23 @@ class PartNoController extends AbstractController
     #[Route('/reset_part_no', name: 'reset_part_no')]
     public function Reset(): Response
     {
+        return $this->redirectToRoute('part_no');
+    }
+
+
+    /* функция удаления */
+    #[Route('/delete_part', name: 'delete_part')]
+    public function deleteInvoice(ManagerRegistry $doctrine, Request $request): Response
+    {
+
+        $id_delete_part = $request->request->all()['delete_part'];
+
+        $delete_part = $doctrine->getRepository(IdDetailsManufacturer::class)->find($id_delete_part);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($delete_part);
+        $entityManager->flush();
+
         return $this->redirectToRoute('part_no');
     }
 }

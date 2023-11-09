@@ -112,6 +112,7 @@
         {% set search_id_side = '' %}
         {% set search_id_body = '' %}
         {% set search_id_axle = '' %}
+        {% set search_id_in_stock = '' %}
 
         {% for value_part_numbers in app.flashes('part_numbers_search') %}  
             {% set search_part_numbers = value_part_numbers %}
@@ -133,7 +134,7 @@
         {% endfor %}
         {{ form_errors(form_p_n_search.manufacturers) }}</th>#}
         {% do form_widget(form_p_n_search.name_detail) %}
-        {% do form_widget(form_p_n_search.id_in_stock) %}
+        {#{% do form_widget(form_p_n_search.id_in_stock) %}#}
 
         {% for value_id_part_name in app.flashes('id_part_name_search') %}  
             {% set search_id_part_name = value_id_part_name %}
@@ -169,6 +170,13 @@
         <th>{{ form_label(form_p_n_search.id_axle) }}<br>
         {{ form_widget(form_p_n_search.id_axle, {value : search_id_axle}) }}
         {{ form_errors(form_p_n_search.id_axle) }}</th>
+
+        {% for value_id_in_stock in app.flashes('id_in_stock_search') %}  
+            {% set search_id_in_stock = value_id_in_stock %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_search.id_in_stock) }}<br>
+        {{ form_widget(form_p_n_search.id_in_stock, {value : search_id_in_stock}) }}
+        {{ form_errors(form_p_n_search.id_in_stock) }}</th>
 
         <th>{{ form_widget(form_p_n_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
 
@@ -264,18 +272,18 @@
 
                                 <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
 
-                            </form>
-
-                            <form action="/refund_part" name="refund_part" method="get">
-
-                                <td><button class="refund" type="submit" name="refund_part" value="{{ incoming_documents.getId() }}">Возврат</button></td>
-                                
-                            </form>
-                            <form action="/delete_invoice" name="delete_invoice" method="post">
-
-                                <td><button class="delete" type="submit" name="delete_invoice" value="{{ incoming_documents.getId() }}">Удалить</button></td>
-                                
                             </form>#}
+
+                            <form action="/edit_part" name="edit_part" method="get">
+
+                                <td><button class="edit" type="submit" name="edit_part" value="{{ part_no.getId() }}">Изменить</button></td>
+                                
+                            </form>
+                            <form action="/delete_part" name="delete_part" method="post">
+
+                                <td><button class="delete" type="submit" name="delete_part" value="{{ part_no.getId() }}">Удалить</button></td>
+                                
+                            </form>
                     </tr>   
                 {% endfor %}
             {% else %}

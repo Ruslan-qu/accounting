@@ -96,7 +96,8 @@ header button.green {
 
 .sales,
 .refund,
-.delete {
+.delete,
+.edit {
     color: #ffffff;
     padding: 1px 6px;
     background-color: rgba(0, 136, 169, 1);
