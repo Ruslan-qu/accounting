@@ -153,7 +153,7 @@ class PartNoController extends AbstractController
 
 
     #[Route('/sales_part_no', name: 'sales_part_no')]
-    public function SalesIncomingDocuments(
+    public function SalesPart(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator
@@ -171,7 +171,7 @@ class PartNoController extends AbstractController
         /* Подключаем валидацию  */
         $errors_part_no = $validator->validate($form_part_no);
         // dd($request);
-        /*Валидация формы ручного сохранения счет-фактур , номера , производителей, описания деталей */
+        /*Валидация формы ручного сохранения деталей */
         if (
             $form_part_no->isSubmitted() && $form_part_no->isValid()
         ) {
@@ -245,7 +245,7 @@ class PartNoController extends AbstractController
 
     /* функция сброса */
     #[Route('/reset_part_no', name: 'reset_part_no')]
-    public function Reset(): Response
+    public function ResetPart(): Response
     {
         return $this->redirectToRoute('part_no');
     }
@@ -253,7 +253,7 @@ class PartNoController extends AbstractController
 
     /* функция удаления */
     #[Route('/delete_part', name: 'delete_part')]
-    public function deleteInvoice(ManagerRegistry $doctrine, Request $request): Response
+    public function deletePart(ManagerRegistry $doctrine, Request $request): Response
     {
 
         $id_delete_part = $request->request->all()['delete_part'];
@@ -265,5 +265,40 @@ class PartNoController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('part_no');
+    }
+
+
+    /* функция редактирования */
+    #[Route('/edit_part', name: 'edit_part')]
+    public function EditPart(
+        ManagerRegistry $doctrine,
+        Request $request,
+    ): Response {
+
+
+        //   dd($entity_part_no);
+        /*Валидация формы Submit*/
+        if (!empty($_POST['edit_part'])) {
+
+            $id_edit_part = $request->request->all()['edit_part'];
+
+            $edit_part = $doctrine->getRepository(IdDetailsManufacturer::class)->find($id_edit_part);
+            //dd($delete_part);
+
+            /* Выводим данные в форму сохранения, через сессии */
+            if ($edit_part) {
+                dd($edit_part);
+                foreach ($edit_part as $key => $values) {
+                    //   dd($key);
+                    if (is_iterable($values)) {
+                        foreach ($values as $key => $value) {
+                            $this->addFlash($key . '_sales', $value);
+                        }
+                    }
+                }
+            }
+
+            return $this->redirectToRoute('part_no');
+        }
     }
 }
