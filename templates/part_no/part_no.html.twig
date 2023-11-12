@@ -8,7 +8,7 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_sales %}
+{% block form_sales_edit %}
 {#Форма сохранения деталей#}
     {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
@@ -97,7 +97,7 @@
         <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
         {#<th><button class="save" type="submit">Сохранить</button></th>#}
    {{ form_end(form_p_n_sales) }}
-{% endblock form_sales %}
+{% endblock form_sales_edit %}
 
 {% block form_search %}
     {#Форма поиска счет-фактур#}

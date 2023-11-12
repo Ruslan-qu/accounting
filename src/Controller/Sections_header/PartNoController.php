@@ -268,28 +268,87 @@ class PartNoController extends AbstractController
     }
 
 
+
+
     /* функция редактирования */
     #[Route('/edit_part', name: 'edit_part')]
     public function EditPart(
         ManagerRegistry $doctrine,
         Request $request,
+        ValidatorInterface $validator
     ): Response {
 
+        /* Подключаем сущности  */
+        $entity_part_no = new IdDetailsManufacturer();
+
+        /* Подключаем форм */
+        $form_p_n_edit = $this->createForm(PartNoType::class, $entity_part_no);
+
+        /*Валидация формы */
+        $form_p_n_edit->handleRequest($request);
+
+        /* Подключаем валидацию  */
+        $errors_part_no = $validator->validate($form_p_n_edit);
+        // dd($request);
 
         //   dd($entity_part_no);
-        /*Валидация формы Submit*/
+
         if (!empty($_POST['edit_part'])) {
 
+            /*Открываем редаткируемую деталь по id */
             $id_edit_part = $request->request->all()['edit_part'];
 
             $edit_part = $doctrine->getRepository(IdDetailsManufacturer::class)->find($id_edit_part);
-            //dd($delete_part);
+        } else {
+            $edit_part = '';
+        }
+        /*Валидация формы ручного сохранения деталей */
+        if (
+            $form_p_n_edit->isSubmitted() && $form_p_n_edit->isValid()
+        ) {
 
-            /* Выводим данные в форму сохранения, через сессии */
-            if ($edit_part) {
-                dd($edit_part);
-                foreach ($edit_part as $key => $values) {
-                    //   dd($key);
+            $part_number_strtolower_preg_replace = strtolower(preg_replace(
+                '#[^a-z\d]#i',
+                '',
+                $request->request->all()['part_no']['part_numbers']
+            ));
+
+            $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
+
+            /* Валидация дулей номеров деталей, сохранения номера , производителей, описания деталей */
+            if ($сount_part_number == 0) {
+
+                $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
+
+                $entity_part_no->setManufacturers(
+                    strtolower(preg_replace(
+                        '#[^a-z\d \-&]#i',
+                        '',
+                        $request->request->all()['part_no']['manufacturers']
+                    ))
+                );
+
+                $entity_part_no->setNameDetail(
+                    mb_strtolower(preg_replace(
+                        '#[^а-яё\d\s\.,]#ui',
+                        '',
+                        $request->request->all()['part_no']['name_detail']
+                    ))
+                );
+
+                $em = $doctrine->getManager();
+                $em->persist($entity_part_no);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('part_no');
+        } else {
+
+            /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
+            $value_form_part_no = $request->request->all();
+            if ($value_form_part_no) {
+                foreach ($value_form_part_no as $key => $values) {
                     if (is_iterable($values)) {
                         foreach ($values as $key => $value) {
                             $this->addFlash($key . '_sales', $value);
@@ -298,7 +357,27 @@ class PartNoController extends AbstractController
                 }
             }
 
-            return $this->redirectToRoute('part_no');
+            /* Выводим ошибки валидации, через сессии */
+            if ($errors_part_no) {
+                foreach ($errors_part_no as $key) {
+                    $message = $key->getmessage();
+                    $propertyPath = $key->getpropertyPath() . '_sales';
+                    //dd($propertyPath);
+                    $this->addFlash(
+                        $propertyPath,
+                        $message
+                    );
+                }
+            }
+
+            //return $this->redirectToRoute('part_no');
         }
+
+        return $this->render('part_no/edit_part_no.html.twig', [
+            'title_logo' => 'Редактируем деталь',
+            'legend' => 'Редактируем деталь',
+            'form_p_n_edit' => $form_p_n_edit->createView(),
+            'edit_part' => $edit_part,
+        ]);
     }
 }

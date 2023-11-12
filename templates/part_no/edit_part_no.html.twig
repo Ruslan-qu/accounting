@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block form_sales_edit %}
+
+{#{{ dump(edit_part.getIdInStock().getId()) }}#}
+{#Форма сохранения деталей#}
+    {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set sales_part_numbers = edit_part.getPartNumbers()|default('') %}
+        {% set sales_manufacturers = edit_part.getManufacturers()|default('') %}
+        {% set sales_name_detail = edit_part.getNameDetail()|default('') %}
+        {% set sales_id_part_name = edit_part.getIdPartName().getId()|default('') %}
+        {% set sales_id_car_brand = edit_part.getIdCarBrand().getId()|default('') %}
+        {% set sales_id_side = edit_part.getIdSide().getId()|default('') %}
+        {% set sales_id_body = edit_part.getIdBody().getId()|default('') %}
+        {% set sales_id_axle = edit_part.getIdAxle().getId()|default('') %}
+        {% set sales_id_in_stock = edit_part.getIdInStock().getId()|default('') %}
+
+        {% for value_part_numbers in app.flashes('part_numbers_sales') %}  
+            {% set sales_part_numbers = value_part_numbers %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.part_numbers) }}<br>
+        {{ form_widget(form_p_n_edit.part_numbers, {value : sales_part_numbers}) }}<br>
+        {{ form_errors(form_p_n_edit.part_numbers) }}</th>
+
+        {% for value_manufacturers in app.flashes('manufacturers_sales') %}  
+            {% set sales_manufacturers = value_manufacturers %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.manufacturers) }}<br>
+        {{ form_widget(form_p_n_edit.manufacturers, {value : sales_manufacturers}) }}<br>
+        {{ form_errors(form_p_n_edit.manufacturers) }}</th>
+
+        {% for value_name_detail in app.flashes('name_detail_sales') %}  
+            {% set sales_name_detail = value_name_detail %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.name_detail) }}<br>
+        {{ form_widget(form_p_n_edit.name_detail, {value : sales_name_detail}) }}<br>    
+        {{ form_errors(form_p_n_edit.name_detail) }}</th>
+
+        {% for value_id_part_name in app.flashes('id_part_name_sales') %}  
+            {% set sales_id_part_name = value_id_part_name %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_part_name) }}<br>
+        {{ form_widget(form_p_n_edit.id_part_name, {value : sales_id_part_name}) }}
+        {{ form_errors(form_p_n_edit.id_part_name) }}</th>
+
+        {% for value_id_car_brand in app.flashes('id_car_brand_sales') %}  
+            {% set sales_id_car_brand = value_id_car_brand %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_car_brand) }}<br>
+        {{ form_widget(form_p_n_edit.id_car_brand, {value : sales_id_car_brand}) }}
+        {{ form_errors(form_p_n_edit.id_car_brand) }}</th>
+
+        {% for value_id_side in app.flashes('id_side_sales') %}  
+            {% set sales_id_side = value_id_side %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_side) }}<br>
+        {{ form_widget(form_p_n_edit.id_side, {value : sales_id_side}) }}
+        {{ form_errors(form_p_n_edit.id_side) }}</th>
+
+        {% for value_id_body in app.flashes('id_body_sales') %}  
+            {% set sales_id_body = value_id_body %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_body) }}<br>
+        {{ form_widget(form_p_n_edit.id_body, {value : sales_id_body}) }}
+        {{ form_errors(form_p_n_edit.id_body) }}</th>
+
+        {% for value_id_axle in app.flashes('id_axle_sales') %}  
+            {% set sales_id_axle = value_id_axle %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_axle) }}<br>
+        {{ form_widget(form_p_n_edit.id_axle, {value : sales_id_axle}) }}
+        {{ form_errors(form_p_n_edit.id_axle) }}</th>
+
+        {% for value_id_in_stock in app.flashes('id_in_stock_sales') %}  
+            {% set sales_id_in_stock = value_id_in_stock %}
+        {% endfor %}
+        <th>{{ form_label(form_p_n_edit.id_in_stock) }}<br>
+        {{ form_widget(form_p_n_edit.id_in_stock, {value : sales_id_in_stock}) }}
+        {{ form_errors(form_p_n_edit.id_in_stock) }}</th>
+
+        <th>{{ form_widget(form_p_n_edit.button, { 'label': 'Редактирует', 'attr': {'class': 'save'} }) }}</th>
+        {#<th><button class="save" type="submit">Сохранить</button></th>#}
+   {{ form_end(form_p_n_edit) }}
+{% endblock form_sales_edit %}
+
+{% block form_search %}{% endblock form_search %}
+
+{% block table_thead_tr %}{% endblock table_thead_tr %}
+
+{% block tbody %}{% endblock tbody %}
