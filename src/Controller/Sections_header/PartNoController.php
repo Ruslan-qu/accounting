@@ -5,11 +5,14 @@ namespace App\Controller\Sections_header;
 use App\Form\PartNoType;
 use App\Entity\IdDetailsManufacturer;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\IdDetailsManufacturerRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -287,11 +290,10 @@ class PartNoController extends AbstractController
         /*Валидация формы */
         $form_p_n_edit->handleRequest($request);
 
-        /* Подключаем валидацию  */
-        $errors_part_no = $validator->validate($form_p_n_edit);
-        // dd($request);
+        /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
+        $validator = Validation::createValidator();
 
-        //   dd($entity_part_no);
+        // dd($request);
 
         if (!empty($_POST['edit_part'])) {
 
@@ -302,75 +304,93 @@ class PartNoController extends AbstractController
         } else {
             $edit_part = '';
         }
-        /*Валидация формы ручного сохранения деталей */
-        if (
-            $form_p_n_edit->isSubmitted() && $form_p_n_edit->isValid()
-        ) {
+        /*Валидация формы ручного именения деталей */
+        if ($form_p_n_edit->isSubmitted()) {
 
-            $part_number_strtolower_preg_replace = strtolower(preg_replace(
-                '#[^a-z\d]#i',
-                '',
-                $request->request->all()['part_no']['part_numbers']
-            ));
+            if ($form_p_n_edit->isValid()) {
 
-            $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
-                ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
+                dd($request);
+                $part_number_strtolower = strtolower($request->request->all()['part_no']['part_numbers']);
 
-            /* Валидация дулей номеров деталей, сохранения номера , производителей, описания деталей */
-            if ($сount_part_number == 0) {
+                $manufacturers_strtolower = strtolower($request->request->all()['part_no']['manufacturers']);
 
-                $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
+                $name_detail_strtolower = strtolower($request->request->all()['part_no']['name_detail']);
 
-                $entity_part_no->setManufacturers(
-                    strtolower(preg_replace(
-                        '#[^a-z\d \-&]#i',
-                        '',
-                        $request->request->all()['part_no']['manufacturers']
-                    ))
-                );
 
-                $entity_part_no->setNameDetail(
-                    mb_strtolower(preg_replace(
-                        '#[^а-яё\d\s\.,]#ui',
-                        '',
-                        $request->request->all()['part_no']['name_detail']
-                    ))
-                );
+                $input = [
+                    'part_number_error' => $part_number_strtolower,
+                    'manufacturers_error' => $manufacturers_strtolower,
+                    'name_detail_error' => $name_detail_strtolower,
+                ];
 
-                $em = $doctrine->getManager();
-                $em->persist($entity_part_no);
-                $em->flush();
-            }
+                $constraint = new Collection([
+                    'part_number_error' => new NotBlank(
+                        message: 'Недопустимое число',
+                    ),
+                    'manufacturers_error' => new NotBlank(
+                        message: 'Недопустимое число',
+                    ),
+                    'name_detail_error' => new NotBlank(
+                        message: 'Недопустимое число',
+                    ),
+                ]);
 
-            return $this->redirectToRoute('part_no');
-        } else {
+                $errors = $validator->validate($input, $constraint);
 
-            /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
-            $value_form_part_no = $request->request->all();
-            if ($value_form_part_no) {
-                foreach ($value_form_part_no as $key => $values) {
-                    if (is_iterable($values)) {
-                        foreach ($values as $key => $value) {
-                            $this->addFlash($key . '_sales', $value);
+                $part_number_strtolower_preg_replace = strtolower(preg_replace(
+                    '#[^a-z\d]#i',
+                    '',
+                    $request->request->all()['part_no']['part_numbers']
+                ));
+
+                $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
+
+                /* Валидация дулей номеров деталей, сохранения номера , производителей, описания деталей */
+                if ($сount_part_number == 0) {
+
+                    $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
+
+                    $entity_part_no->setManufacturers(
+                        strtolower(preg_replace(
+                            '#[^a-z\d \-&]#i',
+                            '',
+                            $request->request->all()['part_no']['manufacturers']
+                        ))
+                    );
+
+                    $entity_part_no->setNameDetail(
+                        mb_strtolower(preg_replace(
+                            '#[^а-яё\d\s\.,]#ui',
+                            '',
+                            $request->request->all()['part_no']['name_detail']
+                        ))
+                    );
+
+                    $em = $doctrine->getManager();
+                    $em->persist($entity_part_no);
+                    $em->flush();
+                }
+
+                return $this->redirectToRoute('part_no');
+            } else {
+
+                /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
+                $value_form_part_no = $request->request->all();
+                if ($value_form_part_no) {
+                    foreach ($value_form_part_no as $key => $values) {
+                        if (is_iterable($values)) {
+                            foreach ($values as $key => $value) {
+                                $this->addFlash($key . '_edit', $value);
+                            }
                         }
                     }
                 }
-            }
 
-            /* Выводим ошибки валидации, через сессии */
-            if ($errors_part_no) {
-                foreach ($errors_part_no as $key) {
-                    $message = $key->getmessage();
-                    $propertyPath = $key->getpropertyPath() . '_sales';
-                    //dd($propertyPath);
-                    $this->addFlash(
-                        $propertyPath,
-                        $message
-                    );
-                }
-            }
 
-            //return $this->redirectToRoute('part_no');
+
+                //return $this->redirectToRoute('part_no');
+            }
         }
 
         return $this->render('part_no/edit_part_no.html.twig', [
