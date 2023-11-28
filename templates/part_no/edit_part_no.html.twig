@@ -8,8 +8,8 @@
 
 {% block form_sales_edit %}
 
-{#{{ dump(edit_part.getIdInStock().getId()) }}#}
-{#Форма редактирования детали#}
+{#{{ dump(edit_part.id) }}
+Форма редактирования детали#}
     {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set edit_part_numbers = edit_part.getPartNumbers()|default('') %}
@@ -27,6 +27,9 @@
         {% endfor %}
         <th>{{ form_label(form_p_n_edit.part_numbers) }}<br>
         {{ form_widget(form_p_n_edit.part_numbers, {value : edit_part_numbers}) }}<br>
+        {% for message in app.flashes('[part_number_error]') %}
+        {{ message }}
+        {% endfor %}
         {{ form_errors(form_p_n_edit.part_numbers) }}</th>
 
         {% for value_manufacturers in app.flashes('manufacturers_edit') %}  
@@ -34,13 +37,19 @@
         {% endfor %}
         <th>{{ form_label(form_p_n_edit.manufacturers) }}<br>
         {{ form_widget(form_p_n_edit.manufacturers, {value : edit_manufacturers}) }}<br>
+        {% for message in app.flashes('[manufacturers_error]') %}
+        {{ message }}
+        {% endfor %}
         {{ form_errors(form_p_n_edit.manufacturers) }}</th>
 
         {% for value_name_detail in app.flashes('name_detail_edit') %}  
             {% set edit_name_detail = value_name_detail %}
         {% endfor %}
         <th>{{ form_label(form_p_n_edit.name_detail) }}<br>
-        {{ form_widget(form_p_n_edit.name_detail, {value : edit_name_detail}) }}<br>    
+        {{ form_widget(form_p_n_edit.name_detail, {value : edit_name_detail}) }}<br>
+        {% for message in app.flashes('[name_detail_error]') %}
+        {{ message }}
+        {% endfor %}
         {{ form_errors(form_p_n_edit.name_detail) }}</th>
 
         {% for value_id_part_name in app.flashes('id_part_name_edit') %}  
@@ -85,7 +94,7 @@
         {{ form_widget(form_p_n_edit.id_in_stock, {value : edit_id_in_stock}) }}
         {{ form_errors(form_p_n_edit.id_in_stock) }}</th>
 
-        <th>{{ form_widget(form_p_n_edit.button, { 'label': 'Редоктировать', 'attr': {'class': 'save'} }) }}</th>
+        <th>{{ form_widget(form_p_n_edit.button, {'label': 'Редоктировать', 'attr': {'class': 'save'} }) }}</th>
         {#<th><button class="save" type="submit">Сохранить</button></th>#}
    {{ form_end(form_p_n_edit) }}
 {% endblock form_sales_edit %}

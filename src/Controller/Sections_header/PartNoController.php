@@ -282,10 +282,10 @@ class PartNoController extends AbstractController
     ): Response {
 
         /* Подключаем сущности  */
-        $entity_part_no = new IdDetailsManufacturer();
+        $entity_part_no_edit = new IdDetailsManufacturer();
 
         /* Подключаем форм */
-        $form_p_n_edit = $this->createForm(PartNoType::class, $entity_part_no);
+        $form_p_n_edit = $this->createForm(PartNoType::class, $entity_part_no_edit);
 
         /*Валидация формы */
         $form_p_n_edit->handleRequest($request);
@@ -307,70 +307,72 @@ class PartNoController extends AbstractController
         /*Валидация формы ручного именения деталей */
         if ($form_p_n_edit->isSubmitted()) {
 
-            if ($form_p_n_edit->isValid()) {
+            $part_number_strtolower = strtolower(preg_replace(
+                '#\s#i',
+                '',
+                $request->request->all()['part_no']['part_numbers']
+            ));
+            $manufacturers_strtolower = strtolower(preg_replace(
+                '#\s#i',
+                '',
+                $request->request->all()['part_no']['manufacturers']
+            ));
+            $name_detail_strtolower = strtolower(preg_replace(
+                '#\s#i',
+                '',
+                $request->request->all()['part_no']['name_detail']
+            ));
 
-                dd($request);
-                $part_number_strtolower = strtolower($request->request->all()['part_no']['part_numbers']);
-
-                $manufacturers_strtolower = strtolower($request->request->all()['part_no']['manufacturers']);
-
-                $name_detail_strtolower = strtolower($request->request->all()['part_no']['name_detail']);
 
 
-                $input = [
-                    'part_number_error' => $part_number_strtolower,
-                    'manufacturers_error' => $manufacturers_strtolower,
-                    'name_detail_error' => $name_detail_strtolower,
-                ];
+            $input = [
+                'part_number_error' => $part_number_strtolower,
+                'manufacturers_error' => $manufacturers_strtolower,
+                'name_detail_error' => $name_detail_strtolower,
+            ];
 
-                $constraint = new Collection([
-                    'part_number_error' => new NotBlank(
-                        message: 'Недопустимое число',
-                    ),
-                    'manufacturers_error' => new NotBlank(
-                        message: 'Недопустимое число',
-                    ),
-                    'name_detail_error' => new NotBlank(
-                        message: 'Недопустимое число',
-                    ),
-                ]);
+            $constraint = new Collection([
+                'part_number_error' => new NotBlank(
+                    message: 'Форма содержит недопустимые символы',
+                ),
+                'manufacturers_error' => new NotBlank(
+                    message: 'Форма содержит недопустимые символы',
+                ),
+                'name_detail_error' => new NotBlank(
+                    message: 'Форма содержит недопустимые символы',
+                ),
+            ]);
 
-                $errors = $validator->validate($input, $constraint);
+            $errors = $validator->validate($input, $constraint);
 
-                $part_number_strtolower_preg_replace = strtolower(preg_replace(
-                    '#[^a-z\d]#i',
-                    '',
-                    $request->request->all()['part_no']['part_numbers']
-                ));
+            if ($form_p_n_edit->isValid() && !$errors->count()) {
+                //dd($request);
 
-                $сount_part_number = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->count(['part_numbers' => $part_number_strtolower_preg_replace]);
+                $edit_part = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    ->findOneBy(['part_numbers' => $part_number_strtolower]);
 
-                /* Валидация дулей номеров деталей, сохранения номера , производителей, описания деталей */
-                if ($сount_part_number == 0) {
+                $edit_part->setPartNumbers($part_number_strtolower);
 
-                    $entity_part_no->setPartNumbers($part_number_strtolower_preg_replace);
+                $edit_part->setManufacturers($manufacturers_strtolower);
 
-                    $entity_part_no->setManufacturers(
-                        strtolower(preg_replace(
-                            '#[^a-z\d \-&]#i',
-                            '',
-                            $request->request->all()['part_no']['manufacturers']
-                        ))
-                    );
+                $edit_part->setNameDetail($name_detail_strtolower);
 
-                    $entity_part_no->setNameDetail(
-                        mb_strtolower(preg_replace(
-                            '#[^а-яё\d\s\.,]#ui',
-                            '',
-                            $request->request->all()['part_no']['name_detail']
-                        ))
-                    );
+                $edit_part->setIdPartName($request->request->all()['part_no']['id_part_name']);
 
-                    $em = $doctrine->getManager();
-                    $em->persist($entity_part_no);
-                    $em->flush();
-                }
+                $edit_part->setIdCarBrand($request->request->all()['part_no']['id_car_brand']);
+
+                $edit_part->setIdSide($request->request->all()['part_no']['id_side']);
+
+                $edit_part->setIdBody($request->request->all()['part_no']['id_body']);
+
+                $edit_part->setIdAxle($request->request->all()['part_no']['id_axle']);
+
+                $edit_part->setIdInStock($request->request->all()['part_no']['id_in_stock']);
+
+
+                //dd($edit_part);
+
+                $doctrine->getManager()->flush();
 
                 return $this->redirectToRoute('part_no');
             } else {
@@ -386,13 +388,22 @@ class PartNoController extends AbstractController
                         }
                     }
                 }
-
-
-
-                //return $this->redirectToRoute('part_no');
+                //dd($errors);
+                /* Выводим ошибки валидации, через сессии  */
+                if ($errors) {
+                    foreach ($errors as $key) {
+                        //dd($key);
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
             }
         }
-
+        //dd($edit_part);
         return $this->render('part_no/edit_part_no.html.twig', [
             'title_logo' => 'Редактируем деталь',
             'legend' => 'Редактируем деталь',
