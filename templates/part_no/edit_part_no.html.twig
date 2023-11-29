@@ -8,10 +8,10 @@
 
 {% block form_sales_edit %}
 
-{#{{ dump(edit_part.id) }}
-Форма редактирования детали#}
+{#Форма редактирования детали#}
     {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
-        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+
+        {#Переменный для вывода данных в форме #}
         {% set edit_part_numbers = edit_part.getPartNumbers()|default('') %}
         {% set edit_manufacturers = edit_part.getManufacturers()|default('') %}
         {% set edit_name_detail = edit_part.getNameDetail()|default('') %}
@@ -95,8 +95,9 @@
         {{ form_errors(form_p_n_edit.id_in_stock) }}</th>
 
         <th>{{ form_widget(form_p_n_edit.button, {'label': 'Редоктировать', 'attr': {'class': 'save'} }) }}</th>
-        {#<th><button class="save" type="submit">Сохранить</button></th>#}
+
    {{ form_end(form_p_n_edit) }}
+   
 {% endblock form_sales_edit %}
 
 {% block form_search %}{% endblock form_search %}

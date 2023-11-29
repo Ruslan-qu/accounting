@@ -6,22 +6,41 @@
 
 {% block legend %}{{legend}}{% endblock legend%}
 
-{% block form %}
-    {{ form_start(form_c) }}
-        <th>{{ form_label(form_c.counterparty) }}<br>
-        {{ form_widget(form_c.counterparty) }}
-        {{ form_errors(form_c.counterparty) }}</th>
-        <th>{{ form_label(form_c.mail_counterparty) }}<br>
-        {{ form_widget(form_c.mail_counterparty) }}
-        {{ form_errors(form_c.mail_counterparty) }}</th>
-        <th><button class="save" type="submit">Сохранить</button></th>
-    {{ form_end(form_c) }}
-{% endblock %}
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_search %}
+
+    {{ form_start(form_counterparty_search) }}
+
+        <th>{{ form_label(form_counterparty_search.counterparty) }}<br>
+        {{ form_widget(form_counterparty_search.counterparty) }}
+        {{ form_errors(form_counterparty_search.counterparty) }}</th>
+
+        <th>{{ form_label(form_counterparty_search.mail_counterparty) }}<br>
+        {{ form_widget(form_counterparty_search.mail_counterparty) }}
+        {{ form_errors(form_counterparty_search.mail_counterparty) }}</th>
+
+        <th>{{ form_widget(form_counterparty_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+
+    {{ form_end(form_counterparty_search) }}
+    
+
+    {{ form_start(form_counterparty_search) }}
+
+      {% do form_widget(form_counterparty_reset.counterparty) %}
+       
+      {% do form_widget(form_counterparty_reset.mail_counterparty) %}
+
+      <th>{{ form_widget(form_counterparty_reset.button, { 'label': 'Сбросить', 'attr': {'class': 'reset'} }) }}</th>
+
+    {{ form_end(form_counterparty_search) }}
+
+{% endblock form_search %}
 
 {% block table_thead_tr %}
-<th>№</th>
 <th>Поставщик</th>
 <th>Емаил поставщика</th>
+<th>Изменить</th>
 <th>Удаление</th>
 {% endblock %}
 

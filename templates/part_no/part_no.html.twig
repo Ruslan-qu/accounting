@@ -9,8 +9,10 @@
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
 {% block form_sales_edit %}
+
 {#Форма сохранения деталей#}
     {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
+
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set sales_part_numbers = '' %}
         {% set sales_manufacturers = '' %}
@@ -95,15 +97,15 @@
         {{ form_errors(form_p_n_sales.id_in_stock) }}</th>
 
         <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
-        {#<th><button class="save" type="submit">Сохранить</button></th>#}
+        
    {{ form_end(form_p_n_sales) }}
+
 {% endblock form_sales_edit %}
 
 {% block form_search %}
-    {#Форма поиска счет-фактур#}
+    {#Форма поиска деталей#}
   {{ form_start(form_p_n_search, { attr: {novalidate: 'novalidate'}, 'action': path('part_no')}) }}
 {#{{ dump(app.flashes()) }}#}
-{#<form action="/part_no" name="search">#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
         {% set search_manufacturers = '' %}
@@ -124,17 +126,9 @@
         {% endfor %}
         {{ form_errors(form_p_n_search.part_numbers) }}</th>
 
-        {#{% for value_manufacturers in app.flashes('manufacturers') %}  
-            {% set search_manufacturers = value_manufacturers %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_search.manufacturers) }}<br>#}
-        {% do form_widget(form_p_n_search.manufacturers) %}{#<br>
-       {% for message in app.flashes('children[manufacturers].data') %}
-            {{ message }}
-        {% endfor %}
-        {{ form_errors(form_p_n_search.manufacturers) }}</th>#}
+        {% do form_widget(form_p_n_search.manufacturers) %}
+       
         {% do form_widget(form_p_n_search.name_detail) %}
-        {#{% do form_widget(form_p_n_search.id_in_stock) %}#}
 
         {% for value_id_part_name in app.flashes('id_part_name_search') %}  
             {% set search_id_part_name = value_id_part_name %}
@@ -179,11 +173,9 @@
         {{ form_errors(form_p_n_search.id_in_stock) }}</th>
 
         <th>{{ form_widget(form_p_n_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
-
-        {#<th><button class="search" type="submit" name="search">Поиск</button></th>#}
         
     {{ form_end(form_p_n_search) }}
-    {#</form>#}
+
     <form action="/reset_part_no" name="reset_part_no">
     <th><button class="reset" type="submit" name="reset_part_no">Сбросить</button></th>
     </form>
@@ -235,44 +227,6 @@
                         <td>{{ part_no.getIdAxle().getAxle()|default('') }}</td>
 
                         <td>{{ part_no.getIdInStock().getInStock()|default('') }}</td>
-
-                           {# <form action="/sales_parts" name="form_sales" method="post">
-
-                                {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
-                               {# {% set quantity_sold = '' %}
-                                {% set price_sold = '' %}
-                                {% set date_sold = '' %}
-
-                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
-                                        {% set quantity_sold = value_quantity_sold %}
-                                    {% endfor %}
-                                    {% for value_price_sold in app.flashes('price_sold') %}  
-                                        {% set price_sold = value_price_sold %}
-                                    {% endfor %}
-                                    {% for value_date_sold in app.flashes('date_sold') %}  
-                                        {% set date_sold = value_date_sold %}
-                                    {% endfor %}
-                                
-                                <td><input type="number" name="quantity_sold" required="required" 
-                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                            {% for message in app.flashes('[quantity_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}
-                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
-                                            {% endfor %}</td>
-
-                                
-                                <td><input type="number" name="price_sold" required="required" 
-                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
-                                            {% for message in app.flashes('[price_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}</td>
-                                
-                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
-
-                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
-
-                            </form>#}
 
                             <form action="/edit_part" name="edit_part" method="post">
 

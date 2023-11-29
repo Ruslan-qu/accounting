@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\IdDetailsManufacturerRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -22,12 +21,11 @@ class PartNoController extends AbstractController
     public function SearchPart(
         ManagerRegistry $doctrine,
         Request $request,
-        IdDetailsManufacturerRepository $IdDetailsManufacturerRepository,
         ValidatorInterface $validator
     ): Response {
-        /*Подключаем сессии, для передачи ошибок валидации*/
-        $session = new Session();
-        $session->start();
+
+        /* Массив для передачи в твиг списка по поиску */
+        $arr_part_no = [];
 
         /*Подключаем класс базы данных*/
         $entity_part_no = new IdDetailsManufacturer();
@@ -43,8 +41,6 @@ class PartNoController extends AbstractController
         /*Подключаем валидацию форм */
         $errors_search_part_no = $validator->validate($form_p_n_search);
 
-        /* Массив для передачи в твиг списка по поиску */
-        $arr_part_no = [];
         //dd($request);
         /*Валидация формы */
         if ($form_p_n_search->isSubmitted()) {
@@ -53,7 +49,7 @@ class PartNoController extends AbstractController
                 /* Массив для сбора списка по поиску */
                 $arr_part_no_search = [];
 
-                /* собераем списка по поиску */
+                /* собераем список по поиску */
                 $part_numbers_search = $request->request->all()['part_no']['part_numbers'];
                 if ($part_numbers_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
@@ -96,7 +92,6 @@ class PartNoController extends AbstractController
                         ->findBy(['id_in_stock' => $id_in_stock_search]);
                 }
 
-                //dd($arr_part_no_search);
                 /* Удаляем дубли из списка по поиску */
                 $newArray = [];
                 $Fruits = [];
@@ -111,7 +106,6 @@ class PartNoController extends AbstractController
                 $arr_part_no[] = $newArray;
                 unset($newArray);
                 unset($Fruits);
-                // dd($arr_part_no);
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
@@ -346,28 +340,28 @@ class PartNoController extends AbstractController
             $errors = $validator->validate($input, $constraint);
 
             if ($form_p_n_edit->isValid() && !$errors->count()) {
-                //dd($request);
+                //dd($form_p_n_edit->getData());
 
-                $edit_part = $doctrine->getRepository(IdDetailsManufacturer::class)
+                $part_no_edit = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findOneBy(['part_numbers' => $part_number_strtolower]);
 
-                $edit_part->setPartNumbers($part_number_strtolower);
+                $part_no_edit->setPartNumbers($part_number_strtolower);
 
-                $edit_part->setManufacturers($manufacturers_strtolower);
+                $part_no_edit->setManufacturers($manufacturers_strtolower);
 
-                $edit_part->setNameDetail($name_detail_strtolower);
+                $part_no_edit->setNameDetail($name_detail_strtolower);
 
-                $edit_part->setIdPartName($request->request->all()['part_no']['id_part_name']);
+                $part_no_edit->setIdPartName($form_p_n_edit->getData()->getIdPartName());
 
-                $edit_part->setIdCarBrand($request->request->all()['part_no']['id_car_brand']);
+                $part_no_edit->setIdCarBrand($form_p_n_edit->getData()->getIdCarBrand());
 
-                $edit_part->setIdSide($request->request->all()['part_no']['id_side']);
+                $part_no_edit->setIdSide($form_p_n_edit->getData()->getIdSide());
 
-                $edit_part->setIdBody($request->request->all()['part_no']['id_body']);
+                $part_no_edit->setIdBody($form_p_n_edit->getData()->getIdBody());
 
-                $edit_part->setIdAxle($request->request->all()['part_no']['id_axle']);
+                $part_no_edit->setIdAxle($form_p_n_edit->getData()->getIdAxle());
 
-                $edit_part->setIdInStock($request->request->all()['part_no']['id_in_stock']);
+                $part_no_edit->setIdInStock($form_p_n_edit->getData()->getIdInStock());
 
 
                 //dd($edit_part);
