@@ -5,7 +5,10 @@ namespace App\Form;
 use App\Entity\Counterparty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,6 +19,7 @@ class CounterpartyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Форма sales
             ->add('counterparty', TextType::class, [
                 'label' => 'Поставщик',
                 'constraints' => [
@@ -24,19 +28,22 @@ class CounterpartyType extends AbstractType
                         //'match' => false,
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
+                    new NotBlank(
+                        message: 'Форма содержит недопустимые символы',
+                    ),
                 ]
             ])
             ->add('mail_counterparty', EmailType::class, [
                 'label' => 'Email',
-                /*'constraints' => [
-                    new Regex([
-                        'pattern' => '/^[\da-z]*$/i',
-                        //'match' => false,
+                'constraints' => [
+                    new Email([
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
-                ]*/
+                    new NotBlank(
+                        message: 'Форма содержит недопустимые символы',
+                    ),
+                ]
             ])
-
             ->add('button', SubmitType::class);
     }
 

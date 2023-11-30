@@ -265,8 +265,6 @@ class PartNoController extends AbstractController
     }
 
 
-
-
     /* функция редактирования */
     #[Route('/edit_part', name: 'edit_part')]
     public function EditPart(
@@ -317,8 +315,6 @@ class PartNoController extends AbstractController
                 $request->request->all()['part_no']['name_detail']
             ));
 
-
-
             $input = [
                 'part_number_error' => $part_number_strtolower,
                 'manufacturers_error' => $manufacturers_strtolower,
@@ -340,7 +336,6 @@ class PartNoController extends AbstractController
             $errors = $validator->validate($input, $constraint);
 
             if ($form_p_n_edit->isValid() && !$errors->count()) {
-                //dd($form_p_n_edit->getData());
 
                 $part_no_edit = $doctrine->getRepository(IdDetailsManufacturer::class)
                     ->findOneBy(['part_numbers' => $part_number_strtolower]);
@@ -363,9 +358,6 @@ class PartNoController extends AbstractController
 
                 $part_no_edit->setIdInStock($form_p_n_edit->getData()->getIdInStock());
 
-
-                //dd($edit_part);
-
                 $doctrine->getManager()->flush();
 
                 return $this->redirectToRoute('part_no');
@@ -382,11 +374,11 @@ class PartNoController extends AbstractController
                         }
                     }
                 }
-                //dd($errors);
+
                 /* Выводим ошибки валидации, через сессии  */
                 if ($errors) {
                     foreach ($errors as $key) {
-                        //dd($key);
+
                         $message = $key->getmessage();
                         $propertyPath = $key->getpropertyPath();
                         $this->addFlash(
@@ -397,7 +389,7 @@ class PartNoController extends AbstractController
                 }
             }
         }
-        //dd($edit_part);
+
         return $this->render('part_no/edit_part_no.html.twig', [
             'title_logo' => 'Редактируем деталь',
             'legend' => 'Редактируем деталь',

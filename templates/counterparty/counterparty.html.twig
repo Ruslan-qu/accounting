@@ -8,17 +8,52 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
+{% block form_sales_edit %}
+    {#Форма сохранения деталей#}
+    {{ form_start(form_counterparty_sales, {'action': path('sales_counterparty')}) }}
+{#{{ dump(app.flashes()) }}
+        Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set sales_counterparty = '' %}
+        {% set sales_mail_counterparty = '' %}
+
+        {% for value_counterparty in app.flashes('counterparty_sales') %}  
+            {% set sales_counterparty = value_counterparty %}
+        {% endfor %}
+        <th>{{ form_label(form_counterparty_sales.counterparty) }}<br>
+        {{ form_widget(form_counterparty_sales.counterparty, {value : sales_counterparty}) }}<br>
+        {% for message_sales in app.flashes('children[counterparty].data_sales') %}
+            {{ message_sales }}
+        {% endfor %}
+        {{ form_errors(form_counterparty_sales.counterparty) }}</th>
+
+        {% for value_mail_counterparty in app.flashes('mail_counterparty_sales') %}  
+            {% set sales_mail_counterparty = value_mail_counterparty %}
+        {% endfor %}
+        <th>{{ form_label(form_counterparty_sales.mail_counterparty) }}<br>
+        {{ form_widget(form_counterparty_sales.mail_counterparty, {value : sales_mail_counterparty}) }}<br>
+        {% for message_sales in app.flashes('children[mail_counterparty].data_sales') %}
+            {{ message_sales }}
+        {% endfor %}
+        {% for message in app.flashes('сount_mail_counterparty') %}
+            {{ message }}
+        {% endfor %}
+        {{ form_errors(form_counterparty_sales.mail_counterparty) }}</th>
+
+        <th>{{ form_widget(form_counterparty_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
+        
+   {{ form_end(form_counterparty_sales) }}
+
+{% endblock form_sales_edit %}
+
 {% block form_search %}
 
     {{ form_start(form_counterparty_search) }}
 
-        <th>{{ form_label(form_counterparty_search.counterparty) }}<br>
-        {{ form_widget(form_counterparty_search.counterparty) }}
-        {{ form_errors(form_counterparty_search.counterparty) }}</th>
+        <th>{{ form_label(form_counterparty_search.counterparty_search) }}<br>
+        {{ form_widget(form_counterparty_search.counterparty_search) }}
+        {{ form_errors(form_counterparty_search.counterparty_search) }}</th>
 
-        <th>{{ form_label(form_counterparty_search.mail_counterparty) }}<br>
-        {{ form_widget(form_counterparty_search.mail_counterparty) }}
-        {{ form_errors(form_counterparty_search.mail_counterparty) }}</th>
+        {% do form_widget(form_counterparty_search.mail_counterparty_search) %}
 
         <th>{{ form_widget(form_counterparty_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
 
@@ -38,15 +73,37 @@
 {% endblock form_search %}
 
 {% block table_thead_tr %}
-<th>Поставщик</th>
-<th>Емаил поставщика</th>
-<th>Изменить</th>
-<th>Удаление</th>
-{% endblock %}
+    {% if arr_counterparty_search %}
+        <th>Поставщик</th>
+        <th>Емаил поставщика</th>
+        <th>Изменить</th>
+        <th>Удаление</th>
+    {% endif %}
+{% endblock table_thead_tr %}
 
-{% block tbody %}
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td><button class="delete" type="submit">Удалить</button></td>
-{% endblock %}
+{% block tbody %} 
+    {% if arr_counterparty_search %}
+        {% for counterparty_search in arr_counterparty_search %}
+            <tr>    
+
+                <td>{{ counterparty_search.getCounterparty() }}</td>
+
+                <td>{{ counterparty_search.getMailCounterparty() }}</td>
+
+                <form action="/edit_part" name="edit_part" method="post">
+
+                <td><button class="edit" type="submit" name="edit_part" value="{{ counterparty_search.getId() }}">Изменить</button></td>
+                                        
+                </form>
+                <form action="/delete_counterparty" name="delete_counterparty" method="post">
+
+                <td><button class="delete" type="submit" name="delete_counterparty" value="{{ counterparty_search.getId() }}">Удалить</button></td>
+                                        
+                </form>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <h2>Данные не найдены. Видите параметры в поиск</h2>  
+    {% endif %}
+    
+{% endblock tbody %}
