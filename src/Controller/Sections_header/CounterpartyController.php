@@ -6,6 +6,7 @@ use App\Entity\Counterparty;
 use App\Form\CounterpartyType;
 use App\Form\CounterpartySearchType;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -202,92 +203,51 @@ class CounterpartyController extends AbstractController
         /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
         $validator = Validation::createValidator();
 
-        // dd($request);
+        //dd($request);
 
-        if (!empty($_POST['edit_part'])) {
+        if (!empty($_POST['edit_counterparty'])) {
 
             /*Открываем редаткируемую деталь по id */
-            $id_edit_part = $request->request->all()['edit_part'];
+            $id_edit_counterparty = $request->request->all()['edit_counterparty'];
 
-            $edit_part = $doctrine->getRepository(IdDetailsManufacturer::class)->find($id_edit_part);
+            $edit_counterparty = $doctrine->getRepository(Counterparty::class)->find($id_edit_counterparty);
         } else {
-            $edit_part = '';
+
+            $edit_counterparty = '';
         }
         /*Валидация формы ручного именения деталей */
-        if ($form_p_n_edit->isSubmitted()) {
+        if ($form_counterparty_edit->isSubmitted()) {
 
-            $part_number_strtolower = strtolower(preg_replace(
-                '#\s#i',
-                '',
-                $request->request->all()['part_no']['part_numbers']
-            ));
-            $manufacturers_strtolower = strtolower(preg_replace(
-                '#\s#i',
-                '',
-                $request->request->all()['part_no']['manufacturers']
-            ));
-            $name_detail_strtolower = strtolower(preg_replace(
-                '#\s#i',
-                '',
-                $request->request->all()['part_no']['name_detail']
-            ));
+            if ($form_counterparty_edit->isValid()) {
 
-            $input = [
-                'part_number_error' => $part_number_strtolower,
-                'manufacturers_error' => $manufacturers_strtolower,
-                'name_detail_error' => $name_detail_strtolower,
-            ];
+                $counterparty_strtolower = strtolower(preg_replace(
+                    '#\s#i',
+                    '',
+                    $request->request->all()['counterparty']['counterparty']
+                ));
+                $mail_counterparty_strtolower = strtolower(preg_replace(
+                    '#\s#i',
+                    '',
+                    $request->request->all()['counterparty']['mail_counterparty']
+                ));
+                //dd($counterparty_strtolower);
 
-            $constraint = new Collection([
-                'part_number_error' => new NotBlank(
-                    message: 'Форма содержит недопустимые символы',
-                ),
-                'manufacturers_error' => new NotBlank(
-                    message: 'Форма содержит недопустимые символы',
-                ),
-                'name_detail_error' => new NotBlank(
-                    message: 'Форма содержит недопустимые символы',
-                ),
-            ]);
+                $counterparty_edit = $doctrine->getRepository(Counterparty::class)
+                    ->findOneBy(['counterparty' => $counterparty_strtolower]);
+                //dd($counterparty_edit);
+                $counterparty_edit->setCounterparty($counterparty_strtolower);
 
-            $errors = $validator->validate($input, $constraint);
-
-            if ($form_p_n_edit->isValid() && !$errors->count()) {
-                //dd($form_p_n_edit->getData());
-
-                $part_no_edit = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_numbers' => $part_number_strtolower]);
-
-                $part_no_edit->setPartNumbers($part_number_strtolower);
-
-                $part_no_edit->setManufacturers($manufacturers_strtolower);
-
-                $part_no_edit->setNameDetail($name_detail_strtolower);
-
-                $part_no_edit->setIdPartName($form_p_n_edit->getData()->getIdPartName());
-
-                $part_no_edit->setIdCarBrand($form_p_n_edit->getData()->getIdCarBrand());
-
-                $part_no_edit->setIdSide($form_p_n_edit->getData()->getIdSide());
-
-                $part_no_edit->setIdBody($form_p_n_edit->getData()->getIdBody());
-
-                $part_no_edit->setIdAxle($form_p_n_edit->getData()->getIdAxle());
-
-                $part_no_edit->setIdInStock($form_p_n_edit->getData()->getIdInStock());
-
-
-                //dd($edit_part);
+                $counterparty_edit->setMailCounterparty($mail_counterparty_strtolower);
 
                 $doctrine->getManager()->flush();
 
-                return $this->redirectToRoute('part_no');
+                return $this->redirectToRoute('counterparty');
             } else {
 
                 /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
-                $value_form_part_no = $request->request->all();
-                if ($value_form_part_no) {
-                    foreach ($value_form_part_no as $key => $values) {
+                $value_form_counterparty = $request->request->all();
+                if ($value_form_counterparty) {
+                    foreach ($value_form_counterparty as $key => $values) {
                         if (is_iterable($values)) {
                             foreach ($values as $key => $value) {
                                 $this->addFlash($key . '_edit', $value);
@@ -295,27 +255,14 @@ class CounterpartyController extends AbstractController
                         }
                     }
                 }
-                //dd($errors);
-                /* Выводим ошибки валидации, через сессии  */
-                if ($errors) {
-                    foreach ($errors as $key) {
-                        //dd($key);
-                        $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath();
-                        $this->addFlash(
-                            $propertyPath,
-                            $message
-                        );
-                    }
-                }
             }
         }
         //dd($edit_part);
-        return $this->render('part_no/edit_part_no.html.twig', [
-            'title_logo' => 'Редактируем деталь',
-            'legend' => 'Редактируем деталь',
-            'form_p_n_edit' => $form_p_n_edit->createView(),
-            'edit_part' => $edit_part,
+        return $this->render('counterparty/edit_counterparty.html.twig', [
+            'title_logo' => 'Редактируем поставщика',
+            'legend' => 'Редактируем поставщика',
+            'form_counterparty_edit' => $form_counterparty_edit->createView(),
+            'edit_counterparty' => $edit_counterparty,
         ]);
     }
 }

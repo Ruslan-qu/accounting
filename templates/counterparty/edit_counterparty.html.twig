@@ -8,95 +8,42 @@
 
 {% block form_sales_edit %}
 
+    {#Переменный для вывода данных в форме #}
+    {% set counterparty_edit = edit_counterparty.getCounterparty()|default('') %}
+    {% set edit_mail_counterparty = edit_counterparty.getMailCounterparty()|default('') %}
+    {% set id_counterparty = edit_counterparty.getId()|default('') %}
+
 {#Форма редактирования детали#}
-    {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
+    {{ form_start(form_counterparty_edit, {'action': path('edit_counterparty')}) }}
 
-        {#Переменный для вывода данных в форме #}
-        {% set edit_part_numbers = edit_part.getPartNumbers()|default('') %}
-        {% set edit_manufacturers = edit_part.getManufacturers()|default('') %}
-        {% set edit_name_detail = edit_part.getNameDetail()|default('') %}
-        {% set edit_id_part_name = edit_part.getIdPartName().getId()|default('') %}
-        {% set edit_id_car_brand = edit_part.getIdCarBrand().getId()|default('') %}
-        {% set edit_id_side = edit_part.getIdSide().getId()|default('') %}
-        {% set edit_id_body = edit_part.getIdBody().getId()|default('') %}
-        {% set edit_id_axle = edit_part.getIdAxle().getId()|default('') %}
-        {% set edit_id_in_stock = edit_part.getIdInStock().getId()|default('') %}
+{{ dump(edit_counterparty) }}
+{{ dump(id_counterparty) }}
+  {{ dump(app.flashes()) }} 
 
-        {% for value_part_numbers in app.flashes('part_numbers_edit') %}  
-            {% set edit_part_numbers = value_part_numbers %}
+        {% for value_counterparty in app.flashes('hidden') %}  
+            {% set id_counterparty = value_counterparty %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_edit.part_numbers) }}<br>
-        {{ form_widget(form_p_n_edit.part_numbers, {value : edit_part_numbers}) }}<br>
-        {% for message in app.flashes('[part_number_error]') %}
-        {{ message }}
-        {% endfor %}
-        {{ form_errors(form_p_n_edit.part_numbers) }}</th>
+        {{ form_widget(form_counterparty_edit.hidden, {value : id_counterparty}) }}
 
-        {% for value_manufacturers in app.flashes('manufacturers_edit') %}  
-            {% set edit_manufacturers = value_manufacturers %}
+        {% for value_counterparty in app.flashes('counterparty_edit') %}  
+            {% set counterparty_edit = value_counterparty %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_edit.manufacturers) }}<br>
-        {{ form_widget(form_p_n_edit.manufacturers, {value : edit_manufacturers}) }}<br>
-        {% for message in app.flashes('[manufacturers_error]') %}
-        {{ message }}
-        {% endfor %}
-        {{ form_errors(form_p_n_edit.manufacturers) }}</th>
+        <th>{{ form_label(form_counterparty_edit.counterparty) }}<br>
+        {{ form_widget(form_counterparty_edit.counterparty, {value : counterparty_edit}) }}<br>
+        {{ form_errors(form_counterparty_edit.counterparty) }}</th>
+        
+        
 
-        {% for value_name_detail in app.flashes('name_detail_edit') %}  
-            {% set edit_name_detail = value_name_detail %}
+        {% for value_mail_counterparty in app.flashes('mail_counterparty_edit') %}  
+            {% set edit_mail_counterparty = value_mail_counterparty %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_edit.name_detail) }}<br>
-        {{ form_widget(form_p_n_edit.name_detail, {value : edit_name_detail}) }}<br>
-        {% for message in app.flashes('[name_detail_error]') %}
-        {{ message }}
-        {% endfor %}
-        {{ form_errors(form_p_n_edit.name_detail) }}</th>
+        <th>{{ form_label(form_counterparty_edit.mail_counterparty) }}<br>
+        {{ form_widget(form_counterparty_edit.mail_counterparty, {value : edit_mail_counterparty}) }}<br>
+        {{ form_errors(form_counterparty_edit.mail_counterparty) }}</th>
 
-        {% for value_id_part_name in app.flashes('id_part_name_edit') %}  
-            {% set edit_id_part_name = value_id_part_name %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_part_name) }}<br>
-        {{ form_widget(form_p_n_edit.id_part_name, {value : edit_id_part_name}) }}
-        {{ form_errors(form_p_n_edit.id_part_name) }}</th>
+        <th>{{ form_widget(form_counterparty_edit.button, {'label': 'Редоктировать', 'attr': {'class': 'save'}})}}</th>
 
-        {% for value_id_car_brand in app.flashes('id_car_brand_edit') %}  
-            {% set edit_id_car_brand = value_id_car_brand %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_car_brand) }}<br>
-        {{ form_widget(form_p_n_edit.id_car_brand, {value : edit_id_car_brand}) }}
-        {{ form_errors(form_p_n_edit.id_car_brand) }}</th>
-
-        {% for value_id_side in app.flashes('id_side_edit') %}  
-            {% set edit_id_side = value_id_side %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_side) }}<br>
-        {{ form_widget(form_p_n_edit.id_side, {value : edit_id_side}) }}
-        {{ form_errors(form_p_n_edit.id_side) }}</th>
-
-        {% for value_id_body in app.flashes('id_body_edit') %}  
-            {% set edit_id_body = value_id_body %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_body) }}<br>
-        {{ form_widget(form_p_n_edit.id_body, {value : edit_id_body}) }}
-        {{ form_errors(form_p_n_edit.id_body) }}</th>
-
-        {% for value_id_axle in app.flashes('id_axle_edit') %}  
-            {% set edit_id_axle = value_id_axle %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_axle) }}<br>
-        {{ form_widget(form_p_n_edit.id_axle, {value : edit_id_axle}) }}
-        {{ form_errors(form_p_n_edit.id_axle) }}</th>
-
-        {% for value_id_in_stock in app.flashes('id_in_stock_edit') %}  
-            {% set edit_id_in_stock = value_id_in_stock %}
-        {% endfor %}
-        <th>{{ form_label(form_p_n_edit.id_in_stock) }}<br>
-        {{ form_widget(form_p_n_edit.id_in_stock, {value : edit_id_in_stock}) }}
-        {{ form_errors(form_p_n_edit.id_in_stock) }}</th>
-
-        <th>{{ form_widget(form_p_n_edit.button, {'label': 'Редоктировать', 'attr': {'class': 'save'} }) }}</th>
-
-   {{ form_end(form_p_n_edit) }}
+   {{ form_end(form_counterparty_edit) }}
    
 {% endblock form_sales_edit %}
 

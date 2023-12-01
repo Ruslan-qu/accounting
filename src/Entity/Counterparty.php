@@ -24,6 +24,8 @@ class Counterparty
     #[ORM\Column(length: 33)]
     private ?string $mail_counterparty = null;
 
+    private ?string $hidden = null;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -84,6 +86,18 @@ class Counterparty
     public function setMailCounterparty(string $mail_counterparty): static
     {
         $this->mail_counterparty = $mail_counterparty;
+
+        return $this;
+    }
+
+    public function getHidden(): ?string
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(string $hidden): static
+    {
+        $this->hidden = $hidden;
 
         return $this;
     }
