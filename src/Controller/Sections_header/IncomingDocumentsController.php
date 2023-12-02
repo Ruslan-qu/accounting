@@ -30,7 +30,7 @@ class IncomingDocumentsController extends AbstractController
 {
     /*функция поиска по данным */
     #[Route('/incoming_documents', name: 'incoming_documents')]
-    public function AddIncomingDocuments(
+    public function SearchIncomingDocuments(
         ManagerRegistry $doctrine,
         Request $request,
         InvoiceRepository $InvoiceRepository,

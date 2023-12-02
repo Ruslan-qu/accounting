@@ -16,11 +16,7 @@
 {#Форма редактирования детали#}
     {{ form_start(form_counterparty_edit, {'action': path('edit_counterparty')}) }}
 
-{{ dump(edit_counterparty) }}
-{{ dump(id_counterparty) }}
-  {{ dump(app.flashes()) }} 
-
-        {% for value_counterparty in app.flashes('hidden') %}  
+        {% for value_counterparty in app.flashes('hidden_edit') %}  
             {% set id_counterparty = value_counterparty %}
         {% endfor %}
         {{ form_widget(form_counterparty_edit.hidden, {value : id_counterparty}) }}
@@ -30,9 +26,7 @@
         {% endfor %}
         <th>{{ form_label(form_counterparty_edit.counterparty) }}<br>
         {{ form_widget(form_counterparty_edit.counterparty, {value : counterparty_edit}) }}<br>
-        {{ form_errors(form_counterparty_edit.counterparty) }}</th>
-        
-        
+        {{ form_errors(form_counterparty_edit.counterparty) }}</th>   
 
         {% for value_mail_counterparty in app.flashes('mail_counterparty_edit') %}  
             {% set edit_mail_counterparty = value_mail_counterparty %}

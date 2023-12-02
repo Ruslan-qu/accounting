@@ -219,6 +219,8 @@ class CounterpartyController extends AbstractController
         if ($form_counterparty_edit->isSubmitted()) {
 
             if ($form_counterparty_edit->isValid()) {
+                //dd($form_counterparty_edit->getData()->getHidden());
+                $id_counterparty = $form_counterparty_edit->getData()->getHidden();
 
                 $counterparty_strtolower = strtolower(preg_replace(
                     '#\s#i',
@@ -233,7 +235,7 @@ class CounterpartyController extends AbstractController
                 //dd($counterparty_strtolower);
 
                 $counterparty_edit = $doctrine->getRepository(Counterparty::class)
-                    ->findOneBy(['counterparty' => $counterparty_strtolower]);
+                    ->find($id_counterparty);
                 //dd($counterparty_edit);
                 $counterparty_edit->setCounterparty($counterparty_strtolower);
 

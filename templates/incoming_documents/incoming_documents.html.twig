@@ -8,7 +8,7 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_sales %}
+{% block form_sales_edit %}
 
 {#Форма сохранения счет-фактур#}
     
@@ -114,11 +114,13 @@
         {{ form_widget(form_i_d.id_payment_method, {value : id_payment_method}) }}
         {{ form_errors(form_i_d.id_payment_method) }}</th>
 
+        {% do form_widget(form_i_d.id_refund_activity) %}
+
         <th><button class="save" type="submit" name="save">Сохранить</button></th>     
 
     {{ form_end(form_i_d) }}
    
-{% endblock form_sales %}
+{% endblock form_sales_edit %}
 
 
 {% block form_search %}

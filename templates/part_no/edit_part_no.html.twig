@@ -12,6 +12,7 @@
     {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
 
         {#Переменный для вывода данных в форме #}
+        {% set id_edit_part = edit_part.getId()|default('') %}
         {% set edit_part_numbers = edit_part.getPartNumbers()|default('') %}
         {% set edit_manufacturers = edit_part.getManufacturers()|default('') %}
         {% set edit_name_detail = edit_part.getNameDetail()|default('') %}
@@ -21,6 +22,11 @@
         {% set edit_id_body = edit_part.getIdBody().getId()|default('') %}
         {% set edit_id_axle = edit_part.getIdAxle().getId()|default('') %}
         {% set edit_id_in_stock = edit_part.getIdInStock().getId()|default('') %}
+        
+        {% for value_id_part in app.flashes('hidden_edit') %}  
+            {% set id_edit_part = value_id_part %}
+        {% endfor %}
+        {{ form_widget(form_p_n_edit.hidden, {value : id_edit_part}) }}
 
         {% for value_part_numbers in app.flashes('part_numbers_edit') %}  
             {% set edit_part_numbers = value_part_numbers %}

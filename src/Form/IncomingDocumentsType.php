@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Invoice;
 use App\Entity\Counterparty;
 use App\Entity\PaymentMethod;
+use App\Entity\RefundActivity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -72,6 +73,16 @@ class IncomingDocumentsType extends AbstractType
                 'label' => 'Способ оплаты',
                 'class' => PaymentMethod::class,
                 'choice_label' => 'method',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+            ->add('id_refund_activity', EntityType::class, [
+                'label' => 'Активность возврата',
+                'class' => RefundActivity::class,
+                'choice_label' => 'activity',
                 'required' => false,
                 'attr' => [
                     'style' => 'width: 100px ',

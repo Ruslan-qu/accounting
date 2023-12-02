@@ -58,6 +58,9 @@ class Invoice
     #[ORM\ManyToOne(inversedBy: 'invoices_payment_method')]
     private ?PaymentMethod $id_payment_method = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoicesRefundActivity')]
+    private ?RefundActivity $id_refund_activity = null;
+
     public function __construct()
     {
         $this->solds = new ArrayCollection();
@@ -238,6 +241,18 @@ class Invoice
     public function setIdPaymentMethod(?PaymentMethod $id_payment_method): static
     {
         $this->id_payment_method = $id_payment_method;
+
+        return $this;
+    }
+
+    public function getIdRefundActivity(): ?RefundActivity
+    {
+        return $this->id_refund_activity;
+    }
+
+    public function setIdRefundActivity(?RefundActivity $id_refund_activity): static
+    {
+        $this->id_refund_activity = $id_refund_activity;
 
         return $this;
     }

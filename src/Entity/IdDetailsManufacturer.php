@@ -52,6 +52,8 @@ class IdDetailsManufacturer
     #[ORM\ManyToOne(inversedBy: 'SidesIdDetailsManufacturers')]
     private ?Sides $id_side = null;
 
+    private ?string $hidden = null;
+
     public function __construct()
     {
         $this->part_number = new ArrayCollection();
@@ -227,6 +229,18 @@ class IdDetailsManufacturer
     public function setIdSide(?Sides $id_side): static
     {
         $this->id_side = $id_side;
+
+        return $this;
+    }
+
+    public function getHidden(): ?string
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(string $hidden): static
+    {
+        $this->hidden = $hidden;
 
         return $this;
     }

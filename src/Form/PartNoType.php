@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -127,6 +128,7 @@ class PartNoType extends AbstractType
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
             ])
+            ->add('hidden', HiddenType::class)
             ->add('button', SubmitType::class);
     }
 

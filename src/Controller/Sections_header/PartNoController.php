@@ -337,8 +337,10 @@ class PartNoController extends AbstractController
 
             if ($form_p_n_edit->isValid() && !$errors->count()) {
 
+                $id_part_no = $form_p_n_edit->getData()->getHidden();
+
                 $part_no_edit = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->findOneBy(['part_numbers' => $part_number_strtolower]);
+                    ->find($id_part_no);
 
                 $part_no_edit->setPartNumbers($part_number_strtolower);
 
