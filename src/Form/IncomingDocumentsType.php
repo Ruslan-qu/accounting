@@ -93,7 +93,7 @@ class IncomingDocumentsType extends AbstractType
                 'label' => '№ Детали',
                 'attr' => ['style' => 'width: 140px'],
             ])
-            ->add('id_manufacturer', IntegerType::class, [
+         ->add('id_manufacturer', IntegerType::class, [
                 'label' => 'Производитель',
                 'attr' => ['style' => 'width: 140px'],
             ]);*/

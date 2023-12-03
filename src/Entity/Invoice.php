@@ -24,9 +24,6 @@ class Invoice
     #[ORM\JoinColumn(nullable: true)]
     private ?Counterparty $id_counterparty = null;
 
-    /*#[ORM\ManyToOne(inversedBy: 'name_detail')]
-    private ?IdDetailsManufacturer $id_name_detail = null;*/
-
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
@@ -94,18 +91,6 @@ class Invoice
 
         return $this;
     }
-
-    /* public function getIdNameDetail(): ?IdDetailsManufacturer
-    {
-        return $this->id_name_detail;
-    }
-
-    public function setIdNameDetail(?IdDetailsManufacturer $id_name_detail): static
-    {
-        $this->id_name_detail = $id_name_detail;
-
-        return $this;
-    }*/
 
     public function getQuantity(): ?int
     {

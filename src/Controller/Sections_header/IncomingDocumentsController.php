@@ -44,12 +44,11 @@ class IncomingDocumentsController extends AbstractController
         /*Подключаем класс базы данных*/
         $entity_incoming_documents = new Invoice();
         $entity_part_no = new IdDetailsManufacturer();
-        $entity_search_invoice = new SearchInvoice();
 
         /*Подключаем формы */
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
-        $form_search_invoice = $this->createForm(SearchInvoiceType::class, $entity_search_invoice);
+        $form_search_invoice = $this->createForm(SearchInvoiceType::class);
 
         /*Валидация формы */
         $form_search_invoice->handleRequest($request);
@@ -240,7 +239,7 @@ class IncomingDocumentsController extends AbstractController
         ) {
 
             $part_number_strtolower_preg_replace = strtolower(preg_replace(
-                '#[^a-z\d]#i',
+                '#\s#',
                 '',
                 $request->request->all()['part_no']['part_numbers']
             ));
@@ -263,14 +262,6 @@ class IncomingDocumentsController extends AbstractController
 
                 $entity_part_no->setIdInStock($doctrine->getRepository(Availability::class)->find(1));
 
-                /*$entity_part_no->setNameDetails(
-                    mb_strtolower(preg_replace(
-                        '#[^а-яё\d\s\.,]#ui',
-                        '',
-                        $request->request->all()['part_no']['name_details']
-                    ))
-                );*/
-
                 $em = $doctrine->getManager();
                 $em->persist($entity_part_no);
                 $em->flush();
@@ -282,8 +273,6 @@ class IncomingDocumentsController extends AbstractController
             $entity_incoming_documents->setIdDetails($id_part_number_manufacturer);
 
             $entity_incoming_documents->setIdManufacturer($id_part_number_manufacturer);
-
-            /*$entity_incoming_documents->setIdNameDetail($id_part_number_manufacturer);*/
 
             $entity_incoming_documents->setNumberDocument(
                 $request->request->all()['incoming_documents']['number_document']
@@ -304,8 +293,6 @@ class IncomingDocumentsController extends AbstractController
             } else {
                 $entity_incoming_documents->setPrice($price * 100);
             }
-
-
 
             $entity_incoming_documents->setSales(1);
             $entity_incoming_documents->setRefund(1);

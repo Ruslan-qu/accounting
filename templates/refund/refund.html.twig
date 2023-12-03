@@ -1,20 +1,225 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RefundController!{% endblock %}
+{% block title %}{{title_logo}}{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block logo %}{{title_logo}}{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block legend %}{% endblock legend%}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/RefundController.php'|file_link(0) }}">src/Controller/RefundController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/refund/index.html.twig'|file_link(0) }}">templates/refund/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_sales_edit %}{% endblock form_sales_edit %}
+
+{% block form_search %}
+    {#Форма поиска возврата#}
+    {{ form_start(form_search) }}
+{#{{ dump(app.flashes()) }}#}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set number_document_search = '' %}
+        {% set s_data_invoice_search = '' %}
+        {% set po_data_invoice_search = '' %}
+        {% set id_counterparty_search = '' %}
+        {% set id_details_search = '' %}
+        {% set id_manufacturer_search = '' %}
+        {#{% set name_details_search = '' %}#}
+        {% set s_price_search = '' %}
+        {% set po_price_search = '' %}
+
+        {% for value_number_document_search in app.flashes('search_number_document') %}  
+        {% set number_document_search = value_number_document_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.search_number_document) }}<br>
+        {{ form_widget(form_search.search_number_document, {value : number_document_search}) }}<br>
+        {% for message in app.flashes('children[search_number_document].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.search_number_document) }}</th>
+
+        {% for value_data_invoice_search in app.flashes('s_data_invoice') %}  
+        {% set s_data_invoice_search = value_data_invoice_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.s_data_invoice) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_data_invoice, {value : s_data_invoice_search}) }}
+        {{ form_errors(form_search.s_data_invoice) }}<br>
+        {% for value_price in app.flashes('po_data_invoice') %}  
+        {% set po_data_invoice_search = value_price %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_search.po_data_invoice, {value : po_data_invoice_search}) }}<br>
+        {{ form_errors(form_search.po_data_invoice) }}</th>
+
+        {% for value_id_counterparty_search in app.flashes('search_id_counterparty') %}  
+        {% set id_counterparty_search = value_id_counterparty_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.search_id_counterparty) }}<br>
+        {{ form_widget(form_search.search_id_counterparty, {value : id_counterparty_search}) }}
+        {{ form_errors(form_search.search_id_counterparty) }}</th>
+
+        {% for value_id_details_search in app.flashes('id_details') %}  
+        {% set id_details_search = value_id_details_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.id_details) }}<br>
+        {{ form_widget(form_search.id_details, {value : id_details_search}) }}<br>
+        {% for message in app.flashes('children[id_details].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.id_details) }}</th>
+
+        {% for value_id_manufacturer_search in app.flashes('id_manufacturer') %}  
+        {% set id_manufacturer_search = value_id_manufacturer_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.id_manufacturer) }}<br>
+        {{ form_widget(form_search.id_manufacturer, {value : id_manufacturer_search}) }}<br>
+        {% for message in app.flashes('children[id_manufacturer].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.id_manufacturer) }}</th>
+
+        {#{% for value_isearch_name_details in app.flashes('search_name_details') %}  
+        {% set name_details_search = value_id_manufacturer_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.search_name_details) }}<br>
+        {{ form_widget(form_search.search_name_details, {value : name_details_search}) }}<br>
+        {% for message in app.flashes('children[search_name_details].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.search_name_details) }}</th>#}
+
+        {% for value_s_price_search in app.flashes('s_price') %}  
+        {% set s_price_search = value_s_price_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.s_price) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_price, {value : s_price_search}) }}
+        {{ form_errors(form_search.s_price) }}<br>
+        {% for value_po_price_search in app.flashes('po_price') %}  
+        {% set po_price_search = value_po_price_search %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_search.po_price, {value : po_price_search}) }}<br>
+        {% for message in app.flashes('children[s_price].data') %}
+        {{ message }}
+        {% endfor %}
+        {% for message in app.flashes('children[po_price].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_search.po_price) }}</th>
+
+        <th>{{ form_widget(form_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+        
+    {{ form_end(form_search) }}
+    <form action="/reset" name="reset">
+    <th><button class="reset" type="submit" name="reset" value="reset">Сбросить</button></th>
+    </form>
+    
+{% endblock form_search %}
+
+{% block table_thead_tr %}
+{#Таблица#}
+{% if arr_incoming_documents %}
+    {% for arr_search_invoice in arr_incoming_documents %}
+        {% if arr_search_invoice %}
+            <th>№ Накладной</th>
+            <th>Дата накладной</th>
+            <th>Поставщик</th>
+            <th>№ Детали</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Цена общая</th>
+            <th>Продано шт</th>
+            <th>Продано Цена</th>
+            <th>Дата прод-жи</th>
+            <th>Продано</th>
+            <th>Возврат</th>
+            <th>Удалить</th>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h2>Видите параметры в поиск</h2> 
+{% endif %}
+{% endblock table_thead_tr %}
+
+{% block tbody %}
+        {#выводит таблицу по поиску#}
+        {% for arr_search_invoice in arr_incoming_documents %}
+            {% if arr_search_invoice %}
+                {% for incoming_documents in arr_search_invoice %}
+
+                    <tr>
+                        {% if incoming_documents.getSales() == 1 
+                        and incoming_documents.getRefund() == 1 %}
+
+                            <td>{{ incoming_documents.getNumberDocument() }}</td>
+
+                            <td>{{ incoming_documents.getDataInvoice()|date("d-m-Y") }}</td>
+
+                            <td>{{ incoming_documents.getIdCounterparty().getCounterparty() }}</td>
+
+                            <td>{{ incoming_documents.getIdDetails().getPartNumbers() }}</td>
+
+                            {#<td>{{ incoming_documents.getIdManufacturer().getManufacturers() }}</td>
+
+                            <td>{{ incoming_documents.getIdNameDetail(). getNameDetails() }}</td>#}
+
+                            <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
+
+                            <td>{{ ((incoming_documents.getPrice() / 100) 
+                                        / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
+
+                            <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
+                                        / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
+
+                            <form action="/sales_parts" name="form_sales" method="post">
+
+                                {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+                                {% set quantity_sold = '' %}
+                                {% set price_sold = '' %}
+                                {% set date_sold = '' %}
+
+                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
+                                        {% set quantity_sold = value_quantity_sold %}
+                                    {% endfor %}
+                                    {% for value_price_sold in app.flashes('price_sold') %}  
+                                        {% set price_sold = value_price_sold %}
+                                    {% endfor %}
+                                    {% for value_date_sold in app.flashes('date_sold') %}  
+                                        {% set date_sold = value_date_sold %}
+                                    {% endfor %}
+                                
+                                <td><input type="number" name="quantity_sold" required="required" 
+                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
+                                            {% for message in app.flashes('[quantity_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}
+                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
+                                            {% endfor %}</td>
+
+                                
+                                <td><input type="number" name="price_sold" required="required" 
+                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
+                                            {% for message in app.flashes('[price_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}</td>
+                                
+                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
+
+                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
+
+                            </form>
+
+                            <form action="/refund_part" name="refund_part" method="get">
+
+                                <td><button class="refund" type="submit" name="refund_part" value="{{ incoming_documents.getId() }}">Возврат</button></td>
+                                
+                            </form>
+                            <form action="/delete_invoice" name="delete_invoice" method="post">
+
+                                <td><button class="delete" type="submit" name="delete_invoice" value="{{ incoming_documents.getId() }}">Удалить</button></td>
+                                
+                            </form>
+                        {% endif %}
+                    </tr>   
+                {% endfor %}
+            {% else %}
+                <h2>Данные не найдены. Видите параметры в поиск</h2>  
+            {% endif %}
+        {% endfor %}
+    
+{% endblock tbody %}

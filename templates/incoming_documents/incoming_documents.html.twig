@@ -215,6 +215,8 @@
         {% endfor %}
         {{ form_errors(form_search.po_price) }}</th>
 
+        {% do form_widget(form_search.button) %}
+
         <th><button class="search" type="submit" name="search">Поиск</button></th>
         
     {{ form_end(form_search) }}
