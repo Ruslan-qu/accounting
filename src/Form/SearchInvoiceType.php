@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Counterparty;
+use App\Entity\PaymentMethod;
 use App\Entity\SearchInvoice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -93,7 +94,7 @@ class SearchInvoiceType extends AbstractType
                 ]
 
             ])
-            ->add('id_details', TextType::class, [
+            ->add('search_id_details', TextType::class, [
                 'label' => '№ Детали',
                 'required' => false,
                 'constraints' => [
@@ -106,7 +107,7 @@ class SearchInvoiceType extends AbstractType
                 'attr' => ['style' => 'width: 140px']
             ])
 
-            ->add('id_manufacturer', TextType::class, [
+            ->add('search_id_manufacturer', TextType::class, [
                 'label' => 'Производитель',
                 'required' => false,
                 'constraints' => [
@@ -117,6 +118,16 @@ class SearchInvoiceType extends AbstractType
                     ]),
                 ],
                 'attr' => ['style' => 'width: 140px']
+            ])
+            ->add('search_id_payment_method', EntityType::class, [
+                'label' => 'Способ оплаты',
+                'class' => PaymentMethod::class,
+                'choice_label' => 'method',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
             ])
             ->add('button', SubmitType::class);
 

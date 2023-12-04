@@ -10,6 +10,7 @@ use App\Form\PartNoType;
 use App\Entity\Availability;
 use App\Entity\Counterparty;
 use App\Entity\SearchInvoice;
+use App\Entity\RefundActivity;
 use App\Form\CounterpartyType;
 use App\Form\SearchInvoiceType;
 use App\Form\IncomingDocumentsType;
@@ -95,7 +96,7 @@ class IncomingDocumentsController extends AbstractController
                         ->findBy(['id_counterparty' => $id_counterparty_search]);
                 }
 
-                $part_numbers_search = strtolower($request->request->all()['search_invoice']['id_details']);
+                $part_numbers_search = strtolower($request->request->all()['search_invoice']['search_id_details']);
                 if ($part_numbers_search) {
                     $arr_details_manufacturer_details = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
@@ -105,7 +106,7 @@ class IncomingDocumentsController extends AbstractController
                     }
                 }
 
-                /*$manufacturers_search = strtolower($request->request->all()['search_invoice']['id_manufacturer']);
+                $manufacturers_search = strtolower($request->request->all()['search_invoice']['search_id_manufacturer']);
                 if ($manufacturers_search) {
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['manufacturers' => $manufacturers_search]);
@@ -115,7 +116,7 @@ class IncomingDocumentsController extends AbstractController
                     }
                 }
 
-                $search_name_details = strtolower($request->request->all()['search_invoice']['search_name_details']);
+                /*$search_name_details = strtolower($request->request->all()['search_invoice']['search_name_details']);
                 if ($search_name_details) {
                     $arr_details_manufacturer_name = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['name_details' => $search_name_details]);
@@ -138,6 +139,12 @@ class IncomingDocumentsController extends AbstractController
                 if (!$s_price_search && $po_price_search) {
                     $arr_incoming_documents_search[] = $InvoiceRepository
                         ->findByPoPrice($po_price_search);
+                }
+
+                $id_payment_method_search = $request->request->all()['search_invoice']['search_id_payment_method'];
+                if ($id_payment_method_search) {
+                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy(['id_payment_method' => $id_payment_method_search]);
                 }
 
                 /* Удаляем дубли из списка по поиску */
@@ -472,6 +479,10 @@ class IncomingDocumentsController extends AbstractController
 
         $refund->setRefund(2);
 
+        $id_refund_activit = $doctrine->getRepository(RefundActivity::class)->find(2);
+
+        $refund->setIdRefundActivity($id_refund_activit);
+
         $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('incoming_documents');
@@ -479,7 +490,7 @@ class IncomingDocumentsController extends AbstractController
 
 
     /* функция сброса */
-    #[Route('/reset', name: 'reset')]
+    #[Route('/reset_invoice', name: 'reset_invoice')]
     public function Reset(): Response
     {
         return $this->redirectToRoute('incoming_documents');

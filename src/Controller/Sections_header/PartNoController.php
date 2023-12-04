@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PartNoController extends AbstractController
 {
     #[Route('/part_no', name: 'part_no')]
-    public function SearchPart(
+    public function searchPart(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator
@@ -150,7 +150,7 @@ class PartNoController extends AbstractController
 
 
     #[Route('/sales_part_no', name: 'sales_part_no')]
-    public function SalesPart(
+    public function salesPart(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator
@@ -242,7 +242,7 @@ class PartNoController extends AbstractController
 
     /* функция сброса */
     #[Route('/reset_part_no', name: 'reset_part_no')]
-    public function ResetPart(): Response
+    public function resetPart(): Response
     {
         return $this->redirectToRoute('part_no');
     }
@@ -267,7 +267,7 @@ class PartNoController extends AbstractController
 
     /* функция редактирования */
     #[Route('/edit_part', name: 'edit_part')]
-    public function EditPart(
+    public function editPart(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator
