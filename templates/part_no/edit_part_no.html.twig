@@ -14,6 +14,7 @@
         {#Переменный для вывода данных в форме #}
         {% set id_edit_part = edit_part.getId()|default('') %}
         {% set edit_part_numbers = edit_part.getPartNumbers()|default('') %}
+        {% set edit_original_number = edit_part.getIdOriginalNumber().getOriginalNumber()|default('') %}
         {% set edit_manufacturers = edit_part.getManufacturers()|default('') %}
         {% set edit_name_detail = edit_part.getNameDetail()|default('') %}
         {% set edit_id_part_name = edit_part.getIdPartName().getId()|default('') %}
@@ -37,6 +38,18 @@
         {{ message }}
         {% endfor %}
         {{ form_errors(form_p_n_edit.part_numbers) }}</th>
+
+        {% do form_widget(form_p_n_edit.id_original_number) %}
+
+        {% for value_original_number in app.flashes('original_number_edit') %}  
+            {% set edit_original_number = value_original_number %}
+        {% endfor %}
+        <th>{{ form_label(form_original_number_edit.original_number) }}<br>
+        {{ form_widget(form_original_number_edit.original_number, {value : edit_original_number}) }}<br>
+        {% for message_sales in app.flashes('[original_number_error]') %}
+            {{ message_sales }}
+        {% endfor %}
+        {{ form_errors(form_original_number_edit.original_number) }}</th>
 
         {% for value_manufacturers in app.flashes('manufacturers_edit') %}  
             {% set edit_manufacturers = value_manufacturers %}
@@ -64,6 +77,9 @@
         <th>{{ form_label(form_p_n_edit.id_part_name) }}<br>
         {{ form_widget(form_p_n_edit.id_part_name, {value : edit_id_part_name}) }}
         {{ form_errors(form_p_n_edit.id_part_name) }}</th>
+
+    </tr>
+    <tr>
 
         {% for value_id_car_brand in app.flashes('id_car_brand_edit') %}  
             {% set edit_id_car_brand = value_id_car_brand %}

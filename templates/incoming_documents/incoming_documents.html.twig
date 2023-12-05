@@ -249,10 +249,6 @@
             <th>Цена шт</th>
             <th>Цена общая</th>
             <th>Способ оплаты</th>
-            {#<th>Продано шт</th>
-            <th>Продано Цена</th>
-            <th>Дата прод-жи</th>
-            <th>Продано</th>#}
             <th>Возврат</th>
             <th>Удалить</th>
         {% endif %}
@@ -293,43 +289,6 @@
 
                             <td>{{ incoming_documents.getIdPaymentMethod().getMethod() }}</td>
 
-                            {#<form action="/sales_parts" name="form_sales" method="post">
-
-                                Переменный для вывода данных в форме когда форма не прошла валидацию#}
-                                {#{% set quantity_sold = '' %}
-                                {% set price_sold = '' %}
-                                {% set date_sold = '' %}
-
-                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
-                                        {% set quantity_sold = value_quantity_sold %}
-                                    {% endfor %}
-                                    {% for value_price_sold in app.flashes('price_sold') %}  
-                                        {% set price_sold = value_price_sold %}
-                                    {% endfor %}
-                                    {% for value_date_sold in app.flashes('date_sold') %}  
-                                        {% set date_sold = value_date_sold %}
-                                    {% endfor %}
-                                
-                                <td><input type="number" name="quantity_sold" required="required" 
-                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                            {% for message in app.flashes('[quantity_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}
-                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
-                                            {% endfor %}</td>
-
-                                
-                                <td><input type="number" name="price_sold" required="required" 
-                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
-                                            {% for message in app.flashes('[price_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}</td>
-                                
-                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
-
-                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
-
-                            </form>#}
 
                             <form action="/refund_part" name="refund_part" method="get">
 

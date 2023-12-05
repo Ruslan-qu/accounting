@@ -4,3 +4,185 @@
 
 {% block logo %}{{title_logo}}{% endblock %}
 
+{% block legend %}{% endblock legend%}
+
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_sales_edit %}{% endblock form_sales_edit %}
+
+{% block form_search %}
+    {#Форма поиска деталей#}
+  {{ form_start(form_price_search, { attr: {novalidate: 'novalidate'}, 'action': path('price')}) }}
+{#{{ dump(app.flashes()) }}#}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set search_part_numbers = '' %}
+        {% set search_manufacturers = '' %}
+        {% set search_id_part_name = '' %}
+        {% set search_id_car_brand = '' %}
+        {% set search_id_side = '' %}
+        {% set search_id_body = '' %}
+        {% set search_id_axle = '' %}
+        {% set search_id_in_stock = '' %}
+
+        {% for value_part_numbers in app.flashes('part_numbers_search') %}  
+            {% set search_part_numbers = value_part_numbers %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.part_numbers) }}<br>
+        {{ form_widget(form_price_search.part_numbers, {value : search_part_numbers}) }}<br>
+        {% for message in app.flashes('children[part_numbers].data_search') %}
+            {{ message }}
+        {% endfor %}
+        {{ form_errors(form_price_search.part_numbers) }}</th>
+
+        {% do form_widget(form_price_search.id_original_number) %}
+
+        {% do form_widget(form_price_search.manufacturers) %}
+       
+        {% do form_widget(form_price_search.name_detail) %}
+
+        {% for value_id_part_name in app.flashes('id_part_name_search') %}  
+            {% set search_id_part_name = value_id_part_name %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_part_name) }}<br>
+        {{ form_widget(form_price_search.id_part_name, {value : search_id_part_name}) }}
+        {{ form_errors(form_price_search.id_part_name) }}</th>
+
+        {% for value_id_car_brand in app.flashes('id_car_brand_search') %}  
+            {% set search_id_car_brand = value_id_car_brand %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_car_brand) }}<br>
+        {{ form_widget(form_price_search.id_car_brand, {value : search_id_car_brand}) }}
+        {{ form_errors(form_price_search.id_car_brand) }}</th>
+
+        {% for value_id_side in app.flashes('id_side_search') %}  
+            {% set search_id_side = value_id_side %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_side) }}<br>
+        {{ form_widget(form_price_search.id_side, {value : search_id_side}) }}
+        {{ form_errors(form_price_search.id_side) }}</th>
+
+        {% for value_id_body in app.flashes('id_body_search') %}  
+            {% set search_id_body = value_id_body %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_body) }}<br>
+        {{ form_widget(form_price_search.id_body, {value : search_id_body}) }}
+        {{ form_errors(form_price_search.id_body) }}</th>
+
+        {% for value_id_axle in app.flashes('id_axle_search') %}  
+            {% set search_id_axle = value_id_axle %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_axle) }}<br>
+        {{ form_widget(form_price_search.id_axle, {value : search_id_axle}) }}
+        {{ form_errors(form_price_search.id_axle) }}</th>
+
+        {% for value_id_in_stock in app.flashes('id_in_stock_search') %}  
+            {% set search_id_in_stock = value_id_in_stock %}
+        {% endfor %}
+        <th>{{ form_label(form_price_search.id_in_stock) }}<br>
+        {{ form_widget(form_price_search.id_in_stock, {value : search_id_in_stock}) }}
+        {{ form_errors(form_price_search.id_in_stock) }}</th>
+
+        <th>{{ form_widget(form_price_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+        
+    {{ form_end(form_price_search) }}
+
+    <form action="/reset_price" name="reset_price">
+    <th><button class="reset" type="submit" name="reset_price">Сбросить</button></th>
+    </form>
+    
+{% endblock form_search %}
+
+{% block table_thead_tr %}
+{% if arr_price %}
+    {% for arr_search_price in arr_price %}
+        {% if arr_search_price %}
+            <th>№ Детали</th>
+            <th>Производитель</th>
+            <th>Описание детали</th>
+            <th>Название детали</th>
+            <th>Марка</th>
+            <th>Сторона</th>
+            <th>Кузов</th>
+            <th>Перед Зад</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Цена общая</th>
+            <th>Продано шт</th>
+            <th>Продано Цена</th>
+            <th>Дата прод-жи</th>
+            <th>Продано</th>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h2>Видите параметры в поиск</h2> 
+{% endif %}
+{% endblock table_thead_tr %}
+
+{% block tbody %}
+    {#выводит таблицу по поиску#}
+      {# {% for arr_search_price in arr_price %}
+            {% if arr_search_price %}
+               {% for price in arr_search_price %}
+                    <tr>
+                        <td>{{ price.getPartNumbers() }}</td>
+
+                        <td>{{ price.getManufacturers() }}</td>
+
+                        <td>{{ price.getNameDetail() }}</td>
+
+                        <td>{{ price.getIdPartName().getPartName()|default('') }}</td>
+
+                        <td>{{ price.getIdCarBrand().getCarBrand()|default('') }}</td>
+
+                        <td>{{ price.getIdSide().getSide()|default('') }}</td>
+
+                        <td>{{ price.getIdBody().getBody()|default('') }}</td>
+
+                        <td>{{ price.getIdAxle().getAxle()|default('') }}</td>
+
+                        <td>{{ price.getIdInStock().getInStock()|default('') }}</td>#}
+
+                            {#<form action="/sales_parts" name="form_sales" method="post">
+
+                                Переменный для вывода данных в форме когда форма не прошла валидацию#}
+                                {#{% set quantity_sold = '' %}
+                                {% set price_sold = '' %}
+                                {% set date_sold = '' %}
+
+                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
+                                        {% set quantity_sold = value_quantity_sold %}
+                                    {% endfor %}
+                                    {% for value_price_sold in app.flashes('price_sold') %}  
+                                        {% set price_sold = value_price_sold %}
+                                    {% endfor %}
+                                    {% for value_date_sold in app.flashes('date_sold') %}  
+                                        {% set date_sold = value_date_sold %}
+                                    {% endfor %}
+                                
+                                <td><input type="number" name="quantity_sold" required="required" 
+                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
+                                            {% for message in app.flashes('[quantity_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}
+                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
+                                            {% endfor %}</td>
+
+                                
+                                <td><input type="number" name="price_sold" required="required" 
+                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
+                                            {% for message in app.flashes('[price_sold_error]') %}
+                                            {{ message }}
+                                            {% endfor %}</td>
+                                
+                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
+
+                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
+
+                            </form>#}
+                    {#</tr>   
+                {% endfor %}
+            {% else %}
+                <h2>Данные не найдены. Видите параметры в поиск</h2>  
+            {% endif %}
+        {% endfor %}#}
+{% endblock tbody %}

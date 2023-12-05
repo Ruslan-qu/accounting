@@ -12,9 +12,10 @@
 
 {#Форма сохранения деталей#}
     {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
-
+{#{{ dump(app.flashes()) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set sales_part_numbers = '' %}
+        {% set sales_id_original_number = '' %}
         {% set sales_manufacturers = '' %}
         {% set sales_name_detail = '' %}
         {% set sales_id_part_name = '' %}
@@ -33,6 +34,18 @@
             {{ message_sales }}
         {% endfor %}
         {{ form_errors(form_p_n_sales.part_numbers) }}</th>
+
+        {% do form_widget(form_p_n_sales.id_original_number) %}
+
+        {% for value_part_numbers in app.flashes('original_number_sales') %}  
+            {% set sales_id_original_number = value_part_numbers %}
+        {% endfor %}
+        <th>{{ form_label(form_original_number_sales.original_number) }}<br>
+        {{ form_widget(form_original_number_sales.original_number, {value : sales_id_original_number}) }}<br>
+        {% for message_sales in app.flashes('children[original_number].data_sales') %}
+            {{ message_sales }}
+        {% endfor %}
+        {{ form_errors(form_original_number_sales.original_number) }}</th>
 
         {% for value_manufacturers in app.flashes('manufacturers_sales') %}  
             {% set sales_manufacturers = value_manufacturers %}
@@ -60,6 +73,9 @@
         <th>{{ form_label(form_p_n_sales.id_part_name) }}<br>
         {{ form_widget(form_p_n_sales.id_part_name, {value : sales_id_part_name}) }}
         {{ form_errors(form_p_n_sales.id_part_name) }}</th>
+                                  
+    </tr>
+    <tr>
 
         {% for value_id_car_brand in app.flashes('id_car_brand_sales') %}  
             {% set sales_id_car_brand = value_id_car_brand %}
@@ -105,7 +121,7 @@
 {% block form_search %}
     {#Форма поиска деталей#}
   {{ form_start(form_p_n_search, { attr: {novalidate: 'novalidate'}, 'action': path('part_no')}) }}
-{#{{ dump(app.flashes()) }}#}
+
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
         {% set search_manufacturers = '' %}
@@ -125,6 +141,8 @@
             {{ message }}
         {% endfor %}
         {{ form_errors(form_p_n_search.part_numbers) }}</th>
+
+        {% do form_widget(form_p_n_search.id_original_number) %}
 
         {% do form_widget(form_p_n_search.manufacturers) %}
        
@@ -187,6 +205,7 @@
     {% for arr_search_part_no in arr_part_no %}
         {% if arr_search_part_no %}
             <th>№ Детали</th>
+            <th>№ Оригинал</th>
             <th>Производитель</th>
             <th>Описание детали</th>
             <th>Название детали</th>
@@ -211,6 +230,8 @@
                {% for part_no in arr_search_part_no %}
                     <tr>
                         <td>{{ part_no.getPartNumbers() }}</td>
+
+                        <td>{{ part_no.getIdOriginalNumber().getOriginalNumber()|default('') }}</td>
 
                         <td>{{ part_no.getManufacturers() }}</td>
 

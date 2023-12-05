@@ -8,6 +8,7 @@ use App\Entity\Bodies;
 use App\Entity\CarBrands;
 use App\Entity\DetailsList;
 use App\Entity\Availability;
+use App\Entity\OriginalRooms;
 use App\Entity\IdDetailsManufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +37,17 @@ class PartNoType extends AbstractType
                 'attr' => ['style' => 'width: 140px']
             ])
 
+            ->add('id_original_number', EntityType::class, [
+                'label' => '№ Оригинал',
+                'class' => OriginalRooms::class,
+                'choice_label' => 'original_number',
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
+            ])
+
             ->add('manufacturers', TextType::class, [
                 'label' => 'Производитель',
                 'constraints' => [
@@ -57,9 +69,10 @@ class PartNoType extends AbstractType
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
+                'required' => false,
                 'attr' => [
                     'rows' => '1',
-                    'cols' => '18'
+                    'cols' => '15'
                 ]
             ])
 

@@ -4,6 +4,7 @@ namespace App\Controller\Sections_header;
 
 //use App\Entity\Invoice;
 //use App\Form\IncomingDocumentsType;
+use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\IdDetailsManufacturer;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PriceController extends AbstractController
 {
+    /*функция поиска по данным */
     #[Route('/price', name: 'price')]
     public function searchPrice(
         ManagerRegistry $doctrine,
@@ -23,7 +25,7 @@ class PriceController extends AbstractController
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
-        $arr_part_no = [];
+        $arr_price = [];
 
         /*Подключаем класс базы данных*/
         $entity_price = new IdDetailsManufacturer();
@@ -37,12 +39,29 @@ class PriceController extends AbstractController
         /*Подключаем валидацию форм */
         $errors_search_part_no = $validator->validate($form_price_search);
 
+        if ($form_price_search->isSubmitted()) {
+            if ($form_price_search->isValid()) {
+                # code...
+            }
+        } else {
+
+            $arr_price[] = $doctrine->getRepository(IdDetailsManufacturer::class)->findAll();
+            //$arr_price[] = $doctrine->getRepository(Invoice::class)->findAll();
+        }
 
 
         return $this->render('price/price.html.twig', [
             'title_logo' => 'Прайс',
-            //'legend' => 'Добавить новую счет-фактуру',
-            //'form_i_d' => $form_incoming_documents->createView(),
+            'legend_search' => 'Поиск',
+            'form_price_search' => $form_price_search->createView(),
+            'arr_price' => $arr_price,
         ]);
+    }
+
+    /* функция сброса */
+    #[Route('/reset_price', name: 'reset_price')]
+    public function resetPart(): Response
+    {
+        return $this->redirectToRoute('price');
     }
 }

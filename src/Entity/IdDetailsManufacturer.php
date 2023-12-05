@@ -54,6 +54,9 @@ class IdDetailsManufacturer
 
     private ?string $hidden = null;
 
+    #[ORM\ManyToOne(inversedBy: 'idDetailsManufacturersOriginalRooms')]
+    private ?OriginalRooms $id_original_number = null;
+
     public function __construct()
     {
         $this->part_number = new ArrayCollection();
@@ -241,6 +244,18 @@ class IdDetailsManufacturer
     public function setHidden(string $hidden): static
     {
         $this->hidden = $hidden;
+
+        return $this;
+    }
+
+    public function getIdOriginalNumber(): ?OriginalRooms
+    {
+        return $this->id_original_number;
+    }
+
+    public function setIdOriginalNumber(?OriginalRooms $id_original_number): static
+    {
+        $this->id_original_number = $id_original_number;
 
         return $this;
     }
