@@ -37,8 +37,8 @@
 
         {% do form_widget(form_p_n_sales.id_original_number) %}
 
-        {% for value_part_numbers in app.flashes('original_number_sales') %}  
-            {% set sales_id_original_number = value_part_numbers %}
+        {% for value_original_number in app.flashes('original_number_sales') %}  
+            {% set sales_id_original_number = value_original_number %}
         {% endfor %}
         <th>{{ form_label(form_original_number_sales.original_number) }}<br>
         {{ form_widget(form_original_number_sales.original_number, {value : sales_id_original_number}) }}<br>
@@ -124,6 +124,7 @@
 
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
+        {% set search_id_original_number = '' %}
         {% set search_manufacturers = '' %}
         {% set search_id_part_name = '' %}
         {% set search_id_car_brand = '' %}
@@ -141,6 +142,16 @@
             {{ message }}
         {% endfor %}
         {{ form_errors(form_p_n_search.part_numbers) }}</th>
+
+        {% for value_original_number in app.flashes('original_number_search') %}  
+            {% set search_id_original_number = value_original_number %}
+        {% endfor %}
+        <th>{{ form_label(form_original_number_search.original_number) }}<br>
+        {{ form_widget(form_original_number_search.original_number, {value : search_id_original_number}) }}<br>
+        {% for message_search in app.flashes('children[original_number].data_search') %}
+            {{ message_search }}
+        {% endfor %}
+        {{ form_errors(form_original_number_search.original_number) }}</th>
 
         {% do form_widget(form_p_n_search.id_original_number) %}
 

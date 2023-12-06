@@ -37,29 +37,105 @@ class PartNoController extends AbstractController
         $form_p_n_search = $this->createForm(PartNoType::class, $entity_part_no);
         $form_p_n_sales = $this->createForm(PartNoType::class, $entity_part_no);
         $form_original_number_sales = $this->createForm(OriginalRoomsType::class, $entity_original_number);
+        $form_original_number_search = $this->createForm(OriginalRoomsType::class, $entity_original_number);
 
         /*Валидация формы */
         $form_p_n_search->handleRequest($request);
+        $form_original_number_search->handleRequest($request);
 
         /*Подключаем валидацию форм */
         $errors_search_part_no = $validator->validate($form_p_n_search);
+        $errors_search_original_number = $validator->validate($form_original_number_search);
 
         //dd($request);
         /*Валидация формы */
-        if ($form_p_n_search->isSubmitted()) {
-            if ($form_p_n_search->isValid()) {
-
+        if ($form_p_n_search->isSubmitted() && $form_original_number_search->isSubmitted()) {
+            if ($form_p_n_search->isValid() && $form_original_number_search->isValid()) {
+                // dd($form_p_n_search);
                 /* Массив для сбора списка по поиску */
                 $arr_part_no_search = [];
 
                 /* собераем список по поиску */
-                $part_numbers_search = $request->request->all()['part_no']['part_numbers'];
+                $part_numbers_search = strtolower(preg_replace(
+                    '#\s#',
+                    '',
+                    $form_p_n_search->getData()->getPartNumbers()
+                ));
+                $original_number = strtolower(preg_replace(
+                    '#\s#',
+                    '',
+                    $form_original_number_search->getData()->getOriginalNumber()
+                ));
+                $id_part_name_search = $form_p_n_search->getData()->getIdPartName();
+                $id_car_brand_search = $form_p_n_search->getData()->getIdCarBrand();
+                $id_side_search = $form_p_n_search->getData()->getIdSide();
+                $id_body_search = $form_p_n_search->getData()->getIdBody();
+                $id_axle_search = $form_p_n_search->getData()->getIdAxle();
+                $id_in_stock_search = $form_p_n_search->getData()->getIdInStock();
+
+                //dd($part_numbers_search);
                 if ($part_numbers_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                    $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
+                } elseif ($original_number) {
+                    $id_original_number = $doctrine->getRepository(OriginalRooms::class)
+                        ->findBy(['original_number' => $original_number]);
+                    $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        ->findBy(['id_original_number' => $id_original_number]);
+                } elseif (
+                    $id_part_name_search || $id_car_brand_search
+                    || $id_side_search || $id_body_search
+                    || $id_axle_search || $id_in_stock_search
+                ) {
+                    if ($id_part_name_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_part_name' => $id_part_name_search]);
+                    }
+
+                    if ($id_car_brand_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_car_brand' => $id_car_brand_search]);
+                    }
+
+                    if ($id_side_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_side' => $id_side_search]);
+                    }
+
+                    if ($id_body_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_body' => $id_body_search]);
+                    }
+
+                    if ($id_axle_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_axle' => $id_axle_search]);
+                    }
+
+                    if ($id_in_stock_search) {
+                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                            ->findBy(['id_in_stock' => $id_in_stock_search]);
+                    }
+                    //dd($arr_part_no_search);
+                    /* Удаляем дубли из списка по поиску */
+                    $newArray = [];
+                    $Fruits = [];
+                    foreach ($arr_part_no_search as $key => $value) {
+                        foreach ($value as $key => $line) {
+                            if (!in_array($line->getId(), $Fruits)) {
+                                $Fruits[] = $line->getId();
+                                $newArray[$key] = $line;
+                            }
+                        }
+                    }
+                    //dd($arr_part_no);
+                    $arr_part_no[] = $newArray;
+                    unset($newArray);
+                    unset($Fruits);
+                    //dd($arr_part_no);
                 }
 
-                $id_part_name_search = $request->request->all()['part_no']['id_part_name'];
+                /* $id_part_name_search = $request->request->all()['part_no']['id_part_name'];
                 if ($id_part_name_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_part_name' => $id_part_name_search]);
@@ -93,10 +169,10 @@ class PartNoController extends AbstractController
                 if ($id_in_stock_search) {
                     $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_in_stock' => $id_in_stock_search]);
-                }
+                }*/
 
                 /* Удаляем дубли из списка по поиску */
-                $newArray = [];
+                /*$newArray = [];
                 $Fruits = [];
                 foreach ($arr_part_no_search as $key => $value) {
                     foreach ($value as $key => $line) {
@@ -108,7 +184,7 @@ class PartNoController extends AbstractController
                 }
                 $arr_part_no[] = $newArray;
                 unset($newArray);
-                unset($Fruits);
+                unset($Fruits);*/
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
@@ -122,7 +198,7 @@ class PartNoController extends AbstractController
                         }
                     }
                 }
-                //dd($errors_search_part_no);
+                //dd($errors_search_original_number);
                 /* Выводим сообщения ошибки в форму поиска, через сессии  */
                 if ($errors_search_part_no) {
                     foreach ($errors_search_part_no as $key) {
@@ -134,6 +210,18 @@ class PartNoController extends AbstractController
                         );
                     }
                 }
+
+                if ($errors_search_original_number) {
+                    foreach ($errors_search_original_number as $key) {
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath() . '_search';
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
+
                 return $this->redirectToRoute('part_no');
             }
         } else {
@@ -147,6 +235,7 @@ class PartNoController extends AbstractController
             'form_p_n_sales' => $form_p_n_sales->createView(),
             'form_p_n_search' => $form_p_n_search->createView(),
             'form_original_number_sales' => $form_original_number_sales->createView(),
+            'form_original_number_search' => $form_original_number_search->createView(),
             'arr_part_no' => $arr_part_no,
         ]);
     }
