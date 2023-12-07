@@ -73,7 +73,11 @@ class PartNoController extends AbstractController
                 $id_axle_search = $form_p_n_search->getData()->getIdAxle();
                 $id_in_stock_search = $form_p_n_search->getData()->getIdInStock();
 
-                //dd($part_numbers_search);
+                $arr_form_p_n_search = $request->request->all()['part_no'];
+
+                $array_filter_part_no = array_filter($arr_form_p_n_search);
+
+
                 if ($part_numbers_search) {
                     $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
@@ -82,57 +86,48 @@ class PartNoController extends AbstractController
                         ->findBy(['original_number' => $original_number]);
                     $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_original_number' => $id_original_number]);
-                } elseif (
-                    $id_part_name_search || $id_car_brand_search
-                    || $id_side_search || $id_body_search
-                    || $id_axle_search || $id_in_stock_search
-                ) {
+                } elseif ($id_part_name_search) {
                     if ($id_part_name_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
+                        $arr = [];
+                        $find_by_id_part_name = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_part_name' => $id_part_name_search]);
+                        dd($find_by_id_part_name);
+                        foreach ($find_by_id_part_name as $key => $value_part_name) {
+                            //dd((array)$value_part_name[(array)'id_part_name']);
+                            foreach ((array) $value_part_name as $key_part_name => $value) {
+                                //echo $value;
+                                //  dd($value);
+                                $arr[$key_part_name] = $value;
+                                //$arr[] = array_intersect_key($value, $array_filter_part_no);
+                            }
+                        }
+                        dd($arr);
                     }
-
+                } elseif ($id_car_brand_search) {
                     if ($id_car_brand_search) {
                         $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_car_brand' => $id_car_brand_search]);
                     }
-
+                } elseif ($id_side_search) {
                     if ($id_side_search) {
                         $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_side' => $id_side_search]);
                     }
-
+                } elseif ($id_body_search) {
                     if ($id_body_search) {
                         $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_body' => $id_body_search]);
                     }
-
+                } elseif ($id_axle_search) {
                     if ($id_axle_search) {
                         $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_axle' => $id_axle_search]);
                     }
-
+                } elseif ($id_in_stock_search) {
                     if ($id_in_stock_search) {
                         $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                             ->findBy(['id_in_stock' => $id_in_stock_search]);
                     }
-                    //dd($arr_part_no_search);
-                    /* Удаляем дубли из списка по поиску */
-                    $newArray = [];
-                    $Fruits = [];
-                    foreach ($arr_part_no_search as $key => $value) {
-                        foreach ($value as $key => $line) {
-                            if (!in_array($line->getId(), $Fruits)) {
-                                $Fruits[] = $line->getId();
-                                $newArray[$key] = $line;
-                            }
-                        }
-                    }
-                    //dd($arr_part_no);
-                    $arr_part_no[] = $newArray;
-                    unset($newArray);
-                    unset($Fruits);
-                    //dd($arr_part_no);
                 }
 
                 /* $id_part_name_search = $request->request->all()['part_no']['id_part_name'];
