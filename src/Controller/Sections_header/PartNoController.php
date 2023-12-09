@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\IdDetailsManufacturerRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -23,7 +24,8 @@ class PartNoController extends AbstractController
     public function searchPart(
         ManagerRegistry $doctrine,
         Request $request,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        IdDetailsManufacturerRepository $IdDetailsManufacturerRepository
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
@@ -68,7 +70,7 @@ class PartNoController extends AbstractController
                 ));
                 $id_part_name_search = $form_p_n_search->getData()->getIdPartName();
                 $id_car_brand_search = $form_p_n_search->getData()->getIdCarBrand();
-                $id_side_search = null;
+                $id_side_search = '= :' . $form_p_n_search->getData()->getIdSide();
                 $id_body_search = $form_p_n_search->getData()->getIdBody();
                 $id_axle_search = $form_p_n_search->getData()->getIdAxle();
                 $id_in_stock_search = $form_p_n_search->getData()->getIdInStock();
@@ -76,7 +78,7 @@ class PartNoController extends AbstractController
                 $arr_form_p_n_search = $request->request->all()['part_no'];
 
                 $array_filter_part_no = array_filter($arr_form_p_n_search);
-                // dd($id_part_name_search);
+                dd($id_side_search);
 
                 if ($part_numbers_search) {
                     $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
@@ -92,8 +94,15 @@ class PartNoController extends AbstractController
 
                     //dd($find_by_id_part_name);
 
-                    $find_by_id_part_name = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_part_name' => $id_part_name_search, 'id_side' => $id_side_search]);
+                    $find_by_id_part_name = $IdDetailsManufacturerRepository
+                        ->findBySearchPart(
+                            $id_part_name_search,
+                            $id_car_brand_search,
+                            $id_side_search,
+                            $id_body_search,
+                            $id_axle_search,
+                            $id_in_stock_search,
+                        );
                     dd($find_by_id_part_name);
                     foreach ($find_by_id_part_name as $key => $value_part_name) {
                         if ($value_part_name->getIdCarBrand() == $id_car_brand_search) {
