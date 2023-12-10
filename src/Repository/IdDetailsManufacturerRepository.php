@@ -56,15 +56,17 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
         $id_axle_search,
         $id_in_stock_search,
     ): array {
-
+        //dd($id_side_search);
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
             'SELECT d
                 FROM App\Entity\IdDetailsManufacturer d
-                WHERE d.id_part_name = :id_part_name_search 
-                AND d.id_side = :id_side_search'
+                WHERE ((d.id_part_name = :id_part_name_search 
+                or d.id_car_brand = :id_car_brand_search)
+                or d.id_side = :id_side_search)'
         )->setParameter('id_part_name_search', $id_part_name_search)
+            ->setParameter('id_car_brand_search', $id_car_brand_search)
             ->setParameter('id_side_search', $id_side_search);
         //dd($query->getResult());
         $query = $query->getResult();
