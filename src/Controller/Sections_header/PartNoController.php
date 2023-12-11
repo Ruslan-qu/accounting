@@ -81,208 +81,40 @@ class PartNoController extends AbstractController
                 //dd($array_filter_part_no);
 
                 if ($part_numbers_search) {
+
                     $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
                 } elseif ($original_number) {
+
                     $id_original_number = $doctrine->getRepository(OriginalRooms::class)
                         ->findBy(['original_number' => $original_number]);
                     $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['id_original_number' => $id_original_number]);
                 } elseif ($id_part_name_search) {
 
-
-
-                    $arrkey = [];
-
-                    //dd($find_by_id_part_name);
-
-                    /* $find_by_id_part_name = $IdDetailsManufacturerRepository
-                        ->findBySearchPart(
-                            $id_part_name_search,
-                            $id_car_brand_search,
-                            $id_side_search,
-                            $id_body_search,
-                            $id_axle_search,
-                            $id_in_stock_search,
-                        );*/
-                    //dd($find_by_id_part_name);
-
-                    $find_by_id_part_name = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_part_name' => $id_part_name_search]);
-
-                    foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
-
-                        $key_part_no_preg_replace_ucwords =
-                            'get' . preg_replace('#_#', '', ucwords($key_part_no, '_')) . '()';
-                        //dd($key_part_no_preg_replace_ucwords);
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->$key_part_no_preg_replace_ucwords == $form_p_n_search->getData()->$key_part_no_preg_replace_ucwords) {
-                                //dd($value_part_name);
-                                //$find_by_id_part_name = [];
-                                $find_by_id_part_name[$key] = $value_part_name;
-                            } else {
-                                unset($find_by_id_part_name[$key]);
-                            }
-                        }
-                    }
-                    dd($find_by_id_part_name);
-                    /*foreach ($find_by_id_part_name as $key => $value_part_name) {
-
-                        if (is_iterable($value_part_name)) {
-                            $arrkey[] = $value_part_name;
-                        }
-
-
-                        if ($value_part_name->getIdCarBrand() == $id_car_brand_search) {
-                            //dd($value_part_name);
-                            //$find_by_id_part_name = [];
-                            $find_by_id_part_name[$key] = $value_part_name;
-                        }*/
-
-                    //dd($value_part_name->getIdPartName());
-                    // foreach ((array) $value_part_name as $key => $value) {
-                    //echo $value;
-                    //  dd($value);
-                    //$arrkey[] = $value;
-                    //$arr[] = array_intersect_key($value, $array_filter_part_no);
-                    // }
-                    //}
-                    // dd($id_side_search);
-                    if ($id_car_brand_search) {
-
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->getIdCarBrand() == $id_car_brand_search) {
-                                //dd($value_part_name);
-                                //$find_by_id_part_name = [];
-                                $find_by_id_part_name[$key] = $value_part_name;
-                            } else {
-                                unset($find_by_id_part_name[$key]);
-                            }
-                        }
-                    }
-
-                    if ($id_side_search) {
-
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->getIdSide() == $id_side_search) {
-                                //dd($value_part_name);
-                                //$find_by_id_part_name = [];
-                                $find_by_id_part_name[$key] = $value_part_name;
-                            } else {
-                                unset($find_by_id_part_name[$key]);
-                            }
-                        }
-                    }
-                    if ($id_body_search) {
-
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->getIdBody() == $id_body_search) {
-                                //dd($value_part_name);
-                                // $find_by_id_part_name = [];
-                                $find_by_id_part_name = $value_part_name;
-                            }
-                        }
-                    }
-                    if ($id_axle_search) {
-                        # code...
-
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->getIdAxle() == $id_axle_search) {
-                                //dd($value_part_name);
-                                // $find_by_id_part_name = [];
-                                $find_by_id_part_name = $value_part_name;
-                            }
-                        }
-                    }
-                    if ($id_in_stock_search) {
-                        # code...
-
-                        foreach ($find_by_id_part_name as $key => $value_part_name) {
-                            if ($value_part_name->getIdInStock() == $id_in_stock_search) {
-                                //dd($value_part_name);
-                                // $find_by_id_part_name = [];
-                                $find_by_id_part_name = $value_part_name;
-                            }
-                        }
-                    }
-                    dd($find_by_id_part_name);
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_part_name_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_car_brand_search) {
-                    if ($id_car_brand_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                            ->findBy(['id_car_brand' => $id_car_brand_search]);
-                    }
+                    // dd($id_car_brand_search);
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_car_brand_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_side_search) {
-                    if ($id_side_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                            ->findBy(['id_side' => $id_side_search]);
-                    }
+
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_side_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_body_search) {
-                    if ($id_body_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                            ->findBy(['id_body' => $id_body_search]);
-                    }
+
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_body_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_axle_search) {
-                    if ($id_axle_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                            ->findBy(['id_axle' => $id_axle_search]);
-                    }
+
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_axle_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_in_stock_search) {
-                    if ($id_in_stock_search) {
-                        $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                            ->findBy(['id_in_stock' => $id_in_stock_search]);
-                    }
-                }
 
-                /* $id_part_name_search = $request->request->all()['part_no']['id_part_name'];
-                if ($id_part_name_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_part_name' => $id_part_name_search]);
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findBySearchPart($id_in_stock_search, $array_filter_part_no, $form_p_n_search);
                 }
-
-                $id_car_brand_search = $request->request->all()['part_no']['id_car_brand'];
-                if ($id_car_brand_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_car_brand' => $id_car_brand_search]);
-                }
-
-                $id_side_search = $request->request->all()['part_no']['id_side'];
-                if ($id_side_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_side' => $id_side_search]);
-                }
-
-                $id_body_search = $request->request->all()['part_no']['id_body'];
-                if ($id_body_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_body' => $id_body_search]);
-                }
-
-                $id_axle_search = $request->request->all()['part_no']['id_axle'];
-                if ($id_axle_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_axle' => $id_axle_search]);
-                }
-
-                $id_in_stock_search = $request->request->all()['part_no']['id_in_stock'];
-                if ($id_in_stock_search) {
-                    $arr_part_no_search[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_in_stock' => $id_in_stock_search]);
-                }*/
-
-                /* Удаляем дубли из списка по поиску */
-                /*$newArray = [];
-                $Fruits = [];
-                foreach ($arr_part_no_search as $key => $value) {
-                    foreach ($value as $key => $line) {
-                        if (!in_array($line->getId(), $Fruits)) {
-                            $Fruits[] = $line->getId();
-                            $newArray[$key] = $line;
-                        }
-                    }
-                }
-                $arr_part_no[] = $newArray;
-                unset($newArray);
-                unset($Fruits);*/
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */

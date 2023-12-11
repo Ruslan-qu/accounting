@@ -48,28 +48,35 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchPart(
-        $id_part_name_search,
-        $id_car_brand_search,
-        $id_side_search,
-        $id_body_search,
-        $id_axle_search,
-        $id_in_stock_search,
-    ): array {
-        //dd($id_side_search);
+    public function findBySearchPart($part_no_search, $array_filter_part_no, $form_p_n_search): array
+    {
+        //dd($array_filter_part_no);
+        $key = array_key_first($array_filter_part_no);
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT d
+            'SELECT d 
                 FROM App\Entity\IdDetailsManufacturer d
-                WHERE ((d.id_part_name = :id_part_name_search 
-                or d.id_car_brand = :id_car_brand_search)
-                or d.id_side = :id_side_search)'
-        )->setParameter('id_part_name_search', $id_part_name_search)
-            ->setParameter('id_car_brand_search', $id_car_brand_search)
-            ->setParameter('id_side_search', $id_side_search);
-        //dd($query->getResult());
+                WHERE d.key = :part_no_search'
+        )->setParameter('part_no_search', $part_no_search)
+            ->bindValue('key', $key);
         $query = $query->getResult();
+
+        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
+
+            $key_part_no_preg_replace_ucwords =
+                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
+
+            foreach ($query as $key => $value_part_name) {
+
+                if ($value_part_name->$key_part_no_preg_replace_ucwords() == $form_p_n_search->getData()->$key_part_no_preg_replace_ucwords()) {
+                    //dd($value_part_name);
+                    $query[$key] = $value_part_name;
+                } else {
+                    unset($query[$key]);
+                }
+            }
+        }
         return $query;
     }
 }
