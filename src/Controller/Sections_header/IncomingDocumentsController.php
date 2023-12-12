@@ -65,89 +65,63 @@ class IncomingDocumentsController extends AbstractController
             if ($form_search_invoice->isValid()) {
 
                 /* Массив для сбора списка по поиску */
-                $arr_incoming_documents_search = [];
+                // $arr_incoming_documents_search = [];
 
                 /* собераем списка по поиску */
                 $number_document_search = $request->request->all()['search_invoice']['search_number_document'];
-                if ($number_document_search) {
-                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['number_document' => $number_document_search]);
-                }
-
                 $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
                 $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
-                if ($s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
-                        ->findByDate($s_data_invoice_search, $po_data_invoice_search);
-                }
-                if ($s_data_invoice_search && !$po_data_invoice_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
-                        ->findBySDate($s_data_invoice_search);
-                }
-                if (!$s_data_invoice_search && $po_data_invoice_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
-                        ->findByPoDate($po_data_invoice_search);
-                }
-
-
                 $id_counterparty_search = $request->request->all()['search_invoice']['search_id_counterparty'];
-                if ($id_counterparty_search) {
-                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['id_counterparty' => $id_counterparty_search]);
-                }
-
                 $part_numbers_search = strtolower($request->request->all()['search_invoice']['search_id_details']);
-                if ($part_numbers_search) {
+                $manufacturers_search = strtolower($request->request->all()['search_invoice']['search_id_manufacturer']);
+                $s_price_search = $request->request->all()['search_invoice']['s_price'];
+                $po_price_search = $request->request->all()['search_invoice']['po_price'];
+                $id_payment_method_search = $request->request->all()['search_invoice']['search_id_payment_method'];
+
+                if ($number_document_search) {
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy(['number_document' => $number_document_search]);
+                } elseif ($s_data_invoice_search && $po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByDate($s_data_invoice_search, $po_data_invoice_search);
+                } elseif ($s_data_invoice_search && !$po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findBySDate($s_data_invoice_search);
+                } elseif (!$s_data_invoice_search && $po_data_invoice_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByPoDate($po_data_invoice_search);
+                } elseif ($id_counterparty_search) {
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
+                        ->findBy(['id_counterparty' => $id_counterparty_search]);
+                } elseif ($part_numbers_search) {
                     $arr_details_manufacturer_details = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['part_numbers' => $part_numbers_search]);
                     if ($arr_details_manufacturer_details) {
-                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_details' => $arr_details_manufacturer_details[0]->getId()]);
                     }
-                }
-
-                $manufacturers_search = strtolower($request->request->all()['search_invoice']['search_id_manufacturer']);
-                if ($manufacturers_search) {
+                } elseif ($manufacturers_search) {
                     $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
                         ->findBy(['manufacturers' => $manufacturers_search]);
                     if ($arr_details_manufacturer) {
-                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
+                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                             ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
                     }
-                }
-
-                /*$search_name_details = strtolower($request->request->all()['search_invoice']['search_name_details']);
-                if ($search_name_details) {
-                    $arr_details_manufacturer_name = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['name_details' => $search_name_details]);
-                    if ($arr_details_manufacturer_name) {
-                        $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
-                            ->findBy(['id_name_detail' => $arr_details_manufacturer_name[0]->getId()]);
-                    }
-                }*/
-
-                $s_price_search = $request->request->all()['search_invoice']['s_price'];
-                $po_price_search = $request->request->all()['search_invoice']['po_price'];
-                if ($s_price_search && $po_price_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
+                } elseif ($s_price_search && $po_price_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
                         ->findByPrice($s_price_search, $po_price_search);
-                }
-                if ($s_price_search && !$po_price_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
+                } elseif ($s_price_search && !$po_price_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
                         ->findBySPrice($s_price_search);
-                }
-                if (!$s_price_search && $po_price_search) {
-                    $arr_incoming_documents_search[] = $InvoiceRepository
+                } elseif (!$s_price_search && $po_price_search) {
+                    $arr_incoming_documents[] = $InvoiceRepository
                         ->findByPoPrice($po_price_search);
-                }
-
-                $id_payment_method_search = $request->request->all()['search_invoice']['search_id_payment_method'];
-                if ($id_payment_method_search) {
-                    $arr_incoming_documents_search[] = $doctrine->getRepository(Invoice::class)
+                } elseif ($id_payment_method_search) {
+                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['id_payment_method' => $id_payment_method_search]);
                 }
 
-                /* Удаляем дубли из списка по поиску */
+                /* Удаляем дубли из списка по поиску 
                 $newArray = [];
                 $Fruits = [];
                 foreach ($arr_incoming_documents_search as $key => $value) {
@@ -160,7 +134,7 @@ class IncomingDocumentsController extends AbstractController
                 }
                 $arr_incoming_documents[] = $newArray;
                 unset($newArray);
-                unset($Fruits);
+                unset($Fruits);*/
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */

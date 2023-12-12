@@ -53,9 +53,6 @@ class PartNoController extends AbstractController
         /*Валидация формы */
         if ($form_p_n_search->isSubmitted() && $form_original_number_search->isSubmitted()) {
             if ($form_p_n_search->isValid() && $form_original_number_search->isValid()) {
-                // dd($form_p_n_search);
-                /* Массив для сбора списка по поиску */
-                $arr_part_no_search = [];
 
                 /* собераем список по поиску */
                 $part_numbers_search = strtolower(preg_replace(
@@ -95,7 +92,7 @@ class PartNoController extends AbstractController
                     $arr_part_no[] = $IdDetailsManufacturerRepository
                         ->findBySearchPart($id_part_name_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_car_brand_search) {
-                    // dd($id_car_brand_search);
+
                     $arr_part_no[] = $IdDetailsManufacturerRepository
                         ->findBySearchPart($id_car_brand_search, $array_filter_part_no, $form_p_n_search);
                 } elseif ($id_side_search) {

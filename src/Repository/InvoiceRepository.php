@@ -259,4 +259,45 @@ class InvoiceRepository extends ServiceEntityRepository
         //dd($query);
 
     }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findBySearchPrice($numbers_search, $array_filter, $form_search): array
+    {
+        $key = array_key_first($array_filter);
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d a
+                FROM App\Entity\Invoice d
+                JOIN d.id_details a
+                WHERE a.part_numbers = :numbers_search'
+        )->setParameter('numbers_search', $numbers_search);
+
+        $query = $query->getResult();
+        dd($query);
+        $query = [];
+
+        $query = $this->findBy([$key => $numbers_search]);
+
+
+        foreach ($array_filter as $key_part_no => $value_part_no) {
+
+            $key_part_no_preg_replace_ucwords =
+                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
+
+            foreach ($query as $key => $value_part_name) {
+
+                if ($value_part_name->$key_part_no_preg_replace_ucwords() == $form_search->getData()->$key_part_no_preg_replace_ucwords()) {
+
+                    $query[$key] = $value_part_name;
+                } else {
+                    unset($query[$key]);
+                }
+            }
+        }
+        return $query;
+    }
 }

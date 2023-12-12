@@ -46,21 +46,15 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
     //        ;
     //    }
     /**
-     * @return Invoice[] Returns an array of Invoice objects
+     * @return IdDetailsManufacturer[] Returns an array of Invoice objects
      */
     public function findBySearchPart($part_no_search, $array_filter_part_no, $form_p_n_search): array
     {
-        //dd($array_filter_part_no);
-        $key = array_key_first($array_filter_part_no);
-        $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery(
-            'SELECT d 
-                FROM App\Entity\IdDetailsManufacturer d
-                WHERE d.key = :part_no_search'
-        )->setParameter('part_no_search', $part_no_search)
-            ->bindValue('key', $key);
-        $query = $query->getResult();
+        $key = array_key_first($array_filter_part_no);
+
+        $query = $this->findBy([$key => $part_no_search]);
+
 
         foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
 
@@ -70,7 +64,7 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
             foreach ($query as $key => $value_part_name) {
 
                 if ($value_part_name->$key_part_no_preg_replace_ucwords() == $form_p_n_search->getData()->$key_part_no_preg_replace_ucwords()) {
-                    //dd($value_part_name);
+
                     $query[$key] = $value_part_name;
                 } else {
                     unset($query[$key]);

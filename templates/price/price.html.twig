@@ -75,12 +75,7 @@
         {{ form_widget(form_price_search.id_axle, {value : search_id_axle}) }}
         {{ form_errors(form_price_search.id_axle) }}</th>
 
-        {% for value_id_in_stock in app.flashes('id_in_stock_search') %}  
-            {% set search_id_in_stock = value_id_in_stock %}
-        {% endfor %}
-        <th>{{ form_label(form_price_search.id_in_stock) }}<br>
-        {{ form_widget(form_price_search.id_in_stock, {value : search_id_in_stock}) }}
-        {{ form_errors(form_price_search.id_in_stock) }}</th>
+        {% do form_widget(form_price_search.id_in_stock) %}
 
         <th>{{ form_widget(form_price_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
         
@@ -96,7 +91,9 @@
 {% if arr_price %}
     {% for arr_search_price in arr_price %}
         {% if arr_search_price %}
+        
             <th>№ Детали</th>
+            <th>№ Оригинал</th>
             <th>Производитель</th>
             <th>Описание детали</th>
             <th>Название детали</th>
@@ -107,10 +104,11 @@
             <th>Кол-во</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
-            <th>Продано шт</th>
+            <th>Продать</th>
+            {#<th>Продано шт</th>
             <th>Продано Цена</th>
             <th>Дата прод-жи</th>
-            <th>Продано</th>
+            <th>Продано</th>#}
         {% endif %}
     {% endfor %}
 {% else %}
@@ -120,69 +118,75 @@
 
 {% block tbody %}
     {#выводит таблицу по поиску#}
-      {# {% for arr_search_price in arr_price %}
+      {% for arr_search_price in arr_price %}
             {% if arr_search_price %}
-               {% for price in arr_search_price %}
-                    <tr>
-                        <td>{{ price.getPartNumbers() }}</td>
+                {% for price in arr_search_price %}
+                    {% if price.getIdInStock().getId() == 1 %}
+                        <tr>
+                            <td>{{ price.getPartNumbers() }}</td>
 
-                        <td>{{ price.getManufacturers() }}</td>
+                            <td>{{ price.getManufacturers() }}</td>
 
-                        <td>{{ price.getNameDetail() }}</td>
+                            <td>{{ price.getNameDetail() }}</td>
 
-                        <td>{{ price.getIdPartName().getPartName()|default('') }}</td>
+                            <td>{{ price.getIdPartName().getPartName()|default('') }}</td>
 
-                        <td>{{ price.getIdCarBrand().getCarBrand()|default('') }}</td>
+                            <td>{{ price.getIdCarBrand().getCarBrand()|default('') }}</td>
 
-                        <td>{{ price.getIdSide().getSide()|default('') }}</td>
+                            <td>{{ price.getIdSide().getSide()|default('') }}</td>
 
-                        <td>{{ price.getIdBody().getBody()|default('') }}</td>
+                            <td>{{ price.getIdBody().getBody()|default('') }}</td>
 
-                        <td>{{ price.getIdAxle().getAxle()|default('') }}</td>
+                            <td>{{ price.getIdAxle().getAxle()|default('') }}</td>
 
-                        <td>{{ price.getIdInStock().getInStock()|default('') }}</td>#}
+                            <form action="/sales_price" name="sales_price" method="post">
 
-                            {#<form action="/sales_parts" name="form_sales" method="post">
+                                    <td><button class="sales" type="submit" name="sales_price" value="{{ price.getId() }}">Продать</button></td>
+                                    
+                            </form>
 
-                                Переменный для вывода данных в форме когда форма не прошла валидацию#}
-                                {#{% set quantity_sold = '' %}
-                                {% set price_sold = '' %}
-                                {% set date_sold = '' %}
+                                {#<form action="/sales_parts" name="form_sales" method="post">
 
-                                    {% for value_quantity_sold in app.flashes('quantity_sold') %}  
-                                        {% set quantity_sold = value_quantity_sold %}
-                                    {% endfor %}
-                                    {% for value_price_sold in app.flashes('price_sold') %}  
-                                        {% set price_sold = value_price_sold %}
-                                    {% endfor %}
-                                    {% for value_date_sold in app.flashes('date_sold') %}  
-                                        {% set date_sold = value_date_sold %}
-                                    {% endfor %}
-                                
-                                <td><input type="number" name="quantity_sold" required="required" 
-                                    style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
-                                            {% for message in app.flashes('[quantity_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}
-                                            {% for message in app.flashes('[sum_quantity_sold_error]') %}
-                                            {% endfor %}</td>
+                                    Переменный для вывода данных в форме когда форма не прошла валидацию#}
+                                    {#{% set quantity_sold = '' %}
+                                    {% set price_sold = '' %}
+                                    {% set date_sold = '' %}
 
-                                
-                                <td><input type="number" name="price_sold" required="required" 
-                                    style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
-                                            {% for message in app.flashes('[price_sold_error]') %}
-                                            {{ message }}
-                                            {% endfor %}</td>
-                                
-                                <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
+                                        {% for value_quantity_sold in app.flashes('quantity_sold') %}  
+                                            {% set quantity_sold = value_quantity_sold %}
+                                        {% endfor %}
+                                        {% for value_price_sold in app.flashes('price_sold') %}  
+                                            {% set price_sold = value_price_sold %}
+                                        {% endfor %}
+                                        {% for value_date_sold in app.flashes('date_sold') %}  
+                                            {% set date_sold = value_date_sold %}
+                                        {% endfor %}
+                                    
+                                    <td><input type="number" name="quantity_sold" required="required" 
+                                        style="width: 70px" placeholder="шт" value="{{ quantity_sold }}" />
+                                                {% for message in app.flashes('[quantity_sold_error]') %}
+                                                {{ message }}
+                                                {% endfor %}
+                                                {% for message in app.flashes('[sum_quantity_sold_error]') %}
+                                                {% endfor %}</td>
 
-                                <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
+                                    
+                                    <td><input type="number" name="price_sold" required="required" 
+                                        style="width: 98px" placeholder="Цена" value="{{ price_sold }}" />
+                                                {% for message in app.flashes('[price_sold_error]') %}
+                                                {{ message }}
+                                                {% endfor %}</td>
+                                    
+                                    <td><input type="date" name="date_sold" required="required" value="{{ date_sold }}" /></td>
 
-                            </form>#}
-                    {#</tr>   
+                                    <td><button class="sales" type="submit" name="sales" value="{{ incoming_documents.getId() }}">Продано</button></td>  
+
+                                </form>#}
+                        </tr> 
+                    {% endif %} 
                 {% endfor %}
             {% else %}
                 <h2>Данные не найдены. Видите параметры в поиск</h2>  
             {% endif %}
-        {% endfor %}#}
+        {% endfor %}
 {% endblock tbody %}
