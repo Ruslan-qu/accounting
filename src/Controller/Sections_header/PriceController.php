@@ -73,30 +73,28 @@ class PriceController extends AbstractController
 
                 if ($part_numbers_search) {
 
-                    //$arr_price[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    //      ->findBy(['part_numbers' => $part_numbers_search]);
                     $arr_price[] = $InvoiceRepository
-                        ->findBySearchPrice($part_numbers_search, $array_filter_part_no, $form_price_search);
+                        ->findBySearchNumber($part_numbers_search);
                 } elseif ($id_part_name_search) {
 
-                    $arr_price[] = $IdDetailsManufacturerRepository
-                        ->findBySearchPart($id_part_name_search, $array_filter_part_no, $form_price_search);
+                    $arr_price[] = $InvoiceRepository
+                        ->findBySearchPartName($id_part_name_search, $array_filter_part_no, $form_price_search);
                 } elseif ($id_car_brand_search) {
 
-                    $arr_price[] = $IdDetailsManufacturerRepository
-                        ->findBySearchPart($id_car_brand_search, $array_filter_part_no, $form_price_search);
+                    $arr_price[] = $InvoiceRepository
+                        ->findBySearchCarBrand($id_car_brand_search, $array_filter_part_no, $form_price_search);
                 } elseif ($id_side_search) {
 
-                    $arr_price[] = $IdDetailsManufacturerRepository
-                        ->findBySearchPart($id_side_search, $array_filter_part_no, $form_price_search);
+                    $arr_price[] = $InvoiceRepository
+                        ->findBySearchSide($id_side_search, $array_filter_part_no, $form_price_search);
                 } elseif ($id_body_search) {
 
-                    $arr_price[] = $IdDetailsManufacturerRepository
-                        ->findBySearchPart($id_body_search, $array_filter_part_no, $form_price_search);
+                    $arr_price[] = $InvoiceRepository
+                        ->findBySearchBody($id_body_search, $array_filter_part_no, $form_price_search);
                 } elseif ($id_axle_search) {
 
-                    $arr_price[] = $IdDetailsManufacturerRepository
-                        ->findBySearchPart($id_axle_search, $array_filter_part_no, $form_price_search);
+                    $arr_price[] = $InvoiceRepository
+                        ->findBySearchAxle($id_axle_search, $array_filter_part_no, $form_price_search);
                 }
             } else {
 
@@ -127,9 +125,7 @@ class PriceController extends AbstractController
                 return $this->redirectToRoute('price');
             }
         } else {
-
-            $arr_price[] = $doctrine->getRepository(IdDetailsManufacturer::class)->findAll();
-            //$arr_price[] = $doctrine->getRepository(Invoice::class)->findAll();
+            $arr_price[] = $InvoiceRepository->findAllInvoicePartNo();
         }
 
 

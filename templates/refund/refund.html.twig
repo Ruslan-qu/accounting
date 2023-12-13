@@ -116,7 +116,7 @@
             <th>Цена общая</th>
             <th>Состояния</th>
             <th>Изменить<br>состояния</th>
-            <th>Снять</th>
+            <th>Отменить<br>возврат</th>
             <th>Удалить</th>
         {% endif %}
     {% endfor %}
@@ -158,7 +158,7 @@
 
                             <form action="/edit_refund" name="edit_refund" method="post">
 
-                                <td><button class="edit" type="submit" name="edit_refund" value="{{ search_refund.getId() }}">Снять</button></td>  
+                                <td><button class="edit" type="submit" name="edit_refund" value="{{ search_refund.getId() }}">Отменить</button></td>  
 
                             </form>
 

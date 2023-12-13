@@ -121,23 +121,35 @@
       {% for arr_search_price in arr_price %}
             {% if arr_search_price %}
                 {% for price in arr_search_price %}
-                    {% if price.getIdInStock().getId() == 1 %}
+                   {# {% if price.getIdDetails().getIdInStock().getId() == 1 
+                        and price.getSales() == 1 
+                        and price.getRefund() == 1%}#}
                         <tr>
-                            <td>{{ price.getPartNumbers() }}</td>
+                            <td>{{ price.getIdDetails().getPartNumbers() }}</td>
 
-                            <td>{{ price.getManufacturers() }}</td>
+                            <td>{{ price.getIdDetails().getIdOriginalNumber().getOriginalNumber() }}</td>
 
-                            <td>{{ price.getNameDetail() }}</td>
+                            <td>{{ price.getIdManufacturer().getManufacturers() }}</td>
 
-                            <td>{{ price.getIdPartName().getPartName()|default('') }}</td>
+                            <td>{{ price.getIdDetails().getNameDetail() }}</td>
 
-                            <td>{{ price.getIdCarBrand().getCarBrand()|default('') }}</td>
+                            <td>{{ price.getIdDetails().getIdPartName().getPartName()|default('') }}</td>
 
-                            <td>{{ price.getIdSide().getSide()|default('') }}</td>
+                            <td>{{ price.getIdDetails().getIdCarBrand().getCarBrand()|default('') }}</td>
 
-                            <td>{{ price.getIdBody().getBody()|default('') }}</td>
+                            <td>{{ price.getIdDetails().getIdSide().getSide()|default('') }}</td>
 
-                            <td>{{ price.getIdAxle().getAxle()|default('') }}</td>
+                            <td>{{ price.getIdDetails().getIdBody().getBody()|default('') }}</td>
+
+                            <td>{{ price.getIdDetails().getIdAxle().getAxle()|default('') }}</td>
+
+                            <td>{{ price.getQuantity() }}</td>
+
+                            <td>{{ ((price.getPrice() / 100) 
+                                        / price.getQuantity())|number_format(2, '.', '') }}</td>
+
+                            <td>{{ (price.getPrice() / 100) - (((price.getPrice() / 100) 
+                                        / price.getQuantity()) * price.getQuantitySold()) }}</td>
 
                             <form action="/sales_price" name="sales_price" method="post">
 
@@ -183,7 +195,7 @@
 
                                 </form>#}
                         </tr> 
-                    {% endif %} 
+                    {#{% endif %}#} 
                 {% endfor %}
             {% else %}
                 <h2>Данные не найдены. Видите параметры в поиск</h2>  

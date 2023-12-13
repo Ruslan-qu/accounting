@@ -46,7 +46,7 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
     //        ;
     //    }
     /**
-     * @return IdDetailsManufacturer[] Returns an array of Invoice objects
+     * @return IdDetailsManufacturer[] Returns an array of IdDetailsManufacturer objects
      */
     public function findBySearchPart($part_no_search, $array_filter_part_no, $form_p_n_search): array
     {
@@ -71,6 +71,37 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
                 }
             }
         }
+        return $query;
+    }
+
+    /**
+     * @return IdDetailsManufacturer[] Returns an array of IdDetailsManufacturer objects
+     */
+    public function findBySearchPrice($part_no_search, $array_filter_part_no, $form_price_search): array
+    {
+
+        $key = array_key_first($array_filter_part_no);
+
+        $query = $this->findBy([$key => $part_no_search]);
+        //$a = $query->getPartNumber();
+
+
+        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
+
+            $key_part_no_preg_replace_ucwords =
+                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
+
+            foreach ($query as $key => $value_part_name) {
+
+                if ($value_part_name->$key_part_no_preg_replace_ucwords() == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()) {
+
+                    $query[$key] = $value_part_name;
+                } else {
+                    unset($query[$key]);
+                }
+            }
+        }
+        //dd($query);
         return $query;
     }
 }
