@@ -58,6 +58,9 @@ class Invoice
     #[ORM\ManyToOne(inversedBy: 'invoicesRefundActivity')]
     private ?RefundActivity $id_refund_activity = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $sold_status = null;
+
     public function __construct()
     {
         $this->solds = new ArrayCollection();
@@ -200,7 +203,7 @@ class Invoice
     {
         if (!$this->solds->contains($sold)) {
             $this->solds->add($sold);
-            $sold->setInvoice($this);
+            $sold->setIdInvoice($this);
         }
 
         return $this;
@@ -210,8 +213,8 @@ class Invoice
     {
         if ($this->solds->removeElement($sold)) {
             // set the owning side to null (unless already changed)
-            if ($sold->getInvoice() === $this) {
-                $sold->setInvoice(null);
+            if ($sold->getIdInvoice() === $this) {
+                $sold->setIdInvoice(null);
             }
         }
 
@@ -238,6 +241,18 @@ class Invoice
     public function setIdRefundActivity(?RefundActivity $id_refund_activity): static
     {
         $this->id_refund_activity = $id_refund_activity;
+
+        return $this;
+    }
+
+    public function getSoldStatus(): ?int
+    {
+        return $this->sold_status;
+    }
+
+    public function setSoldStatus(?int $sold_status): static
+    {
+        $this->sold_status = $sold_status;
 
         return $this;
     }

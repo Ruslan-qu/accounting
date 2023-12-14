@@ -1,0 +1,3 @@
+<?php //App%255CController%255CTest%255CHealthCheckAction
+
+return [PHP_INT_MAX, []];

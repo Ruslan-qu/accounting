@@ -15,7 +15,7 @@ class Sold
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'solds')]
-    private ?Invoice $invoice = null;
+    private ?Invoice $id_invoice = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $quantity_sold = null;
@@ -26,19 +26,21 @@ class Sold
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $date_sold = null;
 
+    private ?int $hidden_sold = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getInvoice(): ?Invoice
+    public function getIdInvoice(): ?Invoice
     {
-        return $this->invoice;
+        return $this->id_invoice;
     }
 
-    public function setInvoice(?Invoice $invoice): static
+    public function setIdInvoice(?Invoice $id_invoice): static
     {
-        $this->invoice = $invoice;
+        $this->id_invoice = $id_invoice;
 
         return $this;
     }
@@ -75,6 +77,18 @@ class Sold
     public function setDateSold(?\DateTimeImmutable $date_sold): static
     {
         $this->date_sold = $date_sold;
+
+        return $this;
+    }
+
+    public function getHiddenSold(): ?int
+    {
+        return $this->hidden_sold;
+    }
+
+    public function setHiddenSold(?int $hidden_sold): static
+    {
+        $this->hidden_sold = $hidden_sold;
 
         return $this;
     }

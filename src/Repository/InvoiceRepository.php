@@ -297,10 +297,10 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchPartName($id_part_name_search, $array_filter_part_no, $form_price_search): array
+    public function findBySearchPart($id_search, $array_filter_part_no, $form_price_search): array
     {
 
-        $key = array_key_first($array_filter_part_no);
+        $part_no = array_key_first($array_filter_part_no);
 
         $entityManager = $this->getEntityManager();
 
@@ -308,8 +308,8 @@ class InvoiceRepository extends ServiceEntityRepository
             'SELECT d, a
                 FROM App\Entity\Invoice d
                 INNER JOIN d.id_details a
-                WHERE a.id_part_name = :id_part_name'
-        )->setParameter('id_part_name', $id_part_name_search);
+                WHERE a.' . $part_no . ' = :id_search'
+        )->setParameter('id_search', $id_search);
 
         $query = $query->getResult();
 
@@ -318,14 +318,14 @@ class InvoiceRepository extends ServiceEntityRepository
             $key_part_no_preg_replace_ucwords =
                 'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
 
-            foreach ($query as $key => $value_part_name) {
+            foreach ($query as $key => $value_part) {
 
                 if (
-                    $value_part_name->getIdDetails()->$key_part_no_preg_replace_ucwords()
+                    $value_part->getIdDetails()->$key_part_no_preg_replace_ucwords()
                     == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
                 ) {
 
-                    $query[$key] = $value_part_name;
+                    $query[$key] = $value_part;
                 } else {
                     unset($query[$key]);
                 }
@@ -337,153 +337,17 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchCarBrand($id_car_brand_search, $array_filter_part_no, $form_price_search): array
+    public function findById($id): array
     {
-
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
             'SELECT d, a
                 FROM App\Entity\Invoice d
                 INNER JOIN d.id_details a
-                WHERE a.id_car_brand = :id_car_brand'
-        )->setParameter('id_car_brand', $id_car_brand_search);
+                WHERE d.id = :id'
+        )->setParameter('id', $id);
 
-        $query = $query->getResult();
-
-        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
-
-            $key_part_no_preg_replace_ucwords =
-                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
-
-            foreach ($query as $key => $value_car_brand) {
-
-                if (
-                    $value_car_brand->getIdDetails()->$key_part_no_preg_replace_ucwords()
-                    == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
-                ) {
-
-                    $query[$key] = $value_car_brand;
-                } else {
-                    unset($query[$key]);
-                }
-            }
-        }
-        return $query;
-    }
-
-    /**
-     * @return Invoice[] Returns an array of Invoice objects
-     */
-    public function findBySearchSide($id_side_search, $array_filter_part_no, $form_price_search): array
-    {
-
-        $entityManager = $this->getEntityManager();
-        $g = 'id_side';
-
-        $query = $entityManager->createQuery(
-            'SELECT d, a
-                FROM App\Entity\Invoice d
-                INNER JOIN d.id_details a
-                WHERE a.' . $g . ' = :id_side'
-        )->setParameter('id_side', $id_side_search);
-
-        $query = $query->getResult();
-
-        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
-
-            $key_part_no_preg_replace_ucwords =
-                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
-
-            foreach ($query as $key => $value_side) {
-
-                if (
-                    $value_side->getIdDetails()->$key_part_no_preg_replace_ucwords()
-                    == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
-                ) {
-
-                    $query[$key] = $value_side;
-                } else {
-                    unset($query[$key]);
-                }
-            }
-        }
-        return $query;
-    }
-
-    /**
-     * @return Invoice[] Returns an array of Invoice objects
-     */
-    public function findBySearchBody($id_body_search, $array_filter_part_no, $form_price_search): array
-    {
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT d, a
-                FROM App\Entity\Invoice d
-                INNER JOIN d.id_details a
-                WHERE a.id_body = :id_body'
-        )->setParameter('id_body', $id_body_search);
-
-        $query = $query->getResult();
-
-        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
-
-            $key_part_no_preg_replace_ucwords =
-                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
-
-            foreach ($query as $key => $value_body) {
-
-                if (
-                    $value_body->getIdDetails()->$key_part_no_preg_replace_ucwords()
-                    == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
-                ) {
-
-                    $query[$key] = $value_body;
-                } else {
-                    unset($query[$key]);
-                }
-            }
-        }
-        return $query;
-    }
-
-    /**
-     * @return Invoice[] Returns an array of Invoice objects
-     */
-    public function findBySearchAxle($id_axle_search, $array_filter_part_no, $form_price_search): array
-    {
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT d, a
-                FROM App\Entity\Invoice d
-                INNER JOIN d.id_details a
-                WHERE a.id_axle = :id_axle'
-        )->setParameter('id_axle', $id_axle_search);
-
-        $query = $query->getResult();
-
-        foreach ($array_filter_part_no as $key_part_no => $value_part_no) {
-
-            $key_part_no_preg_replace_ucwords =
-                'get' . preg_replace('#_#', '', ucwords($key_part_no, '_'));
-
-            foreach ($query as $key => $value_axle) {
-
-                if (
-                    $value_axle->getIdDetails()->$key_part_no_preg_replace_ucwords()
-                    == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
-                ) {
-
-                    $query[$key] = $value_axle;
-                } else {
-                    unset($query[$key]);
-                }
-            }
-        }
-        return $query;
+        return $query->getResult();
     }
 }

@@ -1,0 +1,13 @@
+imap:
+    connections:
+        example_connection:
+            mailbox: "{imap.mail.ru:993/imap/ssl/novalidate-cert}INBOX"
+            username: "kazan_avtozapchasti@mail.ru"
+            password: "quqich"
+            
+        full_config_connection:
+            mailbox: "{imap.mail.ru:143}INBOX"
+            username: "kazan_avtozapchasti@mail.ru"
+            password: "gjljrjybr"
+            attachments_dir: "%kernel.project_dir%/imap/attachments"
+            

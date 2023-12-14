@@ -6,7 +6,7 @@
 
 {% block legend %}{{legend}}{% endblock legend%}
 
-{% block form_sales_edit %}
+{% block form_save_edit_sales %}
 
 {#Форма редактирования детали#}
     {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
@@ -120,7 +120,7 @@
 
    {{ form_end(form_p_n_edit) }}
    
-{% endblock form_sales_edit %}
+{% endblock form_save_edit_sales %}
 
 {% block form_search %}{% endblock form_search %}
 

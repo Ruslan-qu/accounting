@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CPaymentMethod%2524invoices_payment_method
+
+return [PHP_INT_MAX, []];

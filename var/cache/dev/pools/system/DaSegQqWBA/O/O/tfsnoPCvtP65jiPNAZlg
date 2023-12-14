@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CCounterparty%2523addInvoice
+
+return [PHP_INT_MAX, []];

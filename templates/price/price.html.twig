@@ -8,7 +8,7 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_sales_edit %}{% endblock form_sales_edit %}
+{% block form_save_edit_sales %}{% endblock form_save_edit_sales %}
 
 {% block form_search %}
     {#Форма поиска деталей#}
@@ -105,10 +105,6 @@
             <th>Цена шт</th>
             <th>Цена общая</th>
             <th>Продать</th>
-            {#<th>Продано шт</th>
-            <th>Продано Цена</th>
-            <th>Дата прод-жи</th>
-            <th>Продано</th>#}
         {% endif %}
     {% endfor %}
 {% else %}
@@ -121,9 +117,9 @@
       {% for arr_search_price in arr_price %}
             {% if arr_search_price %}
                 {% for price in arr_search_price %}
-                   {# {% if price.getIdDetails().getIdInStock().getId() == 1 
+                   {% if price.getIdDetails().getIdInStock().getId() == 1 
                         and price.getSales() == 1 
-                        and price.getRefund() == 1%}#}
+                        and price.getRefund() == 1 %}
                         <tr>
                             <td>{{ price.getIdDetails().getPartNumbers() }}</td>
 
@@ -143,7 +139,7 @@
 
                             <td>{{ price.getIdDetails().getIdAxle().getAxle()|default('') }}</td>
 
-                            <td>{{ price.getQuantity() }}</td>
+                            <td>{{ price.getQuantity() - price.getQuantitySold() }}</td>
 
                             <td>{{ ((price.getPrice() / 100) 
                                         / price.getQuantity())|number_format(2, '.', '') }}</td>
@@ -151,9 +147,9 @@
                             <td>{{ (price.getPrice() / 100) - (((price.getPrice() / 100) 
                                         / price.getQuantity()) * price.getQuantitySold()) }}</td>
 
-                            <form action="/sales_price" name="sales_price" method="post">
+                            <form action="/sold_price" name="sold_price" method="post">
 
-                                    <td><button class="sales" type="submit" name="sales_price" value="{{ price.getId() }}">Продать</button></td>
+                                    <td><button class="sales" type="submit" name="sold_price" value="{{ price.getId() }}">Продать</button></td>
                                     
                             </form>
 
@@ -195,7 +191,7 @@
 
                                 </form>#}
                         </tr> 
-                    {#{% endif %}#} 
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <h2>Данные не найдены. Видите параметры в поиск</h2>  

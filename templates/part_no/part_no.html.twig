@@ -8,7 +8,7 @@
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_sales_edit %}
+{% block form_save_edit_sales %}
 
 {#Форма сохранения деталей#}
     {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
@@ -116,7 +116,7 @@
         
    {{ form_end(form_p_n_sales) }}
 
-{% endblock form_sales_edit %}
+{% endblock form_save_edit_sales %}
 
 {% block form_search %}
     {#Форма поиска деталей#}

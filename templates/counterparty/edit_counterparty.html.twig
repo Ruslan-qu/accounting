@@ -6,7 +6,7 @@
 
 {% block legend %}{{legend}}{% endblock legend%}
 
-{% block form_sales_edit %}
+{% block form_save_edit_sales %}
 
     {#Переменный для вывода данных в форме #}
     {% set counterparty_edit = edit_counterparty.getCounterparty()|default('') %}
@@ -39,7 +39,7 @@
 
    {{ form_end(form_counterparty_edit) }}
    
-{% endblock form_sales_edit %}
+{% endblock form_save_edit_sales %}
 
 {% block form_search %}{% endblock form_search %}
 

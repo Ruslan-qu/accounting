@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CSearchInvoice%2523getIdManufacturer
+
+return [PHP_INT_MAX, []];

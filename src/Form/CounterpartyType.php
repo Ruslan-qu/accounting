@@ -40,9 +40,9 @@ class CounterpartyType extends AbstractType
                     new Email([
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
-                    new NotBlank(
-                        message: 'Форма содержит недопустимые символы',
-                    ),
+                    new NotBlank([
+                        'message' => 'Форма содержит недопустимые символы'
+                    ]),
                 ]
             ])
             ->add('hidden', HiddenType::class)
