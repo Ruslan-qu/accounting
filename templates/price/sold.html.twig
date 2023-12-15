@@ -76,6 +76,9 @@
                     {% set quantity_sold_price = value_quantity_sold %}
                 {% endfor %}
                 <th>{{ form_widget(form_sold.quantity_sold, {value : quantity_sold_price}) }}<br>
+                {% for message in app.flashes('[quantity_sold_error]') %}
+                    {{ message }}
+                {% endfor %}
                 {{ form_errors(form_sold.quantity_sold) }}</th>
 
                 {% for value_price_sold in app.flashes('price_sold_sold') %}  

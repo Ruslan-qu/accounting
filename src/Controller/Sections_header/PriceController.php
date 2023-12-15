@@ -17,7 +17,9 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Range;
 use App\Repository\IdDetailsManufacturerRepository;
+use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -151,7 +153,7 @@ class PriceController extends AbstractController
 
 
     /* функция продажи */
-    #[Route('/sold_price', name: 'Sold_price')]
+    #[Route('/sold_price', name: 'sold_price')]
     public function soldPrice(
         ManagerRegistry $doctrine,
         Request $request,
@@ -179,25 +181,50 @@ class PriceController extends AbstractController
             $id = $request->request->all()['sold_price'];
 
             $arr_sold_part = $InvoiceRepository->findByIdSold($id);
-            // dd($arr_sold_part);
         } else {
             $id = $form_sold->getData()->getHiddenSold();
             $arr_sold_part = $InvoiceRepository->findByIdSold($id);
         }
-        //dd($arr_sold_part);
-        /*Устанавливаем статус продажи для выведения общей сумму 
-        всех продаж при одной сделки "NULL"- не выводится, "1"- выводится */
-
-        //   $arr_sold_part->setSoldStatus(1);
-        //  $doctrine->getManager()->flush();
 
         /*Валидация формы ручного именения деталей */
         if ($form_sold->isSubmitted()) {
-            if ($form_sold->isValid()) {
+
+            /* Выводим данные и формы */
+            $quantity_sold = $form_sold->getData()->getQuantitySold();
+
+            /* Выводим данные из базы данных */
+            $quantity = $arr_sold_part[0]->getQuantity();
+            $entity_quantity_sold = $arr_sold_part[0]->getQuantitySold();
+            $sum_quantity_sold = $quantity_sold + $entity_quantity_sold;
+
+            /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
+            $validator = Validation::createValidator();
+
+            $input = [
+                'quantity_sold_error' => $quantity_sold,
+                'sum_quantity_sold_error' => $sum_quantity_sold,
+            ];
+
+            $constraint = new Collection([
+                'quantity_sold_error' => new Range(
+                    max: $quantity,
+                    notInRangeMessage: 'Недопустимое число',
+                ),
+                'sum_quantity_sold_error' => new Range(
+                    max: $quantity,
+                    notInRangeMessage: 'Недопустимое число',
+                ),
+            ]);
+
+            $errors = $validator->validate($input, $constraint);
+
+            /* Валидация формы */
+
+            if ($form_sold->isValid() && !$errors->count()) {
 
                 $entity_sold->setIdInvoice($form_sold->getData()->getHidden());
 
-                $entity_sold->setQuantitySold($form_sold->getData()->getQuantitySold());
+                $entity_sold->setQuantitySold($quantity_sold);
 
                 $entity_sold->setPriceSold($form_sold->getData()->getPriceSold());
 
@@ -208,7 +235,11 @@ class PriceController extends AbstractController
                 $em->flush();
 
 
+                $arr_sold_part[0]->setQuantitySold($quantity_sold);
+                /*Устанавливаем статус продажи для выведения общей сумму 
+                    всех продаж при одной сделки "NULL"- не выводится, "1"- выводится */
                 $arr_sold_part[0]->setSoldStatus(1);
+
                 $doctrine->getManager()->flush();
 
                 return $this->redirectToRoute('price');
@@ -225,9 +256,22 @@ class PriceController extends AbstractController
                         }
                     }
                 }
+
+                /* Выводим ошибки валидации, через сессии  */
+                if ($errors) {
+                    foreach ($errors as $key) {
+                        //dd($key);
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
             }
         }
-        //dd($arr_sold_part);
+
         return $this->render('price/sold.html.twig', [
             'title_logo' => 'Продажа детали',
             'legend' => 'Продажа детали',

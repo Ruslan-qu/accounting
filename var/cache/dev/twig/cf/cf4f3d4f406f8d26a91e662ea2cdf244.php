@@ -947,6 +947,7 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
             <th>№ Детали</th>
             <th>Производитель</th>
             <th>Кол-во</th>
+            <th>Кол-во<br>продано</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
             <th>Способ оплаты</th>
@@ -954,14 +955,14 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
             <th>Удалить</th>
         ";
                 }
-                // line 255
+                // line 256
                 echo "    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_invoice'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         } else {
-            // line 257
+            // line 258
             echo "    <h2>Видите параметры в поиск</h2> 
 ";
         }
@@ -973,7 +974,7 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
 
     }
 
-    // line 261
+    // line 262
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -983,119 +984,124 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 262
-        echo "        ";
         // line 263
         echo "        ";
+        // line 264
+        echo "        ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_incoming_documents"]) || array_key_exists("arr_incoming_documents", $context) ? $context["arr_incoming_documents"] : (function () { throw new RuntimeError('Variable "arr_incoming_documents" does not exist.', 263, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_incoming_documents"]) || array_key_exists("arr_incoming_documents", $context) ? $context["arr_incoming_documents"] : (function () { throw new RuntimeError('Variable "arr_incoming_documents" does not exist.', 264, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["arr_search_invoice"]) {
-            // line 264
+            // line 265
             echo "            ";
             if ($context["arr_search_invoice"]) {
-                // line 265
+                // line 266
                 echo "                ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable($context["arr_search_invoice"]);
                 foreach ($context['_seq'] as $context["_key"] => $context["incoming_documents"]) {
-                    // line 266
+                    // line 267
                     echo "                    <tr>
                         ";
-                    // line 267
-                    if (((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getSales", [], "method", false, false, false, 267) == 1) && (twig_get_attribute($this->env, $this->source,                     // line 268
-$context["incoming_documents"], "getRefund", [], "method", false, false, false, 268) == 1))) {
-                        // line 269
+                    // line 268
+                    if (((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getSales", [], "method", false, false, false, 268) == 1) && (twig_get_attribute($this->env, $this->source,                     // line 269
+$context["incoming_documents"], "getRefund", [], "method", false, false, false, 269) == 1))) {
+                        // line 270
                         echo "
                             <td>";
-                        // line 270
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getNumberDocument", [], "method", false, false, false, 270), "html", null, true);
+                        // line 271
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getNumberDocument", [], "method", false, false, false, 271), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 272
-                        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getDataInvoice", [], "method", false, false, false, 272), "d-m-Y"), "html", null, true);
+                        // line 273
+                        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getDataInvoice", [], "method", false, false, false, 273), "d-m-Y"), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 274
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdCounterparty", [], "method", false, false, false, 274), "getCounterparty", [], "method", false, false, false, 274), "html", null, true);
+                        // line 275
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdCounterparty", [], "method", false, false, false, 275), "getCounterparty", [], "method", false, false, false, 275), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 276
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdDetails", [], "method", false, false, false, 276), "getPartNumbers", [], "method", false, false, false, 276), "html", null, true);
+                        // line 277
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdDetails", [], "method", false, false, false, 277), "getPartNumbers", [], "method", false, false, false, 277), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 278
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdManufacturer", [], "method", false, false, false, 278), "getManufacturers", [], "method", false, false, false, 278), "html", null, true);
+                        // line 279
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdManufacturer", [], "method", false, false, false, 279), "getManufacturers", [], "method", false, false, false, 279), "html", null, true);
                         echo "</td>
 
                             ";
-                        // line 281
+                        // line 282
                         echo "
                             <td>";
-                        // line 282
-                        echo twig_escape_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantity", [], "method", false, false, false, 282) - twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 282)), "html", null, true);
+                        // line 283
+                        echo twig_escape_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantity", [], "method", false, false, false, 283) - twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 283)), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 284
-                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 284) / 100) / twig_get_attribute($this->env, $this->source,                         // line 285
-$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 285)), 2, ".", ""), "html", null, true);
+                        // line 285
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", true, true, false, 285)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 285), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
                         // line 287
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 287) / 100) - (((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 287) / 100) / twig_get_attribute($this->env, $this->source,                         // line 288
-$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 288)) * twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 288))), "html", null, true);
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 287) / 100) / twig_get_attribute($this->env, $this->source,                         // line 288
+$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 288)), 2, ".", ""), "html", null, true);
                         echo "</td>
 
                             <td>";
                         // line 290
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdPaymentMethod", [], "method", false, false, false, 290), "getMethod", [], "method", false, false, false, 290), "html", null, true);
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 290) / 100) - (((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 290) / 100) / twig_get_attribute($this->env, $this->source,                         // line 291
+$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 291)) * twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 291))), "html", null, true);
+                        echo "</td>
+
+                            <td>";
+                        // line 293
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdPaymentMethod", [], "method", false, false, false, 293), "getMethod", [], "method", false, false, false, 293), "html", null, true);
                         echo "</td>
 
 
                             <form action=\"/refund_part\" name=\"refund_part\" method=\"get\">
 
                                 <td><button class=\"refund\" type=\"submit\" name=\"refund_part\" value=\"";
-                        // line 295
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 295), "html", null, true);
+                        // line 298
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 298), "html", null, true);
                         echo "\">Возврат</button></td>
                                 
                             </form>
                             <form action=\"/delete_invoice\" name=\"delete_invoice\" method=\"post\">
 
                                 <td><button class=\"delete\" type=\"submit\" name=\"delete_invoice\" value=\"";
-                        // line 300
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 300), "html", null, true);
+                        // line 303
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 303), "html", null, true);
                         echo "\">Удалить</button></td>
                                 
                             </form>
                         ";
                     }
-                    // line 304
+                    // line 307
                     echo "                    </tr>   
                 ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['incoming_documents'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 306
+                // line 309
                 echo "            ";
             } else {
-                // line 307
+                // line 310
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 309
+            // line 312
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_invoice'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 310
+        // line 313
         echo "    
 ";
         
@@ -1118,7 +1124,7 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
 
     public function getDebugInfo()
     {
-        return array (  1099 => 310,  1093 => 309,  1089 => 307,  1086 => 306,  1079 => 304,  1072 => 300,  1064 => 295,  1056 => 290,  1051 => 288,  1050 => 287,  1045 => 285,  1044 => 284,  1039 => 282,  1036 => 281,  1031 => 278,  1026 => 276,  1021 => 274,  1016 => 272,  1011 => 270,  1008 => 269,  1006 => 268,  1005 => 267,  1002 => 266,  997 => 265,  994 => 264,  989 => 263,  987 => 262,  977 => 261,  965 => 257,  958 => 255,  944 => 243,  941 => 242,  936 => 241,  934 => 240,  924 => 238,  907 => 230,  902 => 227,  900 => 226,  895 => 224,  891 => 223,  886 => 222,  880 => 221,  878 => 220,  872 => 219,  866 => 217,  857 => 215,  852 => 214,  843 => 212,  839 => 211,  833 => 210,  827 => 209,  825 => 208,  819 => 207,  815 => 206,  810 => 205,  805 => 204,  799 => 203,  797 => 202,  791 => 201,  788 => 200,  782 => 189,  773 => 187,  769 => 186,  765 => 185,  760 => 184,  754 => 183,  752 => 182,  746 => 181,  740 => 179,  731 => 177,  727 => 176,  723 => 175,  718 => 174,  712 => 173,  710 => 172,  704 => 171,  699 => 169,  695 => 168,  690 => 167,  684 => 166,  682 => 165,  676 => 164,  671 => 162,  665 => 161,  659 => 160,  657 => 159,  651 => 158,  647 => 157,  642 => 156,  637 => 155,  631 => 154,  629 => 153,  623 => 152,  617 => 150,  608 => 148,  604 => 147,  600 => 146,  595 => 145,  589 => 144,  587 => 143,  581 => 142,  578 => 141,  575 => 140,  572 => 139,  569 => 138,  567 => 137,  564 => 136,  561 => 135,  558 => 134,  555 => 133,  552 => 132,  549 => 131,  547 => 130,  542 => 128,  540 => 127,  530 => 126,  517 => 121,  512 => 118,  510 => 117,  505 => 115,  501 => 114,  496 => 113,  490 => 112,  488 => 111,  482 => 110,  476 => 108,  467 => 106,  462 => 105,  453 => 103,  449 => 102,  445 => 101,  440 => 100,  434 => 99,  432 => 98,  426 => 97,  420 => 95,  411 => 93,  407 => 92,  403 => 91,  398 => 90,  392 => 89,  390 => 88,  384 => 87,  381 => 86,  378 => 84,  372 => 73,  363 => 71,  359 => 70,  355 => 69,  350 => 68,  344 => 67,  342 => 66,  336 => 65,  330 => 63,  321 => 61,  317 => 60,  313 => 59,  308 => 58,  302 => 57,  300 => 56,  294 => 55,  291 => 54,  286 => 51,  282 => 50,  277 => 49,  271 => 48,  269 => 47,  263 => 46,  258 => 44,  254 => 43,  249 => 42,  243 => 41,  241 => 40,  235 => 39,  229 => 37,  220 => 35,  216 => 34,  212 => 33,  207 => 32,  201 => 31,  199 => 30,  193 => 29,  190 => 28,  187 => 27,  184 => 26,  181 => 25,  179 => 24,  176 => 23,  173 => 22,  170 => 21,  167 => 20,  164 => 19,  162 => 18,  157 => 15,  154 => 14,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  1105 => 313,  1099 => 312,  1095 => 310,  1092 => 309,  1085 => 307,  1078 => 303,  1070 => 298,  1062 => 293,  1057 => 291,  1056 => 290,  1051 => 288,  1050 => 287,  1045 => 285,  1040 => 283,  1037 => 282,  1032 => 279,  1027 => 277,  1022 => 275,  1017 => 273,  1012 => 271,  1009 => 270,  1007 => 269,  1006 => 268,  1003 => 267,  998 => 266,  995 => 265,  990 => 264,  988 => 263,  978 => 262,  966 => 258,  959 => 256,  944 => 243,  941 => 242,  936 => 241,  934 => 240,  924 => 238,  907 => 230,  902 => 227,  900 => 226,  895 => 224,  891 => 223,  886 => 222,  880 => 221,  878 => 220,  872 => 219,  866 => 217,  857 => 215,  852 => 214,  843 => 212,  839 => 211,  833 => 210,  827 => 209,  825 => 208,  819 => 207,  815 => 206,  810 => 205,  805 => 204,  799 => 203,  797 => 202,  791 => 201,  788 => 200,  782 => 189,  773 => 187,  769 => 186,  765 => 185,  760 => 184,  754 => 183,  752 => 182,  746 => 181,  740 => 179,  731 => 177,  727 => 176,  723 => 175,  718 => 174,  712 => 173,  710 => 172,  704 => 171,  699 => 169,  695 => 168,  690 => 167,  684 => 166,  682 => 165,  676 => 164,  671 => 162,  665 => 161,  659 => 160,  657 => 159,  651 => 158,  647 => 157,  642 => 156,  637 => 155,  631 => 154,  629 => 153,  623 => 152,  617 => 150,  608 => 148,  604 => 147,  600 => 146,  595 => 145,  589 => 144,  587 => 143,  581 => 142,  578 => 141,  575 => 140,  572 => 139,  569 => 138,  567 => 137,  564 => 136,  561 => 135,  558 => 134,  555 => 133,  552 => 132,  549 => 131,  547 => 130,  542 => 128,  540 => 127,  530 => 126,  517 => 121,  512 => 118,  510 => 117,  505 => 115,  501 => 114,  496 => 113,  490 => 112,  488 => 111,  482 => 110,  476 => 108,  467 => 106,  462 => 105,  453 => 103,  449 => 102,  445 => 101,  440 => 100,  434 => 99,  432 => 98,  426 => 97,  420 => 95,  411 => 93,  407 => 92,  403 => 91,  398 => 90,  392 => 89,  390 => 88,  384 => 87,  381 => 86,  378 => 84,  372 => 73,  363 => 71,  359 => 70,  355 => 69,  350 => 68,  344 => 67,  342 => 66,  336 => 65,  330 => 63,  321 => 61,  317 => 60,  313 => 59,  308 => 58,  302 => 57,  300 => 56,  294 => 55,  291 => 54,  286 => 51,  282 => 50,  277 => 49,  271 => 48,  269 => 47,  263 => 46,  258 => 44,  254 => 43,  249 => 42,  243 => 41,  241 => 40,  235 => 39,  229 => 37,  220 => 35,  216 => 34,  212 => 33,  207 => 32,  201 => 31,  199 => 30,  193 => 29,  190 => 28,  187 => 27,  184 => 26,  181 => 25,  179 => 24,  176 => 23,  173 => 22,  170 => 21,  167 => 20,  164 => 19,  162 => 18,  157 => 15,  154 => 14,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -1371,6 +1377,7 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
             <th>№ Детали</th>
             <th>Производитель</th>
             <th>Кол-во</th>
+            <th>Кол-во<br>продано</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
             <th>Способ оплаты</th>
@@ -1405,6 +1412,8 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
                             {#<td>{{ incoming_documents.getIdNameDetail(). getNameDetails() }}</td>#}
 
                             <td>{{ incoming_documents.getQuantity() - incoming_documents.getQuantitySold() }}</td>
+
+                            <td>{{ incoming_documents.getQuantitySold()|default('') }}</td>
 
                             <td>{{ ((incoming_documents.getPrice() / 100) 
                                         / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>

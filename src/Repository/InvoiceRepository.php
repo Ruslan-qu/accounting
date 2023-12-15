@@ -347,7 +347,7 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN d.id_details a
                 WHERE d.id = :id'
         )->setParameter('id', $id);
-        dd($query->getResult());
+        // dd($query->getResult());
         return $query->getResult();
     }
 }

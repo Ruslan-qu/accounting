@@ -35,7 +35,7 @@ return [
     'edit_part' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::editPart'], [], [['text', '/edit_part']], [], [], []],
     'price' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PriceController::searchPrice'], [], [['text', '/price']], [], [], []],
     'reset_price' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PriceController::resetPart'], [], [['text', '/reset_price']], [], [], []],
-    'Sold_price' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PriceController::soldPrice'], [], [['text', '/sold_price']], [], [], []],
+    'sold_price' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PriceController::soldPrice'], [], [['text', '/sold_price']], [], [], []],
     'refund' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::SearchRefund'], [], [['text', '/refund']], [], [], []],
     'reset_refund' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::Reset'], [], [['text', '/reset_refund']], [], [], []],
     'edit_refund' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::EditRefund'], [], [['text', '/edit_refund']], [], [], []],

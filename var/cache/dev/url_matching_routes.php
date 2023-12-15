@@ -33,7 +33,7 @@ return [
         '/edit_part' => [[['_route' => 'edit_part', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::editPart'], null, null, null, false, false, null]],
         '/price' => [[['_route' => 'price', '_controller' => 'App\\Controller\\Sections_header\\PriceController::searchPrice'], null, null, null, false, false, null]],
         '/reset_price' => [[['_route' => 'reset_price', '_controller' => 'App\\Controller\\Sections_header\\PriceController::resetPart'], null, null, null, false, false, null]],
-        '/sold_price' => [[['_route' => 'Sold_price', '_controller' => 'App\\Controller\\Sections_header\\PriceController::soldPrice'], null, null, null, false, false, null]],
+        '/sold_price' => [[['_route' => 'sold_price', '_controller' => 'App\\Controller\\Sections_header\\PriceController::soldPrice'], null, null, null, false, false, null]],
         '/refund' => [[['_route' => 'refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::SearchRefund'], null, null, null, false, false, null]],
         '/reset_refund' => [[['_route' => 'reset_refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::Reset'], null, null, null, false, false, null]],
         '/edit_refund' => [[['_route' => 'edit_refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::EditRefund'], null, null, null, false, false, null]],
