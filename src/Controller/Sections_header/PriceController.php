@@ -2,6 +2,7 @@
 
 namespace App\Controller\Sections_header;
 
+use DateTime;
 use App\Entity\Sold;
 use App\Form\SoldType;
 use App\Entity\Invoice;
@@ -167,90 +168,54 @@ class PriceController extends AbstractController
         /*Валидация формы */
         $form_sold->handleRequest($request);
 
+        /*Подключаем валидацию форм */
+        $errors_sold = $validator->validate($form_sold);
 
-        /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
-        $validator = Validation::createValidator();
-
-        //dd($request);
+        //dd($form_sold->getData()->getHiddenSold());
 
         if (!empty($_POST['sold_price'])) {
 
             /*Открываем деталь по id */
             $id = $request->request->all()['sold_price'];
 
-            $arr_sold_part = $InvoiceRepository->findById($id);
+            $arr_sold_part = $InvoiceRepository->findByIdSold($id);
             // dd($arr_sold_part);
         } else {
-            $arr_sold_part = '';
+            $id = $form_sold->getData()->getHiddenSold();
+            $arr_sold_part = $InvoiceRepository->findByIdSold($id);
         }
+        //dd($arr_sold_part);
+        /*Устанавливаем статус продажи для выведения общей сумму 
+        всех продаж при одной сделки "NULL"- не выводится, "1"- выводится */
+
+        //   $arr_sold_part->setSoldStatus(1);
+        //  $doctrine->getManager()->flush();
+
         /*Валидация формы ручного именения деталей */
-        /* if ($form_sold->isSubmitted()) {
+        if ($form_sold->isSubmitted()) {
             if ($form_sold->isValid()) {
 
+                $entity_sold->setIdInvoice($form_sold->getData()->getHidden());
 
-                $id_part_no = $form_p_n_edit->getData()->getHidden();
+                $entity_sold->setQuantitySold($form_sold->getData()->getQuantitySold());
 
-                $part_no_edit = $doctrine->getRepository(IdDetailsManufacturer::class)
-                    ->find($id_part_no);
+                $entity_sold->setPriceSold($form_sold->getData()->getPriceSold());
 
-                $original_number_strtolower_preg_replace = strtolower(preg_replace(
-                    '#\s#',
-                    '',
-                    $form_original_number_edit->getData()->getOriginalNumber()
-                ));
-                if ($original_number_strtolower_preg_replace) {
+                $entity_sold->setDateSold(new DateTime($form_sold->getData()->getDateSold()));
+
+                $em = $doctrine->getManager();
+                $em->persist($entity_sold);
+                $em->flush();
 
 
-                    $сount_original_number = $doctrine->getRepository(OriginalRooms::class)
-                        ->count(['original_number' => $original_number_strtolower_preg_replace]);*/
-
-        /* Валидация дулей оригинального номеров деталей */
-        /*  if ($сount_original_number == 0) {
-
-                        $entity_original_number_edit->setOriginalNumber($original_number_strtolower_preg_replace);
-
-                        $em = $doctrine->getManager();
-                        $em->persist($entity_original_number_edit);
-                        $em->flush();
-                    }
-
-                    $id_original_number = $doctrine->getRepository(OriginalRooms::class)
-                        ->findOneBy(['original_number' => $original_number_strtolower_preg_replace]);
-
-                    $part_no_edit->setIdOriginalNumber($id_original_number);
-                }
-
-                $part_no_edit->setPartNumbers($part_number_strtolower);
-
-                $part_no_edit->setManufacturers($manufacturers_strtolower);
-
-                $name_detail_strtolower = strtolower(preg_replace(
-                    '#\s#i',
-                    '',
-                    $request->request->all()['part_no']['name_detail']
-                ));
-
-                $part_no_edit->setNameDetail($name_detail_strtolower);
-
-                $part_no_edit->setIdPartName($form_p_n_edit->getData()->getIdPartName());
-
-                $part_no_edit->setIdCarBrand($form_p_n_edit->getData()->getIdCarBrand());
-
-                $part_no_edit->setIdSide($form_p_n_edit->getData()->getIdSide());
-
-                $part_no_edit->setIdBody($form_p_n_edit->getData()->getIdBody());
-
-                $part_no_edit->setIdAxle($form_p_n_edit->getData()->getIdAxle());
-
-                $part_no_edit->setIdInStock($form_p_n_edit->getData()->getIdInStock());
-
+                $arr_sold_part[0]->setSoldStatus(1);
                 $doctrine->getManager()->flush();
 
-                return $this->redirectToRoute('part_no');
-            } else {*/
+                return $this->redirectToRoute('price');
+            } else {
 
-        /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
-        /* $value_form_sold = $request->request->all();
+                /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
+                $value_form_sold = $request->request->all();
                 if ($value_form_sold) {
                     foreach ($value_form_sold as $key => $values) {
                         if (is_iterable($values)) {
@@ -259,22 +224,9 @@ class PriceController extends AbstractController
                             }
                         }
                     }
-                }*/
-
-        /* Выводим ошибки валидации, через сессии  */
-        /*  if ($errors) {
-                    foreach ($errors as $key) {
-
-                        $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath();
-                        $this->addFlash(
-                            $propertyPath,
-                            $message
-                        );
-                    }
                 }
             }
-        }*/
+        }
         //dd($arr_sold_part);
         return $this->render('price/sold.html.twig', [
             'title_logo' => 'Продажа детали',

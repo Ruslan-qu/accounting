@@ -337,7 +337,7 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findById($id): array
+    public function findByIdSold($id): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -347,7 +347,7 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN d.id_details a
                 WHERE d.id = :id'
         )->setParameter('id', $id);
-
+        dd($query->getResult());
         return $query->getResult();
     }
 }

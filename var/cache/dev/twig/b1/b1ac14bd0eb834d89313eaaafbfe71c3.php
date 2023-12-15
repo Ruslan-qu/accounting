@@ -29,7 +29,7 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
             'logo' => [$this, 'block_logo'],
             'legend' => [$this, 'block_legend'],
             'legend_search' => [$this, 'block_legend_search'],
-            'form_save_edit' => [$this, 'block_form_save_edit'],
+            'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'form_search' => [$this, 'block_form_search'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
@@ -138,66 +138,66 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
     }
 
     // line 11
-    public function block_form_save_edit($context, array $blocks = [])
+    public function block_form_save_edit_sales($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         // line 12
         echo "
 ";
         // line 14
         echo "    ";
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 14, $this->source); })()), 'form_start', ["action" => $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sales_part_no")]);
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 14, $this->source); })()), 'form_start', ["action" => $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("save_part_no")]);
         echo "
 ";
         // line 16
         echo "        ";
         // line 17
         echo "        ";
-        $context["sales_part_numbers"] = "";
+        $context["save_part_numbers"] = "";
         // line 18
         echo "        ";
-        $context["sales_id_original_number"] = "";
+        $context["save_id_original_number"] = "";
         // line 19
         echo "        ";
-        $context["sales_manufacturers"] = "";
+        $context["save_manufacturers"] = "";
         // line 20
         echo "        ";
-        $context["sales_name_detail"] = "";
+        $context["save_name_detail"] = "";
         // line 21
         echo "        ";
-        $context["sales_id_part_name"] = "";
+        $context["save_id_part_name"] = "";
         // line 22
         echo "        ";
-        $context["sales_id_car_brand"] = "";
+        $context["save_id_car_brand"] = "";
         // line 23
         echo "        ";
-        $context["sales_id_side"] = "";
+        $context["save_id_side"] = "";
         // line 24
         echo "        ";
-        $context["sales_id_body"] = "";
+        $context["save_id_body"] = "";
         // line 25
         echo "        ";
-        $context["sales_id_axle"] = "";
+        $context["save_id_axle"] = "";
         // line 26
         echo "        ";
-        $context["sales_id_in_stock"] = "";
+        $context["save_id_in_stock"] = "";
         // line 27
         echo "
         ";
         // line 28
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 28, $this->source); })()), "flashes", ["part_numbers_sales"], "method", false, false, false, 28));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 28, $this->source); })()), "flashes", ["part_numbers_save"], "method", false, false, false, 28));
         foreach ($context['_seq'] as $context["_key"] => $context["value_part_numbers"]) {
             echo "  
             ";
             // line 29
-            $context["sales_part_numbers"] = $context["value_part_numbers"];
+            $context["save_part_numbers"] = $context["value_part_numbers"];
             // line 30
             echo "        ";
         }
@@ -206,45 +206,45 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 31
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 31, $this->source); })()), "part_numbers", [], "any", false, false, false, 31), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 31, $this->source); })()), "part_numbers", [], "any", false, false, false, 31), 'label');
         echo "<br>
         ";
         // line 32
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 32, $this->source); })()), "part_numbers", [], "any", false, false, false, 32), 'widget', ["value" => (isset($context["sales_part_numbers"]) || array_key_exists("sales_part_numbers", $context) ? $context["sales_part_numbers"] : (function () { throw new RuntimeError('Variable "sales_part_numbers" does not exist.', 32, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 32, $this->source); })()), "part_numbers", [], "any", false, false, false, 32), 'widget', ["value" => (isset($context["save_part_numbers"]) || array_key_exists("save_part_numbers", $context) ? $context["save_part_numbers"] : (function () { throw new RuntimeError('Variable "save_part_numbers" does not exist.', 32, $this->source); })())]);
         echo "<br>
         ";
         // line 33
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "flashes", ["children[part_numbers].data_sales"], "method", false, false, false, 33));
-        foreach ($context['_seq'] as $context["_key"] => $context["message_sales"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "flashes", ["children[part_numbers].data_save"], "method", false, false, false, 33));
+        foreach ($context['_seq'] as $context["_key"] => $context["message_save"]) {
             // line 34
             echo "            ";
-            echo twig_escape_filter($this->env, $context["message_sales"], "html", null, true);
+            echo twig_escape_filter($this->env, $context["message_save"], "html", null, true);
             echo "
         ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_sales'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_save'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 36
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 36, $this->source); })()), "part_numbers", [], "any", false, false, false, 36), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 36, $this->source); })()), "part_numbers", [], "any", false, false, false, 36), 'errors');
         echo "</th>
 
         ";
         // line 38
-        $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 38, $this->source); })()), "id_original_number", [], "any", false, false, false, 38), 'widget');
+        $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 38, $this->source); })()), "id_original_number", [], "any", false, false, false, 38), 'widget');
         // line 39
         echo "
         ";
         // line 40
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 40, $this->source); })()), "flashes", ["original_number_sales"], "method", false, false, false, 40));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 40, $this->source); })()), "flashes", ["original_number_save"], "method", false, false, false, 40));
         foreach ($context['_seq'] as $context["_key"] => $context["value_original_number"]) {
             echo "  
             ";
             // line 41
-            $context["sales_id_original_number"] = $context["value_original_number"];
+            $context["save_id_original_number"] = $context["value_original_number"];
             // line 42
             echo "        ";
         }
@@ -253,40 +253,40 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 43
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_sales"]) || array_key_exists("form_original_number_sales", $context) ? $context["form_original_number_sales"] : (function () { throw new RuntimeError('Variable "form_original_number_sales" does not exist.', 43, $this->source); })()), "original_number", [], "any", false, false, false, 43), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_save"]) || array_key_exists("form_original_number_save", $context) ? $context["form_original_number_save"] : (function () { throw new RuntimeError('Variable "form_original_number_save" does not exist.', 43, $this->source); })()), "original_number", [], "any", false, false, false, 43), 'label');
         echo "<br>
         ";
         // line 44
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_sales"]) || array_key_exists("form_original_number_sales", $context) ? $context["form_original_number_sales"] : (function () { throw new RuntimeError('Variable "form_original_number_sales" does not exist.', 44, $this->source); })()), "original_number", [], "any", false, false, false, 44), 'widget', ["value" => (isset($context["sales_id_original_number"]) || array_key_exists("sales_id_original_number", $context) ? $context["sales_id_original_number"] : (function () { throw new RuntimeError('Variable "sales_id_original_number" does not exist.', 44, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_save"]) || array_key_exists("form_original_number_save", $context) ? $context["form_original_number_save"] : (function () { throw new RuntimeError('Variable "form_original_number_save" does not exist.', 44, $this->source); })()), "original_number", [], "any", false, false, false, 44), 'widget', ["value" => (isset($context["save_id_original_number"]) || array_key_exists("save_id_original_number", $context) ? $context["save_id_original_number"] : (function () { throw new RuntimeError('Variable "save_id_original_number" does not exist.', 44, $this->source); })())]);
         echo "<br>
         ";
         // line 45
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 45, $this->source); })()), "flashes", ["children[original_number].data_sales"], "method", false, false, false, 45));
-        foreach ($context['_seq'] as $context["_key"] => $context["message_sales"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 45, $this->source); })()), "flashes", ["children[original_number].data_save"], "method", false, false, false, 45));
+        foreach ($context['_seq'] as $context["_key"] => $context["message_save"]) {
             // line 46
             echo "            ";
-            echo twig_escape_filter($this->env, $context["message_sales"], "html", null, true);
+            echo twig_escape_filter($this->env, $context["message_save"], "html", null, true);
             echo "
         ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_sales'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_save'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 48
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_sales"]) || array_key_exists("form_original_number_sales", $context) ? $context["form_original_number_sales"] : (function () { throw new RuntimeError('Variable "form_original_number_sales" does not exist.', 48, $this->source); })()), "original_number", [], "any", false, false, false, 48), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_original_number_save"]) || array_key_exists("form_original_number_save", $context) ? $context["form_original_number_save"] : (function () { throw new RuntimeError('Variable "form_original_number_save" does not exist.', 48, $this->source); })()), "original_number", [], "any", false, false, false, 48), 'errors');
         echo "</th>
 
         ";
         // line 50
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 50, $this->source); })()), "flashes", ["manufacturers_sales"], "method", false, false, false, 50));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 50, $this->source); })()), "flashes", ["manufacturers_save"], "method", false, false, false, 50));
         foreach ($context['_seq'] as $context["_key"] => $context["value_manufacturers"]) {
             echo "  
             ";
             // line 51
-            $context["sales_manufacturers"] = $context["value_manufacturers"];
+            $context["save_manufacturers"] = $context["value_manufacturers"];
             // line 52
             echo "        ";
         }
@@ -295,40 +295,40 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 53
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 53, $this->source); })()), "manufacturers", [], "any", false, false, false, 53), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 53, $this->source); })()), "manufacturers", [], "any", false, false, false, 53), 'label');
         echo "<br>
         ";
         // line 54
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 54, $this->source); })()), "manufacturers", [], "any", false, false, false, 54), 'widget', ["value" => (isset($context["sales_manufacturers"]) || array_key_exists("sales_manufacturers", $context) ? $context["sales_manufacturers"] : (function () { throw new RuntimeError('Variable "sales_manufacturers" does not exist.', 54, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 54, $this->source); })()), "manufacturers", [], "any", false, false, false, 54), 'widget', ["value" => (isset($context["save_manufacturers"]) || array_key_exists("save_manufacturers", $context) ? $context["save_manufacturers"] : (function () { throw new RuntimeError('Variable "save_manufacturers" does not exist.', 54, $this->source); })())]);
         echo "<br>
         ";
         // line 55
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 55, $this->source); })()), "flashes", ["children[manufacturers].data_sales"], "method", false, false, false, 55));
-        foreach ($context['_seq'] as $context["_key"] => $context["message_sales"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 55, $this->source); })()), "flashes", ["children[manufacturers].data_save"], "method", false, false, false, 55));
+        foreach ($context['_seq'] as $context["_key"] => $context["message_save"]) {
             // line 56
             echo "            ";
-            echo twig_escape_filter($this->env, $context["message_sales"], "html", null, true);
+            echo twig_escape_filter($this->env, $context["message_save"], "html", null, true);
             echo "
         ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_sales'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_save'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 58
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 58, $this->source); })()), "manufacturers", [], "any", false, false, false, 58), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 58, $this->source); })()), "manufacturers", [], "any", false, false, false, 58), 'errors');
         echo "</th>
 
         ";
         // line 60
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 60, $this->source); })()), "flashes", ["name_detail_sales"], "method", false, false, false, 60));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 60, $this->source); })()), "flashes", ["name_detail_save"], "method", false, false, false, 60));
         foreach ($context['_seq'] as $context["_key"] => $context["value_name_detail"]) {
             echo "  
             ";
             // line 61
-            $context["sales_name_detail"] = $context["value_name_detail"];
+            $context["save_name_detail"] = $context["value_name_detail"];
             // line 62
             echo "        ";
         }
@@ -337,40 +337,40 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 63
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 63, $this->source); })()), "name_detail", [], "any", false, false, false, 63), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 63, $this->source); })()), "name_detail", [], "any", false, false, false, 63), 'label');
         echo "<br>
         ";
         // line 64
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 64, $this->source); })()), "name_detail", [], "any", false, false, false, 64), 'widget', ["value" => (isset($context["sales_name_detail"]) || array_key_exists("sales_name_detail", $context) ? $context["sales_name_detail"] : (function () { throw new RuntimeError('Variable "sales_name_detail" does not exist.', 64, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 64, $this->source); })()), "name_detail", [], "any", false, false, false, 64), 'widget', ["value" => (isset($context["save_name_detail"]) || array_key_exists("save_name_detail", $context) ? $context["save_name_detail"] : (function () { throw new RuntimeError('Variable "save_name_detail" does not exist.', 64, $this->source); })())]);
         echo "<br>    
         ";
         // line 65
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 65, $this->source); })()), "flashes", ["children[name_detail].data_sales"], "method", false, false, false, 65));
-        foreach ($context['_seq'] as $context["_key"] => $context["message_sales"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 65, $this->source); })()), "flashes", ["children[name_detail].data_save"], "method", false, false, false, 65));
+        foreach ($context['_seq'] as $context["_key"] => $context["message_save"]) {
             // line 66
             echo "            ";
-            echo twig_escape_filter($this->env, $context["message_sales"], "html", null, true);
+            echo twig_escape_filter($this->env, $context["message_save"], "html", null, true);
             echo "
         ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_sales'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_save'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 68
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 68, $this->source); })()), "name_detail", [], "any", false, false, false, 68), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 68, $this->source); })()), "name_detail", [], "any", false, false, false, 68), 'errors');
         echo "</th>
 
         ";
         // line 70
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 70, $this->source); })()), "flashes", ["id_part_name_sales"], "method", false, false, false, 70));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 70, $this->source); })()), "flashes", ["id_part_name_save"], "method", false, false, false, 70));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_part_name"]) {
             echo "  
             ";
             // line 71
-            $context["sales_id_part_name"] = $context["value_id_part_name"];
+            $context["save_id_part_name"] = $context["value_id_part_name"];
             // line 72
             echo "        ";
         }
@@ -379,15 +379,15 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 73
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 73, $this->source); })()), "id_part_name", [], "any", false, false, false, 73), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 73, $this->source); })()), "id_part_name", [], "any", false, false, false, 73), 'label');
         echo "<br>
         ";
         // line 74
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 74, $this->source); })()), "id_part_name", [], "any", false, false, false, 74), 'widget', ["value" => (isset($context["sales_id_part_name"]) || array_key_exists("sales_id_part_name", $context) ? $context["sales_id_part_name"] : (function () { throw new RuntimeError('Variable "sales_id_part_name" does not exist.', 74, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 74, $this->source); })()), "id_part_name", [], "any", false, false, false, 74), 'widget', ["value" => (isset($context["save_id_part_name"]) || array_key_exists("save_id_part_name", $context) ? $context["save_id_part_name"] : (function () { throw new RuntimeError('Variable "save_id_part_name" does not exist.', 74, $this->source); })())]);
         echo "
         ";
         // line 75
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 75, $this->source); })()), "id_part_name", [], "any", false, false, false, 75), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 75, $this->source); })()), "id_part_name", [], "any", false, false, false, 75), 'errors');
         echo "</th>
                                   
     </tr>
@@ -396,12 +396,12 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         ";
         // line 80
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 80, $this->source); })()), "flashes", ["id_car_brand_sales"], "method", false, false, false, 80));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 80, $this->source); })()), "flashes", ["id_car_brand_save"], "method", false, false, false, 80));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_car_brand"]) {
             echo "  
             ";
             // line 81
-            $context["sales_id_car_brand"] = $context["value_id_car_brand"];
+            $context["save_id_car_brand"] = $context["value_id_car_brand"];
             // line 82
             echo "        ";
         }
@@ -410,26 +410,26 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 83
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 83, $this->source); })()), "id_car_brand", [], "any", false, false, false, 83), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 83, $this->source); })()), "id_car_brand", [], "any", false, false, false, 83), 'label');
         echo "<br>
         ";
         // line 84
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 84, $this->source); })()), "id_car_brand", [], "any", false, false, false, 84), 'widget', ["value" => (isset($context["sales_id_car_brand"]) || array_key_exists("sales_id_car_brand", $context) ? $context["sales_id_car_brand"] : (function () { throw new RuntimeError('Variable "sales_id_car_brand" does not exist.', 84, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 84, $this->source); })()), "id_car_brand", [], "any", false, false, false, 84), 'widget', ["value" => (isset($context["save_id_car_brand"]) || array_key_exists("save_id_car_brand", $context) ? $context["save_id_car_brand"] : (function () { throw new RuntimeError('Variable "save_id_car_brand" does not exist.', 84, $this->source); })())]);
         echo "
         ";
         // line 85
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 85, $this->source); })()), "id_car_brand", [], "any", false, false, false, 85), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 85, $this->source); })()), "id_car_brand", [], "any", false, false, false, 85), 'errors');
         echo "</th>
 
         ";
         // line 87
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 87, $this->source); })()), "flashes", ["id_side_sales"], "method", false, false, false, 87));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 87, $this->source); })()), "flashes", ["id_side_save"], "method", false, false, false, 87));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_side"]) {
             echo "  
             ";
             // line 88
-            $context["sales_id_side"] = $context["value_id_side"];
+            $context["save_id_side"] = $context["value_id_side"];
             // line 89
             echo "        ";
         }
@@ -438,26 +438,26 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 90
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 90, $this->source); })()), "id_side", [], "any", false, false, false, 90), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 90, $this->source); })()), "id_side", [], "any", false, false, false, 90), 'label');
         echo "<br>
         ";
         // line 91
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 91, $this->source); })()), "id_side", [], "any", false, false, false, 91), 'widget', ["value" => (isset($context["sales_id_side"]) || array_key_exists("sales_id_side", $context) ? $context["sales_id_side"] : (function () { throw new RuntimeError('Variable "sales_id_side" does not exist.', 91, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 91, $this->source); })()), "id_side", [], "any", false, false, false, 91), 'widget', ["value" => (isset($context["save_id_side"]) || array_key_exists("save_id_side", $context) ? $context["save_id_side"] : (function () { throw new RuntimeError('Variable "save_id_side" does not exist.', 91, $this->source); })())]);
         echo "
         ";
         // line 92
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 92, $this->source); })()), "id_side", [], "any", false, false, false, 92), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 92, $this->source); })()), "id_side", [], "any", false, false, false, 92), 'errors');
         echo "</th>
 
         ";
         // line 94
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 94, $this->source); })()), "flashes", ["id_body_sales"], "method", false, false, false, 94));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 94, $this->source); })()), "flashes", ["id_body_save"], "method", false, false, false, 94));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_body"]) {
             echo "  
             ";
             // line 95
-            $context["sales_id_body"] = $context["value_id_body"];
+            $context["save_id_body"] = $context["value_id_body"];
             // line 96
             echo "        ";
         }
@@ -466,26 +466,26 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 97
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 97, $this->source); })()), "id_body", [], "any", false, false, false, 97), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 97, $this->source); })()), "id_body", [], "any", false, false, false, 97), 'label');
         echo "<br>
         ";
         // line 98
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 98, $this->source); })()), "id_body", [], "any", false, false, false, 98), 'widget', ["value" => (isset($context["sales_id_body"]) || array_key_exists("sales_id_body", $context) ? $context["sales_id_body"] : (function () { throw new RuntimeError('Variable "sales_id_body" does not exist.', 98, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 98, $this->source); })()), "id_body", [], "any", false, false, false, 98), 'widget', ["value" => (isset($context["save_id_body"]) || array_key_exists("save_id_body", $context) ? $context["save_id_body"] : (function () { throw new RuntimeError('Variable "save_id_body" does not exist.', 98, $this->source); })())]);
         echo "
         ";
         // line 99
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 99, $this->source); })()), "id_body", [], "any", false, false, false, 99), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 99, $this->source); })()), "id_body", [], "any", false, false, false, 99), 'errors');
         echo "</th>
 
         ";
         // line 101
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 101, $this->source); })()), "flashes", ["id_axle_sales"], "method", false, false, false, 101));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 101, $this->source); })()), "flashes", ["id_axle_save"], "method", false, false, false, 101));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_axle"]) {
             echo "  
             ";
             // line 102
-            $context["sales_id_axle"] = $context["value_id_axle"];
+            $context["save_id_axle"] = $context["value_id_axle"];
             // line 103
             echo "        ";
         }
@@ -494,26 +494,26 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 104
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 104, $this->source); })()), "id_axle", [], "any", false, false, false, 104), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 104, $this->source); })()), "id_axle", [], "any", false, false, false, 104), 'label');
         echo "<br>
         ";
         // line 105
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 105, $this->source); })()), "id_axle", [], "any", false, false, false, 105), 'widget', ["value" => (isset($context["sales_id_axle"]) || array_key_exists("sales_id_axle", $context) ? $context["sales_id_axle"] : (function () { throw new RuntimeError('Variable "sales_id_axle" does not exist.', 105, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 105, $this->source); })()), "id_axle", [], "any", false, false, false, 105), 'widget', ["value" => (isset($context["save_id_axle"]) || array_key_exists("save_id_axle", $context) ? $context["save_id_axle"] : (function () { throw new RuntimeError('Variable "save_id_axle" does not exist.', 105, $this->source); })())]);
         echo "
         ";
         // line 106
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 106, $this->source); })()), "id_axle", [], "any", false, false, false, 106), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 106, $this->source); })()), "id_axle", [], "any", false, false, false, 106), 'errors');
         echo "</th>
 
         ";
         // line 108
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 108, $this->source); })()), "flashes", ["id_in_stock_sales"], "method", false, false, false, 108));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 108, $this->source); })()), "flashes", ["id_in_stock_save"], "method", false, false, false, 108));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_in_stock"]) {
             echo "  
             ";
             // line 109
-            $context["sales_id_in_stock"] = $context["value_id_in_stock"];
+            $context["save_id_in_stock"] = $context["value_id_in_stock"];
             // line 110
             echo "        ";
         }
@@ -522,25 +522,25 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 111
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 111, $this->source); })()), "id_in_stock", [], "any", false, false, false, 111), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 111, $this->source); })()), "id_in_stock", [], "any", false, false, false, 111), 'label');
         echo "<br>
         ";
         // line 112
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 112, $this->source); })()), "id_in_stock", [], "any", false, false, false, 112), 'widget', ["value" => (isset($context["sales_id_in_stock"]) || array_key_exists("sales_id_in_stock", $context) ? $context["sales_id_in_stock"] : (function () { throw new RuntimeError('Variable "sales_id_in_stock" does not exist.', 112, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 112, $this->source); })()), "id_in_stock", [], "any", false, false, false, 112), 'widget', ["value" => (isset($context["save_id_in_stock"]) || array_key_exists("save_id_in_stock", $context) ? $context["save_id_in_stock"] : (function () { throw new RuntimeError('Variable "save_id_in_stock" does not exist.', 112, $this->source); })())]);
         echo "
         ";
         // line 113
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 113, $this->source); })()), "id_in_stock", [], "any", false, false, false, 113), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 113, $this->source); })()), "id_in_stock", [], "any", false, false, false, 113), 'errors');
         echo "</th>
 
         <th>";
         // line 115
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 115, $this->source); })()), "button", [], "any", false, false, false, 115), 'widget', ["label" => "Сохранить", "attr" => ["class" => "save"]]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 115, $this->source); })()), "button", [], "any", false, false, false, 115), 'widget', ["label" => "Сохранить", "attr" => ["class" => "save"]]);
         echo "</th>
         
    ";
         // line 117
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_p_n_sales"]) || array_key_exists("form_p_n_sales", $context) ? $context["form_p_n_sales"] : (function () { throw new RuntimeError('Variable "form_p_n_sales" does not exist.', 117, $this->source); })()), 'form_end');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_p_n_save"]) || array_key_exists("form_p_n_save", $context) ? $context["form_p_n_save"] : (function () { throw new RuntimeError('Variable "form_p_n_save" does not exist.', 117, $this->source); })()), 'form_end');
         echo "
 
 ";
@@ -1090,115 +1090,115 @@ class __TwigTemplate_294b8d538e7a13728d3cf8092351e66c extends Template
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_save_edit %}
+{% block form_save_edit_sales %}
 
 {#Форма сохранения деталей#}
-    {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
+    {{ form_start(form_p_n_save, {'action': path('save_part_no')}) }}
 {#{{ dump(app.flashes()) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
-        {% set sales_part_numbers = '' %}
-        {% set sales_id_original_number = '' %}
-        {% set sales_manufacturers = '' %}
-        {% set sales_name_detail = '' %}
-        {% set sales_id_part_name = '' %}
-        {% set sales_id_car_brand = '' %}
-        {% set sales_id_side = '' %}
-        {% set sales_id_body = '' %}
-        {% set sales_id_axle = '' %}
-        {% set sales_id_in_stock = '' %}
+        {% set save_part_numbers = '' %}
+        {% set save_id_original_number = '' %}
+        {% set save_manufacturers = '' %}
+        {% set save_name_detail = '' %}
+        {% set save_id_part_name = '' %}
+        {% set save_id_car_brand = '' %}
+        {% set save_id_side = '' %}
+        {% set save_id_body = '' %}
+        {% set save_id_axle = '' %}
+        {% set save_id_in_stock = '' %}
 
-        {% for value_part_numbers in app.flashes('part_numbers_sales') %}  
-            {% set sales_part_numbers = value_part_numbers %}
+        {% for value_part_numbers in app.flashes('part_numbers_save') %}  
+            {% set save_part_numbers = value_part_numbers %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.part_numbers) }}<br>
-        {{ form_widget(form_p_n_sales.part_numbers, {value : sales_part_numbers}) }}<br>
-        {% for message_sales in app.flashes('children[part_numbers].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.part_numbers) }}<br>
+        {{ form_widget(form_p_n_save.part_numbers, {value : save_part_numbers}) }}<br>
+        {% for message_save in app.flashes('children[part_numbers].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.part_numbers) }}</th>
+        {{ form_errors(form_p_n_save.part_numbers) }}</th>
 
-        {% do form_widget(form_p_n_sales.id_original_number) %}
+        {% do form_widget(form_p_n_save.id_original_number) %}
 
-        {% for value_original_number in app.flashes('original_number_sales') %}  
-            {% set sales_id_original_number = value_original_number %}
+        {% for value_original_number in app.flashes('original_number_save') %}  
+            {% set save_id_original_number = value_original_number %}
         {% endfor %}
-        <th>{{ form_label(form_original_number_sales.original_number) }}<br>
-        {{ form_widget(form_original_number_sales.original_number, {value : sales_id_original_number}) }}<br>
-        {% for message_sales in app.flashes('children[original_number].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_original_number_save.original_number) }}<br>
+        {{ form_widget(form_original_number_save.original_number, {value : save_id_original_number}) }}<br>
+        {% for message_save in app.flashes('children[original_number].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_original_number_sales.original_number) }}</th>
+        {{ form_errors(form_original_number_save.original_number) }}</th>
 
-        {% for value_manufacturers in app.flashes('manufacturers_sales') %}  
-            {% set sales_manufacturers = value_manufacturers %}
+        {% for value_manufacturers in app.flashes('manufacturers_save') %}  
+            {% set save_manufacturers = value_manufacturers %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.manufacturers) }}<br>
-        {{ form_widget(form_p_n_sales.manufacturers, {value : sales_manufacturers}) }}<br>
-        {% for message_sales in app.flashes('children[manufacturers].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.manufacturers) }}<br>
+        {{ form_widget(form_p_n_save.manufacturers, {value : save_manufacturers}) }}<br>
+        {% for message_save in app.flashes('children[manufacturers].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.manufacturers) }}</th>
+        {{ form_errors(form_p_n_save.manufacturers) }}</th>
 
-        {% for value_name_detail in app.flashes('name_detail_sales') %}  
-            {% set sales_name_detail = value_name_detail %}
+        {% for value_name_detail in app.flashes('name_detail_save') %}  
+            {% set save_name_detail = value_name_detail %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.name_detail) }}<br>
-        {{ form_widget(form_p_n_sales.name_detail, {value : sales_name_detail}) }}<br>    
-        {% for message_sales in app.flashes('children[name_detail].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.name_detail) }}<br>
+        {{ form_widget(form_p_n_save.name_detail, {value : save_name_detail}) }}<br>    
+        {% for message_save in app.flashes('children[name_detail].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.name_detail) }}</th>
+        {{ form_errors(form_p_n_save.name_detail) }}</th>
 
-        {% for value_id_part_name in app.flashes('id_part_name_sales') %}  
-            {% set sales_id_part_name = value_id_part_name %}
+        {% for value_id_part_name in app.flashes('id_part_name_save') %}  
+            {% set save_id_part_name = value_id_part_name %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_part_name) }}<br>
-        {{ form_widget(form_p_n_sales.id_part_name, {value : sales_id_part_name}) }}
-        {{ form_errors(form_p_n_sales.id_part_name) }}</th>
+        <th>{{ form_label(form_p_n_save.id_part_name) }}<br>
+        {{ form_widget(form_p_n_save.id_part_name, {value : save_id_part_name}) }}
+        {{ form_errors(form_p_n_save.id_part_name) }}</th>
                                   
     </tr>
     <tr>
 
-        {% for value_id_car_brand in app.flashes('id_car_brand_sales') %}  
-            {% set sales_id_car_brand = value_id_car_brand %}
+        {% for value_id_car_brand in app.flashes('id_car_brand_save') %}  
+            {% set save_id_car_brand = value_id_car_brand %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_car_brand) }}<br>
-        {{ form_widget(form_p_n_sales.id_car_brand, {value : sales_id_car_brand}) }}
-        {{ form_errors(form_p_n_sales.id_car_brand) }}</th>
+        <th>{{ form_label(form_p_n_save.id_car_brand) }}<br>
+        {{ form_widget(form_p_n_save.id_car_brand, {value : save_id_car_brand}) }}
+        {{ form_errors(form_p_n_save.id_car_brand) }}</th>
 
-        {% for value_id_side in app.flashes('id_side_sales') %}  
-            {% set sales_id_side = value_id_side %}
+        {% for value_id_side in app.flashes('id_side_save') %}  
+            {% set save_id_side = value_id_side %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_side) }}<br>
-        {{ form_widget(form_p_n_sales.id_side, {value : sales_id_side}) }}
-        {{ form_errors(form_p_n_sales.id_side) }}</th>
+        <th>{{ form_label(form_p_n_save.id_side) }}<br>
+        {{ form_widget(form_p_n_save.id_side, {value : save_id_side}) }}
+        {{ form_errors(form_p_n_save.id_side) }}</th>
 
-        {% for value_id_body in app.flashes('id_body_sales') %}  
-            {% set sales_id_body = value_id_body %}
+        {% for value_id_body in app.flashes('id_body_save') %}  
+            {% set save_id_body = value_id_body %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_body) }}<br>
-        {{ form_widget(form_p_n_sales.id_body, {value : sales_id_body}) }}
-        {{ form_errors(form_p_n_sales.id_body) }}</th>
+        <th>{{ form_label(form_p_n_save.id_body) }}<br>
+        {{ form_widget(form_p_n_save.id_body, {value : save_id_body}) }}
+        {{ form_errors(form_p_n_save.id_body) }}</th>
 
-        {% for value_id_axle in app.flashes('id_axle_sales') %}  
-            {% set sales_id_axle = value_id_axle %}
+        {% for value_id_axle in app.flashes('id_axle_save') %}  
+            {% set save_id_axle = value_id_axle %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_axle) }}<br>
-        {{ form_widget(form_p_n_sales.id_axle, {value : sales_id_axle}) }}
-        {{ form_errors(form_p_n_sales.id_axle) }}</th>
+        <th>{{ form_label(form_p_n_save.id_axle) }}<br>
+        {{ form_widget(form_p_n_save.id_axle, {value : save_id_axle}) }}
+        {{ form_errors(form_p_n_save.id_axle) }}</th>
 
-        {% for value_id_in_stock in app.flashes('id_in_stock_sales') %}  
-            {% set sales_id_in_stock = value_id_in_stock %}
+        {% for value_id_in_stock in app.flashes('id_in_stock_save') %}  
+            {% set save_id_in_stock = value_id_in_stock %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_in_stock) }}<br>
-        {{ form_widget(form_p_n_sales.id_in_stock, {value : sales_id_in_stock}) }}
-        {{ form_errors(form_p_n_sales.id_in_stock) }}</th>
+        <th>{{ form_label(form_p_n_save.id_in_stock) }}<br>
+        {{ form_widget(form_p_n_save.id_in_stock, {value : save_id_in_stock}) }}
+        {{ form_errors(form_p_n_save.id_in_stock) }}</th>
 
-        <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
+        <th>{{ form_widget(form_p_n_save.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
         
-   {{ form_end(form_p_n_sales) }}
+   {{ form_end(form_p_n_save) }}
 
-{% endblock form_save_edit %}
+{% endblock form_save_edit_sales %}
 
 {% block form_search %}
     {#Форма поиска деталей#}

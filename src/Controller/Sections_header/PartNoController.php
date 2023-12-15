@@ -37,8 +37,8 @@ class PartNoController extends AbstractController
 
         /*Подключаем формы */
         $form_p_n_search = $this->createForm(PartNoType::class, $entity_part_no);
-        $form_p_n_sales = $this->createForm(PartNoType::class, $entity_part_no);
-        $form_original_number_sales = $this->createForm(OriginalRoomsType::class, $entity_original_number);
+        $form_p_n_save = $this->createForm(PartNoType::class, $entity_part_no);
+        $form_original_number_save = $this->createForm(OriginalRoomsType::class, $entity_original_number);
         $form_original_number_search = $this->createForm(OriginalRoomsType::class, $entity_original_number);
 
         /*Валидация формы */
@@ -159,9 +159,9 @@ class PartNoController extends AbstractController
             'title_logo' => 'Детали',
             'legend' => 'Добавить новую деталь',
             'legend_search' => 'Поиск',
-            'form_p_n_sales' => $form_p_n_sales->createView(),
+            'form_p_n_save' => $form_p_n_save->createView(),
             'form_p_n_search' => $form_p_n_search->createView(),
-            'form_original_number_sales' => $form_original_number_sales->createView(),
+            'form_original_number_save' => $form_original_number_save->createView(),
             'form_original_number_search' => $form_original_number_search->createView(),
             'arr_part_no' => $arr_part_no,
         ]);
@@ -169,7 +169,7 @@ class PartNoController extends AbstractController
 
 
 
-    #[Route('/sales_part_no', name: 'sales_part_no')]
+    #[Route('/save_part_no', name: 'save_part_no')]
     public function salesPart(
         ManagerRegistry $doctrine,
         Request $request,
@@ -270,7 +270,7 @@ class PartNoController extends AbstractController
                     foreach ($value_form_part_no as $key => $values) {
                         if (is_iterable($values)) {
                             foreach ($values as $key => $value) {
-                                $this->addFlash($key . '_sales', $value);
+                                $this->addFlash($key . '_save', $value);
                             }
                         }
                     }
@@ -280,7 +280,7 @@ class PartNoController extends AbstractController
                 if ($errors_part_no) {
                     foreach ($errors_part_no as $key) {
                         $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath() . '_sales';
+                        $propertyPath = $key->getpropertyPath() . '_save';
                         //dd($propertyPath);
                         $this->addFlash(
                             $propertyPath,
@@ -292,7 +292,7 @@ class PartNoController extends AbstractController
                 if ($errors_original_number) {
                     foreach ($errors_original_number as $key) {
                         $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath() . '_sales';
+                        $propertyPath = $key->getpropertyPath() . '_save';
                         //dd($propertyPath);
                         $this->addFlash(
                             $propertyPath,

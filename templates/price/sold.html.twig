@@ -8,96 +8,122 @@
 
 {% block form_save_edit_sales %}
 
+    {% for sold in arr_sold_part %}
 
-    </tr>
-        <div class="table">  
-            <table>
-                <thead>
-                    <tr>
-                        <th>№ Детали</th>
-                        <th>Название детали</th>
-                        <th>Марка</th>
-                        <th>Кол-во</th>
-                        <th>Цена шт</th>
-                        <th>Цена общая</th>
-                        <th>Кол-во</th>
-                        <th>Цена</th>
-                        <th>Дата прод-жи</th>
-                        <th>Продать</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for sold in arr_sold_part %}
-                    {# {{ dump(arr_sold_part) }}
-                       {% for sold in arr_sold %}#}
-                            <tr>
-                                <td>{{ sold.getIdDetails().getPartNumbers() }}</td>
+                <th>№ Детали</th>
+                <th>№ Оригинал</th>
+                <th>Производитель</th>
+                <th>Описание детали</th>
+                <th>Название детали</th>
+                <th>Марка</th>
+                <th>Сторона</th>
+                <th>Кузов</th>
+                <th>Перед Зад</th>
+            </tr>
+            <tr>
+            
+                <th>{{ sold.getIdDetails().getPartNumbers() }}</th>
 
-                                <td>{{ sold.getIdDetails().getIdPartName().getPartName()|default('') }}</td>
+                <th>{{ sold.getIdDetails().getIdOriginalNumber().getOriginalNumber() }}</th>
 
-                                <td>{{ sold.getIdDetails().getIdCarBrand().getCarBrand()|default('') }}</td>
+                <th>{{ sold.getIdManufacturer().getManufacturers() }}</th>
 
-                                <td>{{ sold.getQuantity() - sold.getQuantitySold() }}</td>
+                <th>{{ sold.getIdDetails().getNameDetail() }}</th>
 
-                                <td>{{ ((sold.getPrice() / 100) 
-                                        / sold.getQuantity())|number_format(2, '.', '') }}</td>
+                <th>{{ sold.getIdDetails().getIdPartName().getPartName()|default('') }}</th>
 
-                                <td>{{ (sold.getPrice() / 100) - (((sold.getPrice() / 100) 
-                                        / sold.getQuantity()) * sold.getQuantitySold()) }}</td>
-                                
-                                {#Форма продажи детали#}
-                                {{ form_start(form_sold) }}
-                                    {% set quantity_sold_price = '' %}
-                                    {% set price_sold_price = '' %}
-                                    {% set date_sold_price = '' %}
-                                    {% set id_hidden = sold.getId()|default('') %}
+                <th>{{ sold.getIdDetails().getIdCarBrand().getCarBrand()|default('') }}</th>
 
-                                    {% for value_id_hidden in app.flashes('hidden_sold') %}  
-                                        {% set id_hidden = value_id_hidden %}
-                                    {% endfor %}
-                                    {{ form_widget(form_sold.hidden_sold, {value : id_hidden}) }}
+                <th>{{ sold.getIdDetails().getIdSide().getSide()|default('') }}</th>
 
-                                    {% for value_quantity_sold in app.flashes('quantity_sold_sold') %}  
-                                        {% set quantity_sold_price = value_quantity_sold %}
-                                    {% endfor %}
-                                    <th>{{ form_widget(form_sold.quantity_sold, {value : quantity_sold_price}) }}<br>
-                                    {% for message in app.flashes('[quantity_sold_error]') %}
-                                    {{ message }}
-                                    {% endfor %}
-                                    {{ form_errors(form_sold.quantity_sold) }}</th>
+                <th>{{ sold.getIdDetails().getIdBody().getBody()|default('') }}</th>
 
-                                    {% for value_price_sold in app.flashes('price_sold_sold') %}  
-                                        {% set price_sold_price = value_price_sold %}
-                                    {% endfor %}
-                                    <th>{{ form_widget(form_sold.price_sold, {value : price_sold_price}) }}<br>
-                                    {% for message in app.flashes('[price_sold_error]') %}
-                                    {{ message }}
-                                    {% endfor %}
-                                    {{ form_errors(form_sold.price_sold) }}</th>
+                <th>{{ sold.getIdDetails().getIdAxle().getAxle()|default('') }}</th>
 
-                                    {% for value_date_sold in app.flashes('date_sold_sold') %}  
-                                        {% set date_sold_price = value_date_sold %}
-                                    {% endfor %}
-                                    <th>{{ form_widget(form_sold.date_sold, {value : date_sold_price}) }}<br>
-                                    {% for message in app.flashes('[date_sold_error]') %}
-                                    {{ message }}
-                                    {% endfor %}
-                                    {{ form_errors(form_sold.date_sold) }}</th>
+            </tr>
+            <tr>
+                <th>Кол-во</th>
+                <th>Цена шт</th>
+                <th>Цена общая</th>
+                <th>Кол-во</th>
+                <th>Цена</th>
+                <th>Дата прод-жи</th>
+                <th>Продать</th>
+            </tr>
+            <tr>
+
+                <th>{{ sold.getQuantity() - sold.getQuantitySold() }}</th>
+
+                <th>{{ ((sold.getPrice() / 100) 
+                        / sold.getQuantity())|number_format(2, '.', '') }}</th>
+
+                <th>{{ (sold.getPrice() / 100) - (((sold.getPrice() / 100) 
+                / sold.getQuantity()) * sold.getQuantitySold()) }}</th>
                                     
-                                    <th>{{ form_widget(form_sold.button, {'label': 'Продать', 'attr': {'class': 'save'} }) }}</th>
+            {#Форма продажи детали#}
+            {{ form_start(form_sold) }}
+                {% set quantity_sold_price = '' %}
+                {% set price_sold_price = '' %}
+                {% set date_sold_price = '' %}
+                {% set id_hidden = sold.getId()|default('') %}
 
-                                 {{ form_end(form_sold) }}           
-                            </tr>
-                        {#{% endfor %}#}
-                    {% endfor %}               
-                </tbody>
-            </table> 
-        </div> 
-   
+                {% for value_id_hidden in app.flashes('hidden_sold') %}  
+                    {% set id_hidden = value_id_hidden %}
+                {% endfor %}
+                {{ form_widget(form_sold.hidden_sold, {value : id_hidden}) }}
+
+                {% for value_quantity_sold in app.flashes('quantity_sold_sold') %}  
+                    {% set quantity_sold_price = value_quantity_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold.quantity_sold, {value : quantity_sold_price}) }}<br>
+                {{ form_errors(form_sold.quantity_sold) }}</th>
+
+                {% for value_price_sold in app.flashes('price_sold_sold') %}  
+                    {% set price_sold_price = value_price_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold.price_sold, {value : price_sold_price}) }}<br>
+                {{ form_errors(form_sold.price_sold) }}</th>
+
+                {% for value_date_sold in app.flashes('date_sold_sold') %}  
+                    {% set date_sold_price = value_date_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold.date_sold, {value : date_sold_price}) }}<br>
+                {{ form_errors(form_sold.date_sold) }}</th>
+
+                {% do form_widget(form_sold.id_invoice) %}
+                                            
+                <th>{{ form_widget(form_sold.button, {'label': 'Продать', 'attr': {'class': 'save'} }) }}</th>
+
+            {{ form_end(form_sold) }}
+    {% else %}
+
+        <h2>Выберите и нажмите нужный раздел</h2> 
+                
+    {% endfor %}               
+
 {% endblock form_save_edit_sales %}
 
 {% block form_search %}{% endblock form_search %}
 
-{% block table_thead_tr %}{% endblock table_thead_tr %}
+{% block table_thead_tr %}
+{#{% for arr_search_price in arr_price %}
+        {% if arr_search_price %} 
+            <th>№ Детали</th>
+            <th>№ Оригинал</th>
+            <th>Производитель</th>
+            <th>Описание детали</th>
+            <th>Название детали</th>
+            <th>Марка</th>
+            <th>Сторона</th>
+            <th>Кузов</th>
+            <th>Перед Зад</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Цена общая</th>
+            <th>Продать</th>
+        {% endif %}
+    {% endfor %}#}
+
+{% endblock table_thead_tr %}
 
 {% block tbody %}{% endblock tbody %}

@@ -11,110 +11,110 @@
 {% block form_save_edit_sales %}
 
 {#Форма сохранения деталей#}
-    {{ form_start(form_p_n_sales, {'action': path('sales_part_no')}) }}
+    {{ form_start(form_p_n_save, {'action': path('save_part_no')}) }}
 {#{{ dump(app.flashes()) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
-        {% set sales_part_numbers = '' %}
-        {% set sales_id_original_number = '' %}
-        {% set sales_manufacturers = '' %}
-        {% set sales_name_detail = '' %}
-        {% set sales_id_part_name = '' %}
-        {% set sales_id_car_brand = '' %}
-        {% set sales_id_side = '' %}
-        {% set sales_id_body = '' %}
-        {% set sales_id_axle = '' %}
-        {% set sales_id_in_stock = '' %}
+        {% set save_part_numbers = '' %}
+        {% set save_id_original_number = '' %}
+        {% set save_manufacturers = '' %}
+        {% set save_name_detail = '' %}
+        {% set save_id_part_name = '' %}
+        {% set save_id_car_brand = '' %}
+        {% set save_id_side = '' %}
+        {% set save_id_body = '' %}
+        {% set save_id_axle = '' %}
+        {% set save_id_in_stock = '' %}
 
-        {% for value_part_numbers in app.flashes('part_numbers_sales') %}  
-            {% set sales_part_numbers = value_part_numbers %}
+        {% for value_part_numbers in app.flashes('part_numbers_save') %}  
+            {% set save_part_numbers = value_part_numbers %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.part_numbers) }}<br>
-        {{ form_widget(form_p_n_sales.part_numbers, {value : sales_part_numbers}) }}<br>
-        {% for message_sales in app.flashes('children[part_numbers].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.part_numbers) }}<br>
+        {{ form_widget(form_p_n_save.part_numbers, {value : save_part_numbers}) }}<br>
+        {% for message_save in app.flashes('children[part_numbers].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.part_numbers) }}</th>
+        {{ form_errors(form_p_n_save.part_numbers) }}</th>
 
-        {% do form_widget(form_p_n_sales.id_original_number) %}
+        {% do form_widget(form_p_n_save.id_original_number) %}
 
-        {% for value_original_number in app.flashes('original_number_sales') %}  
-            {% set sales_id_original_number = value_original_number %}
+        {% for value_original_number in app.flashes('original_number_save') %}  
+            {% set save_id_original_number = value_original_number %}
         {% endfor %}
-        <th>{{ form_label(form_original_number_sales.original_number) }}<br>
-        {{ form_widget(form_original_number_sales.original_number, {value : sales_id_original_number}) }}<br>
-        {% for message_sales in app.flashes('children[original_number].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_original_number_save.original_number) }}<br>
+        {{ form_widget(form_original_number_save.original_number, {value : save_id_original_number}) }}<br>
+        {% for message_save in app.flashes('children[original_number].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_original_number_sales.original_number) }}</th>
+        {{ form_errors(form_original_number_save.original_number) }}</th>
 
-        {% for value_manufacturers in app.flashes('manufacturers_sales') %}  
-            {% set sales_manufacturers = value_manufacturers %}
+        {% for value_manufacturers in app.flashes('manufacturers_save') %}  
+            {% set save_manufacturers = value_manufacturers %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.manufacturers) }}<br>
-        {{ form_widget(form_p_n_sales.manufacturers, {value : sales_manufacturers}) }}<br>
-        {% for message_sales in app.flashes('children[manufacturers].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.manufacturers) }}<br>
+        {{ form_widget(form_p_n_save.manufacturers, {value : save_manufacturers}) }}<br>
+        {% for message_save in app.flashes('children[manufacturers].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.manufacturers) }}</th>
+        {{ form_errors(form_p_n_save.manufacturers) }}</th>
 
-        {% for value_name_detail in app.flashes('name_detail_sales') %}  
-            {% set sales_name_detail = value_name_detail %}
+        {% for value_name_detail in app.flashes('name_detail_save') %}  
+            {% set save_name_detail = value_name_detail %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.name_detail) }}<br>
-        {{ form_widget(form_p_n_sales.name_detail, {value : sales_name_detail}) }}<br>    
-        {% for message_sales in app.flashes('children[name_detail].data_sales') %}
-            {{ message_sales }}
+        <th>{{ form_label(form_p_n_save.name_detail) }}<br>
+        {{ form_widget(form_p_n_save.name_detail, {value : save_name_detail}) }}<br>    
+        {% for message_save in app.flashes('children[name_detail].data_save') %}
+            {{ message_save }}
         {% endfor %}
-        {{ form_errors(form_p_n_sales.name_detail) }}</th>
+        {{ form_errors(form_p_n_save.name_detail) }}</th>
 
-        {% for value_id_part_name in app.flashes('id_part_name_sales') %}  
-            {% set sales_id_part_name = value_id_part_name %}
+        {% for value_id_part_name in app.flashes('id_part_name_save') %}  
+            {% set save_id_part_name = value_id_part_name %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_part_name) }}<br>
-        {{ form_widget(form_p_n_sales.id_part_name, {value : sales_id_part_name}) }}
-        {{ form_errors(form_p_n_sales.id_part_name) }}</th>
+        <th>{{ form_label(form_p_n_save.id_part_name) }}<br>
+        {{ form_widget(form_p_n_save.id_part_name, {value : save_id_part_name}) }}
+        {{ form_errors(form_p_n_save.id_part_name) }}</th>
                                   
     </tr>
     <tr>
 
-        {% for value_id_car_brand in app.flashes('id_car_brand_sales') %}  
-            {% set sales_id_car_brand = value_id_car_brand %}
+        {% for value_id_car_brand in app.flashes('id_car_brand_save') %}  
+            {% set save_id_car_brand = value_id_car_brand %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_car_brand) }}<br>
-        {{ form_widget(form_p_n_sales.id_car_brand, {value : sales_id_car_brand}) }}
-        {{ form_errors(form_p_n_sales.id_car_brand) }}</th>
+        <th>{{ form_label(form_p_n_save.id_car_brand) }}<br>
+        {{ form_widget(form_p_n_save.id_car_brand, {value : save_id_car_brand}) }}
+        {{ form_errors(form_p_n_save.id_car_brand) }}</th>
 
-        {% for value_id_side in app.flashes('id_side_sales') %}  
-            {% set sales_id_side = value_id_side %}
+        {% for value_id_side in app.flashes('id_side_save') %}  
+            {% set save_id_side = value_id_side %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_side) }}<br>
-        {{ form_widget(form_p_n_sales.id_side, {value : sales_id_side}) }}
-        {{ form_errors(form_p_n_sales.id_side) }}</th>
+        <th>{{ form_label(form_p_n_save.id_side) }}<br>
+        {{ form_widget(form_p_n_save.id_side, {value : save_id_side}) }}
+        {{ form_errors(form_p_n_save.id_side) }}</th>
 
-        {% for value_id_body in app.flashes('id_body_sales') %}  
-            {% set sales_id_body = value_id_body %}
+        {% for value_id_body in app.flashes('id_body_save') %}  
+            {% set save_id_body = value_id_body %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_body) }}<br>
-        {{ form_widget(form_p_n_sales.id_body, {value : sales_id_body}) }}
-        {{ form_errors(form_p_n_sales.id_body) }}</th>
+        <th>{{ form_label(form_p_n_save.id_body) }}<br>
+        {{ form_widget(form_p_n_save.id_body, {value : save_id_body}) }}
+        {{ form_errors(form_p_n_save.id_body) }}</th>
 
-        {% for value_id_axle in app.flashes('id_axle_sales') %}  
-            {% set sales_id_axle = value_id_axle %}
+        {% for value_id_axle in app.flashes('id_axle_save') %}  
+            {% set save_id_axle = value_id_axle %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_axle) }}<br>
-        {{ form_widget(form_p_n_sales.id_axle, {value : sales_id_axle}) }}
-        {{ form_errors(form_p_n_sales.id_axle) }}</th>
+        <th>{{ form_label(form_p_n_save.id_axle) }}<br>
+        {{ form_widget(form_p_n_save.id_axle, {value : save_id_axle}) }}
+        {{ form_errors(form_p_n_save.id_axle) }}</th>
 
-        {% for value_id_in_stock in app.flashes('id_in_stock_sales') %}  
-            {% set sales_id_in_stock = value_id_in_stock %}
+        {% for value_id_in_stock in app.flashes('id_in_stock_save') %}  
+            {% set save_id_in_stock = value_id_in_stock %}
         {% endfor %}
-        <th>{{ form_label(form_p_n_sales.id_in_stock) }}<br>
-        {{ form_widget(form_p_n_sales.id_in_stock, {value : sales_id_in_stock}) }}
-        {{ form_errors(form_p_n_sales.id_in_stock) }}</th>
+        <th>{{ form_label(form_p_n_save.id_in_stock) }}<br>
+        {{ form_widget(form_p_n_save.id_in_stock, {value : save_id_in_stock}) }}
+        {{ form_errors(form_p_n_save.id_in_stock) }}</th>
 
-        <th>{{ form_widget(form_p_n_sales.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
+        <th>{{ form_widget(form_p_n_save.button, { 'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
         
-   {{ form_end(form_p_n_sales) }}
+   {{ form_end(form_p_n_save) }}
 
 {% endblock form_save_edit_sales %}
 

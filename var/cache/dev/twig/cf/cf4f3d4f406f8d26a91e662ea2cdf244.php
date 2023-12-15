@@ -29,7 +29,7 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
             'logo' => [$this, 'block_logo'],
             'legend' => [$this, 'block_legend'],
             'legend_search' => [$this, 'block_legend_search'],
-            'form_save_edit' => [$this, 'block_form_save_edit'],
+            'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'form_search' => [$this, 'block_form_search'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
@@ -138,14 +138,14 @@ class __TwigTemplate_bfa9d504aaf9e02355ce6f00b19ce0c3 extends Template
     }
 
     // line 11
-    public function block_form_save_edit($context, array $blocks = [])
+    public function block_form_save_edit_sales($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         // line 12
         echo "
@@ -1133,7 +1133,7 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
 
 {% block legend_search %}{{legend_search}}{% endblock legend_search %}
 
-{% block form_save_edit %}
+{% block form_save_edit_sales %}
 
 {#Форма сохранения счет-фактур#}
     
@@ -1245,7 +1245,7 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
 
     {{ form_end(form_i_d) }}
    
-{% endblock form_save_edit %}
+{% endblock form_save_edit_sales %}
 
 
 {% block form_search %}

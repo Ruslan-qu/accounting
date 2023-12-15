@@ -28,7 +28,7 @@ class __TwigTemplate_ea2e063c4f2e52d192769b646db4b1ec extends Template
             'title' => [$this, 'block_title'],
             'logo' => [$this, 'block_logo'],
             'legend' => [$this, 'block_legend'],
-            'form_sales_edit' => [$this, 'block_form_sales_edit'],
+            'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'form_search' => [$this, 'block_form_search'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
@@ -118,14 +118,14 @@ class __TwigTemplate_ea2e063c4f2e52d192769b646db4b1ec extends Template
     }
 
     // line 9
-    public function block_form_sales_edit($context, array $blocks = [])
+    public function block_form_save_edit_sales($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_sales_edit"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_sales_edit"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         // line 10
         echo "
@@ -633,7 +633,7 @@ class __TwigTemplate_ea2e063c4f2e52d192769b646db4b1ec extends Template
 
 {% block legend %}{{legend}}{% endblock legend%}
 
-{% block form_sales_edit %}
+{% block form_save_edit_sales %}
 
 {#Форма редактирования детали#}
     {{ form_start(form_p_n_edit, {'action': path('edit_part')}) }}
@@ -747,7 +747,7 @@ class __TwigTemplate_ea2e063c4f2e52d192769b646db4b1ec extends Template
 
    {{ form_end(form_p_n_edit) }}
    
-{% endblock form_sales_edit %}
+{% endblock form_save_edit_sales %}
 
 {% block form_search %}{% endblock form_search %}
 
