@@ -337,7 +337,7 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findByIdSold($id): array
+    public function findOneByIdSold($id): array
     {
         $entityManager = $this->getEntityManager();
 

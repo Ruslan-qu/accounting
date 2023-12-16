@@ -57,8 +57,8 @@
                 <th>{{ ((sold.getPrice() / 100) 
                         / sold.getQuantity())|number_format(2, '.', '') }}</th>
 
-                <th>{{ (sold.getPrice() / 100) - (((sold.getPrice() / 100) 
-                / sold.getQuantity()) * sold.getQuantitySold()) }}</th>
+                <th>{{ ((sold.getPrice() / 100) - (((sold.getPrice() / 100) 
+                / sold.getQuantity()) * sold.getQuantitySold()))|number_format(2, '.', '') }}</th>
                                     
             {#Форма продажи детали#}
             {{ form_start(form_sold) }}
@@ -98,9 +98,6 @@
                 <th>{{ form_widget(form_sold.button, {'label': 'Продать', 'attr': {'class': 'save'} }) }}</th>
 
             {{ form_end(form_sold) }}
-    {% else %}
-
-        <h2>Выберите и нажмите нужный раздел</h2> 
                 
     {% endfor %}               
 
@@ -109,24 +106,58 @@
 {% block form_search %}{% endblock form_search %}
 
 {% block table_thead_tr %}
-{#{% for arr_search_price in arr_price %}
-        {% if arr_search_price %} 
+{% for sale_list in arr_sale_list %}
+         
             <th>№ Детали</th>
-            <th>№ Оригинал</th>
-            <th>Производитель</th>
-            <th>Описание детали</th>
             <th>Название детали</th>
             <th>Марка</th>
             <th>Сторона</th>
-            <th>Кузов</th>
             <th>Перед Зад</th>
             <th>Кол-во</th>
             <th>Цена шт</th>
-            <th>Цена общая</th>
-            <th>Продать</th>
-        {% endif %}
-    {% endfor %}#}
-
+            <th>Кол-во</th>
+            <th>Цена</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        
+    {% endfor %}
 {% endblock table_thead_tr %}
 
-{% block tbody %}{% endblock tbody %}
+{% block tbody %}
+    {% for sale_list in arr_sale_list %}
+        
+            <tr>
+                <td>{{ sale_list.getIdInvoice().getIdDetails().getPartNumbers() }}</td>
+
+                <td>{{ sale_list.getIdInvoice().getIdDetails().getIdPartName().getPartName()|default('') }}</td>
+
+                <td>{{ sale_list.getIdInvoice().getIdDetails().getIdCarBrand().getCarBrand()|default('') }}</td>
+
+                <td>{{ sale_list.getIdInvoice().getIdDetails().getIdSide().getSide()|default('') }}</td>
+
+                <td>{{ sale_list.getIdInvoice().getIdDetails().getIdAxle().getAxle()|default('') }}</td>
+
+                <td>{{ sale_list.getQuantitySold() }}</td>
+
+                <td>{{ (((sale_list.getIdInvoice().getPrice() / 100) 
+                            / sale_list.getIdInvoice().getQuantity()) 
+                                * sale_list.getQuantitySold())|number_format(2, '.', '') }}</td>
+
+                <td>{{ sale_list.getQuantitySold() }}</td>
+
+                <td>{{ (sale_list.getPriceSold() / 100)|number_format(2, '.', '') }}</td>      
+
+                <form action="/sold_price" name="edit_sold_price" method="post">
+
+                    <td><button class="edit" type="submit" name="edit_sold_price" value="{{ sale_list.getIdInvoice().getId() }}">Изменить</button></td>
+                                    
+                </form>
+
+                <form action="/delete_sale_list" name="delete_sale_list" method="post">
+
+                    <td><button class="delete" type="submit" name="delete_sale_list" value="{{ sale_list.getIdInvoice().getId() }}">Удалить</button></td>
+                                    
+                </form>
+            </tr> 
+    {% endfor %}
+{% endblock tbody %}

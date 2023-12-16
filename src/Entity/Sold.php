@@ -23,8 +23,8 @@ class Sold
     #[ORM\Column(nullable: true)]
     private ?int $price_sold = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTime $date_sold = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_sold = null;
 
     private ?int $hidden_sold = null;
 
@@ -69,12 +69,12 @@ class Sold
         return $this;
     }
 
-    public function getDateSold(): ?\DateTime
+    public function getDateSold(): ?\DateTimeInterface
     {
         return $this->date_sold;
     }
 
-    public function setDateSold(?\DateTime $date_sold): static
+    public function setDateSold(?\DateTimeInterface $date_sold): static
     {
         $this->date_sold = $date_sold;
 

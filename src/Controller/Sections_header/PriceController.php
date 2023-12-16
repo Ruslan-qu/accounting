@@ -5,10 +5,12 @@ namespace App\Controller\Sections_header;
 use DateTime;
 use App\Entity\Sold;
 use App\Form\SoldType;
+use DateTimeImmutable;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\OriginalRooms;
 use App\Form\OriginalRoomsType;
+use App\Repository\SoldRepository;
 use App\Form\IncomingDocumentsType;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
@@ -159,6 +161,7 @@ class PriceController extends AbstractController
         Request $request,
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
+        SoldRepository $SoldRepository,
     ): Response {
 
         /* Подключаем сущности  */
@@ -170,8 +173,7 @@ class PriceController extends AbstractController
         /*Валидация формы */
         $form_sold->handleRequest($request);
 
-        /*Подключаем валидацию форм */
-        $errors_sold = $validator->validate($form_sold);
+        $arr_sale_list = $SoldRepository->findBySaleList();
 
         //dd($form_sold->getData()->getHiddenSold());
 
@@ -180,10 +182,10 @@ class PriceController extends AbstractController
             /*Открываем деталь по id */
             $id = $request->request->all()['sold_price'];
 
-            $arr_sold_part = $InvoiceRepository->findByIdSold($id);
+            $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         } else {
             $id = $form_sold->getData()->getHiddenSold();
-            $arr_sold_part = $InvoiceRepository->findByIdSold($id);
+            $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         }
 
         /*Валидация формы ручного именения деталей */
@@ -193,9 +195,9 @@ class PriceController extends AbstractController
             $quantity_sold = $form_sold->getData()->getQuantitySold();
 
             /* Выводим данные из базы данных */
-            $quantity = $arr_sold_part[0]->getQuantity();
-            $entity_quantity_sold = $arr_sold_part[0]->getQuantitySold();
-            $sum_quantity_sold = $quantity_sold + $entity_quantity_sold;
+            $quantity_invoice = $arr_sold_part[0]->getQuantity();
+            $invoice_quantity_sold = $arr_sold_part[0]->getQuantitySold();
+            $sum_quantity_sold = $quantity_sold + $invoice_quantity_sold;
 
             /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
             $validator = Validation::createValidator();
@@ -207,11 +209,11 @@ class PriceController extends AbstractController
 
             $constraint = new Collection([
                 'quantity_sold_error' => new Range(
-                    max: $quantity,
+                    max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
                 'sum_quantity_sold_error' => new Range(
-                    max: $quantity,
+                    max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
             ]);
@@ -221,14 +223,15 @@ class PriceController extends AbstractController
             /* Валидация формы */
 
             if ($form_sold->isValid() && !$errors->count()) {
+                //dd($request->request->all()['sold']['date_sold']);
 
-                $entity_sold->setIdInvoice($form_sold->getData()->getHidden());
+                $entity_sold->setIdInvoice($arr_sold_part[0]);
 
                 $entity_sold->setQuantitySold($quantity_sold);
 
-                $entity_sold->setPriceSold($form_sold->getData()->getPriceSold());
+                $entity_sold->setPriceSold($form_sold->getData()->getPriceSold() * 100);
 
-                $entity_sold->setDateSold(new DateTime($form_sold->getData()->getDateSold()));
+                $entity_sold->setDateSold(new DateTime($request->request->all()['sold']['date_sold']));
 
                 $em = $doctrine->getManager();
                 $em->persist($entity_sold);
@@ -237,12 +240,22 @@ class PriceController extends AbstractController
 
                 $arr_sold_part[0]->setQuantitySold($quantity_sold);
                 /*Устанавливаем статус продажи для выведения общей сумму 
-                    всех продаж при одной сделки "NULL"- не выводится, "1"- выводится */
-                $arr_sold_part[0]->setSoldStatus(1);
+                    всех продаж при одной сделки "1"- не выводится, "2"- выводится */
+                $arr_sold_part[0]->setSoldStatus(2);
 
                 $doctrine->getManager()->flush();
 
-                return $this->redirectToRoute('price');
+                if ($invoice_quantity_sold == $quantity_invoice) {
+
+                    /* если количество на складе и количество проданных 
+                    деталей равно ставится в ячейке продажи setSales(2) */
+
+                    $$arr_sold_part[0]->setSales(2);
+
+                    $doctrine->getManager()->flush();
+                }
+
+                return $this->redirectToRoute('sold_price');
             } else {
 
                 /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
@@ -277,6 +290,23 @@ class PriceController extends AbstractController
             'legend' => 'Продажа детали',
             'form_sold' => $form_sold->createView(),
             'arr_sold_part' => $arr_sold_part,
+            'arr_sale_list' => $arr_sale_list,
         ]);
+    }
+
+    /* функция удаления */
+    #[Route('/delete_sale_list', name: 'delete_sale_list')]
+    public function deleteInvoice(ManagerRegistry $doctrine, Request $request): Response
+    {
+        //dd($request->request->all());
+        $id_delete_sale_list = $request->request->all()['delete_sale_list'];
+
+        $delete_sold_status = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
+
+        $delete_sold_status->setSoldStatus(1);
+
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('sold_price');
     }
 }

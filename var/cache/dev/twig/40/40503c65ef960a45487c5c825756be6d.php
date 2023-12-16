@@ -581,28 +581,23 @@ $context["price"], "getQuantity", [], "method", false, false, false, 147)) * twi
                         echo "\">Продать</button></td>
                                     
                             </form>
-
-                                ";
-                        // line 158
-                        echo "                                    ";
-                        // line 192
-                        echo "                        </tr> 
+                        </tr> 
                     ";
                     }
-                    // line 194
+                    // line 156
                     echo "                ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['price'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 195
+                // line 157
                 echo "            ";
             } else {
-                // line 196
+                // line 158
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 198
+            // line 160
             echo "        ";
         }
         $_parent = $context['_parent'];
@@ -628,7 +623,7 @@ $context["price"], "getQuantity", [], "method", false, false, false, 147)) * twi
 
     public function getDebugInfo()
     {
-        return array (  606 => 198,  602 => 196,  599 => 195,  593 => 194,  589 => 192,  587 => 158,  580 => 151,  573 => 147,  572 => 146,  567 => 144,  566 => 143,  561 => 141,  556 => 139,  551 => 137,  546 => 135,  541 => 133,  536 => 131,  531 => 129,  526 => 127,  521 => 125,  516 => 123,  513 => 122,  511 => 121,  510 => 120,  508 => 119,  503 => 118,  500 => 117,  495 => 116,  493 => 115,  483 => 114,  471 => 110,  464 => 108,  445 => 93,  440 => 92,  438 => 91,  428 => 90,  411 => 82,  406 => 80,  403 => 79,  401 => 78,  396 => 76,  392 => 75,  387 => 74,  381 => 73,  379 => 72,  373 => 71,  368 => 69,  364 => 68,  359 => 67,  353 => 66,  351 => 65,  345 => 64,  340 => 62,  336 => 61,  331 => 60,  325 => 59,  323 => 58,  317 => 57,  312 => 55,  308 => 54,  303 => 53,  297 => 52,  295 => 51,  289 => 50,  284 => 48,  280 => 47,  275 => 46,  269 => 45,  267 => 44,  261 => 43,  258 => 42,  256 => 41,  253 => 40,  251 => 39,  248 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  601 => 160,  597 => 158,  594 => 157,  588 => 156,  580 => 151,  573 => 147,  572 => 146,  567 => 144,  566 => 143,  561 => 141,  556 => 139,  551 => 137,  546 => 135,  541 => 133,  536 => 131,  531 => 129,  526 => 127,  521 => 125,  516 => 123,  513 => 122,  511 => 121,  510 => 120,  508 => 119,  503 => 118,  500 => 117,  495 => 116,  493 => 115,  483 => 114,  471 => 110,  464 => 108,  445 => 93,  440 => 92,  438 => 91,  428 => 90,  411 => 82,  406 => 80,  403 => 79,  401 => 78,  396 => 76,  392 => 75,  387 => 74,  381 => 73,  379 => 72,  373 => 71,  368 => 69,  364 => 68,  359 => 67,  353 => 66,  351 => 65,  345 => 64,  340 => 62,  336 => 61,  331 => 60,  325 => 59,  323 => 58,  317 => 57,  312 => 55,  308 => 54,  303 => 53,  297 => 52,  295 => 51,  289 => 50,  284 => 48,  280 => 47,  275 => 46,  269 => 45,  267 => 44,  261 => 43,  258 => 42,  256 => 41,  253 => 40,  251 => 39,  248 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -786,44 +781,6 @@ $context["price"], "getQuantity", [], "method", false, false, false, 147)) * twi
                                     <td><button class=\"sales\" type=\"submit\" name=\"sold_price\" value=\"{{ price.getId() }}\">Продать</button></td>
                                     
                             </form>
-
-                                {#<form action=\"/sales_parts\" name=\"form_sales\" method=\"post\">
-
-                                    Переменный для вывода данных в форме когда форма не прошла валидацию#}
-                                    {#{% set quantity_sold = '' %}
-                                    {% set price_sold = '' %}
-                                    {% set date_sold = '' %}
-
-                                        {% for value_quantity_sold in app.flashes('quantity_sold') %}  
-                                            {% set quantity_sold = value_quantity_sold %}
-                                        {% endfor %}
-                                        {% for value_price_sold in app.flashes('price_sold') %}  
-                                            {% set price_sold = value_price_sold %}
-                                        {% endfor %}
-                                        {% for value_date_sold in app.flashes('date_sold') %}  
-                                            {% set date_sold = value_date_sold %}
-                                        {% endfor %}
-                                    
-                                    <td><input type=\"number\" name=\"quantity_sold\" required=\"required\" 
-                                        style=\"width: 70px\" placeholder=\"шт\" value=\"{{ quantity_sold }}\" />
-                                                {% for message in app.flashes('[quantity_sold_error]') %}
-                                                {{ message }}
-                                                {% endfor %}
-                                                {% for message in app.flashes('[sum_quantity_sold_error]') %}
-                                                {% endfor %}</td>
-
-                                    
-                                    <td><input type=\"number\" name=\"price_sold\" required=\"required\" 
-                                        style=\"width: 98px\" placeholder=\"Цена\" value=\"{{ price_sold }}\" />
-                                                {% for message in app.flashes('[price_sold_error]') %}
-                                                {{ message }}
-                                                {% endfor %}</td>
-                                    
-                                    <td><input type=\"date\" name=\"date_sold\" required=\"required\" value=\"{{ date_sold }}\" /></td>
-
-                                    <td><button class=\"sales\" type=\"submit\" name=\"sales\" value=\"{{ incoming_documents.getId() }}\">Продано</button></td>  
-
-                                </form>#}
                         </tr> 
                     {% endif %}
                 {% endfor %}

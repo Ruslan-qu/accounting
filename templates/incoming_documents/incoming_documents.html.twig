@@ -12,7 +12,7 @@
 
 {#Форма сохранения счет-фактур#}
     
-    {{ form_start(form_i_d, {'action': path('sales_incoming_documents')}) }}
+    {{ form_start(form_i_d, {'action': path('save_incoming_documents')}) }}
 
         {#{{ dump(app.flashes('children[price]')[0]) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
@@ -71,18 +71,6 @@
                 {{ message }}
             {% endfor %}
             {{ form_errors(form_p_n.manufacturers) }}</th>
-
-            {#{% for value_name_detail in app.flashes('name_details') %}  
-            {% set name_details = value_name_detail %}
-            {% endfor %}
-            <th>{{ form_label(form_p_n.name_details) }}<br>
-            {{ form_widget(form_p_n.name_details, {value : name_details}) }}<br>    
-            {% for message in app.flashes('children[name_details].data') %}
-            {{ message }}
-            {% endfor %}
-            {{ form_errors(form_p_n.name_details) }}</th>#}
-
-        {#{{ form_end(form_p_n) }}#}
         
         {% for value_quantity in app.flashes('quantity') %}  
         {% set quantity = value_quantity %}
