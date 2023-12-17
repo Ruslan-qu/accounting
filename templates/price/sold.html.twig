@@ -62,8 +62,9 @@
                                     
             {#Форма продажи детали#}
             {{ form_start(form_sold) }}
-                {% set quantity_sold_price = '' %}
-                {% set price_sold_price = '' %}
+            {#{{ dump(arr_sale_list[0].getDateSold()) }}#}
+                {% set quantity_sold_price = arr_sale_list[0].getQuantitySold()|default('') %}
+                {% set price_sold_price = (arr_sale_list[0].getPriceSold() / 100)|number_format(2, '.', '')|default('') %}
                 {% set date_sold_price = '' %}
                 {% set id_hidden = sold.getId()|default('') %}
 
@@ -98,7 +99,10 @@
                 <th>{{ form_widget(form_sold.button, {'label': 'Продать', 'attr': {'class': 'save'} }) }}</th>
 
             {{ form_end(form_sold) }}
-                
+    {% else %}
+
+    <h2>Выберите пункт в меню или завершите продажу</h2>  
+
     {% endfor %}               
 
 {% endblock form_save_edit_sales %}

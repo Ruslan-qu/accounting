@@ -175,7 +175,7 @@ class PriceController extends AbstractController
 
         $arr_sale_list = $SoldRepository->findBySaleList();
 
-        //dd($form_sold->getData()->getHiddenSold());
+        //dd($request->request->all()['edit_sold_price']);
 
         if (!empty($_POST['sold_price'])) {
 
@@ -185,6 +185,9 @@ class PriceController extends AbstractController
             $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         } else {
             $id = $form_sold->getData()->getHiddenSold();
+            if (!$id) {
+                $id = $request->request->all()['edit_sold_price'];
+            }
             $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         }
 
@@ -301,11 +304,17 @@ class PriceController extends AbstractController
         //dd($request->request->all());
         $id_delete_sale_list = $request->request->all()['delete_sale_list'];
 
-        $delete_sold_status = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
+        $delete_sold_Invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
 
-        $delete_sold_status->setSoldStatus(1);
+        $delete_sold_Invoice->setSoldStatus(1);
 
-        $doctrine->getManager()->flush();
+        $delete_sold_Invoice->setQuantitySold(0);
+
+        $delete_sold = $doctrine->getRepository(Sold::class)->findOneBy(['id_invoice' => $id_delete_sale_list]);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($delete_sold);
+        $entityManager->flush();
 
         return $this->redirectToRoute('sold_price');
     }

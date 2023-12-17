@@ -143,8 +143,8 @@
                             <td>{{ ((price.getPrice() / 100) 
                                         / price.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ (price.getPrice() / 100) - (((price.getPrice() / 100) 
-                                        / price.getQuantity()) * price.getQuantitySold()) }}</td>
+                            <td>{{ ((price.getPrice() / 100) - (((price.getPrice() / 100) 
+                                        / price.getQuantity()) * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
 
                             <form action="/sold_price" name="sold_price" method="post">
 

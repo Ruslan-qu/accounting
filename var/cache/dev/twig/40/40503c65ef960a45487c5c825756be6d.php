@@ -569,8 +569,8 @@ $context["price"], "getQuantity", [], "method", false, false, false, 144)), 2, "
 
                             <td>";
                         // line 146
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 146) / 100) - (((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 146) / 100) / twig_get_attribute($this->env, $this->source,                         // line 147
-$context["price"], "getQuantity", [], "method", false, false, false, 147)) * twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 147))), "html", null, true);
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 146) / 100) - (((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 146) / 100) / twig_get_attribute($this->env, $this->source,                         // line 147
+$context["price"], "getQuantity", [], "method", false, false, false, 147)) * twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 147))), 2, ".", ""), "html", null, true);
                         echo "</td>
 
                             <form action=\"/sold_price\" name=\"sold_price\" method=\"post\">
@@ -773,8 +773,8 @@ $context["price"], "getQuantity", [], "method", false, false, false, 147)) * twi
                             <td>{{ ((price.getPrice() / 100) 
                                         / price.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ (price.getPrice() / 100) - (((price.getPrice() / 100) 
-                                        / price.getQuantity()) * price.getQuantitySold()) }}</td>
+                            <td>{{ ((price.getPrice() / 100) - (((price.getPrice() / 100) 
+                                        / price.getQuantity()) * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
 
                             <form action=\"/sold_price\" name=\"sold_price\" method=\"post\">
 
