@@ -169,27 +169,28 @@ class PriceController extends AbstractController
 
         /* Подключаем форм */
         $form_sold = $this->createForm(SoldType::class, $entity_sold);
+        $form_complete_sales = $this->createForm(SoldType::class, $entity_sold);
 
         /*Валидация формы */
         $form_sold->handleRequest($request);
 
-        $arr_sale_list = $SoldRepository->findBySaleList();
+        $arr_sale_list[] = $SoldRepository->findBySaleList();
 
-        //dd($request->request->all()['edit_sold_price']);
+        $total_amount_transaction = $SoldRepository->countTotalAmountPriceSold();
+
+        // dd($total_amount_transaction[0][1]);
 
         if (!empty($_POST['sold_price'])) {
 
             /*Открываем деталь по id */
             $id = $request->request->all()['sold_price'];
-
-            $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         } else {
+
             $id = $form_sold->getData()->getHiddenSold();
-            if (!$id) {
-                $id = $request->request->all()['edit_sold_price'];
-            }
-            $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
         }
+        $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
+        //dd($arr_sold_part);
+
 
         /*Валидация формы ручного именения деталей */
         if ($form_sold->isSubmitted()) {
@@ -291,15 +292,147 @@ class PriceController extends AbstractController
         return $this->render('price/sold.html.twig', [
             'title_logo' => 'Продажа детали',
             'legend' => 'Продажа детали',
+            'total_amount_transaction' => $total_amount_transaction[0][1],
             'form_sold' => $form_sold->createView(),
+            'form_complete_sales' => $form_complete_sales->createView(),
             'arr_sold_part' => $arr_sold_part,
             'arr_sale_list' => $arr_sale_list,
         ]);
     }
 
+    /* функция изменения продажи */
+    #[Route('/edit_sold_price', name: 'edit_sold_price')]
+    public function editSoldPrice(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator,
+        InvoiceRepository $InvoiceRepository,
+        SoldRepository $SoldRepository,
+    ): Response {
+
+        /* Подключаем сущности  */
+        $entity_sold = new Sold();
+
+        /* Подключаем форм */
+        $form_sold_edit = $this->createForm(SoldType::class, $entity_sold);
+
+        /*Валидация формы */
+        $form_sold_edit->handleRequest($request);
+
+        //dd($request->request->all()['edit_sold_price']);
+        /*Открываем деталь по id */
+        if (!empty($_POST['edit_sold_price'])) {
+
+
+            $id = $request->request->all()['edit_sold_price'];
+        } else {
+
+            $id = $form_sold_edit->getData()->getHiddenSold();
+        }
+        $arr_sold_part = $SoldRepository->findOneByIdSoldEdit($id);
+        //dd($arr_sold_part);
+
+
+        /*Валидация формы ручного именения деталей */
+        if ($form_sold_edit->isSubmitted()) {
+
+            /* Выводим данные и формы */
+            $quantity_sold = $form_sold_edit->getData()->getQuantitySold();
+
+            /* Выводим данные из базы данных */
+            $quantity_invoice = $arr_sold_part[0]->getIdInvoice()->getQuantity();
+            $invoice_quantity_sold = $arr_sold_part[0]->getIdInvoice()->getQuantitySold();
+            $sum_quantity_sold = $quantity_sold + $invoice_quantity_sold;
+
+            /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
+            $validator = Validation::createValidator();
+
+            $input = [
+                'quantity_sold_error' => $quantity_sold,
+                'sum_quantity_sold_error' => $sum_quantity_sold,
+            ];
+
+            $constraint = new Collection([
+                'quantity_sold_error' => new Range(
+                    max: $quantity_invoice,
+                    notInRangeMessage: 'Недопустимое число',
+                ),
+                'sum_quantity_sold_error' => new Range(
+                    max: $quantity_invoice,
+                    notInRangeMessage: 'Недопустимое число',
+                ),
+            ]);
+
+            $errors = $validator->validate($input, $constraint);
+
+            /* Валидация формы */
+
+            if ($form_sold_edit->isValid() && !$errors->count()) {
+                //dd($form_sold_edit);
+
+                $arr_sold_part[0]->setIdInvoice($arr_sold_part[0]->getIdInvoice());
+
+                $arr_sold_part[0]->setQuantitySold($quantity_sold);
+
+                $arr_sold_part[0]->setPriceSold($form_sold_edit->getData()->getPriceSold() * 100);
+
+                $arr_sold_part[0]->setDateSold(new DateTime($request->request->all()['sold']['date_sold']));
+
+                $arr_sold_part[0]->getIdInvoice()->setQuantitySold($quantity_sold);
+
+                $doctrine->getManager()->flush();
+
+                /* если количество на складе и количество проданных 
+                    деталей равно ставится в ячейке продажи setSales(2) */
+
+                if ($invoice_quantity_sold == $quantity_invoice) {
+
+                    $$arr_sold_part[0]->getIdInvoice()->setSales(2);
+
+                    $doctrine->getManager()->flush();
+                }
+
+                return $this->redirectToRoute('sold_price');
+            } else {
+
+                /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
+                $value_form_sold = $request->request->all();
+                if ($value_form_sold) {
+                    foreach ($value_form_sold as $key => $values) {
+                        if (is_iterable($values)) {
+                            foreach ($values as $key => $value) {
+                                $this->addFlash($key . '_sold', $value);
+                            }
+                        }
+                    }
+                }
+
+                /* Выводим ошибки валидации, через сессии  */
+                if ($errors) {
+                    foreach ($errors as $key) {
+                        //dd($key);
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
+            }
+        }
+
+        return $this->render('price/edit_sold.html.twig', [
+            'title_logo' => 'Продажа детали',
+            'legend' => 'Продажа детали',
+            'form_sold_edit' => $form_sold_edit->createView(),
+            'arr_sold_part' => $arr_sold_part,
+        ]);
+    }
+
     /* функция удаления */
     #[Route('/delete_sale_list', name: 'delete_sale_list')]
-    public function deleteInvoice(ManagerRegistry $doctrine, Request $request): Response
+    public function deleteSaleList(ManagerRegistry $doctrine, Request $request): Response
     {
         //dd($request->request->all());
         $id_delete_sale_list = $request->request->all()['delete_sale_list'];
@@ -317,5 +450,30 @@ class PriceController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('sold_price');
+    }
+
+    /* функция завершения сделки */
+    #[Route('/complete_sales', name: 'complete_sales')]
+    public function completeSales(ManagerRegistry $doctrine, Request $request, InvoiceRepository $InvoiceRepository,): Response
+    {
+
+        $InvoiceRepository->completeSales();
+        //dd($request->request->all());
+
+        $id_delete_sale_list = $request->request->all()['delete_sale_list'];
+
+        $delete_sold_Invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
+
+        $delete_sold_Invoice->setSoldStatus(1);
+
+        $delete_sold_Invoice->setQuantitySold(0);
+
+        $delete_sold = $doctrine->getRepository(Sold::class)->findOneBy(['id_invoice' => $id_delete_sale_list]);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($delete_sold);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('price');
     }
 }

@@ -63,4 +63,39 @@ class SoldRepository extends ServiceEntityRepository
         //dd($query->getResult());
         return $query->getResult();
     }
+
+    /**
+     * @return Sold[] Returns an array of Invoice objects
+     */
+    public function findOneByIdSoldEdit($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, i, d
+                FROM App\Entity\Sold s
+                INNER JOIN s.id_invoice i
+                INNER JOIN i.id_details d
+                WHERE i.id = :id'
+        )->setParameter('id', $id);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
+
+    /**
+     * @return Sold[] Returns общая сумма price_sold
+     */
+    public function countTotalAmountPriceSold(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT SUM (s.price_sold)
+                FROM App\Entity\Sold s
+                INNER JOIN s.id_invoice i
+                WHERE i.sold_status = :sold_status'
+        )->setParameter('sold_status', '2');
+        //dd($query->getResult());
+        return $query->getResult();
+    }
 }

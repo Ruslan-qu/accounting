@@ -63,8 +63,8 @@
             {#Форма продажи детали#}
             {{ form_start(form_sold) }}
             {#{{ dump(arr_sale_list[0].getDateSold()) }}#}
-                {% set quantity_sold_price = arr_sale_list[0].getQuantitySold()|default('') %}
-                {% set price_sold_price = (arr_sale_list[0].getPriceSold() / 100)|number_format(2, '.', '')|default('') %}
+                {% set quantity_sold_price = '' %}
+                {% set price_sold_price = '' %}
                 {% set date_sold_price = '' %}
                 {% set id_hidden = sold.getId()|default('') %}
 
@@ -107,28 +107,52 @@
 
 {% endblock form_save_edit_sales %}
 
-{% block form_search %}{% endblock form_search %}
+{% block form_search %}
+    {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
+        {#{% set id_hidden_complete_sales = sold.getId()|default('') %}
+
+        {% for value_id_hidden in app.flashes('hidden_sold') %}  
+            {% set id_hidden_complete_sales = value_id_hidden %}
+        {% endfor %}
+        {{ form_widget(form_complete_sales.hidden_sold, {value : id_hidden_complete_sales}) }}#}
+
+        {% do form_widget(form_complete_sales.hidden_sold) %}
+        {% do form_widget(form_complete_sales.id_invoice) %}
+        {% do form_widget(form_complete_sales.quantity_sold) %}
+        {% do form_widget(form_complete_sales.price_sold) %}
+        {% do form_widget(form_complete_sales.date_sold) %}
+                                            
+        <th>{{ form_widget(form_complete_sales.button
+            , {'label': 'Завершить сделку', 'attr': {'class': 'save'} }) }}</th>
+    
+    {{ form_end(form_complete_sales) }}
+
+    <th>Цена общая - {{total_amount_transaction / 100}}</th>
+{% endblock form_search %}
 
 {% block table_thead_tr %}
-{% for sale_list in arr_sale_list %}
-         
-            <th>№ Детали</th>
-            <th>Название детали</th>
-            <th>Марка</th>
-            <th>Сторона</th>
-            <th>Перед Зад</th>
-            <th>Кол-во</th>
-            <th>Цена шт</th>
-            <th>Кол-во</th>
-            <th>Цена</th>
-            <th>Изменить</th>
-            <th>Удалить</th>
-        
+ 
+    {% for sale_list in arr_sale_list %}
+
+        <th>№ Детали</th>
+        <th>Название детали</th>
+        <th>Марка</th>
+        <th>Сторона</th>
+        <th>Перед Зад</th>
+        <th>Кол-во</th>
+        <th>Цена шт</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+
     {% endfor %}
+
 {% endblock table_thead_tr %}
 
 {% block tbody %}
-    {% for sale_list in arr_sale_list %}
+    {% for value_sale_list in arr_sale_list %}
+        {% for sale_list in value_sale_list %}
         
             <tr>
                 <td>{{ sale_list.getIdInvoice().getIdDetails().getPartNumbers() }}</td>
@@ -151,7 +175,7 @@
 
                 <td>{{ (sale_list.getPriceSold() / 100)|number_format(2, '.', '') }}</td>      
 
-                <form action="/sold_price" name="edit_sold_price" method="post">
+                <form action="/edit_sold_price" name="edit_sold_price" method="post">
 
                     <td><button class="edit" type="submit" name="edit_sold_price" value="{{ sale_list.getIdInvoice().getId() }}">Изменить</button></td>
                                     
@@ -163,5 +187,6 @@
                                     
                 </form>
             </tr> 
+        {% endfor %}    
     {% endfor %}
 {% endblock tbody %}

@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block form_save_edit_sales %}
+
+    {% for sold in arr_sold_part %}
+
+                <th>№ Детали</th>
+                <th>№ Оригинал</th>
+                <th>Производитель</th>
+                <th>Описание детали</th>
+                <th>Название детали</th>
+                <th>Марка</th>
+                <th>Сторона</th>
+                <th>Кузов</th>
+                <th>Перед Зад</th>
+            </tr>
+            <tr>
+            
+                <th>{{ sold.getIdInvoice().getIdDetails().getPartNumbers() }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdOriginalNumber().getOriginalNumber() }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdManufacturer().getManufacturers() }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getNameDetail() }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdPartName().getPartName()|default('') }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdCarBrand().getCarBrand()|default('') }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdSide().getSide()|default('') }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdBody().getBody()|default('') }}</th>
+
+                <th>{{ sold.getIdInvoice().getIdDetails().getIdAxle().getAxle()|default('') }}</th>
+
+            </tr>
+            <tr>
+                <th>Кол-во</th>
+                <th>Цена шт</th>
+                <th>Цена общая</th>
+                <th>Кол-во</th>
+                <th>Цена</th>
+                <th>Дата прод-жи</th>
+                <th>Продать</th>
+            </tr>
+            <tr>
+
+                <th>{{ sold.getIdInvoice().getQuantity() }}</th>
+
+                <th>{{ ((sold.getIdInvoice().getPrice() / 100) 
+                        / sold.getIdInvoice().getQuantity())|number_format(2, '.', '') }}</th>
+
+                <th>{{ (sold.getIdInvoice().getPrice() / 100)|number_format(2, '.', '') }}</th>
+                                    
+            {#Форма продажи детали#}
+            {{ form_start(form_sold_edit) }}
+            {#{{ dump(sold.getDateSold()|date("Y-m-d")) }}#}
+                {% set quantity_sold_price = sold.getQuantitySold()|default('') %}
+                {% set price_sold_price = (sold.getPriceSold() / 100)|default('') %}
+                {% set date_sold_price = sold.getDateSold()|date("Y-m-d")|default('') %}
+                {% set id_hidden = sold.getIdInvoice().getId()|default('') %}
+
+                {% for value_id_hidden in app.flashes('hidden_sold') %}  
+                    {% set id_hidden = value_id_hidden %}
+                {% endfor %}
+                {{ form_widget(form_sold_edit.hidden_sold, {value : id_hidden}) }}
+
+                {% for value_quantity_sold in app.flashes('quantity_sold_sold') %}  
+                    {% set quantity_sold_price = value_quantity_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold_edit.quantity_sold, {value : quantity_sold_price}) }}<br>
+                {% for message in app.flashes('[quantity_sold_error]') %}
+                    {{ message }}
+                {% endfor %}
+                {{ form_errors(form_sold_edit.quantity_sold) }}</th>
+
+                {% for value_price_sold in app.flashes('price_sold_sold') %}  
+                    {% set price_sold_price = value_price_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold_edit.price_sold, {value : price_sold_price}) }}<br>
+                {{ form_errors(form_sold_edit.price_sold) }}</th>
+
+                {% for value_date_sold in app.flashes('date_sold_sold') %}  
+                    {% set date_sold_price = value_date_sold %}
+                {% endfor %}
+                <th>{{ form_widget(form_sold_edit.date_sold, {value : date_sold_price}) }}<br>
+                {{ form_errors(form_sold_edit.date_sold) }}</th>
+
+                {% do form_widget(form_sold_edit.id_invoice) %}
+                                            
+                <th>{{ form_widget(form_sold_edit.button, {'label': 'Продать', 'attr': {'class': 'save'} }) }}</th>
+
+            {{ form_end(form_sold_edit) }}
+
+    {% endfor %}               
+
+{% endblock form_save_edit_sales %}
+
+{% block form_search %}{% endblock form_search %}
+
+{% block table_thead_tr %}{% endblock table_thead_tr %}
+
+{% block tbody %}{% endblock tbody %}

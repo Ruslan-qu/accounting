@@ -350,4 +350,26 @@ class InvoiceRepository extends ServiceEntityRepository
         // dd($query->getResult());
         return $query->getResult();
     }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function completeSales(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i
+                FROM App\Entity\Invoice i
+                WHERE i.sold_status = :sold_status'
+        )->setParameter('sold_status', '2');
+        // dd($query->getResult());
+        $result = $query->getResult();
+
+        // foreach ($result as $key => $value) {
+        //      
+        // }
+
+        return $result;
+    }
 }
