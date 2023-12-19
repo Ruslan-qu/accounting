@@ -22,7 +22,6 @@ return [
     'edit_counterparty' => [[], ['_controller' => 'App\\Controller\\Sections_header\\CounterpartyController::EditCounterparty'], [], [['text', '/edit_counterparty']], [], [], []],
     'incoming_documents' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SearchIncomingDocuments'], [], [['text', '/incoming_documents']], [], [], []],
     'save_incoming_documents' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SalesIncomingDocuments'], [], [['text', '/save_incoming_documents']], [], [], []],
-    'sales_parts' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SalesParts'], [], [['text', '/sales_parts']], [], [], []],
     'refund_part' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::Refund'], [], [['text', '/refund_part']], [], [], []],
     'reset_invoice' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::Reset'], [], [['text', '/reset_invoice']], [], [], []],
     'delete_invoice' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::deleteInvoice'], [], [['text', '/delete_invoice']], [], [], []],
@@ -44,6 +43,6 @@ return [
     'edit_refund' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::EditRefund'], [], [['text', '/edit_refund']], [], [], []],
     'delete_refund' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::deleteRefund'], [], [['text', '/delete_refund']], [], [], []],
     'edit_activity' => [[], ['_controller' => 'App\\Controller\\Sections_header\\RefundController::EditActivity'], [], [['text', '/edit_activity']], [], [], []],
-    'sales' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::index'], [], [['text', '/sales']], [], [], []],
+    'sales' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::searchSales'], [], [['text', '/sales']], [], [], []],
     'health_check' => [[], ['_controller' => 'App\\Controller\\Test\\HealthCheckAction'], [], [['text', '/health-check']], [], [], []],
 ];

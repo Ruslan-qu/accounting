@@ -115,6 +115,7 @@
             <th>Кол-во</th>
             <th>Цена общая</th>
             <th>Состояния</th>
+            <th>Дата возврата</th>
             <th>Изменить<br>состояния</th>
             <th>Отменить<br>возврат</th>
             <th>Удалить</th>
@@ -149,6 +150,8 @@
                             <td>{{ (search_refund.getPrice() / 100)|number_format(2, '.', '')}}</td>
 
                             <td>{{ search_refund.getIdRefundActivity().getActivity() }}</td>
+
+                            <td>{{ search_refund.getRefundDateInvoice().getRefundDate()|date("d-m-Y") }}</td>
 
                             <form action="/edit_activity" name="edit_activity" method="post">
 

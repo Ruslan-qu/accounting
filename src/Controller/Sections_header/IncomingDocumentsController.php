@@ -7,6 +7,7 @@ use App\Entity\Sold;
 use DateTimeImmutable;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
+use App\Entity\RefundDate;
 use App\Entity\Availability;
 use App\Entity\Counterparty;
 use App\Entity\SearchInvoice;
@@ -37,10 +38,6 @@ class IncomingDocumentsController extends AbstractController
         InvoiceRepository $InvoiceRepository,
         ValidatorInterface $validator
     ): Response {
-
-        /*Подключаем сессии, для передачи ошибок валидации*/
-        $session = new Session();
-        $session->start();
 
         /*Подключаем класс базы данных*/
         $entity_incoming_documents = new Invoice();
@@ -94,19 +91,11 @@ class IncomingDocumentsController extends AbstractController
                     $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['id_counterparty' => $id_counterparty_search]);
                 } elseif ($part_numbers_search) {
-                    $arr_details_manufacturer_details = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['part_numbers' => $part_numbers_search]);
-                    if ($arr_details_manufacturer_details) {
-                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                            ->findBy(['id_details' => $arr_details_manufacturer_details[0]->getId()]);
-                    }
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findBySearchNumber($part_numbers_search);
                 } elseif ($manufacturers_search) {
-                    $arr_details_manufacturer = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['manufacturers' => $manufacturers_search]);
-                    if ($arr_details_manufacturer) {
-                        $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                            ->findBy(['id_manufacturer' => $arr_details_manufacturer[0]->getId()]);
-                    }
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findBySearchManufacturers($manufacturers_search);
                 } elseif ($s_price_search && $po_price_search) {
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findByPrice($s_price_search, $po_price_search);
@@ -163,16 +152,6 @@ class IncomingDocumentsController extends AbstractController
                 return $this->redirectToRoute('incoming_documents');
             }
         }
-
-        /* Валидация форм продажи, выводим ошибки валидации, 
-        вбитые данные в форм продажи если форма не прошла валидацию, через сессии  */
-        if ($session->getFlashBag()->has('sales')) {
-            $error_id = $session->getFlashBag()->get('sales')[0];
-            $arr_incoming_documents_error[] = $doctrine->getRepository(Invoice::class)
-                ->find($error_id);
-            $arr_incoming_documents[] = $arr_incoming_documents_error;
-        }
-
 
         return $this->render('incoming_documents/incoming_documents.html.twig', [
             'title_logo' => 'Входящие документы',
@@ -325,140 +304,26 @@ class IncomingDocumentsController extends AbstractController
         }
     }
 
-
-    /* Функция формы продажи */
-    #[Route('/sales_parts', name: 'sales_parts')]
-    public function SalesParts(
-        ManagerRegistry $doctrine,
-        Request $request,
-        ValidatorInterface $validator
-    ): Response {
-
-        /* Валидация формы продажи */
-        if (
-            isset($_POST['quantity_sold'])
-            && isset($_POST['price_sold'])
-            && isset($_POST['date_sold'])
-        ) {
-            /* Подключаем сущности */
-            $entity_sold = new Sold();
-
-            /* Выводим данные и формы */
-            $id = $request->request->all()['sales'];
-            $quantity_sold = $request->request->all()['quantity_sold'];
-            $price_sold = $request->request->all()['price_sold'];
-
-            /* Выводим по ид из базы данных */
-            $entity_sales = $doctrine->getRepository(Invoice::class)->find($id);
-            $quantity = $entity_sales->getQuantity();
-            $entity_quantity_sold = $entity_sales->getQuantitySold();
-            $sum_quantity_sold = $quantity_sold + $entity_quantity_sold;
-
-            /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
-            $validator = Validation::createValidator();
-
-            $input = [
-                'quantity_sold_error' => $quantity_sold,
-                'sum_quantity_sold_error' => $sum_quantity_sold,
-                'price_sold_error' => $price_sold,
-            ];
-
-            $constraint = new Assert\Collection([
-                'quantity_sold_error' => new Assert\Range(
-                    min: 1,
-                    max: $quantity,
-                    notInRangeMessage: 'Недопустимое число',
-                ),
-                'sum_quantity_sold_error' => new Assert\Range(
-                    min: 1,
-                    max: $quantity,
-                ),
-                'price_sold_error' => new Assert\Range(
-                    min: 1,
-                    minMessage: 'Недопустимое число',
-                ),
-            ]);
-
-            $errors = $validator->validate($input, $constraint);
-
-            /* Валидация формы */
-            if (!$errors->count()) {
-
-                /* Запись в базу данных */
-                $entity_sales->setQuantitySold(
-                    $entity_quantity_sold +
-                        $request->request->all()['quantity_sold']
-                );
-
-                $entity_sold->setInvoice($entity_sales);
-
-                $entity_sold->setQuantitySold(
-                    $request->request->all()['quantity_sold']
-                );
-
-                $entity_sold->setPriceSold(
-                    $request->request->all()['price_sold']
-                );
-                $entity_sold->setDateSold(
-                    new DateTimeImmutable($request->request->all()['date_sold'])
-                );
-
-                $em = $doctrine->getManager();
-                $em->persist($entity_sold);
-                $em->flush();
-
-                $quantity_sold = $entity_sales->getQuantitySold();
-
-                if ($quantity_sold == $quantity) {
-
-                    $entity_sales->setSales(2);
-
-                    $doctrine->getManager()->flush();
-                }
-
-                return $this->redirectToRoute('incoming_documents');
-            } else {
-                /* Выводим вбитые данные в форму продаж если форма не прошла валидацию, через сессии  */
-                $value_sold = $request->request->all();
-                if ($value_sold) {
-                    foreach ($value_sold as $key => $value) {
-                        $this->addFlash($key, $value);
-                    }
-                }
-
-                /* Выводим ошибки валидации, через сессии  */
-                if ($errors) {
-                    foreach ($errors as $key) {
-                        //dd($key);
-                        $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath();
-                        $this->addFlash(
-                            $propertyPath,
-                            $message
-                        );
-                    }
-                }
-
-                return $this->redirectToRoute('incoming_documents');
-            }
-        }
-    }
-
     /* Функция возврата , изменяем данные в базе данных ячейке возврат  */
     #[Route('/refund_part', name: 'refund_part', methods: ['GET'])]
     public function Refund(ManagerRegistry $doctrine, Request $request): Response
     {
+        $entity_refund_date = new RefundDate();
+
         $id = $request->query->get('refund_part');
-
         $refund = $doctrine->getRepository(Invoice::class)->find($id);
-
         $refund->setRefund(2);
-
         $id_refund_activit = $doctrine->getRepository(RefundActivity::class)->find(2);
-
         $refund->setIdRefundActivity($id_refund_activit);
 
-        $doctrine->getManager()->flush();
+        // $doctrine->getManager()->flush();
+
+        $entity_refund_date->setIdInvoiceRefundDate($refund);
+        $entity_refund_date->setRefundDate(new \DateTime());
+        //dd($entity_refund_date);
+        $em = $doctrine->getManager();
+        $em->persist($entity_refund_date);
+        $em->flush();
 
         return $this->redirectToRoute('incoming_documents');
     }

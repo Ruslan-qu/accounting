@@ -5,13 +5,9 @@ namespace App\Controller\Sections_header;
 use DateTime;
 use App\Entity\Sold;
 use App\Form\SoldType;
-use DateTimeImmutable;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
-use App\Entity\OriginalRooms;
-use App\Form\OriginalRoomsType;
 use App\Repository\SoldRepository;
-use App\Form\IncomingDocumentsType;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Range;
-use App\Repository\IdDetailsManufacturerRepository;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,11 +25,9 @@ class PriceController extends AbstractController
     /*функция поиска по данным */
     #[Route('/price', name: 'price')]
     public function searchPrice(
-        ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
-        IdDetailsManufacturerRepository $IdDetailsManufacturerRepository
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
@@ -42,18 +35,12 @@ class PriceController extends AbstractController
 
         /*Подключаем класс базы данных*/
         $entity_price = new IdDetailsManufacturer();
-        $entity_original_number = new OriginalRooms();
-        $entity_incoming_documents = new Invoice();
 
         /*Подключаем формы */
         $form_price_search = $this->createForm(PartNoType::class, $entity_price);
-        $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
-        $form_original_number = $this->createForm(OriginalRoomsType::class, $entity_original_number);
 
         /*Валидация формы */
         $form_price_search->handleRequest($request);
-        $form_incoming_documents->handleRequest($request);
-        $form_original_number->handleRequest($request);
 
         /*Подключаем валидацию форм */
         $errors_search_price = $validator->validate($form_price_search);
@@ -67,7 +54,7 @@ class PriceController extends AbstractController
                     '',
                     $form_price_search->getData()->getPartNumbers()
                 ));
-                //dd($request);
+
                 $id_part_name_search = $form_price_search->getData()->getIdPartName();
                 $id_car_brand_search = $form_price_search->getData()->getIdCarBrand();
                 $id_side_search = $form_price_search->getData()->getIdSide();
@@ -75,9 +62,7 @@ class PriceController extends AbstractController
                 $id_axle_search = $form_price_search->getData()->getIdAxle();
 
                 $arr_form_price_search = $request->request->all()['part_no'];
-
                 $array_filter_part_no = array_filter($arr_form_price_search);
-                //dd($array_filter_part_no);
 
                 if ($part_numbers_search) {
 
@@ -117,7 +102,7 @@ class PriceController extends AbstractController
                         }
                     }
                 }
-                //dd($errors_search_original_number);
+
                 /* Выводим сообщения ошибки в форму поиска, через сессии  */
                 if ($errors_search_price) {
                     foreach ($errors_search_price as $key) {
@@ -132,8 +117,6 @@ class PriceController extends AbstractController
 
                 return $this->redirectToRoute('price');
             }
-        } else {
-            $arr_price[] = $InvoiceRepository->findAllInvoicePartNo();
         }
 
 
@@ -174,11 +157,11 @@ class PriceController extends AbstractController
         /*Валидация формы */
         $form_sold->handleRequest($request);
 
+        /*Выводим список продоваемых деталей*/
         $arr_sale_list[] = $SoldRepository->findBySaleList();
 
+        /*Выводим общую сумму */
         $total_amount_transaction = $SoldRepository->countTotalAmountPriceSold();
-
-        // dd($total_amount_transaction[0][1]);
 
         if (!empty($_POST['sold_price'])) {
 
@@ -188,11 +171,10 @@ class PriceController extends AbstractController
 
             $id = $form_sold->getData()->getHiddenSold();
         }
+        /*Открываем деталь по id */
         $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
-        //dd($arr_sold_part);
 
-
-        /*Валидация формы ручного именения деталей */
+        /*Валидация формы */
         if ($form_sold->isSubmitted()) {
 
             /* Выводим данные и формы */
@@ -227,8 +209,8 @@ class PriceController extends AbstractController
             /* Валидация формы */
 
             if ($form_sold->isValid() && !$errors->count()) {
-                //dd($request->request->all()['sold']['date_sold']);
 
+                /* Сохранения формы */
                 $entity_sold->setIdInvoice($arr_sold_part[0]);
 
                 $entity_sold->setQuantitySold($quantity_sold);
@@ -249,16 +231,6 @@ class PriceController extends AbstractController
 
                 $doctrine->getManager()->flush();
 
-                if ($invoice_quantity_sold == $quantity_invoice) {
-
-                    /* если количество на складе и количество проданных 
-                    деталей равно ставится в ячейке продажи setSales(2) */
-
-                    $$arr_sold_part[0]->setSales(2);
-
-                    $doctrine->getManager()->flush();
-                }
-
                 return $this->redirectToRoute('sold_price');
             } else {
 
@@ -277,7 +249,6 @@ class PriceController extends AbstractController
                 /* Выводим ошибки валидации, через сессии  */
                 if ($errors) {
                     foreach ($errors as $key) {
-                        //dd($key);
                         $message = $key->getmessage();
                         $propertyPath = $key->getpropertyPath();
                         $this->addFlash(
@@ -306,7 +277,6 @@ class PriceController extends AbstractController
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator,
-        InvoiceRepository $InvoiceRepository,
         SoldRepository $SoldRepository,
     ): Response {
 
@@ -319,21 +289,18 @@ class PriceController extends AbstractController
         /*Валидация формы */
         $form_sold_edit->handleRequest($request);
 
-        //dd($request->request->all()['edit_sold_price']);
         /*Открываем деталь по id */
         if (!empty($_POST['edit_sold_price'])) {
-
 
             $id = $request->request->all()['edit_sold_price'];
         } else {
 
             $id = $form_sold_edit->getData()->getHiddenSold();
         }
+        /*Открываем деталь по id */
         $arr_sold_part = $SoldRepository->findOneByIdSoldEdit($id);
-        //dd($arr_sold_part);
 
-
-        /*Валидация формы ручного именения деталей */
+        /*Валидация формы */
         if ($form_sold_edit->isSubmitted()) {
 
             /* Выводим данные и формы */
@@ -368,7 +335,6 @@ class PriceController extends AbstractController
             /* Валидация формы */
 
             if ($form_sold_edit->isValid() && !$errors->count()) {
-                //dd($form_sold_edit);
 
                 $arr_sold_part[0]->setIdInvoice($arr_sold_part[0]->getIdInvoice());
 
@@ -381,16 +347,6 @@ class PriceController extends AbstractController
                 $arr_sold_part[0]->getIdInvoice()->setQuantitySold($quantity_sold);
 
                 $doctrine->getManager()->flush();
-
-                /* если количество на складе и количество проданных 
-                    деталей равно ставится в ячейке продажи setSales(2) */
-
-                if ($invoice_quantity_sold == $quantity_invoice) {
-
-                    $$arr_sold_part[0]->getIdInvoice()->setSales(2);
-
-                    $doctrine->getManager()->flush();
-                }
 
                 return $this->redirectToRoute('sold_price');
             } else {
@@ -410,7 +366,6 @@ class PriceController extends AbstractController
                 /* Выводим ошибки валидации, через сессии  */
                 if ($errors) {
                     foreach ($errors as $key) {
-                        //dd($key);
                         $message = $key->getmessage();
                         $propertyPath = $key->getpropertyPath();
                         $this->addFlash(
@@ -434,7 +389,6 @@ class PriceController extends AbstractController
     #[Route('/delete_sale_list', name: 'delete_sale_list')]
     public function deleteSaleList(ManagerRegistry $doctrine, Request $request): Response
     {
-        //dd($request->request->all());
         $id_delete_sale_list = $request->request->all()['delete_sale_list'];
 
         $delete_sold_Invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
@@ -454,25 +408,28 @@ class PriceController extends AbstractController
 
     /* функция завершения сделки */
     #[Route('/complete_sales', name: 'complete_sales')]
-    public function completeSales(ManagerRegistry $doctrine, Request $request, InvoiceRepository $InvoiceRepository,): Response
+    public function completeSales(ManagerRegistry $doctrine): Response
     {
+        /* Выводим список деталей на продажу */
+        $complete_sales_invoice = $doctrine->getRepository(Invoice::class)->findBy(['sold_status' => '2']);
 
-        $InvoiceRepository->completeSales();
-        //dd($request->request->all());
+        foreach ($complete_sales_invoice as $key => $value) {
 
-        $id_delete_sale_list = $request->request->all()['delete_sale_list'];
+            $value->setSoldStatus(1);
 
-        $delete_sold_Invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
+            $quantity_invoice = $value->getQuantity();
+            $invoice_quantity_sold = $value->getQuantitySold();
 
-        $delete_sold_Invoice->setSoldStatus(1);
+            /* если количество на складе и количество проданных 
+                        деталей равно, в ячейке продажи setSales(2) */
 
-        $delete_sold_Invoice->setQuantitySold(0);
+            if ($invoice_quantity_sold == $quantity_invoice) {
 
-        $delete_sold = $doctrine->getRepository(Sold::class)->findOneBy(['id_invoice' => $id_delete_sale_list]);
+                $value->setSales(2);
+            }
+        }
 
-        $entityManager = $doctrine->getManager();
-        $entityManager->remove($delete_sold);
-        $entityManager->flush();
+        $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('price');
     }

@@ -543,19 +543,20 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
             <th>Кол-во</th>
             <th>Цена общая</th>
             <th>Состояния</th>
+            <th>Дата возврата</th>
             <th>Изменить<br>состояния</th>
             <th>Отменить<br>возврат</th>
             <th>Удалить</th>
         ";
                 }
-                // line 122
+                // line 123
                 echo "    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_refund'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         } else {
-            // line 124
+            // line 125
             echo "    <h2>Видите параметры в поиск</h2> 
 ";
         }
@@ -567,7 +568,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
 
     }
 
-    // line 128
+    // line 129
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -577,74 +578,79 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 129
-        echo "        ";
         // line 130
         echo "        ";
+        // line 131
+        echo "        ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 130, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 131, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["arr_search_refund"]) {
-            // line 131
+            // line 132
             echo "            ";
             if ($context["arr_search_refund"]) {
-                // line 132
+                // line 133
                 echo "                ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable($context["arr_search_refund"]);
                 foreach ($context['_seq'] as $context["_key"] => $context["search_refund"]) {
-                    // line 133
+                    // line 134
                     echo "
                     <tr>
                         ";
-                    // line 135
-                    if ((twig_get_attribute($this->env, $this->source, $context["search_refund"], "getRefund", [], "method", false, false, false, 135) == 2)) {
-                        // line 136
+                    // line 136
+                    if ((twig_get_attribute($this->env, $this->source, $context["search_refund"], "getRefund", [], "method", false, false, false, 136) == 2)) {
+                        // line 137
                         echo "
                             <td>";
-                        // line 137
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getNumberDocument", [], "method", false, false, false, 137), "html", null, true);
+                        // line 138
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getNumberDocument", [], "method", false, false, false, 138), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 139
-                        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getDataInvoice", [], "method", false, false, false, 139), "d-m-Y"), "html", null, true);
+                        // line 140
+                        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getDataInvoice", [], "method", false, false, false, 140), "d-m-Y"), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 141
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdCounterparty", [], "method", false, false, false, 141), "getCounterparty", [], "method", false, false, false, 141), "html", null, true);
+                        // line 142
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdCounterparty", [], "method", false, false, false, 142), "getCounterparty", [], "method", false, false, false, 142), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 143
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdDetails", [], "method", false, false, false, 143), "getPartNumbers", [], "method", false, false, false, 143), "html", null, true);
+                        // line 144
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdDetails", [], "method", false, false, false, 144), "getPartNumbers", [], "method", false, false, false, 144), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 145
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdManufacturer", [], "method", false, false, false, 145), "getManufacturers", [], "method", false, false, false, 145), "html", null, true);
+                        // line 146
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdManufacturer", [], "method", false, false, false, 146), "getManufacturers", [], "method", false, false, false, 146), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 147
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getQuantity", [], "method", false, false, false, 147), "html", null, true);
+                        // line 148
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getQuantity", [], "method", false, false, false, 148), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 149
-                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["search_refund"], "getPrice", [], "method", false, false, false, 149) / 100), 2, ".", ""), "html", null, true);
+                        // line 150
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["search_refund"], "getPrice", [], "method", false, false, false, 150) / 100), 2, ".", ""), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 151
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdRefundActivity", [], "method", false, false, false, 151), "getActivity", [], "method", false, false, false, 151), "html", null, true);
+                        // line 152
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdRefundActivity", [], "method", false, false, false, 152), "getActivity", [], "method", false, false, false, 152), "html", null, true);
+                        echo "</td>
+
+                            <td>";
+                        // line 154
+                        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getRefundDateInvoice", [], "method", false, false, false, 154), "getRefundDate", [], "method", false, false, false, 154), "d-m-Y"), "html", null, true);
                         echo "</td>
 
                             <form action=\"/edit_activity\" name=\"edit_activity\" method=\"post\">
 
                                 <td><button class=\"edit\" type=\"submit\" name=\"edit_activity\" value=\"";
-                        // line 155
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 155), "html", null, true);
+                        // line 158
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 158), "html", null, true);
                         echo "\">Изменить</button></td>  
 
                             </form>
@@ -652,8 +658,8 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                             <form action=\"/edit_refund\" name=\"edit_refund\" method=\"post\">
 
                                 <td><button class=\"edit\" type=\"submit\" name=\"edit_refund\" value=\"";
-                        // line 161
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 161), "html", null, true);
+                        // line 164
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 164), "html", null, true);
                         echo "\">Отменить</button></td>  
 
                             </form>
@@ -661,34 +667,34 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                             <form action=\"/delete_refund\" name=\"delete_refund\" method=\"post\">
 
                                 <td><button class=\"delete\" type=\"submit\" name=\"delete_refund\" value=\"";
-                        // line 167
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 167), "html", null, true);
+                        // line 170
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getId", [], "method", false, false, false, 170), "html", null, true);
                         echo "\">Удалить</button></td>
    
                             </form>
                         ";
                     }
-                    // line 171
+                    // line 174
                     echo "                    </tr>   
                 ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['search_refund'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 173
+                // line 176
                 echo "            ";
             } else {
-                // line 174
+                // line 177
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 176
+            // line 179
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_refund'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 177
+        // line 180
         echo "    
 ";
         
@@ -711,7 +717,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
 
     public function getDebugInfo()
     {
-        return array (  692 => 177,  686 => 176,  682 => 174,  679 => 173,  672 => 171,  665 => 167,  656 => 161,  647 => 155,  640 => 151,  635 => 149,  630 => 147,  625 => 145,  620 => 143,  615 => 141,  610 => 139,  605 => 137,  602 => 136,  600 => 135,  596 => 133,  591 => 132,  588 => 131,  583 => 130,  581 => 129,  571 => 128,  559 => 124,  552 => 122,  538 => 110,  535 => 109,  530 => 108,  528 => 107,  518 => 105,  502 => 98,  497 => 96,  494 => 95,  492 => 94,  486 => 92,  477 => 90,  472 => 89,  463 => 87,  459 => 86,  453 => 85,  447 => 84,  445 => 83,  439 => 82,  435 => 81,  430 => 80,  425 => 79,  419 => 78,  417 => 77,  411 => 76,  405 => 74,  396 => 72,  392 => 71,  388 => 70,  383 => 69,  377 => 68,  375 => 67,  369 => 66,  363 => 64,  354 => 62,  350 => 61,  346 => 60,  341 => 59,  335 => 58,  333 => 57,  327 => 56,  322 => 54,  318 => 53,  313 => 52,  307 => 51,  305 => 50,  299 => 49,  294 => 47,  288 => 46,  282 => 45,  280 => 44,  274 => 43,  270 => 42,  265 => 41,  260 => 40,  254 => 39,  252 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  698 => 180,  692 => 179,  688 => 177,  685 => 176,  678 => 174,  671 => 170,  662 => 164,  653 => 158,  646 => 154,  641 => 152,  636 => 150,  631 => 148,  626 => 146,  621 => 144,  616 => 142,  611 => 140,  606 => 138,  603 => 137,  601 => 136,  597 => 134,  592 => 133,  589 => 132,  584 => 131,  582 => 130,  572 => 129,  560 => 125,  553 => 123,  538 => 110,  535 => 109,  530 => 108,  528 => 107,  518 => 105,  502 => 98,  497 => 96,  494 => 95,  492 => 94,  486 => 92,  477 => 90,  472 => 89,  463 => 87,  459 => 86,  453 => 85,  447 => 84,  445 => 83,  439 => 82,  435 => 81,  430 => 80,  425 => 79,  419 => 78,  417 => 77,  411 => 76,  405 => 74,  396 => 72,  392 => 71,  388 => 70,  383 => 69,  377 => 68,  375 => 67,  369 => 66,  363 => 64,  354 => 62,  350 => 61,  346 => 60,  341 => 59,  335 => 58,  333 => 57,  327 => 56,  322 => 54,  318 => 53,  313 => 52,  307 => 51,  305 => 50,  299 => 49,  294 => 47,  288 => 46,  282 => 45,  280 => 44,  274 => 43,  270 => 42,  265 => 41,  260 => 40,  254 => 39,  252 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -833,6 +839,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
             <th>Кол-во</th>
             <th>Цена общая</th>
             <th>Состояния</th>
+            <th>Дата возврата</th>
             <th>Изменить<br>состояния</th>
             <th>Отменить<br>возврат</th>
             <th>Удалить</th>
@@ -867,6 +874,8 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                             <td>{{ (search_refund.getPrice() / 100)|number_format(2, '.', '')}}</td>
 
                             <td>{{ search_refund.getIdRefundActivity().getActivity() }}</td>
+
+                            <td>{{ search_refund.getRefundDateInvoice().getRefundDate()|date(\"d-m-Y\") }}</td>
 
                             <form action=\"/edit_activity\" name=\"edit_activity\" method=\"post\">
 

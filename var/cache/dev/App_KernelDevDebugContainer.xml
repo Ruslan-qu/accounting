@@ -424,6 +424,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -458,7 +462,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.CoyoAsO"/>
+      <argument type="service" id=".service_locator.6QSqSuF"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1681,7 +1685,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.CoyoAsO"/>
+      <argument type="service" id=".service_locator.6QSqSuF"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -2800,7 +2804,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.8MOJOum"/>
+      <argument type="service" id=".service_locator.QocKcgR"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3982,6 +3986,8 @@
     <service id=".abstract.instanceof.App\Repository\PaymentMethodRepository" class="App\Repository\PaymentMethodRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RefundActivityRepository" class="App\Repository\RefundActivityRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\RefundActivityRepository" class="App\Repository\RefundActivityRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SoldRepository" class="App\Repository\SoldRepository" autowire="true" abstract="true"/>
@@ -4391,12 +4397,10 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.lxYgUQK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Sj9YQbw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\IdDetailsManufacturerRepository"/>
         <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
@@ -4404,6 +4408,14 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="validator" type="service_closure" id="debug.validator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.4vTIIZS" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
         <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
@@ -4417,7 +4429,7 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.CoyoAsO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.6QSqSuF" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Sections_header\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
@@ -4426,7 +4438,6 @@
         <argument key="App\Controller\Sections_header\CounterpartyController::deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::Refund" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController::SalesParts" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::SearchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4435,13 +4446,14 @@
         <argument key="App\Controller\Sections_header\PartNoController::searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
         <argument key="App\Controller\Sections_header\PriceController::completeSales" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PriceController::editSoldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
-        <argument key="App\Controller\Sections_header\PriceController::searchPrice" type="service_closure" id=".service_locator.lxYgUQK"/>
+        <argument key="App\Controller\Sections_header\PriceController::editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\Sections_header\PriceController::searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
         <argument key="App\Controller\Sections_header\PriceController::soldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
         <argument key="App\Controller\Sections_header\RefundController::EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController::EditRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController::SearchRefund" type="service_closure" id=".service_locator.OAvFRDk"/>
         <argument key="App\Controller\Sections_header\RefundController::deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\SalesController::searchSales" type="service_closure" id=".service_locator.OAvFRDk"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -4452,7 +4464,6 @@
         <argument key="App\Controller\Sections_header\CounterpartyController:deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:Refund" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController:SalesParts" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:SearchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4461,13 +4472,14 @@
         <argument key="App\Controller\Sections_header\PartNoController:searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
         <argument key="App\Controller\Sections_header\PriceController:completeSales" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PriceController:editSoldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
-        <argument key="App\Controller\Sections_header\PriceController:searchPrice" type="service_closure" id=".service_locator.lxYgUQK"/>
+        <argument key="App\Controller\Sections_header\PriceController:editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\Sections_header\PriceController:searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
         <argument key="App\Controller\Sections_header\PriceController:soldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
         <argument key="App\Controller\Sections_header\RefundController:EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController:EditRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController:SearchRefund" type="service_closure" id=".service_locator.OAvFRDk"/>
         <argument key="App\Controller\Sections_header\RefundController:deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\SalesController:searchSales" type="service_closure" id=".service_locator.OAvFRDk"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -4566,7 +4578,7 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.8MOJOum" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.QocKcgR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AvailabilityRepository" type="service_closure" id="App\Repository\AvailabilityRepository"/>
@@ -4580,6 +4592,7 @@
         <argument key="App\Repository\OriginalRoomsRepository" type="service_closure" id="App\Repository\OriginalRoomsRepository"/>
         <argument key="App\Repository\PaymentMethodRepository" type="service_closure" id="App\Repository\PaymentMethodRepository"/>
         <argument key="App\Repository\RefundActivityRepository" type="service_closure" id="App\Repository\RefundActivityRepository"/>
+        <argument key="App\Repository\RefundDateRepository" type="service_closure" id="App\Repository\RefundDateRepository"/>
         <argument key="App\Repository\SidesRepository" type="service_closure" id="App\Repository\SidesRepository"/>
         <argument key="App\Repository\SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
       </argument>
@@ -5644,7 +5657,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.CoyoAsO"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.6QSqSuF"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5660,9 +5673,10 @@
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
     <service id=".service_locator.49ahYN1" alias=".service_locator.OAvFRDk"/>
     <service id=".service_locator.y9JlpNl" alias=".service_locator.16FGhqR"/>
-    <service id=".service_locator.kyd9R0N" alias=".service_locator.lxYgUQK"/>
+    <service id=".service_locator.K8JWs5c" alias=".service_locator.Sj9YQbw"/>
     <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
-    <service id=".service_locator.JKHByH6" alias=".service_locator.CoyoAsO"/>
+    <service id=".service_locator.2_UOsCe" alias=".service_locator.4vTIIZS"/>
+    <service id=".service_locator.NXjAmuE" alias=".service_locator.6QSqSuF"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
     <service id=".service_locator.TDJWgws" alias=".service_locator.i0paIpz"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
@@ -5680,8 +5694,9 @@
     <service id=".service_locator.eQ296SW" alias=".service_locator.o6sN0hZ"/>
     <service id=".service_locator..01V9I4" alias=".service_locator.OAvFRDk"/>
     <service id=".service_locator.pO.gOFO" alias=".service_locator.16FGhqR"/>
-    <service id=".service_locator.ISc_F5." alias=".service_locator.lxYgUQK"/>
+    <service id=".service_locator.76TjQWA" alias=".service_locator.Sj9YQbw"/>
     <service id=".service_locator.jdO2PI1" alias=".service_locator.FECJdp3"/>
+    <service id=".service_locator.i2LCHhB" alias=".service_locator.4vTIIZS"/>
     <service id=".service_locator.HxfGI0d" alias=".service_locator.O2p6Lk7"/>
     <service id=".service_locator.3bxtozr" alias=".service_locator._ju.bgC"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>

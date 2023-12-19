@@ -58,18 +58,6 @@ class InvoiceRepository extends ServiceEntityRepository
             ->setParameter('po_data_invoice', $po_data_invoice_search)
             ->getQuery()
             ->getResult();
-
-        /*$entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT d
-                FROM App\Entity\Invoice d
-                WHERE d.data_invoice >= :s_data_invoice
-                AND d.data_invoice <= :po_data_invoice'
-        )->setParameter('s_data_invoice', $s_data_invoice_search)
-            ->setParameter('po_data_invoice', $po_data_invoice_search);
-
-        return $query->getResult();*/
     }
 
     /**
@@ -101,13 +89,12 @@ class InvoiceRepository extends ServiceEntityRepository
      */
     public function findByPrice($s_price_search, $po_price_search): array
     {
-        //dd($s_price_search);
+
         if (strpos($s_price_search, ',')) {
             $s_price_search = str_replace(',', '.', $s_price_search);
             $s_price = $s_price_search * 100;
-            //dd($s_price_search);
         } else {
-            //dd($s_price_search);
+
             $s_price = $s_price_search * 100;
         }
 
@@ -115,7 +102,7 @@ class InvoiceRepository extends ServiceEntityRepository
             $po_price_search = str_replace(',', '.', $po_price_search);
             $p_price = $po_price_search * 100;
         } else {
-            //dd($price);
+
             $p_price = $po_price_search * 100;
         }
 
@@ -128,23 +115,21 @@ class InvoiceRepository extends ServiceEntityRepository
                 AND d.price <= :p_price'
         )->setParameter('s_price', $s_price)
             ->setParameter('p_price', $p_price);
-        //dd($query->getResult());
         $arr_result = $query->getResult();
 
         $query = [];
 
         foreach ($arr_result as $key => $value) {
-            //dd($value);
+
             $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
                 * $value->getQuantitySold());
-            //dd($price);
+
             if ($price >= $s_price_search && $price <= $po_price_search) {
-                //dd($value);
+
                 $query[] = $value;
             }
-            // dd($price);
         }
-        //dd($query);
+
         return $query;
     }
 
@@ -154,13 +139,12 @@ class InvoiceRepository extends ServiceEntityRepository
      */
     public function findBySPrice($s_price_search): array
     {
-        //dd($s_price_search);
+
         if (strpos($s_price_search, ',')) {
             $s_price_search = str_replace(',', '.', $s_price_search);
             $s_price = $s_price_search * 100;
-            //dd($s_price_search);
         } else {
-            //dd($s_price_search);
+
             $s_price = $s_price_search * 100;
         }
 
@@ -171,23 +155,22 @@ class InvoiceRepository extends ServiceEntityRepository
                 FROM App\Entity\Invoice d
                 WHERE d.price >= :s_price'
         )->setParameter('s_price', $s_price);
-        //dd($query->getResult());
+
         $arr_result = $query->getResult();
 
         $query = [];
 
         foreach ($arr_result as $key => $value) {
-            //dd($value);
+
             $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
                 * $value->getQuantitySold());
-            //dd($price);
+
             if ($price >= $s_price_search) {
-                //dd($value);
+
                 $query[] = $value;
             }
-            // dd($price);
         }
-        //dd($query);
+
         return $query;
     }
 
@@ -201,7 +184,7 @@ class InvoiceRepository extends ServiceEntityRepository
             $po_price_search = str_replace(',', '.', $po_price_search);
             $p_price = $po_price_search * 100;
         } else {
-            //dd($price);
+
             $p_price = $po_price_search * 100;
         }
 
@@ -212,23 +195,21 @@ class InvoiceRepository extends ServiceEntityRepository
                 FROM App\Entity\Invoice d
                 WHERE d.price <= :p_price'
         )->setParameter('p_price', $p_price);
-        //dd($query->getResult());
+
         $arr_result = $query->getResult();
 
         $query = [];
 
         foreach ($arr_result as $key => $value) {
-            //dd($value);
+
             $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
                 * $value->getQuantitySold());
-            //dd($price);
+
             if ($price <= $po_price_search) {
-                //dd($value);
+
                 $query[] = $value;
             }
-            // dd($price);
         }
-        //dd($query);
         return $query;
     }
 
@@ -246,18 +227,16 @@ class InvoiceRepository extends ServiceEntityRepository
                 FROM App\Entity\Invoice d
                 WHERE d.id = :id'
         )->setParameter('id', $id);
-        //dd($query->getResult()[0]->getPrice());
+
         $arr_result = $query->getResult();
 
         foreach ($arr_result as $key => $value) {
-            //dd($value);
+
             $price = ($value->getPrice() / 100) - ((($value->getPrice() / 100) / $value->getQuantity())
                 * $value->getQuantitySold());
-            //dd($price);
+
             return $price;
         }
-        //dd($query);
-
     }
 
     /**
@@ -290,6 +269,23 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN d.id_details a
                 WHERE a.part_numbers = :numbers_search'
         )->setParameter('numbers_search', $numbers_search);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findBySearchManufacturers($manufacturers_search): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT d, a
+                FROM App\Entity\Invoice d
+                INNER JOIN d.id_details a
+                WHERE a.manufacturers = :manufacturers_search'
+        )->setParameter('manufacturers_search', $manufacturers_search);
 
         return $query->getResult();
     }
@@ -347,29 +343,25 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN d.id_details a
                 WHERE d.id = :id'
         )->setParameter('id', $id);
-        // dd($query->getResult());
         return $query->getResult();
     }
 
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function completeSales(): array
+    public function findByRefund(): array
     {
+
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT i
+            'SELECT i, d, r
                 FROM App\Entity\Invoice i
-                WHERE i.sold_status = :sold_status'
-        )->setParameter('sold_status', '2');
-        // dd($query->getResult());
-        $result = $query->getResult();
+                INNER JOIN i.id_details d
+                INNER JOIN r.id_invoice_refund_date d
+                WHERE d.id = :id'
+        )->setParameter('id', $id);;
 
-        // foreach ($result as $key => $value) {
-        //      
-        // }
-
-        return $result;
+        return $query->getResult();
     }
 }

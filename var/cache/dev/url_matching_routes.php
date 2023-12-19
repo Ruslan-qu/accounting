@@ -20,7 +20,6 @@ return [
         '/edit_counterparty' => [[['_route' => 'edit_counterparty', '_controller' => 'App\\Controller\\Sections_header\\CounterpartyController::EditCounterparty'], null, null, null, false, false, null]],
         '/incoming_documents' => [[['_route' => 'incoming_documents', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SearchIncomingDocuments'], null, null, null, false, false, null]],
         '/save_incoming_documents' => [[['_route' => 'save_incoming_documents', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SalesIncomingDocuments'], null, null, null, false, false, null]],
-        '/sales_parts' => [[['_route' => 'sales_parts', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::SalesParts'], null, null, null, false, false, null]],
         '/refund_part' => [[['_route' => 'refund_part', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::Refund'], null, ['GET' => 0], null, false, false, null]],
         '/reset_invoice' => [[['_route' => 'reset_invoice', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::Reset'], null, null, null, false, false, null]],
         '/delete_invoice' => [[['_route' => 'delete_invoice', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::deleteInvoice'], null, null, null, false, false, null]],
@@ -42,7 +41,7 @@ return [
         '/edit_refund' => [[['_route' => 'edit_refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::EditRefund'], null, null, null, false, false, null]],
         '/delete_refund' => [[['_route' => 'delete_refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::deleteRefund'], null, null, null, false, false, null]],
         '/edit_activity' => [[['_route' => 'edit_activity', '_controller' => 'App\\Controller\\Sections_header\\RefundController::EditActivity'], null, null, null, false, false, null]],
-        '/sales' => [[['_route' => 'sales', '_controller' => 'App\\Controller\\Sections_header\\SalesController::index'], null, null, null, false, false, null]],
+        '/sales' => [[['_route' => 'sales', '_controller' => 'App\\Controller\\Sections_header\\SalesController::searchSales'], null, null, null, false, false, null]],
         '/health-check' => [[['_route' => 'health_check', '_controller' => 'App\\Controller\\Test\\HealthCheckAction'], null, ['GET' => 0], null, false, false, null]],
     ],
     [ // $regexpList

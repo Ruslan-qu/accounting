@@ -109,12 +109,6 @@
 
 {% block form_search %}
     {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
-        {#{% set id_hidden_complete_sales = sold.getId()|default('') %}
-
-        {% for value_id_hidden in app.flashes('hidden_sold') %}  
-            {% set id_hidden_complete_sales = value_id_hidden %}
-        {% endfor %}
-        {{ form_widget(form_complete_sales.hidden_sold, {value : id_hidden_complete_sales}) }}#}
 
         {% do form_widget(form_complete_sales.hidden_sold) %}
         {% do form_widget(form_complete_sales.id_invoice) %}
@@ -152,8 +146,7 @@
 
 {% block tbody %}
     {% for value_sale_list in arr_sale_list %}
-        {% for sale_list in value_sale_list %}
-        
+        {% for sale_list in value_sale_list %}       
             <tr>
                 <td>{{ sale_list.getIdInvoice().getIdDetails().getPartNumbers() }}</td>
 

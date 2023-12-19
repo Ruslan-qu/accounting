@@ -115,6 +115,6 @@ class __TwigTemplate_2b0d693e5fcf8a97c64dca9ddf24d937 extends Template
 {% block title %}{{title_logo}}{% endblock %}
 
 {% block logo %}{{title_logo}}{% endblock %}
-", "sales/sales.html.twig", "/var/www/templates/sales/sales.html.twig");
+ ", "sales/sales.html.twig", "/var/www/templates/sales/sales.html.twig");
     }
 }

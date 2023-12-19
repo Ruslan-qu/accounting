@@ -61,9 +61,13 @@ class Invoice
     #[ORM\Column(nullable: true)]
     private ?int $sold_status = null;
 
+    #[ORM\OneToMany(mappedBy: 'id_invoice_refund_date', targetEntity: RefundDate::class)]
+    private Collection $RefundDateInvoice;
+
     public function __construct()
     {
         $this->solds = new ArrayCollection();
+        $this->RefundDateInvoice = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +257,36 @@ class Invoice
     public function setSoldStatus(?int $sold_status): static
     {
         $this->sold_status = $sold_status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RefundDate>
+     */
+    public function getRefundDateInvoice(): Collection
+    {
+        return $this->RefundDateInvoice;
+    }
+
+    public function addRefundDateInvoice(RefundDate $refundDateInvoice): static
+    {
+        if (!$this->RefundDateInvoice->contains($refundDateInvoice)) {
+            $this->RefundDateInvoice->add($refundDateInvoice);
+            $refundDateInvoice->setIdInvoiceRefundDate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRefundDateInvoice(RefundDate $refundDateInvoice): static
+    {
+        if ($this->RefundDateInvoice->removeElement($refundDateInvoice)) {
+            // set the owning side to null (unless already changed)
+            if ($refundDateInvoice->getIdInvoiceRefundDate() === $this) {
+                $refundDateInvoice->setIdInvoiceRefundDate(null);
+            }
+        }
 
         return $this;
     }

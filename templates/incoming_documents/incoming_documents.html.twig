@@ -50,8 +50,6 @@
         {{ form_widget(form_i_d.id_counterparty, {value : id_counterparty}) }}
         {{ form_errors(form_i_d.id_counterparty) }}</th>
 
-        {#{{ form_start(form_p_n) }}#}
-
             {% for value_part_numbers in app.flashes('part_numbers') %}  
                 {% set part_numbers = value_part_numbers %}
             {% endfor %}
@@ -122,7 +120,6 @@
         {% set id_counterparty_search = '' %}
         {% set id_details_search = '' %}
         {% set id_manufacturer_search = '' %}
-        {#{% set name_details_search = '' %}#}
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
         {% set id_payment_method_search = '' %}
@@ -175,16 +172,6 @@
         {{ message }}
         {% endfor %}
         {{ form_errors(form_search.search_id_manufacturer) }}</th>
-
-        {#{% for value_isearch_name_details in app.flashes('search_name_details') %}  
-        {% set name_details_search = value_id_manufacturer_search %}
-        {% endfor %}
-        <th>{{ form_label(form_search.search_name_details) }}<br>
-        {{ form_widget(form_search.search_name_details, {value : name_details_search}) }}<br>
-        {% for message in app.flashes('children[search_name_details].data') %}
-        {{ message }}
-        {% endfor %}
-        {{ form_errors(form_search.search_name_details) }}</th>#}
 
         {% for value_s_price_search in app.flashes('s_price') %}  
         {% set s_price_search = value_s_price_search %}
