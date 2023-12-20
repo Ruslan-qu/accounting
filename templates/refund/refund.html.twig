@@ -23,75 +23,81 @@
         {% set id_manufacturer_search = '' %}
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
+        {% set data_refund_search = '' %}
 
-        {% for value_number_document_search in app.flashes('search_number_document') %}  
+        {% for value_number_document_search in app.flashes('search_number_document_refund') %}  
         {% set number_document_search = value_number_document_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.search_number_document) }}<br>
-        {{ form_widget(form_search.search_number_document, {value : number_document_search}) }}<br>
-        {% for message in app.flashes('children[search_number_document].data') %}
+        <th>{{ form_label(form_search.search_number_document_refund) }}<br>
+        {{ form_widget(form_search.search_number_document_refund, {value : number_document_search}) }}<br>
+        {% for message in app.flashes('children[search_number_document_refund].data') %}
         {{ message }}
         {% endfor %}
-        {{ form_errors(form_search.search_number_document) }}</th>
+        {{ form_errors(form_search.search_number_document_refund) }}</th>
 
-        {% for value_data_invoice_search in app.flashes('s_data_invoice') %}  
+        {% for value_data_invoice_search in app.flashes('s_data_invoice_refund') %}  
         {% set s_data_invoice_search = value_data_invoice_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.s_data_invoice) }}<br>
-        {{'с '}}{{ form_widget(form_search.s_data_invoice, {value : s_data_invoice_search}) }}
-        {{ form_errors(form_search.s_data_invoice) }}<br>
-        {% for value_price in app.flashes('po_data_invoice') %}  
+        <th>{{ form_label(form_search.s_data_invoice_refund) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_data_invoice_refund, {value : s_data_invoice_search}) }}
+        {{ form_errors(form_search.s_data_invoice_refund) }}<br>
+        {% for value_price in app.flashes('po_data_invoice_refund') %}  
         {% set po_data_invoice_search = value_price %}
         {% endfor %}
-        {{'по '}}{{ form_widget(form_search.po_data_invoice, {value : po_data_invoice_search}) }}<br>
-        {{ form_errors(form_search.po_data_invoice) }}</th>
+        {{'по '}}{{ form_widget(form_search.po_data_invoice_refund, {value : po_data_invoice_search}) }}<br>
+        {{ form_errors(form_search.po_data_invoice_refund) }}</th>
 
-        {% for value_id_counterparty_search in app.flashes('search_id_counterparty') %}  
+        {% for value_id_counterparty_search in app.flashes('search_id_counterparty_refund') %}  
         {% set id_counterparty_search = value_id_counterparty_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.search_id_counterparty) }}<br>
-        {{ form_widget(form_search.search_id_counterparty, {value : id_counterparty_search}) }}
-        {{ form_errors(form_search.search_id_counterparty) }}</th>
+        <th>{{ form_label(form_search.search_id_counterparty_refund) }}<br>
+        {{ form_widget(form_search.search_id_counterparty_refund, {value : id_counterparty_search}) }}
+        {{ form_errors(form_search.search_id_counterparty_refund) }}</th>
 
-        {% for value_id_details_search in app.flashes('search_id_details') %}  
+        {% for value_id_details_search in app.flashes('search_id_details_refund') %}  
         {% set id_details_search = value_id_details_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.search_id_details) }}<br>
-        {{ form_widget(form_search.search_id_details, {value : id_details_search}) }}<br>
-        {% for message in app.flashes('children[search_id_details].data') %}
+        <th>{{ form_label(form_search.search_id_details_refund) }}<br>
+        {{ form_widget(form_search.search_id_details_refund, {value : id_details_search}) }}<br>
+        {% for message in app.flashes('children[search_id_details_refund].data') %}
         {{ message }}
         {% endfor %}
-        {{ form_errors(form_search.search_id_details) }}</th>
+        {{ form_errors(form_search.search_id_details_refund) }}</th>
 
-        {% for value_id_manufacturer_search in app.flashes('search_id_manufacturer') %}  
+        {% for value_id_manufacturer_search in app.flashes('search_id_manufacturer_refund') %}  
         {% set id_manufacturer_search = value_id_manufacturer_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.search_id_manufacturer) }}<br>
-        {{ form_widget(form_search.search_id_manufacturer, {value : id_manufacturer_search}) }}<br>
-        {% for message in app.flashes('children[search_id_manufacturer].data') %}
+        <th>{{ form_label(form_search.search_id_manufacturer_refund) }}<br>
+        {{ form_widget(form_search.search_id_manufacturer_refund, {value : id_manufacturer_search}) }}<br>
+        {% for message in app.flashes('children[search_id_manufacturer_refund].data') %}
         {{ message }}
         {% endfor %}
-        {{ form_errors(form_search.search_id_manufacturer) }}</th>
+        {{ form_errors(form_search.search_id_manufacturer_refund) }}</th>
 
-        {% for value_s_price_search in app.flashes('s_price') %}  
+        {% for value_s_price_search in app.flashes('s_price_refund') %}  
         {% set s_price_search = value_s_price_search %}
         {% endfor %}
-        <th>{{ form_label(form_search.s_price) }}<br>
-        {{'с '}}{{ form_widget(form_search.s_price, {value : s_price_search}) }}
-        {{ form_errors(form_search.s_price) }}<br>
-        {% for value_po_price_search in app.flashes('po_price') %}  
+        <th>{{ form_label(form_search.s_price_refund) }}<br>
+        {{'с '}}{{ form_widget(form_search.s_price_refund, {value : s_price_search}) }}
+        {{ form_errors(form_search.s_price_refund) }}<br>
+        {% for value_po_price_search in app.flashes('po_price_refund') %}  
         {% set po_price_search = value_po_price_search %}
         {% endfor %}
-        {{'по '}}{{ form_widget(form_search.po_price, {value : po_price_search}) }}<br>
-        {% for message in app.flashes('children[s_price].data') %}
+        {{'по '}}{{ form_widget(form_search.po_price_refund, {value : po_price_search}) }}<br>
+        {% for message in app.flashes('children[s_price_refund].data') %}
         {{ message }}
         {% endfor %}
-        {% for message in app.flashes('children[po_price].data') %}
+        {% for message in app.flashes('children[po_price_refund].data') %}
         {{ message }}
         {% endfor %}
-        {{ form_errors(form_search.po_price) }}</th>
+        {{ form_errors(form_search.po_price_refund) }}</th>
 
-        {% do form_widget(form_search.search_id_payment_method) %}
+        {% for value_data_refund_search in app.flashes('data_refund') %}  
+        {% set data_refund_search = value_data_refund_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.data_refund) }}<br>
+        {{ form_widget(form_search.data_refund, {value : data_refund_search}) }}
+        {{ form_errors(form_search.data_refund) }}</th>
 
         <th>{{ form_widget(form_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
         
@@ -133,44 +139,41 @@
                 {% for search_refund in arr_search_refund %}
 
                     <tr>
-                        {% if search_refund.getRefund() == 2 %}
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getNumberDocument() }}</td>
 
-                            <td>{{ search_refund.getNumberDocument() }}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getDataInvoice()|date("d-m-Y") }}</td>
 
-                            <td>{{ search_refund.getDataInvoice()|date("d-m-Y") }}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getIdCounterparty().getCounterparty() }}</td>
 
-                            <td>{{ search_refund.getIdCounterparty().getCounterparty() }}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getIdDetails().getPartNumbers() }}</td>
 
-                            <td>{{ search_refund.getIdDetails().getPartNumbers() }}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getIdManufacturer().getManufacturers() }}</td>
 
-                            <td>{{ search_refund.getIdManufacturer().getManufacturers() }}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getQuantity() }}</td>
 
-                            <td>{{ search_refund.getQuantity() }}</td>
+                            <td>{{ (search_refund.getIdInvoiceRefundDate().getPrice() / 100)|number_format(2, '.', '')}}</td>
 
-                            <td>{{ (search_refund.getPrice() / 100)|number_format(2, '.', '')}}</td>
+                            <td>{{ search_refund.getIdInvoiceRefundDate().getIdRefundActivity().getActivity() }}</td>
 
-                            <td>{{ search_refund.getIdRefundActivity().getActivity() }}</td>
-
-                            <td>{{ search_refund.getRefundDateInvoice().getRefundDate()|date("d-m-Y") }}</td>
+                            <td>{{ search_refund.getRefundDate()|date("d-m-Y") }}</td>
 
                             <form action="/edit_activity" name="edit_activity" method="post">
 
-                                <td><button class="edit" type="submit" name="edit_activity" value="{{ search_refund.getId() }}">Изменить</button></td>  
+                                <td><button class="edit" type="submit" name="edit_activity" value="{{ search_refund.getIdInvoiceRefundDate().getId() }}">Изменить</button></td>  
 
                             </form>
 
                             <form action="/edit_refund" name="edit_refund" method="post">
 
-                                <td><button class="edit" type="submit" name="edit_refund" value="{{ search_refund.getId() }}">Отменить</button></td>  
+                                <td><button class="edit" type="submit" name="edit_refund" value="{{ search_refund.getIdInvoiceRefundDate().getId() }}">Отменить</button></td>  
 
                             </form>
 
                             <form action="/delete_refund" name="delete_refund" method="post">
 
-                                <td><button class="delete" type="submit" name="delete_refund" value="{{ search_refund.getId() }}">Удалить</button></td>
+                                <td><button class="delete" type="submit" name="delete_refund" value="{{ search_refund.getIdInvoiceRefundDate().getId() }}">Удалить</button></td>
    
                             </form>
-                        {% endif %}
                     </tr>   
                 {% endfor %}
             {% else %}

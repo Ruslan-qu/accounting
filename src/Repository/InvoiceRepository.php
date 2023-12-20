@@ -345,23 +345,4 @@ class InvoiceRepository extends ServiceEntityRepository
         )->setParameter('id', $id);
         return $query->getResult();
     }
-
-    /**
-     * @return Invoice[] Returns an array of Invoice objects
-     */
-    public function findByRefund(): array
-    {
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT i, d, r
-                FROM App\Entity\Invoice i
-                INNER JOIN i.id_details d
-                INNER JOIN r.id_invoice_refund_date d
-                WHERE d.id = :id'
-        )->setParameter('id', $id);;
-
-        return $query->getResult();
-    }
 }

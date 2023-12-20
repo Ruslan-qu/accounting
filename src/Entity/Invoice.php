@@ -61,7 +61,7 @@ class Invoice
     #[ORM\Column(nullable: true)]
     private ?int $sold_status = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_invoice_refund_date', targetEntity: RefundDate::class)]
+    #[ORM\OneToMany(mappedBy: 'id_invoice_refund_date', targetEntity: RefundDate::class, cascade: ['remove'])]
     private Collection $RefundDateInvoice;
 
     public function __construct()
