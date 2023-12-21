@@ -7,6 +7,7 @@ use App\Entity\Sold;
 use App\Form\SoldType;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
+use App\Entity\Availability;
 use App\Repository\SoldRepository;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
@@ -213,7 +214,7 @@ class PriceController extends AbstractController
                 /* Сохранения формы */
                 $entity_sold->setIdInvoice($arr_sold_part[0]);
 
-                $entity_sold->setQuantitySold($quantity_sold);
+                $entity_sold->setQuantitySold($sum_quantity_sold);
 
                 $entity_sold->setPriceSold($form_sold->getData()->getPriceSold() * 100);
 
@@ -303,13 +304,14 @@ class PriceController extends AbstractController
         /*Валидация формы */
         if ($form_sold_edit->isSubmitted()) {
 
-            /* Выводим данные и формы */
+            /* Выводим данные из формы */
             $quantity_sold = $form_sold_edit->getData()->getQuantitySold();
 
             /* Выводим данные из базы данных */
             $quantity_invoice = $arr_sold_part[0]->getIdInvoice()->getQuantity();
             $invoice_quantity_sold = $arr_sold_part[0]->getIdInvoice()->getQuantitySold();
-            $sum_quantity_sold = $quantity_sold + $invoice_quantity_sold;
+            $sold_quantity_sold = $arr_sold_part[0]->getQuantitySold();
+            $sum_quantity_sold = $quantity_sold + ($invoice_quantity_sold - $sold_quantity_sold);
 
             /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
             $validator = Validation::createValidator();
@@ -321,10 +323,12 @@ class PriceController extends AbstractController
 
             $constraint = new Collection([
                 'quantity_sold_error' => new Range(
+                    min: 1,
                     max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
                 'sum_quantity_sold_error' => new Range(
+                    min: 1,
                     max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
@@ -408,27 +412,37 @@ class PriceController extends AbstractController
 
     /* функция завершения сделки */
     #[Route('/complete_sales', name: 'complete_sales')]
-    public function completeSales(ManagerRegistry $doctrine): Response
+    public function completeSales(ManagerRegistry $doctrine, InvoiceRepository $InvoiceRepository): Response
     {
         /* Выводим список деталей на продажу */
-        $complete_sales_invoice = $doctrine->getRepository(Invoice::class)->findBy(['sold_status' => '2']);
+        $complete_sales_invoice = $InvoiceRepository->findByCompleteSales();
 
+        // dd($complete_sales_invoice);
         foreach ($complete_sales_invoice as $key => $value) {
 
             $value->setSoldStatus(1);
 
             $quantity_invoice = $value->getQuantity();
             $invoice_quantity_sold = $value->getQuantitySold();
-
             /* если количество на складе и количество проданных 
                         деталей равно, в ячейке продажи setSales(2) */
-
             if ($invoice_quantity_sold == $quantity_invoice) {
 
                 $value->setSales(2);
             }
         }
 
+        $doctrine->getManager()->flush();
+
+        $in_stock = $doctrine->getRepository(Availability::class)->find(2);
+        foreach ($complete_sales_invoice as $key => $value) {
+
+            $count_availability = $InvoiceRepository->findByCountAvailability($value->getIdDetails());
+            if ($count_availability[0][1] == 0) {
+
+                $value->getIdDetails()->setIdInStock($in_stock);
+            }
+        }
         $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('price');

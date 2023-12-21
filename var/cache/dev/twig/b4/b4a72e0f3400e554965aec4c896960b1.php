@@ -369,7 +369,7 @@ $context["sold"], "getQuantity", [], "method", false, false, false, 61)) * twig_
         if (!$context['_iterated']) {
             // line 103
             echo "
-    <h2>Выберите пункт в меню или завершите продажу</h2>  
+    <h2>Для продолжения продажи выберите прайс в меню или завершите продажу</h2>  
 
     ";
         }
@@ -718,7 +718,7 @@ $context["sale_list"], "getQuantitySold", [], "method", false, false, false, 165
             {{ form_end(form_sold) }}
     {% else %}
 
-    <h2>Выберите пункт в меню или завершите продажу</h2>  
+    <h2>Для продолжения продажи выберите прайс в меню или завершите продажу</h2>  
 
     {% endfor %}               
 

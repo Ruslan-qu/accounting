@@ -345,4 +345,38 @@ class InvoiceRepository extends ServiceEntityRepository
         )->setParameter('id', $id);
         return $query->getResult();
     }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByCompleteSales(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, d, a
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN d.id_in_stock a
+                WHERE i.sold_status = :sold_status'
+        )->setParameter('sold_status', 2);
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByCountAvailability($id_details): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(i.id_details)
+                FROM App\Entity\Invoice i
+                WHERE i.id_details = :id_details
+                AND i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters(['id_details' => $id_details, 'Sales' => 2, 'refund' => 2]);
+        return $query->getResult();
+    }
 }
