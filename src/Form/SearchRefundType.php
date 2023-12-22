@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Counterparty;
 use App\Entity\PaymentMethod;
+use App\Entity\RefundActivity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -88,7 +89,6 @@ class SearchRefundType extends AbstractType
                     'style' => 'width: 100px ',
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
-
             ])
             ->add('search_id_details_refund', TextType::class, [
                 'label' => '№ Детали',
@@ -119,6 +119,17 @@ class SearchRefundType extends AbstractType
                 'label' => 'Дата возврата',
                 'widget' => 'single_text',
                 'required' => false,
+            ])
+            ->add('refund_activity_refund', EntityType::class, [
+                'label' => 'Состояния',
+                'class' => RefundActivity::class,
+                'choice_label' => 'activity',
+                // 'expanded' => true,
+                'required' => false,
+                'attr' => [
+                    'style' => 'width: 100px ',
+                    'style' => 'padding: 1px 3px 1px 5px'
+                ]
             ])
 
             ->add('button', SubmitType::class);;

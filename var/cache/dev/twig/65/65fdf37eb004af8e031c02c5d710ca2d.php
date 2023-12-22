@@ -201,36 +201,39 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         echo "        ";
         $context["data_refund_search"] = "";
         // line 27
+        echo "        ";
+        $context["activity_refund_search"] = "";
+        // line 28
         echo "
         ";
-        // line 28
+        // line 29
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 28, $this->source); })()), "flashes", ["search_number_document_refund"], "method", false, false, false, 28));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 29, $this->source); })()), "flashes", ["search_number_document_refund"], "method", false, false, false, 29));
         foreach ($context['_seq'] as $context["_key"] => $context["value_number_document_search"]) {
             echo "  
         ";
-            // line 29
-            $context["number_document_search"] = $context["value_number_document_search"];
             // line 30
+            $context["number_document_search"] = $context["value_number_document_search"];
+            // line 31
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_number_document_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 31
-        echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 31, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 31), 'label');
-        echo "<br>
-        ";
         // line 32
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 32, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 32), 'widget', ["value" => (isset($context["number_document_search"]) || array_key_exists("number_document_search", $context) ? $context["number_document_search"] : (function () { throw new RuntimeError('Variable "number_document_search" does not exist.', 32, $this->source); })())]);
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 32, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 32), 'label');
         echo "<br>
         ";
         // line 33
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 33, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 33), 'widget', ["value" => (isset($context["number_document_search"]) || array_key_exists("number_document_search", $context) ? $context["number_document_search"] : (function () { throw new RuntimeError('Variable "number_document_search" does not exist.', 33, $this->source); })())]);
+        echo "<br>
+        ";
+        // line 34
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "flashes", ["children[search_number_document_refund].data"], "method", false, false, false, 33));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", ["children[search_number_document_refund].data"], "method", false, false, false, 34));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 34
+            // line 35
             echo "        ";
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
@@ -239,121 +242,121 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
+        // line 37
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 36, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 36), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 37, $this->source); })()), "search_number_document_refund", [], "any", false, false, false, 37), 'errors');
         echo "</th>
 
         ";
-        // line 38
+        // line 39
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 38, $this->source); })()), "flashes", ["s_data_invoice_refund"], "method", false, false, false, 38));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "flashes", ["s_data_invoice_refund"], "method", false, false, false, 39));
         foreach ($context['_seq'] as $context["_key"] => $context["value_data_invoice_search"]) {
             echo "  
         ";
-            // line 39
-            $context["s_data_invoice_search"] = $context["value_data_invoice_search"];
             // line 40
+            $context["s_data_invoice_search"] = $context["value_data_invoice_search"];
+            // line 41
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_data_invoice_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 41
-        echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 41, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 41), 'label');
-        echo "<br>
-        ";
         // line 42
-        echo "с ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 42, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 42), 'widget', ["value" => (isset($context["s_data_invoice_search"]) || array_key_exists("s_data_invoice_search", $context) ? $context["s_data_invoice_search"] : (function () { throw new RuntimeError('Variable "s_data_invoice_search" does not exist.', 42, $this->source); })())]);
-        echo "
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 42, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 42), 'label');
+        echo "<br>
         ";
         // line 43
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 43, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 43), 'errors');
-        echo "<br>
+        echo "с ";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 43, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 43), 'widget', ["value" => (isset($context["s_data_invoice_search"]) || array_key_exists("s_data_invoice_search", $context) ? $context["s_data_invoice_search"] : (function () { throw new RuntimeError('Variable "s_data_invoice_search" does not exist.', 43, $this->source); })())]);
+        echo "
         ";
         // line 44
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 44, $this->source); })()), "s_data_invoice_refund", [], "any", false, false, false, 44), 'errors');
+        echo "<br>
+        ";
+        // line 45
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 44, $this->source); })()), "flashes", ["po_data_invoice_refund"], "method", false, false, false, 44));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 45, $this->source); })()), "flashes", ["po_data_invoice_refund"], "method", false, false, false, 45));
         foreach ($context['_seq'] as $context["_key"] => $context["value_price"]) {
             echo "  
         ";
-            // line 45
-            $context["po_data_invoice_search"] = $context["value_price"];
             // line 46
+            $context["po_data_invoice_search"] = $context["value_price"];
+            // line 47
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_price'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 47
+        // line 48
         echo "        ";
         echo "по ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 47, $this->source); })()), "po_data_invoice_refund", [], "any", false, false, false, 47), 'widget', ["value" => (isset($context["po_data_invoice_search"]) || array_key_exists("po_data_invoice_search", $context) ? $context["po_data_invoice_search"] : (function () { throw new RuntimeError('Variable "po_data_invoice_search" does not exist.', 47, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 48, $this->source); })()), "po_data_invoice_refund", [], "any", false, false, false, 48), 'widget', ["value" => (isset($context["po_data_invoice_search"]) || array_key_exists("po_data_invoice_search", $context) ? $context["po_data_invoice_search"] : (function () { throw new RuntimeError('Variable "po_data_invoice_search" does not exist.', 48, $this->source); })())]);
         echo "<br>
         ";
-        // line 48
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 48, $this->source); })()), "po_data_invoice_refund", [], "any", false, false, false, 48), 'errors');
+        // line 49
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 49, $this->source); })()), "po_data_invoice_refund", [], "any", false, false, false, 49), 'errors');
         echo "</th>
 
         ";
-        // line 50
+        // line 51
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 50, $this->source); })()), "flashes", ["search_id_counterparty_refund"], "method", false, false, false, 50));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 51, $this->source); })()), "flashes", ["search_id_counterparty_refund"], "method", false, false, false, 51));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_counterparty_search"]) {
             echo "  
         ";
-            // line 51
-            $context["id_counterparty_search"] = $context["value_id_counterparty_search"];
             // line 52
+            $context["id_counterparty_search"] = $context["value_id_counterparty_search"];
+            // line 53
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_id_counterparty_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 53
+        // line 54
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 53, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 53), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 54, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 54), 'label');
         echo "<br>
         ";
-        // line 54
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 54, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 54), 'widget', ["value" => (isset($context["id_counterparty_search"]) || array_key_exists("id_counterparty_search", $context) ? $context["id_counterparty_search"] : (function () { throw new RuntimeError('Variable "id_counterparty_search" does not exist.', 54, $this->source); })())]);
+        // line 55
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 55, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 55), 'widget', ["value" => (isset($context["id_counterparty_search"]) || array_key_exists("id_counterparty_search", $context) ? $context["id_counterparty_search"] : (function () { throw new RuntimeError('Variable "id_counterparty_search" does not exist.', 55, $this->source); })())]);
         echo "
         ";
-        // line 55
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 55, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 55), 'errors');
+        // line 56
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 56, $this->source); })()), "search_id_counterparty_refund", [], "any", false, false, false, 56), 'errors');
         echo "</th>
 
         ";
-        // line 57
+        // line 58
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 57, $this->source); })()), "flashes", ["search_id_details_refund"], "method", false, false, false, 57));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 58, $this->source); })()), "flashes", ["search_id_details_refund"], "method", false, false, false, 58));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_details_search"]) {
             echo "  
         ";
-            // line 58
-            $context["id_details_search"] = $context["value_id_details_search"];
             // line 59
+            $context["id_details_search"] = $context["value_id_details_search"];
+            // line 60
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_id_details_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 60
-        echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 60, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 60), 'label');
-        echo "<br>
-        ";
         // line 61
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 61, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 61), 'widget', ["value" => (isset($context["id_details_search"]) || array_key_exists("id_details_search", $context) ? $context["id_details_search"] : (function () { throw new RuntimeError('Variable "id_details_search" does not exist.', 61, $this->source); })())]);
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 61, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 61), 'label');
         echo "<br>
         ";
         // line 62
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 62, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 62), 'widget', ["value" => (isset($context["id_details_search"]) || array_key_exists("id_details_search", $context) ? $context["id_details_search"] : (function () { throw new RuntimeError('Variable "id_details_search" does not exist.', 62, $this->source); })())]);
+        echo "<br>
+        ";
+        // line 63
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 62, $this->source); })()), "flashes", ["children[search_id_details_refund].data"], "method", false, false, false, 62));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 63, $this->source); })()), "flashes", ["children[search_id_details_refund].data"], "method", false, false, false, 63));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 63
+            // line 64
             echo "        ";
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
@@ -362,40 +365,40 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 65
+        // line 66
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 65, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 65), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 66, $this->source); })()), "search_id_details_refund", [], "any", false, false, false, 66), 'errors');
         echo "</th>
 
         ";
-        // line 67
+        // line 68
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 67, $this->source); })()), "flashes", ["search_id_manufacturer_refund"], "method", false, false, false, 67));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "flashes", ["search_id_manufacturer_refund"], "method", false, false, false, 68));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_manufacturer_search"]) {
             echo "  
         ";
-            // line 68
-            $context["id_manufacturer_search"] = $context["value_id_manufacturer_search"];
             // line 69
+            $context["id_manufacturer_search"] = $context["value_id_manufacturer_search"];
+            // line 70
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_id_manufacturer_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 70
-        echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 70, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 70), 'label');
-        echo "<br>
-        ";
         // line 71
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 71, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 71), 'widget', ["value" => (isset($context["id_manufacturer_search"]) || array_key_exists("id_manufacturer_search", $context) ? $context["id_manufacturer_search"] : (function () { throw new RuntimeError('Variable "id_manufacturer_search" does not exist.', 71, $this->source); })())]);
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 71, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 71), 'label');
         echo "<br>
         ";
         // line 72
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 72, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 72), 'widget', ["value" => (isset($context["id_manufacturer_search"]) || array_key_exists("id_manufacturer_search", $context) ? $context["id_manufacturer_search"] : (function () { throw new RuntimeError('Variable "id_manufacturer_search" does not exist.', 72, $this->source); })())]);
+        echo "<br>
+        ";
+        // line 73
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 72, $this->source); })()), "flashes", ["children[search_id_manufacturer_refund].data"], "method", false, false, false, 72));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 73, $this->source); })()), "flashes", ["children[search_id_manufacturer_refund].data"], "method", false, false, false, 73));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 73
+            // line 74
             echo "        ";
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
@@ -404,65 +407,65 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 75
+        // line 76
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 75, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 75), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 76, $this->source); })()), "search_id_manufacturer_refund", [], "any", false, false, false, 76), 'errors');
         echo "</th>
 
         ";
-        // line 77
+        // line 78
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 77, $this->source); })()), "flashes", ["s_price_refund"], "method", false, false, false, 77));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 78, $this->source); })()), "flashes", ["s_price_refund"], "method", false, false, false, 78));
         foreach ($context['_seq'] as $context["_key"] => $context["value_s_price_search"]) {
             echo "  
         ";
-            // line 78
-            $context["s_price_search"] = $context["value_s_price_search"];
             // line 79
+            $context["s_price_search"] = $context["value_s_price_search"];
+            // line 80
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_s_price_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 80
-        echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 80, $this->source); })()), "s_price_refund", [], "any", false, false, false, 80), 'label');
-        echo "<br>
-        ";
         // line 81
-        echo "с ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 81, $this->source); })()), "s_price_refund", [], "any", false, false, false, 81), 'widget', ["value" => (isset($context["s_price_search"]) || array_key_exists("s_price_search", $context) ? $context["s_price_search"] : (function () { throw new RuntimeError('Variable "s_price_search" does not exist.', 81, $this->source); })())]);
-        echo "
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 81, $this->source); })()), "s_price_refund", [], "any", false, false, false, 81), 'label');
+        echo "<br>
         ";
         // line 82
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 82, $this->source); })()), "s_price_refund", [], "any", false, false, false, 82), 'errors');
-        echo "<br>
+        echo "с ";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 82, $this->source); })()), "s_price_refund", [], "any", false, false, false, 82), 'widget', ["value" => (isset($context["s_price_search"]) || array_key_exists("s_price_search", $context) ? $context["s_price_search"] : (function () { throw new RuntimeError('Variable "s_price_search" does not exist.', 82, $this->source); })())]);
+        echo "
         ";
         // line 83
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 83, $this->source); })()), "s_price_refund", [], "any", false, false, false, 83), 'errors');
+        echo "<br>
+        ";
+        // line 84
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 83, $this->source); })()), "flashes", ["po_price_refund"], "method", false, false, false, 83));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 84, $this->source); })()), "flashes", ["po_price_refund"], "method", false, false, false, 84));
         foreach ($context['_seq'] as $context["_key"] => $context["value_po_price_search"]) {
             echo "  
         ";
-            // line 84
-            $context["po_price_search"] = $context["value_po_price_search"];
             // line 85
+            $context["po_price_search"] = $context["value_po_price_search"];
+            // line 86
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_po_price_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 86
+        // line 87
         echo "        ";
         echo "по ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 86, $this->source); })()), "po_price_refund", [], "any", false, false, false, 86), 'widget', ["value" => (isset($context["po_price_search"]) || array_key_exists("po_price_search", $context) ? $context["po_price_search"] : (function () { throw new RuntimeError('Variable "po_price_search" does not exist.', 86, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 87, $this->source); })()), "po_price_refund", [], "any", false, false, false, 87), 'widget', ["value" => (isset($context["po_price_search"]) || array_key_exists("po_price_search", $context) ? $context["po_price_search"] : (function () { throw new RuntimeError('Variable "po_price_search" does not exist.', 87, $this->source); })())]);
         echo "<br>
         ";
-        // line 87
+        // line 88
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 87, $this->source); })()), "flashes", ["children[s_price_refund].data"], "method", false, false, false, 87));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 88, $this->source); })()), "flashes", ["children[s_price_refund].data"], "method", false, false, false, 88));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 88
+            // line 89
             echo "        ";
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
@@ -471,12 +474,12 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 90
+        // line 91
         echo "        ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 90, $this->source); })()), "flashes", ["children[po_price_refund].data"], "method", false, false, false, 90));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 91, $this->source); })()), "flashes", ["children[po_price_refund].data"], "method", false, false, false, 91));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 91
+            // line 92
             echo "        ";
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
@@ -485,47 +488,75 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 93
+        // line 94
         echo "        ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 93, $this->source); })()), "po_price_refund", [], "any", false, false, false, 93), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 94, $this->source); })()), "po_price_refund", [], "any", false, false, false, 94), 'errors');
         echo "</th>
 
         ";
-        // line 95
+        // line 96
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 95, $this->source); })()), "flashes", ["data_refund"], "method", false, false, false, 95));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 96, $this->source); })()), "flashes", ["data_refund"], "method", false, false, false, 96));
         foreach ($context['_seq'] as $context["_key"] => $context["value_data_refund_search"]) {
             echo "  
         ";
-            // line 96
-            $context["data_refund_search"] = $context["value_data_refund_search"];
             // line 97
+            $context["data_refund_search"] = $context["value_data_refund_search"];
+            // line 98
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_data_refund_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 98
+        // line 99
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 98, $this->source); })()), "data_refund", [], "any", false, false, false, 98), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 99, $this->source); })()), "data_refund", [], "any", false, false, false, 99), 'label');
         echo "<br>
         ";
-        // line 99
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 99, $this->source); })()), "data_refund", [], "any", false, false, false, 99), 'widget', ["value" => (isset($context["data_refund_search"]) || array_key_exists("data_refund_search", $context) ? $context["data_refund_search"] : (function () { throw new RuntimeError('Variable "data_refund_search" does not exist.', 99, $this->source); })())]);
+        // line 100
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 100, $this->source); })()), "data_refund", [], "any", false, false, false, 100), 'widget', ["value" => (isset($context["data_refund_search"]) || array_key_exists("data_refund_search", $context) ? $context["data_refund_search"] : (function () { throw new RuntimeError('Variable "data_refund_search" does not exist.', 100, $this->source); })())]);
         echo "
         ";
-        // line 100
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 100, $this->source); })()), "data_refund", [], "any", false, false, false, 100), 'errors');
+        // line 101
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 101, $this->source); })()), "data_refund", [], "any", false, false, false, 101), 'errors');
+        echo "</th>
+
+        ";
+        // line 103
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 103, $this->source); })()), "flashes", ["refund_activity_refund_refund"], "method", false, false, false, 103));
+        foreach ($context['_seq'] as $context["_key"] => $context["value_activity_refund_search"]) {
+            echo "  
+        ";
+            // line 104
+            $context["activity_refund_search"] = $context["value_activity_refund_search"];
+            // line 105
+            echo "        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_activity_refund_search'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 106
+        echo "        <th>";
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 106, $this->source); })()), "refund_activity_refund", [], "any", false, false, false, 106), 'label');
+        echo "<br>
+        ";
+        // line 107
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 107, $this->source); })()), "refund_activity_refund", [], "any", false, false, false, 107), 'widget', ["value" => (isset($context["activity_refund_search"]) || array_key_exists("activity_refund_search", $context) ? $context["activity_refund_search"] : (function () { throw new RuntimeError('Variable "activity_refund_search" does not exist.', 107, $this->source); })())]);
+        echo "
+        ";
+        // line 108
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 108, $this->source); })()), "refund_activity_refund", [], "any", false, false, false, 108), 'errors');
         echo "</th>
 
         <th>";
-        // line 102
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 102, $this->source); })()), "button", [], "any", false, false, false, 102), 'widget', ["label" => "Поиск", "attr" => ["class" => "search"]]);
+        // line 110
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 110, $this->source); })()), "button", [], "any", false, false, false, 110), 'widget', ["label" => "Поиск", "attr" => ["class" => "search"]]);
         echo "</th>
         
     ";
-        // line 104
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 104, $this->source); })()), 'form_end');
+        // line 112
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_search"]) || array_key_exists("form_search", $context) ? $context["form_search"] : (function () { throw new RuntimeError('Variable "form_search" does not exist.', 112, $this->source); })()), 'form_end');
         echo "
     <form action=\"/reset_refund\" name=\"reset_refund\">
     <th><button class=\"reset\" type=\"submit\" name=\"reset_refund\">Сбросить</button></th>
@@ -540,7 +571,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
 
     }
 
-    // line 111
+    // line 119
     public function block_table_thead_tr($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -550,17 +581,17 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
 
-        // line 113
-        if ((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 113, $this->source); })())) {
-            // line 114
+        // line 121
+        if ((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 121, $this->source); })())) {
+            // line 122
             echo "    ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 114, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 122, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["arr_search_refund"]) {
-                // line 115
+                // line 123
                 echo "        ";
                 if ($context["arr_search_refund"]) {
-                    // line 116
+                    // line 124
                     echo "            <th>№ Накладной</th>
             <th>Дата накладной</th>
             <th>Поставщик</th>
@@ -575,14 +606,14 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
             <th>Удалить</th>
         ";
                 }
-                // line 129
+                // line 137
                 echo "    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_refund'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         } else {
-            // line 131
+            // line 139
             echo "    <h2>Видите параметры в поиск</h2> 
 ";
         }
@@ -594,7 +625,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
 
     }
 
-    // line 135
+    // line 143
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -604,74 +635,74 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 136
+        // line 144
         echo "        ";
-        // line 137
+        // line 145
         echo "        ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 137, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_refund"]) || array_key_exists("arr_refund", $context) ? $context["arr_refund"] : (function () { throw new RuntimeError('Variable "arr_refund" does not exist.', 145, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["arr_search_refund"]) {
-            // line 138
+            // line 146
             echo "            ";
             if ($context["arr_search_refund"]) {
-                // line 139
+                // line 147
                 echo "                ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable($context["arr_search_refund"]);
                 foreach ($context['_seq'] as $context["_key"] => $context["search_refund"]) {
-                    // line 140
+                    // line 148
                     echo "
                     <tr>
                             <td>";
-                    // line 142
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 142), "getNumberDocument", [], "method", false, false, false, 142), "html", null, true);
-                    echo "</td>
-
-                            <td>";
-                    // line 144
-                    echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 144), "getDataInvoice", [], "method", false, false, false, 144), "d-m-Y"), "html", null, true);
-                    echo "</td>
-
-                            <td>";
-                    // line 146
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 146), "getIdCounterparty", [], "method", false, false, false, 146), "getCounterparty", [], "method", false, false, false, 146), "html", null, true);
-                    echo "</td>
-
-                            <td>";
-                    // line 148
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 148), "getIdDetails", [], "method", false, false, false, 148), "getPartNumbers", [], "method", false, false, false, 148), "html", null, true);
-                    echo "</td>
-
-                            <td>";
                     // line 150
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 150), "getIdManufacturer", [], "method", false, false, false, 150), "getManufacturers", [], "method", false, false, false, 150), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 150), "getNumberDocument", [], "method", false, false, false, 150), "html", null, true);
                     echo "</td>
 
                             <td>";
                     // line 152
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 152), "getQuantity", [], "method", false, false, false, 152), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 152), "getDataInvoice", [], "method", false, false, false, 152), "d-m-Y"), "html", null, true);
                     echo "</td>
 
                             <td>";
                     // line 154
-                    echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 154), "getPrice", [], "method", false, false, false, 154) / 100), 2, ".", ""), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 154), "getIdCounterparty", [], "method", false, false, false, 154), "getCounterparty", [], "method", false, false, false, 154), "html", null, true);
                     echo "</td>
 
                             <td>";
                     // line 156
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 156), "getIdRefundActivity", [], "method", false, false, false, 156), "getActivity", [], "method", false, false, false, 156), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 156), "getIdDetails", [], "method", false, false, false, 156), "getPartNumbers", [], "method", false, false, false, 156), "html", null, true);
                     echo "</td>
 
                             <td>";
                     // line 158
-                    echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getRefundDate", [], "method", false, false, false, 158), "d-m-Y"), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 158), "getIdManufacturer", [], "method", false, false, false, 158), "getManufacturers", [], "method", false, false, false, 158), "html", null, true);
+                    echo "</td>
+
+                            <td>";
+                    // line 160
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 160), "getQuantity", [], "method", false, false, false, 160), "html", null, true);
+                    echo "</td>
+
+                            <td>";
+                    // line 162
+                    echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 162), "getPrice", [], "method", false, false, false, 162) / 100), 2, ".", ""), "html", null, true);
+                    echo "</td>
+
+                            <td>";
+                    // line 164
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 164), "getIdRefundActivity", [], "method", false, false, false, 164), "getActivity", [], "method", false, false, false, 164), "html", null, true);
+                    echo "</td>
+
+                            <td>";
+                    // line 166
+                    echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getRefundDate", [], "method", false, false, false, 166), "d-m-Y"), "html", null, true);
                     echo "</td>
 
                             <form action=\"/edit_activity\" name=\"edit_activity\" method=\"post\">
 
                                 <td><button class=\"edit\" type=\"submit\" name=\"edit_activity\" value=\"";
-                    // line 162
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 162), "getId", [], "method", false, false, false, 162), "html", null, true);
+                    // line 170
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 170), "getId", [], "method", false, false, false, 170), "html", null, true);
                     echo "\">Изменить</button></td>  
 
                             </form>
@@ -679,8 +710,8 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                             <form action=\"/edit_refund\" name=\"edit_refund\" method=\"post\">
 
                                 <td><button class=\"edit\" type=\"submit\" name=\"edit_refund\" value=\"";
-                    // line 168
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 168), "getId", [], "method", false, false, false, 168), "html", null, true);
+                    // line 176
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 176), "getId", [], "method", false, false, false, 176), "html", null, true);
                     echo "\">Отменить</button></td>  
 
                             </form>
@@ -688,8 +719,8 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                             <form action=\"/delete_refund\" name=\"delete_refund\" method=\"post\">
 
                                 <td><button class=\"delete\" type=\"submit\" name=\"delete_refund\" value=\"";
-                    // line 174
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 174), "getId", [], "method", false, false, false, 174), "html", null, true);
+                    // line 182
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["search_refund"], "getIdInvoiceRefundDate", [], "method", false, false, false, 182), "getId", [], "method", false, false, false, 182), "html", null, true);
                     echo "\">Удалить</button></td>
    
                             </form>
@@ -699,20 +730,20 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['search_refund'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 179
+                // line 187
                 echo "            ";
             } else {
-                // line 180
+                // line 188
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 182
+            // line 190
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_refund'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 183
+        // line 191
         echo "    
 ";
         
@@ -735,7 +766,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
 
     public function getDebugInfo()
     {
-        return array (  716 => 183,  710 => 182,  706 => 180,  703 => 179,  692 => 174,  683 => 168,  674 => 162,  667 => 158,  662 => 156,  657 => 154,  652 => 152,  647 => 150,  642 => 148,  637 => 146,  632 => 144,  627 => 142,  623 => 140,  618 => 139,  615 => 138,  610 => 137,  608 => 136,  598 => 135,  586 => 131,  579 => 129,  564 => 116,  561 => 115,  556 => 114,  554 => 113,  544 => 111,  528 => 104,  523 => 102,  518 => 100,  514 => 99,  509 => 98,  503 => 97,  501 => 96,  495 => 95,  489 => 93,  480 => 91,  475 => 90,  466 => 88,  462 => 87,  456 => 86,  450 => 85,  448 => 84,  442 => 83,  438 => 82,  433 => 81,  428 => 80,  422 => 79,  420 => 78,  414 => 77,  408 => 75,  399 => 73,  395 => 72,  391 => 71,  386 => 70,  380 => 69,  378 => 68,  372 => 67,  366 => 65,  357 => 63,  353 => 62,  349 => 61,  344 => 60,  338 => 59,  336 => 58,  330 => 57,  325 => 55,  321 => 54,  316 => 53,  310 => 52,  308 => 51,  302 => 50,  297 => 48,  291 => 47,  285 => 46,  283 => 45,  277 => 44,  273 => 43,  268 => 42,  263 => 41,  257 => 40,  255 => 39,  249 => 38,  243 => 36,  234 => 34,  230 => 33,  226 => 32,  221 => 31,  215 => 30,  213 => 29,  207 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  747 => 191,  741 => 190,  737 => 188,  734 => 187,  723 => 182,  714 => 176,  705 => 170,  698 => 166,  693 => 164,  688 => 162,  683 => 160,  678 => 158,  673 => 156,  668 => 154,  663 => 152,  658 => 150,  654 => 148,  649 => 147,  646 => 146,  641 => 145,  639 => 144,  629 => 143,  617 => 139,  610 => 137,  595 => 124,  592 => 123,  587 => 122,  585 => 121,  575 => 119,  559 => 112,  554 => 110,  549 => 108,  545 => 107,  540 => 106,  534 => 105,  532 => 104,  526 => 103,  521 => 101,  517 => 100,  512 => 99,  506 => 98,  504 => 97,  498 => 96,  492 => 94,  483 => 92,  478 => 91,  469 => 89,  465 => 88,  459 => 87,  453 => 86,  451 => 85,  445 => 84,  441 => 83,  436 => 82,  431 => 81,  425 => 80,  423 => 79,  417 => 78,  411 => 76,  402 => 74,  398 => 73,  394 => 72,  389 => 71,  383 => 70,  381 => 69,  375 => 68,  369 => 66,  360 => 64,  356 => 63,  352 => 62,  347 => 61,  341 => 60,  339 => 59,  333 => 58,  328 => 56,  324 => 55,  319 => 54,  313 => 53,  311 => 52,  305 => 51,  300 => 49,  294 => 48,  288 => 47,  286 => 46,  280 => 45,  276 => 44,  271 => 43,  266 => 42,  260 => 41,  258 => 40,  252 => 39,  246 => 37,  237 => 35,  233 => 34,  229 => 33,  224 => 32,  218 => 31,  216 => 30,  210 => 29,  207 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -766,6 +797,7 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
         {% set data_refund_search = '' %}
+        {% set activity_refund_search = '' %}
 
         {% for value_number_document_search in app.flashes('search_number_document_refund') %}  
         {% set number_document_search = value_number_document_search %}
@@ -840,6 +872,13 @@ class __TwigTemplate_2e25de5c2f2cc5c67db1260468101bff extends Template
         <th>{{ form_label(form_search.data_refund) }}<br>
         {{ form_widget(form_search.data_refund, {value : data_refund_search}) }}
         {{ form_errors(form_search.data_refund) }}</th>
+
+        {% for value_activity_refund_search in app.flashes('refund_activity_refund_refund') %}  
+        {% set activity_refund_search = value_activity_refund_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.refund_activity_refund) }}<br>
+        {{ form_widget(form_search.refund_activity_refund, {value : activity_refund_search}) }}
+        {{ form_errors(form_search.refund_activity_refund) }}</th>
 
         <th>{{ form_widget(form_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
         

@@ -118,7 +118,8 @@
                 {% for price in arr_search_price %}
                    {% if price.getIdDetails().getIdInStock().getId() == 1 
                         and price.getSales() == 1 
-                        and price.getRefund() == 1 %}
+                        and price.getRefund() == 1 
+                        and (price.getQuantity() - price.getQuantitySold()) != 0%}
                         <tr>
                             <td>{{ price.getIdDetails().getPartNumbers() }}</td>
 

@@ -4,3 +4,75 @@
 
 {% block logo %}{{title_logo}}{% endblock %}
  
+ {% block legend %}{% endblock legend%}
+
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_save_edit_sales %}{% endblock form_save_edit_sales %}
+
+{% block form_search %}
+    {#Форма поиска #}
+    {{ form_start(form_sales_search, {'action': path('sales')}) }}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set search_sales_part_numbers = '' %}
+        {% set search_sales_id_original_number = '' %}
+        {% set search_sales_manufacturers = '' %}
+        {% set search_id_counterparty = '' %}
+        {% set search_id_payment_method = '' %}
+        {% set search_sales_id_part_name = '' %}
+        {% set search_sales_id_car_brand = '' %}
+        {% set search_sales_id_side = '' %}
+        {% set search_sales_id_body = '' %}
+        {% set search_sales_id_axle = '' %}
+
+        {% for value_part_numbers in app.flashes('part_numbers_sales_search') %}  
+            {% set search_sales_part_numbers = value_part_numbers %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.part_numbers_sales) }}<br>
+        {{ form_widget(form_sales_search.part_numbers_sales, {value : search_sales_part_numbers}) }}<br>
+        {% for message_part_numbers_sales in app.flashes('children[part_numbers_sales].data_search') %}
+            {{ message_part_numbers_sales }}
+        {% endfor %}
+        {{ form_errors(form_sales_search.part_numbers_sales) }}</th>
+
+        {% for value_original_number in app.flashes('original_number_sales_search') %}  
+            {% set search_sales_id_original_number = value_original_number %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.original_number_sales) }}<br>
+        {{ form_widget(form_sales_search.original_number_sales, {value : search_sales_id_original_number}) }}<br>
+        {% for message_original_number_sales in app.flashes('children[original_number_sales].data_search') %}
+            {{ message_original_number_sales }}
+        {% endfor %}
+        {{ form_errors(form_sales_search.original_number_sales) }}</th>
+
+        {% for value_manufacturers in app.flashes('manufacturers_sales_search') %}  
+                {% set search_sales_manufacturers = value_manufacturers %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.manufacturers_sales) }}<br>
+        {{ form_widget(form_sales_search.manufacturers_sales, {value : search_sales_manufacturers}) }}<br>
+        {% for message_manufacturers_sales in app.flashes('children[manufacturers_sales].data_search') %}
+            {{ message_manufacturers_sales }}
+        {% endfor %}
+        {{ form_errors(form_sales_search.manufacturers_sales) }}</th>
+
+        {% for value_id_counterparty in app.flashes('id_counterparty_sales_search') %}  
+        {% set search_id_counterparty = value_id_counterparty %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_counterparty_sales) }}<br>
+        {{ form_widget(form_sales_search.id_counterparty_sales, {value : search_id_counterparty}) }}
+        {{ form_errors(form_sales_search.id_counterparty_sales) }}</th>
+
+        {% for value_id_payment_method in app.flashes('id_payment_method_sales_search') %}  
+        {% set search_id_payment_method = value_id_payment_method %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_payment_method_sales) }}<br>
+        {{ form_widget(form_sales_search.id_payment_method_sales, {value : search_id_payment_method}) }}
+        {{ form_errors(form_sales_search.id_payment_method_sales) }}</th>
+
+    {{ form_end(form_sales_search) }}
+
+    <form action="/reset_sales" name="reset_sales">
+        <th><button class="reset" type="submit" name="reset_sales">Сбросить</button></th>
+    </form>
+
+{% endblock form_search %}

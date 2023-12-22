@@ -4,6 +4,7 @@ namespace App\Controller\Sections_header;
 
 use App\Entity\Invoice;
 use App\Entity\RefundDate;
+use App\Entity\Availability;
 use App\Entity\RefundActivity;
 use App\Form\SearchRefundType;
 use App\Form\SearchInvoiceType;
@@ -53,6 +54,7 @@ class RefundController extends AbstractController
                 $s_price_search = $request->request->all()['search_refund']['s_price_refund'];
                 $po_price_search = $request->request->all()['search_refund']['po_price_refund'];
                 $data_refund = $request->request->all()['search_refund']['data_refund'];
+                $activity_refund = $request->request->all()['search_refund']['refund_activity_refund'];
 
                 if ($number_document_search) {
 
@@ -97,6 +99,10 @@ class RefundController extends AbstractController
 
                     $arr_refund[] = $RefundDateRepository
                         ->findByDataRefund($data_refund);
+                } elseif ($activity_refund) {
+
+                    $arr_refund[] = $RefundDateRepository
+                        ->findByActivityRefund($activity_refund);
                 }
             } else {
 
@@ -148,14 +154,18 @@ class RefundController extends AbstractController
 
     /* Функция отменяет возврат  */
     #[Route('/edit_refund', name: 'edit_refund')]
-    public function EditRefund(ManagerRegistry $doctrine, Request $request): Response
-    {
+    public function EditRefund(
+        ManagerRegistry $doctrine,
+        Request $request,
+        InvoiceRepository $InvoiceRepository,
+    ): Response {
         if ($request->request->all()) {
+
             $id = $request->request->all()['edit_refund'];
 
-            $edit_refund = $doctrine->getRepository(Invoice::class)->find($id);
+            $edit_refund = $InvoiceRepository->findOneByInvoiceJoinDetails($id);
 
-            $edit_refund->setRefund(1);
+            $edit_refund[0]->setRefund(1);
 
             $delete_refund_date = $doctrine->getRepository(RefundDate::class)
                 ->findOneBy(['id_invoice_refund_date' => $id]);
@@ -163,6 +173,14 @@ class RefundController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->remove($delete_refund_date);
             $entityManager->flush();
+
+            $in_stock = $doctrine->getRepository(Availability::class)->find(1);
+            $count_availability = $InvoiceRepository->findByCountAvailability($edit_refund[0]->getIdDetails());
+            if ($count_availability[0][1] != 0) {
+
+                $edit_refund[0]->getIdDetails()->setIdInStock($in_stock);
+            }
+            $doctrine->getManager()->flush();
         }
 
 

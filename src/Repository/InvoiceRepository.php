@@ -331,9 +331,9 @@ class InvoiceRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Invoice[] Returns an array of Invoice objects
+     * @return Invoice Returns an array of Invoice objects
      */
-    public function findOneByIdSold($id): array
+    public function findOneByInvoiceJoinDetails($id): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -354,17 +354,16 @@ class InvoiceRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT i, d, a
+            'SELECT i, d
                 FROM App\Entity\Invoice i
                 INNER JOIN i.id_details d
-                INNER JOIN d.id_in_stock a
                 WHERE i.sold_status = :sold_status'
         )->setParameter('sold_status', 2);
         return $query->getResult();
     }
 
     /**
-     * @return Invoice[] Returns an array of Invoice objects
+     * @return Invoice Returns an array of Invoice objects
      */
     public function findByCountAvailability($id_details): array
     {

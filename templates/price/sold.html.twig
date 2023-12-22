@@ -61,7 +61,7 @@
                 / sold.getQuantity()) * sold.getQuantitySold()))|number_format(2, '.', '') }}</th>
                                     
             {#Форма продажи детали#}
-            {{ form_start(form_sold) }}
+            {{ form_start(form_sold, {'action': path('sold_price')}) }}
             {#{{ dump(arr_sale_list[0].getDateSold()) }}#}
                 {% set quantity_sold_price = '' %}
                 {% set price_sold_price = '' %}

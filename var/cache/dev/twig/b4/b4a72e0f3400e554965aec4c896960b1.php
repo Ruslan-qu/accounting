@@ -226,7 +226,7 @@ $context["sold"], "getQuantity", [], "method", false, false, false, 61)) * twig_
             ";
             // line 64
             echo "            ";
-            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_sold"]) || array_key_exists("form_sold", $context) ? $context["form_sold"] : (function () { throw new RuntimeError('Variable "form_sold" does not exist.', 64, $this->source); })()), 'form_start');
+            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_sold"]) || array_key_exists("form_sold", $context) ? $context["form_sold"] : (function () { throw new RuntimeError('Variable "form_sold" does not exist.', 64, $this->source); })()), 'form_start', ["action" => $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sold_price")]);
             echo "
             ";
             // line 66
@@ -678,7 +678,7 @@ $context["sale_list"], "getQuantitySold", [], "method", false, false, false, 165
                 / sold.getQuantity()) * sold.getQuantitySold()))|number_format(2, '.', '') }}</th>
                                     
             {#Форма продажи детали#}
-            {{ form_start(form_sold) }}
+            {{ form_start(form_sold, {'action': path('sold_price')}) }}
             {#{{ dump(arr_sale_list[0].getDateSold()) }}#}
                 {% set quantity_sold_price = '' %}
                 {% set price_sold_price = '' %}

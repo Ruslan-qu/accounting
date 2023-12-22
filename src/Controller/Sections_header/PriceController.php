@@ -173,18 +173,18 @@ class PriceController extends AbstractController
             $id = $form_sold->getData()->getHiddenSold();
         }
         /*Открываем деталь по id */
-        $arr_sold_part = $InvoiceRepository->findOneByIdSold($id);
+        $arr_sold_part = $InvoiceRepository->findOneByInvoiceJoinDetails($id);
 
         /*Валидация формы */
         if ($form_sold->isSubmitted()) {
 
             /* Выводим данные и формы */
             $quantity_sold = $form_sold->getData()->getQuantitySold();
-
+            //  dd($arr_sold_part);
             /* Выводим данные из базы данных */
             $quantity_invoice = $arr_sold_part[0]->getQuantity();
             $invoice_quantity_sold = $arr_sold_part[0]->getQuantitySold();
-            $sum_quantity_sold = $quantity_sold + $invoice_quantity_sold;
+            $sum_quantity_sold = $invoice_quantity_sold + $quantity_sold;
 
             /* Подключаем валидацию и прописываем условида валидации и сообщение ошибки*/
             $validator = Validation::createValidator();
@@ -196,10 +196,12 @@ class PriceController extends AbstractController
 
             $constraint = new Collection([
                 'quantity_sold_error' => new Range(
+                    min: 1,
                     max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
                 'sum_quantity_sold_error' => new Range(
+                    min: 1,
                     max: $quantity_invoice,
                     notInRangeMessage: 'Недопустимое число',
                 ),
@@ -214,7 +216,7 @@ class PriceController extends AbstractController
                 /* Сохранения формы */
                 $entity_sold->setIdInvoice($arr_sold_part[0]);
 
-                $entity_sold->setQuantitySold($sum_quantity_sold);
+                $entity_sold->setQuantitySold($quantity_sold);
 
                 $entity_sold->setPriceSold($form_sold->getData()->getPriceSold() * 100);
 
@@ -225,7 +227,7 @@ class PriceController extends AbstractController
                 $em->flush();
 
 
-                $arr_sold_part[0]->setQuantitySold($quantity_sold);
+                $arr_sold_part[0]->setQuantitySold($sum_quantity_sold);
                 /*Устанавливаем статус продажи для выведения общей сумму 
                     всех продаж при одной сделки "1"- не выводится, "2"- выводится */
                 $arr_sold_part[0]->setSoldStatus(2);

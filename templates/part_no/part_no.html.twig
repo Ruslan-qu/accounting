@@ -119,13 +119,12 @@
 {% endblock form_save_edit_sales %}
 
 {% block form_search %}
-    {#Форма поиска деталей#}
-  {{ form_start(form_p_n_search, { attr: {novalidate: 'novalidate'}, 'action': path('part_no')}) }}
+    {#Форма поиска #}
+    {{ form_start(form_p_n_search, { attr: {novalidate: 'novalidate'}, 'action': path('part_no')}) }}
 
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set search_part_numbers = '' %}
         {% set search_id_original_number = '' %}
-        {% set search_manufacturers = '' %}
         {% set search_id_part_name = '' %}
         {% set search_id_car_brand = '' %}
         {% set search_id_side = '' %}

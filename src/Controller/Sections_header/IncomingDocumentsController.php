@@ -304,26 +304,35 @@ class IncomingDocumentsController extends AbstractController
         }
     }
 
-    /* Функция возврата , изменяем данные в базе данных ячейке возврат  */
+    /* Функция возврата */
     #[Route('/refund_part', name: 'refund_part', methods: ['GET'])]
-    public function Refund(ManagerRegistry $doctrine, Request $request): Response
-    {
+    public function Refund(
+        ManagerRegistry $doctrine,
+        Request $request,
+        InvoiceRepository $InvoiceRepository,
+    ): Response {
         $entity_refund_date = new RefundDate();
 
         $id = $request->query->get('refund_part');
-        $refund = $doctrine->getRepository(Invoice::class)->find($id);
-        $refund->setRefund(2);
+        $refund = $InvoiceRepository->findOneByInvoiceJoinDetails($id);
+        $refund[0]->setRefund(2);
         $id_refund_activit = $doctrine->getRepository(RefundActivity::class)->find(2);
-        $refund->setIdRefundActivity($id_refund_activit);
+        $refund[0]->setIdRefundActivity($id_refund_activit);
 
-        // $doctrine->getManager()->flush();
-
-        $entity_refund_date->setIdInvoiceRefundDate($refund);
+        $entity_refund_date->setIdInvoiceRefundDate($refund[0]);
         $entity_refund_date->setRefundDate(new \DateTime());
-        //dd($entity_refund_date);
+
         $em = $doctrine->getManager();
         $em->persist($entity_refund_date);
         $em->flush();
+
+        $in_stock = $doctrine->getRepository(Availability::class)->find(2);
+        $count_availability = $InvoiceRepository->findByCountAvailability($refund[0]->getIdDetails());
+        if ($count_availability[0][1] == 0) {
+
+            $refund[0]->getIdDetails()->setIdInStock($in_stock);
+        }
+        $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('incoming_documents');
     }

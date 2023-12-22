@@ -5,6 +5,7 @@ namespace App\Controller\Sections_header;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\OriginalRooms;
+use App\Form\SearchSalesType;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -34,17 +35,31 @@ class SalesController extends AbstractController
         $entity_PartNo = new IdDetailsManufacturer();
 
         /*Подключаем формы */
-        $form_price_search = $this->createForm(PartNoType::class, $entity_PartNo);
+        $form_sales_search = $this->createForm(SearchSalesType::class);
 
         /*Валидация формы */
-        $form_price_search->handleRequest($request);
+        $form_sales_search->handleRequest($request);
 
         /*Подключаем валидацию форм */
-        $errors_search_price = $validator->validate($form_price_search);
+        $errors_search_sales = $validator->validate($form_sales_search);
+
+        if ($form_sales_search->isSubmitted()) {
+            if ($form_sales_search->isValid()) {
+            }
+        }
 
 
         return $this->render('sales/sales.html.twig', [
             'title_logo' => 'Продажи',
+            'legend_search' => 'Поиск',
+            'form_sales_search' => $form_sales_search->createView(),
         ]);
+    }
+
+    /* функция сброса */
+    #[Route('/reset_sales', name: 'reset_sales')]
+    public function resetPart(): Response
+    {
+        return $this->redirectToRoute('sales');
     }
 }

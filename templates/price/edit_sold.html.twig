@@ -61,7 +61,7 @@
                 <th>{{ (sold.getIdInvoice().getPrice() / 100)|number_format(2, '.', '') }}</th>
                                     
             {#Форма продажи детали#}
-            {{ form_start(form_sold_edit) }}
+            {{ form_start(form_sold_edit, {'action': path('edit_sold_price')}) }}
            {#} {{ dump(app.flashes()) }}#}
                 {% set quantity_sold_price = sold.getQuantitySold()|default('') %}
                 {% set price_sold_price = (sold.getPriceSold() / 100)|default('') %}

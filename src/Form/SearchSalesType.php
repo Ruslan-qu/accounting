@@ -159,7 +159,7 @@ class SearchSalesType extends AbstractType
                 ],
                 'attr' => ['style' => 'width: 80px'],
             ])
-            ->add('search_id_counterparty_sales', EntityType::class, [
+            ->add('id_counterparty_sales', EntityType::class, [
                 'label' => 'Поставщик',
                 'class' => Counterparty::class,
                 'choice_label' => 'counterparty',
@@ -171,7 +171,7 @@ class SearchSalesType extends AbstractType
                 ]
 
             ])
-            ->add('search_id_payment_method_sales', EntityType::class, [
+            ->add('id_payment_method_sales', EntityType::class, [
                 'label' => 'Способ оплаты',
                 'class' => PaymentMethod::class,
                 'choice_label' => 'method',
@@ -181,8 +181,8 @@ class SearchSalesType extends AbstractType
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
             ])
-            ->add('hidden', HiddenType::class)
-            ->add('button', SubmitType::class);
+            ->add('hidden_sales', HiddenType::class)
+            ->add('button_sales', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

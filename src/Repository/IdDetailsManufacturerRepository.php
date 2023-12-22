@@ -104,4 +104,21 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
         //dd($query);
         return $query;
     }
+
+    /**
+     * @return IdDetailsManufacturer[] Returns an array of IdDetailsManufacturer objects
+     */
+    public function findByActivityRefund($activity_refund): array
+    {
+        $entityManager = $this->getEntityManager();
+        // dd($data_refund);
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                WHERE r.refund_date = :refund_date'
+        )->setParameter('refund_date', $data_refund);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
 }

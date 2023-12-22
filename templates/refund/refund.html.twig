@@ -24,6 +24,7 @@
         {% set s_price_search = '' %}
         {% set po_price_search = '' %}
         {% set data_refund_search = '' %}
+        {% set activity_refund_search = '' %}
 
         {% for value_number_document_search in app.flashes('search_number_document_refund') %}  
         {% set number_document_search = value_number_document_search %}
@@ -98,6 +99,13 @@
         <th>{{ form_label(form_search.data_refund) }}<br>
         {{ form_widget(form_search.data_refund, {value : data_refund_search}) }}
         {{ form_errors(form_search.data_refund) }}</th>
+
+        {% for value_activity_refund_search in app.flashes('refund_activity_refund_refund') %}  
+        {% set activity_refund_search = value_activity_refund_search %}
+        {% endfor %}
+        <th>{{ form_label(form_search.refund_activity_refund) }}<br>
+        {{ form_widget(form_search.refund_activity_refund, {value : activity_refund_search}) }}
+        {{ form_errors(form_search.refund_activity_refund) }}</th>
 
         <th>{{ form_widget(form_search.button, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
         
