@@ -331,7 +331,7 @@ class InvoiceRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Invoice Returns an array of Invoice objects
+     * @return Invoice[] Returns an array of Invoice objects
      */
     public function findOneByInvoiceJoinDetails($id): array
     {
@@ -363,7 +363,7 @@ class InvoiceRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Invoice Returns an array of Invoice objects
+     * @return Invoice[] Returns an array of Invoice objects
      */
     public function findByCountAvailability($id_details): array
     {

@@ -337,4 +337,21 @@ class RefundDateRepository extends ServiceEntityRepository
         }
         return $query;
     }
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findByActivityRefund($activity_refund): array
+    {
+        $entityManager = $this->getEntityManager();
+        // dd($data_refund);
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+            FROM App\Entity\RefundDate r
+            INNER JOIN r.id_invoice_refund_date i
+            WHERE i.id_refund_activity = :id_refund_activity'
+        )->setParameter('id_refund_activity', $activity_refund);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
 }

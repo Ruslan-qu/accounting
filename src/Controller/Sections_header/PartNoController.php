@@ -83,10 +83,8 @@ class PartNoController extends AbstractController
                         ->findBy(['part_numbers' => $part_numbers_search]);
                 } elseif ($original_number) {
 
-                    $id_original_number = $doctrine->getRepository(OriginalRooms::class)
-                        ->findBy(['original_number' => $original_number]);
-                    $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)
-                        ->findBy(['id_original_number' => $id_original_number]);
+                    $arr_part_no[] = $IdDetailsManufacturerRepository
+                        ->findByOriginalNumber($original_number);
                 } elseif ($id_part_name_search) {
 
                     $arr_part_no[] = $IdDetailsManufacturerRepository
