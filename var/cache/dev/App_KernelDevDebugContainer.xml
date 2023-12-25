@@ -468,7 +468,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.S77tpbq"/>
+      <argument type="service" id=".service_locator.R3IqLRq"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1693,7 +1693,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.S77tpbq"/>
+      <argument type="service" id=".service_locator.R3IqLRq"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -4457,7 +4457,7 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.S77tpbq" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.R3IqLRq" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Sections_header\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
@@ -4470,7 +4470,7 @@
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController::editPart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController::salesPart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\Sections_header\PartNoController::savePart" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\PartNoController::searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
         <argument key="App\Controller\Sections_header\PriceController::completeSales" type="service_closure" id=".service_locator.AOBeOHN"/>
         <argument key="App\Controller\Sections_header\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4496,7 +4496,7 @@
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController:editPart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController:salesPart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\Sections_header\PartNoController:savePart" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\PartNoController:searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
         <argument key="App\Controller\Sections_header\PriceController:completeSales" type="service_closure" id=".service_locator.AOBeOHN"/>
         <argument key="App\Controller\Sections_header\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -5687,7 +5687,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.S77tpbq"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.R3IqLRq"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5708,7 +5708,7 @@
     <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
     <service id=".service_locator.2_UOsCe" alias=".service_locator.4vTIIZS"/>
     <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
-    <service id=".service_locator.p36n6hv" alias=".service_locator.S77tpbq"/>
+    <service id=".service_locator.xu9wYV2" alias=".service_locator.R3IqLRq"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
     <service id=".service_locator.n9MeIoD" alias=".service_locator.jC44.T7"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>

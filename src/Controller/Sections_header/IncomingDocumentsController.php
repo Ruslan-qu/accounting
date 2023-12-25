@@ -64,32 +64,42 @@ class IncomingDocumentsController extends AbstractController
                 /* Массив для сбора списка по поиску */
                 // $arr_incoming_documents_search = [];
 
+                /* удаляем пустые зачения массива формы */
+                // $arr_form_invoice_search = $request->request->all()['search_invoice'];
+                // $array_filter_invoice = array_filter($arr_form_invoice_search);
+                //dd($form_search_invoice->getData());
+                //$id_part_name_search = $form_search_invoice->getData()->getPoDataInvoice();
                 /* собераем списка по поиску */
-                $number_document_search = $request->request->all()['search_invoice']['search_number_document'];
-                $s_data_invoice_search = $request->request->all()['search_invoice']['s_data_invoice'];
-                $po_data_invoice_search = $request->request->all()['search_invoice']['po_data_invoice'];
-                $id_counterparty_search = $request->request->all()['search_invoice']['search_id_counterparty'];
-                $part_numbers_search = strtolower($request->request->all()['search_invoice']['search_id_details']);
-                $manufacturers_search = strtolower($request->request->all()['search_invoice']['search_id_manufacturer']);
-                $s_price_search = $request->request->all()['search_invoice']['s_price'];
-                $po_price_search = $request->request->all()['search_invoice']['po_price'];
-                $id_payment_method_search = $request->request->all()['search_invoice']['search_id_payment_method'];
+                $number_document_search = $form_search_invoice->getData()['search_number_document'];
+                $s_data_invoice_search = $form_search_invoice->getData()['s_data_invoice'];
+                $po_data_invoice_search = $form_search_invoice->getData()['po_data_invoice'];
+                $id_counterparty_search = $form_search_invoice->getData()['search_id_counterparty'];
+                $part_numbers_search = strtolower($form_search_invoice->getData()['search_id_details']);
+                $manufacturers_search = strtolower($form_search_invoice->getData()['search_id_manufacturer']);
+                $s_price_search = $form_search_invoice->getData()['s_price'];
+                $po_price_search = $form_search_invoice->getData()['po_price'];
+                $id_payment_method_search = $form_search_invoice->getData()['search_id_payment_method'];
 
                 if ($number_document_search) {
                     $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
                         ->findBy(['number_document' => $number_document_search]);
                 } elseif ($s_data_invoice_search && $po_data_invoice_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByDate($s_data_invoice_search, $po_data_invoice_search);
+                        ->findByDate(
+                            $s_data_invoice_search,
+                            $po_data_invoice_search,
+                            $form_search_invoice
+                        );
                 } elseif ($s_data_invoice_search && !$po_data_invoice_search) {
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findBySDate($s_data_invoice_search);
+                        ->findBySDate($s_data_invoice_search, $form_search_invoice);
                 } elseif (!$s_data_invoice_search && $po_data_invoice_search) {
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByPoDate($po_data_invoice_search);
+                        ->findByPoDate($po_data_invoice_search, $form_search_invoice);
                 } elseif ($id_counterparty_search) {
-                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['id_counterparty' => $id_counterparty_search]);
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByCounterparty($id_counterparty_search, $form_search_invoice);
                 } elseif ($part_numbers_search) {
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findBySearchNumber($part_numbers_search);

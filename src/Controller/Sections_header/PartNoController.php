@@ -72,8 +72,8 @@ class PartNoController extends AbstractController
                 $id_axle_search = $form_p_n_search->getData()->getIdAxle();
                 $id_in_stock_search = $form_p_n_search->getData()->getIdInStock();
 
+                /* удаляем пустые зачения массива формы */
                 $arr_form_p_n_search = $request->request->all()['part_no'];
-
                 $array_filter_part_no = array_filter($arr_form_p_n_search);
                 //dd($array_filter_part_no);
 
@@ -168,7 +168,7 @@ class PartNoController extends AbstractController
 
 
     #[Route('/save_part_no', name: 'save_part_no')]
-    public function salesPart(
+    public function savePart(
         ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator

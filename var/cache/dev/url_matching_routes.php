@@ -26,7 +26,7 @@ return [
         '/ku_dir' => [[['_route' => 'ku_dir', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_main_page', '_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], null, null, null, false, false, null]],
         '/part_no' => [[['_route' => 'part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], null, null, null, false, false, null]],
-        '/save_part_no' => [[['_route' => 'save_part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::salesPart'], null, null, null, false, false, null]],
+        '/save_part_no' => [[['_route' => 'save_part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::savePart'], null, null, null, false, false, null]],
         '/reset_part_no' => [[['_route' => 'reset_part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::resetPart'], null, null, null, false, false, null]],
         '/delete_part' => [[['_route' => 'delete_part', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::deletePart'], null, null, null, false, false, null]],
         '/edit_part' => [[['_route' => 'edit_part', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::editPart'], null, null, null, false, false, null]],

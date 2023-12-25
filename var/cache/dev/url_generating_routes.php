@@ -28,7 +28,7 @@ return [
     'ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::index'], [], [['text', '/ku_dir']], [], [], []],
     'app_main_page' => [[], ['_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], [], [['text', '/']], [], [], []],
     'part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], [], [['text', '/part_no']], [], [], []],
-    'save_part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::salesPart'], [], [['text', '/save_part_no']], [], [], []],
+    'save_part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::savePart'], [], [['text', '/save_part_no']], [], [], []],
     'reset_part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::resetPart'], [], [['text', '/reset_part_no']], [], [], []],
     'delete_part' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::deletePart'], [], [['text', '/delete_part']], [], [], []],
     'edit_part' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::editPart'], [], [['text', '/edit_part']], [], [], []],

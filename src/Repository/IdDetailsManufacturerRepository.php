@@ -93,7 +93,10 @@ class IdDetailsManufacturerRepository extends ServiceEntityRepository
 
             foreach ($query as $key => $value_part_name) {
 
-                if ($value_part_name->$key_part_no_preg_replace_ucwords() == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()) {
+                if (
+                    $value_part_name->$key_part_no_preg_replace_ucwords()
+                    == $form_price_search->getData()->$key_part_no_preg_replace_ucwords()
+                ) {
 
                     $query[$key] = $value_part_name;
                 } else {
