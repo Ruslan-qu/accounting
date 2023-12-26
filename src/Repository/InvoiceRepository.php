@@ -87,7 +87,7 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findByDate(
+    public function findByDateInvoice(
         $s_data_invoice_search,
         $po_data_invoice_search,
         $form_search_invoice
@@ -564,15 +564,9 @@ class InvoiceRepository extends ServiceEntityRepository
 
                 if ($key_invoice == 'search_id_payment_method') {
 
-                    $key_invoice_preg_replace_ucwords =
-                        'get' . preg_replace('#_#', '', ucwords($key_invoice, '_'));
-                    $key_invoice_preg_replace_search = preg_replace('#Search#', '', $key_invoice_preg_replace_ucwords);
-
-                    // dd($key_invoice_preg_replace_search);
-
                     foreach ($result as $key => $value_invoice) {
 
-                        if ($value_invoice->$key_invoice_preg_replace_search() == $value_form) {
+                        if ($value_invoice->getIdPaymentMethod() == $value_form) {
 
                             $result[$key] = $value_invoice;
                         } else {
@@ -589,7 +583,312 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findByPrice($s_price_search, $po_price_search): array
+    public function findBySearchNumberInvoice(
+        $part_numbers_search,
+        $form_search_invoice
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, d
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                WHERE d.part_numbers = :part_numbers
+                AND i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'part_numbers' => $part_numbers_search,
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_invoice->getData());
+        unset($array_filter_form['search_id_details']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice => $value_form) {
+
+                if ($key_invoice == 's_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'po_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'search_id_manufacturer') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdManufacturer()->getManufacturers() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'search_id_payment_method') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdPaymentMethod() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findBySearchManufacturers(
+        $manufacturers_search,
+        $form_search_invoice
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, d
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                WHERE d.manufacturers = :manufacturers
+                AND i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'manufacturers' => $manufacturers_search,
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_invoice->getData());
+        unset($array_filter_form['search_id_manufacturer']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice => $value_form) {
+
+                if ($key_invoice == 's_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'po_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'search_id_payment_method') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdPaymentMethod() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByPrice(
+        $form_search_invoice
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i
+                FROM App\Entity\Invoice i
+                WHERE i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_invoice->getData());
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice => $value_form) {
+
+                if ($key_invoice == 's_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice == 'po_price') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getPrice() / 100)
+                            - ((($value_invoice->getPrice() / 100) / $value_invoice->getQuantity())
+                                * $value_invoice->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+
+                if ($key_invoice == 'search_id_payment_method') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdPaymentMethod() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByPaymentMethod($id_payment_method_search): array
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i
+                FROM App\Entity\Invoice i
+                WHERE i.id_payment_method = :id_payment_method
+                AND i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'id_payment_method' => $id_payment_method_search,
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    /*public function findByPrice($s_price_search, $po_price_search): array
     {
 
         if (strpos($s_price_search, ',')) {
@@ -633,13 +932,13 @@ class InvoiceRepository extends ServiceEntityRepository
         }
 
         return $query;
-    }
+    }*/
 
 
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySPrice($s_price_search): array
+    /*public function findBySPrice($s_price_search): array
     {
 
         if (strpos($s_price_search, ',')) {
@@ -674,12 +973,12 @@ class InvoiceRepository extends ServiceEntityRepository
         }
 
         return $query;
-    }
+    }*/
 
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findByPoPrice($po_price_search): array
+    /*public function findByPoPrice($po_price_search): array
     {
 
         if (strpos($po_price_search, ',')) {
@@ -713,7 +1012,7 @@ class InvoiceRepository extends ServiceEntityRepository
             }
         }
         return $query;
-    }
+    }*/
 
     /**
      * Находит общую цену по id 
@@ -761,16 +1060,22 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchNumber($numbers_search): array
+    public function findBySearchNumberPrice($numbers_search): array
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT d, a
-                FROM App\Entity\Invoice d
-                INNER JOIN d.id_details a
-                WHERE a.part_numbers = :numbers_search'
-        )->setParameter('numbers_search', $numbers_search);
+            'SELECT i, d
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                WHERE d.part_numbers = :numbers_search
+                AND i.Sales != :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'numbers_search' => $numbers_search,
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
 
         return $query->getResult();
     }
@@ -778,7 +1083,7 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchManufacturers($manufacturers_search): array
+    /* public function findBySearchManufacturers($manufacturers_search): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -790,7 +1095,7 @@ class InvoiceRepository extends ServiceEntityRepository
         )->setParameter('manufacturers_search', $manufacturers_search);
 
         return $query->getResult();
-    }
+    }*/
 
     /**
      * @return Invoice[] Returns an array of Invoice objects

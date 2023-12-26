@@ -68,7 +68,7 @@ class PriceController extends AbstractController
                 if ($part_numbers_search) {
 
                     $arr_price[] = $InvoiceRepository
-                        ->findBySearchNumber($part_numbers_search);
+                        ->findBySearchNumberPrice($part_numbers_search);
                 } elseif ($id_part_name_search) {
 
                     $arr_price[] = $InvoiceRepository

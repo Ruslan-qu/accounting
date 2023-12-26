@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\RefundDate;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<RefundDate>
@@ -101,7 +102,7 @@ class RefundDateRepository extends ServiceEntityRepository
     /**
      * @return RefundDate[] Returns an array of RefundDate objects
      */
-    public function findByDateInvoice($s_data_invoice_search, $po_data_invoice_search): array
+    /*public function findByDateInvoice($s_data_invoice_search, $po_data_invoice_search): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -113,12 +114,168 @@ class RefundDateRepository extends ServiceEntityRepository
                 AND i.data_invoice <= :data_invoice_po'
         )->setParameters(['data_invoice_s' => $s_data_invoice_search, 'data_invoice_po' => $po_data_invoice_search,]);
         return $query->getResult();
+    }*/
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findByDateInvoiceRefund(
+        $s_data_invoice_search,
+        $po_data_invoice_search,
+        $form_search_refund
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                WHERE i.data_invoice >= :s_data_invoice
+                AND i.data_invoice <= :p_data_invoice
+                AND i.Sales != :Sales'
+        )->setParameters([
+            's_data_invoice' => $s_data_invoice_search,
+            'p_data_invoice' => $po_data_invoice_search,
+            'Sales' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_refund->getData());
+        unset($array_filter_form['s_data_invoice_refund']);
+        unset($array_filter_form['po_data_invoice_refund']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice_refund => $value_form) {
+
+                if ($key_invoice_refund == 's_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'po_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+
+                if ($key_invoice_refund == 'search_id_details_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdDetails()->getPartNumbers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_manufacturer_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_counterparty_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdCounterparty() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'refund_activity_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdRefundActivity() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'data_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getRefundDate() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        return $result;
     }
 
     /**
      * @return RefundDate[] Returns an array of RefundDate objects
      */
-    public function findBySDateInvoice($s_data_invoice_search): array
+    /*public function findBySDateInvoice($s_data_invoice_search): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -129,12 +286,162 @@ class RefundDateRepository extends ServiceEntityRepository
                 WHERE i.data_invoice >= :data_invoice_s'
         )->setParameter('data_invoice_s', $s_data_invoice_search);
         return $query->getResult();
+    }*/
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findBySDateInvoiceRefund(
+        $s_data_invoice_search,
+        $form_search_refund
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                WHERE i.data_invoice >= :s_data_invoice
+                AND i.Sales != :Sales'
+        )->setParameters([
+            's_data_invoice' => $s_data_invoice_search,
+            'Sales' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_refund->getData());
+        unset($array_filter_form['s_data_invoice_refund']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice_refund => $value_form) {
+
+                if ($key_invoice_refund == 's_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'po_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+
+                if ($key_invoice_refund == 'search_id_details_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdDetails()->getPartNumbers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_manufacturer_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_counterparty_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdCounterparty() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'refund_activity_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdRefundActivity() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'data_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getRefundDate() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**
      * @return RefundDate[] Returns an array of RefundDate objects
      */
-    public function findByPoDateInvoice($po_data_invoice_search): array
+    /*public function findByPoDateInvoice($po_data_invoice_search): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -145,12 +452,161 @@ class RefundDateRepository extends ServiceEntityRepository
                 WHERE i.data_invoice <= :data_invoice_po'
         )->setParameter('data_invoice_po', $po_data_invoice_search);
         return $query->getResult();
+    }*/
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findByPoDateInvoiceRefund(
+        $po_data_invoice_search,
+        $form_search_refund
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                WHERE i.data_invoice <= :p_data_invoice 
+                AND i.Sales != :Sales'
+        )->setParameters([
+            'p_data_invoice' => $po_data_invoice_search,
+            'Sales' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_refund->getData());
+        unset($array_filter_form['po_data_invoice_refund']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice_refund => $value_form) {
+
+                if ($key_invoice_refund == 's_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'po_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_details_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdDetails()->getPartNumbers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_manufacturer_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_counterparty_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdCounterparty() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'refund_activity_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdRefundActivity() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'data_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getRefundDate() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**
      * @return RefundDate[] Returns an array of RefundDate objects
      */
-    public function findByCounterparty($id_counterparty_search): array
+    /*public function findByCounterparty($id_counterparty_search): array
     {
 
         $entityManager = $this->getEntityManager();
@@ -163,12 +619,148 @@ class RefundDateRepository extends ServiceEntityRepository
                 WHERE i.id_counterparty = :id_counterparty'
         )->setParameter('id_counterparty', $id_counterparty_search);
         return $query->getResult();
+    }*/
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findByCounterpartyRefund(
+        $id_counterparty_search,
+        $form_search_refund
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r, i
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                WHERE i.id_counterparty = :id_counterparty 
+                AND i.Sales != :Sales'
+        )->setParameters([
+            'id_counterparty' => $id_counterparty_search,
+            'Sales' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_refund->getData());
+        unset($array_filter_form['search_id_counterparty_refund']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice_refund => $value_form) {
+
+                if ($key_invoice_refund == 's_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'po_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_details_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdDetails()->getPartNumbers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_manufacturer_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'refund_activity_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdRefundActivity() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'data_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getRefundDate() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**
      * @return RefundDate[] Returns an array of RefundDate objects
      */
-    public function findByPartNumber($part_numbers_search): array
+    /*public function findByPartNumber($part_numbers_search): array
     {
 
         $entityManager = $this->getEntityManager();
@@ -181,7 +773,129 @@ class RefundDateRepository extends ServiceEntityRepository
                 WHERE d.part_numbers = :part_numbers'
         )->setParameter('part_numbers', $part_numbers_search);
         return $query->getResult();
+    }*/
+
+    /**
+     * @return RefundDate[] Returns an array of RefundDate objects
+     */
+    public function findByPartNumberRefund(
+        $part_numbers_search,
+        $form_search_refund
+    ): array {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r, i, d
+                FROM App\Entity\RefundDate r
+                INNER JOIN r.id_invoice_refund_date i
+                INNER JOIN i.id_details d
+                WHERE d.part_numbers = :part_numbers 
+                AND i.Sales != :Sales'
+        )->setParameters([
+            'part_numbers' => $part_numbers_search,
+            'Sales' => '2'
+        ]);
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_search_refund->getData());
+        unset($array_filter_form['search_id_details_refund']);
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_invoice_refund => $value_form) {
+
+                if ($key_invoice_refund == 's_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_s = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'po_price_refund') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key => $value_invoice) {
+
+                        $price_po = ($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                            - ((($value_invoice->getIdInvoiceRefundDate()->getPrice() / 100)
+                                / $value_invoice->getIdInvoiceRefundDate()->getQuantity())
+                                * $value_invoice->getIdInvoiceRefundDate()->getQuantitySold());
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'search_id_manufacturer_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if (
+                            $value_invoice->getIdInvoiceRefundDate()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'refund_activity_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getIdInvoiceRefundDate()->getIdRefundActivity() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+
+                if ($key_invoice_refund == 'data_refund') {
+
+                    foreach ($result as $key => $value_invoice) {
+
+                        if ($value_invoice->getRefundDate() == $value_form) {
+
+                            $result[$key] = $value_invoice;
+                        } else {
+                            unset($result[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
+
 
     /**
      * @return RefundDate[] Returns an array of RefundDate objects

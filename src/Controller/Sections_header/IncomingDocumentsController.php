@@ -64,11 +64,6 @@ class IncomingDocumentsController extends AbstractController
                 /* Массив для сбора списка по поиску */
                 // $arr_incoming_documents_search = [];
 
-                /* удаляем пустые зачения массива формы */
-                // $arr_form_invoice_search = $request->request->all()['search_invoice'];
-                // $array_filter_invoice = array_filter($arr_form_invoice_search);
-                //dd($form_search_invoice->getData());
-                //$id_part_name_search = $form_search_invoice->getData()->getPoDataInvoice();
                 /* собераем списка по поиску */
                 $number_document_search = $form_search_invoice->getData()['search_number_document'];
                 $s_data_invoice_search = $form_search_invoice->getData()['s_data_invoice'];
@@ -86,38 +81,47 @@ class IncomingDocumentsController extends AbstractController
                 } elseif ($s_data_invoice_search && $po_data_invoice_search) {
 
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByDate(
+                        ->findByDateInvoice(
                             $s_data_invoice_search,
                             $po_data_invoice_search,
                             $form_search_invoice
                         );
                 } elseif ($s_data_invoice_search && !$po_data_invoice_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findBySDate($s_data_invoice_search, $form_search_invoice);
                 } elseif (!$s_data_invoice_search && $po_data_invoice_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findByPoDate($po_data_invoice_search, $form_search_invoice);
                 } elseif ($id_counterparty_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findByCounterparty($id_counterparty_search, $form_search_invoice);
                 } elseif ($part_numbers_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findBySearchNumber($part_numbers_search);
+                        ->findBySearchNumberInvoice($part_numbers_search, $form_search_invoice);
                 } elseif ($manufacturers_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findBySearchManufacturers($manufacturers_search);
+                        ->findBySearchManufacturers($manufacturers_search, $form_search_invoice);
                 } elseif ($s_price_search && $po_price_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByPrice($s_price_search, $po_price_search);
+                        ->findByPrice($form_search_invoice);
                 } elseif ($s_price_search && !$po_price_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findBySPrice($s_price_search);
+                        ->findByPrice($form_search_invoice);
                 } elseif (!$s_price_search && $po_price_search) {
+
                     $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByPoPrice($po_price_search);
+                        ->findByPrice($form_search_invoice);
                 } elseif ($id_payment_method_search) {
-                    $arr_incoming_documents[] = $doctrine->getRepository(Invoice::class)
-                        ->findBy(['id_payment_method' => $id_payment_method_search]);
+
+                    $arr_incoming_documents[] = $InvoiceRepository
+                        ->findByPaymentMethod($id_payment_method_search);
                 }
 
                 /* Удаляем дубли из списка по поиску 
