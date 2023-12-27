@@ -86,23 +86,15 @@ class RefundController extends AbstractController
                 } elseif ($manufacturers_search) {
 
                     $arr_refund[] = $RefundDateRepository
-                        ->findByPartManufacturers($manufacturers_search);
-                } elseif ($s_price_search && $po_price_search) {
+                        ->findByPartManufacturersRefund($manufacturers_search, $form_search_refund);
+                } elseif ($s_price_search || $po_price_search) {
 
                     $arr_refund[] = $RefundDateRepository
-                        ->findByPriceRefund($s_price_search, $po_price_search);
-                } elseif ($s_price_search && !$po_price_search) {
-
-                    $arr_refund[] = $RefundDateRepository
-                        ->findBySPriceRefund($s_price_search);
-                } elseif (!$s_price_search && $po_price_search) {
-
-                    $arr_refund[] = $RefundDateRepository
-                        ->findByPoPriceRefund($po_price_search);
+                        ->findByPriceRefund($form_search_refund);
                 } elseif ($data_refund) {
 
                     $arr_refund[] = $RefundDateRepository
-                        ->findByDataRefund($data_refund);
+                        ->findByDataRefund($data_refund, $form_search_refund);
                 } elseif ($activity_refund) {
 
                     $arr_refund[] = $RefundDateRepository

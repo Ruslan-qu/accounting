@@ -6,6 +6,7 @@ use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\OriginalRooms;
 use App\Form\SearchSalesType;
+use App\Repository\SoldRepository;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,6 +24,7 @@ class SalesController extends AbstractController
         Request $request,
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
+        SoldRepository $SoldRepository,
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
@@ -45,7 +47,10 @@ class SalesController extends AbstractController
 
         if ($form_sales_search->isSubmitted()) {
             if ($form_sales_search->isValid()) {
+                $arr_sales[] = $SoldRepository->findByListSoldParts($form_sales_search);
             }
+        } else {
+            $arr_sales[] = $SoldRepository->findBySoldList();
         }
 
 
@@ -53,6 +58,8 @@ class SalesController extends AbstractController
             'title_logo' => 'Продажи',
             'legend_search' => 'Поиск',
             'form_sales_search' => $form_sales_search->createView(),
+            'arr_sales' => $arr_sales,
+
         ]);
     }
 

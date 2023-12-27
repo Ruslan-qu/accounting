@@ -47,7 +47,7 @@ class SoldRepository extends ServiceEntityRepository
     //    }
 
     /**
-     * @return Sold[] Returns an array of Invoice objects
+     * @return Sold[] Returns an array of Sold objects
      */
     public function findBySaleList(): array
     {
@@ -65,7 +65,7 @@ class SoldRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Sold[] Returns an array of Invoice objects
+     * @return Sold[] Returns an array of Sold objects
      */
     public function findOneByIdSoldEdit($id): array
     {
@@ -95,6 +95,291 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN s.id_invoice i
                 WHERE i.sold_status = :sold_status'
         )->setParameter('sold_status', '2');
+        //dd($query->getResult());
+        return $query->getResult();
+    }
+
+    /**
+     * @return Sold[] Returns an array of Sold objects
+     */
+    public function findByListSoldParts($form_sales_search): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, i, d , m, c, pm, pn, cb, b, a, ds, o
+                FROM App\Entity\Sold s
+                INNER JOIN s.id_invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN i.id_manufacturer m
+                INNER JOIN i.id_counterparty c
+                INNER JOIN i.id_payment_method pm
+                INNER JOIN d.id_part_name pn
+                INNER JOIN d.id_car_brand cb
+                INNER JOIN d.id_body b
+                INNER JOIN d.id_axle a
+                INNER JOIN d.id_side ds
+                INNER JOIN d.id_original_number o'
+        );
+        //dd($form_sales_search->getData());
+        $result = $query->getResult();
+        // dd($result);
+        $array_filter_form = array_filter($form_sales_search->getData());
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_form => $value_form) {
+
+                if ($key_form == 'part_numbers_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getPartNumbers()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'original_number_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdOriginalNumber()->getOriginalNumber()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'manufacturers_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdManufacturer()->getManufacturers()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_part_name_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdPartName()->getPartName()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_car_brand_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdCarBrand()->getCarBrand()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_side_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdSide()->getSide()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_body_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdBody()->getBody()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_axle_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdDetails()->getIdAxle()->getAxle()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 's_data_invoice_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getDateSold() >= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'po_data_invoice_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getDateSold() <= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 's_price_sales') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        $price_s = ($value_result->getPriceSold() / 100);
+
+                        if ($price_s >= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'po_price_sales') {
+
+                    if (strpos($value_form, ',')) {
+                        $value_form = str_replace(',', '.', $value_form);
+                    }
+                    foreach ($result as $key_result => $value_result) {
+
+                        $price_po = ($value_result->getPriceSold() / 100);
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_counterparty_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdCounterparty()->getCounterparty()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'id_payment_method_sales') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if (
+                            $value_result->getIdInvoice()->getIdPaymentMethod()->getMethod()
+                            == $value_form
+                        ) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return Sold[] Returns an array of Sold objects
+     */
+    public function findBySoldList(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, i, d , m, c, pm, pn, cb, b, a, ds, o
+                FROM App\Entity\Sold s
+                INNER JOIN s.id_invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN i.id_manufacturer m
+                INNER JOIN i.id_counterparty c
+                INNER JOIN i.id_payment_method pm
+                INNER JOIN d.id_part_name pn
+                INNER JOIN d.id_car_brand cb
+                INNER JOIN d.id_body b
+                INNER JOIN d.id_axle a
+                INNER JOIN d.id_side ds
+                INNER JOIN d.id_original_number o'
+        );
         //dd($query->getResult());
         return $query->getResult();
     }

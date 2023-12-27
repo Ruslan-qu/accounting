@@ -106,15 +106,7 @@ class IncomingDocumentsController extends AbstractController
 
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findBySearchManufacturers($manufacturers_search, $form_search_invoice);
-                } elseif ($s_price_search && $po_price_search) {
-
-                    $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByPrice($form_search_invoice);
-                } elseif ($s_price_search && !$po_price_search) {
-
-                    $arr_incoming_documents[] = $InvoiceRepository
-                        ->findByPrice($form_search_invoice);
-                } elseif (!$s_price_search && $po_price_search) {
+                } elseif ($s_price_search || $po_price_search) {
 
                     $arr_incoming_documents[] = $InvoiceRepository
                         ->findByPrice($form_search_invoice);

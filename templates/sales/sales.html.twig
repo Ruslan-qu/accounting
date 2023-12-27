@@ -24,13 +24,17 @@
         {% set search_sales_id_side = '' %}
         {% set search_sales_id_body = '' %}
         {% set search_sales_id_axle = '' %}
+        {% set s_data_sales_search = '' %}
+        {% set po_data_sales_search = '' %}
+        {% set s_price_sales_search = '' %}
+        {% set po_price_sales_search = '' %}
 
         {% for value_part_numbers in app.flashes('part_numbers_sales_search') %}  
             {% set search_sales_part_numbers = value_part_numbers %}
         {% endfor %}
         <th>{{ form_label(form_sales_search.part_numbers_sales) }}<br>
         {{ form_widget(form_sales_search.part_numbers_sales, {value : search_sales_part_numbers}) }}<br>
-        {% for message_part_numbers_sales in app.flashes('children[part_numbers_sales].data_search') %}
+        {% for message_part_numbers_sales in app.flashes('children[part_numbers_sales].data_errors') %}
             {{ message_part_numbers_sales }}
         {% endfor %}
         {{ form_errors(form_sales_search.part_numbers_sales) }}</th>
@@ -40,7 +44,7 @@
         {% endfor %}
         <th>{{ form_label(form_sales_search.original_number_sales) }}<br>
         {{ form_widget(form_sales_search.original_number_sales, {value : search_sales_id_original_number}) }}<br>
-        {% for message_original_number_sales in app.flashes('children[original_number_sales].data_search') %}
+        {% for message_original_number_sales in app.flashes('children[original_number_sales].data_errors') %}
             {{ message_original_number_sales }}
         {% endfor %}
         {{ form_errors(form_sales_search.original_number_sales) }}</th>
@@ -50,7 +54,7 @@
         {% endfor %}
         <th>{{ form_label(form_sales_search.manufacturers_sales) }}<br>
         {{ form_widget(form_sales_search.manufacturers_sales, {value : search_sales_manufacturers}) }}<br>
-        {% for message_manufacturers_sales in app.flashes('children[manufacturers_sales].data_search') %}
+        {% for message_manufacturers_sales in app.flashes('children[manufacturers_sales].data_errors') %}
             {{ message_manufacturers_sales }}
         {% endfor %}
         {{ form_errors(form_sales_search.manufacturers_sales) }}</th>
@@ -69,6 +73,82 @@
         {{ form_widget(form_sales_search.id_payment_method_sales, {value : search_id_payment_method}) }}
         {{ form_errors(form_sales_search.id_payment_method_sales) }}</th>
 
+        {% for value_id_part_name in app.flashes('id_part_name_sales_search') %}  
+            {% set search_sales_id_part_name = value_id_part_name %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_part_name_sales) }}<br>
+        {{ form_widget(form_sales_search.id_part_name_sales, {value : search_sales_id_part_name}) }}
+        {{ form_errors(form_sales_search.id_part_name_sales) }}</th>
+
+    </tr>
+    <tr>
+
+        {% for value_id_car_brand in app.flashes('id_car_brand_sales_search') %}  
+            {% set search_sales_id_car_brand = value_id_car_brand %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_car_brand_sales) }}<br>
+        {{ form_widget(form_sales_search.id_car_brand_sales, {value : search_sales_id_car_brand}) }}
+        {{ form_errors(form_sales_search.id_car_brand_sales) }}</th> 
+
+        {% for value_id_side in app.flashes('id_side_sales_search') %}  
+            {% set search_sales_id_side = value_id_side %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_side_sales) }}<br>
+        {{ form_widget(form_sales_search.id_side_sales, {value : search_sales_id_side}) }}
+        {{ form_errors(form_sales_search.id_side_sales) }}</th>
+
+        {% for value_id_body in app.flashes('id_body_sales_search') %}  
+            {% set search_sales_id_body = value_id_body %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_body_sales) }}<br>
+        {{ form_widget(form_sales_search.id_body_sales, {value : search_sales_id_body}) }}
+        {{ form_errors(form_sales_search.id_body_sales) }}</th>
+
+        {% for value_id_axle in app.flashes('id_axle_sales_search') %}  
+            {% set search_sales_id_axle = value_id_axle %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.id_axle_sales) }}<br>
+        {{ form_widget(form_sales_search.id_axle_sales, {value : search_sales_id_axle}) }}
+        {{ form_errors(form_sales_search.id_axle_sales) }}</th>
+
+        {% for value_data_invoice_search in app.flashes('s_data_invoice_sales_search') %}  
+        {% set s_data_sales_search = value_data_invoice_search %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.s_data_invoice_sales) }}<br>
+        {{'с '}}{{ form_widget(form_sales_search.s_data_invoice_sales, {value : s_data_sales_search}) }}
+        {{ form_errors(form_sales_search.s_data_invoice_sales) }}<br>
+        {% for value_price in app.flashes('po_data_invoice_sales_search') %}  
+        {% set po_data_sales_search = value_price %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_sales_search.po_data_invoice_sales, {value : po_data_sales_search}) }}<br>
+        {% for message_s_data_invoice_sales in app.flashes('children[s_data_invoice_sales].data_errors') %}
+        {{ message_s_data_invoice_sales }}
+        {% endfor %}
+        {% for message_po_data_invoice_sales in app.flashes('children[po_data_invoice_sales].data_errors') %}
+        {{ message_po_data_invoice_sales }}
+        {% endfor %}
+        {{ form_errors(form_sales_search.po_data_invoice_sales) }}</th>
+
+        {% for value_s_price_search in app.flashes('s_price_sales_search') %}  
+        {% set s_price_sales_search = value_s_price_search %}
+        {% endfor %}
+        <th>{{ form_label(form_sales_search.s_price_sales) }}<br>
+        {{'с '}}{{ form_widget(form_sales_search.s_price_sales, {value : s_price_sales_search}) }}
+        {{ form_errors(form_sales_search.s_price_sales) }}<br>
+        {% for value_po_price_search in app.flashes('po_price_sales_search') %}  
+        {% set po_price_sales_search = value_po_price_search %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_sales_search.po_price_sales, {value : po_price_sales_search}) }}<br>
+        {% for message_s_price_sales in app.flashes('children[s_price_sales].data_errors') %}
+        {{ message_s_price_sales }}
+        {% endfor %}
+        {% for message_po_price_sales in app.flashes('children[po_price_sales].data_errors') %}
+        {{ message_po_price_sales }}
+        {% endfor %}
+        {{ form_errors(form_sales_search.po_price_sales) }}</th>
+
+        <th>{{ form_widget(form_sales_search.button_sales, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+
     {{ form_end(form_sales_search) }}
 
     <form action="/reset_sales" name="reset_sales">
@@ -76,3 +156,82 @@
     </form>
 
 {% endblock form_search %}
+
+{% block table_thead_tr %}
+{#{% if arr_part_no %}
+    {% for arr_search_part_no in arr_part_no %}
+        {% if arr_search_part_no %}#}
+            <th>№ Детали</th>
+            <th>№ Оригинал</th>
+            <th>Произ-тель</th>
+            <th>Описание детали</th>
+            <th>Название детали</th>
+            <th>Марка</th>
+            <th>Сторона</th>
+            <th>Кузов</th>
+            <th>Перед Зад</th>
+            <th>Поставщик</th>
+            <th>Способ оплаты</th>
+            <th>Дата продажи</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Цена общая</th>
+        {#{% endif %}
+    {% endfor %}
+{% else %}
+    <h2>Видите параметры в поиск</h2> 
+{% endif %}#}
+{% endblock table_thead_tr %}
+
+{% block tbody %}
+    {#выводит таблицу по поиску#}
+      {% for arr_sales_price in arr_sales %}
+            {% if arr_sales_price %}
+                {% for sales_price in arr_sales_price %}
+                        <tr>
+                            <td>{{ sales_price.getIdInvoice().getIdDetails().getPartNumbers() }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdOriginalNumber().getOriginalNumber() }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdManufacturer().getManufacturers() }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails().getNameDetail() }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdPartName().getPartName()|default('') }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdCarBrand().getCarBrand()|default('') }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdSide().getSide()|default('') }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdBody().getBody()|default('') }}</td>
+
+                            <td>{{ sales_price.getIdInvoice().getIdDetails()
+                                .getIdAxle().getAxle()|default('') }}</td>
+
+                            <td>{{ sales_price.getIdInvoice()
+                                .getIdCounterparty().getCounterparty() }}</td>
+
+                            <td>{{ sales_price.getIdInvoice()
+                                .getIdPaymentMethod().getMethod() }}</td>
+
+                            <td>{{ sales_price.getDateSold()|date("d-m-Y") }}</td>   
+
+                            <td>{{ sales_price.getQuantitySold() }}</td>
+
+                            <td>{{ ((sales_price.getPriceSold() / 100) 
+                                        / sales_price.getQuantitySold())|number_format(2, '.', '') }}</td>
+
+                            <td>{{ (sales_price.getPriceSold() / 100)|number_format(2, '.', '') }}</td>
+                        </tr> 
+                    
+                {% endfor %}
+            {% else %}
+                <h2>Данные не найдены. Видите параметры в поиск</h2>  
+            {% endif %}
+        {% endfor %}
+{% endblock tbody %}
