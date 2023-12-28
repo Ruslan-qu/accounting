@@ -127,19 +127,19 @@
 {% block table_thead_tr %}
  
     {% for sale_list in arr_sale_list %}
-
-        <th>№ Детали</th>
-        <th>Название детали</th>
-        <th>Марка</th>
-        <th>Сторона</th>
-        <th>Перед Зад</th>
-        <th>Кол-во</th>
-        <th>Цена шт</th>
-        <th>Кол-во</th>
-        <th>Цена</th>
-        <th>Изменить</th>
-        <th>Удалить</th>
-
+        {% if sale_list %}
+            <th>№ Детали</th>
+            <th>Название детали</th>
+            <th>Марка</th>
+            <th>Сторона</th>
+            <th>Перед Зад</th>
+            <th>Кол-во</th>
+            <th>Цена шт</th>
+            <th>Кол-во</th>
+            <th>Цена</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        {% endif %}
     {% endfor %}
 
 {% endblock table_thead_tr %}

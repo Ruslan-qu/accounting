@@ -107,18 +107,11 @@ class SoldRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT s, i, d , m, c, pm, pn, cb, b, a, ds, o
+            'SELECT s, i, d , m, o
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
                 INNER JOIN i.id_details d
                 INNER JOIN i.id_manufacturer m
-                INNER JOIN i.id_counterparty c
-                INNER JOIN i.id_payment_method pm
-                INNER JOIN d.id_part_name pn
-                INNER JOIN d.id_car_brand cb
-                INNER JOIN d.id_body b
-                INNER JOIN d.id_axle a
-                INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o'
         );
         //dd($form_sales_search->getData());
@@ -183,7 +176,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdPartName()->getPartName()
+                            $value_result->getIdInvoice()->getIdDetails()->getIdPartName()
                             == $value_form
                         ) {
 
@@ -199,7 +192,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdCarBrand()->getCarBrand()
+                            $value_result->getIdInvoice()->getIdDetails()->getIdCarBrand()
                             == $value_form
                         ) {
 
@@ -215,7 +208,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdSide()->getSide()
+                            $value_result->getIdInvoice()->getIdDetails()->getIdSide()
                             == $value_form
                         ) {
 
@@ -231,7 +224,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdBody()->getBody()
+                            $value_result->getIdInvoice()->getIdDetails()->getIdBody()
                             == $value_form
                         ) {
 
@@ -247,7 +240,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdAxle()->getAxle()
+                            $value_result->getIdInvoice()->getIdDetails()->getIdAxle()
                             == $value_form
                         ) {
 
@@ -326,7 +319,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdCounterparty()->getCounterparty()
+                            $value_result->getIdInvoice()->getIdCounterparty()
                             == $value_form
                         ) {
 
@@ -342,7 +335,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdPaymentMethod()->getMethod()
+                            $value_result->getIdInvoice()->getIdPaymentMethod()
                             == $value_form
                         ) {
 

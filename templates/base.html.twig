@@ -55,7 +55,23 @@
                                         </tr>
                                     </table> 
                            <fieldset>
-                        </div> 
+                        </div>
+                         <div class="total_amount">  
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_total_amount %}
+                                        {% endblock table_total_amount %}	
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       <tr> 
+                                            {% block tbody_total_amount %}
+                                            {% endblock tbody_total_amount %}
+                                        </tr>
+                                </tbody>
+                            </table> 
+                        </div>
                         <div class="table">  
                             <table>
                                 <thead>
@@ -69,7 +85,7 @@
                                         {% endblock tbody %} 
                                 </tbody>
                             </table> 
-                        </div> 
+                        </div>   
                     {% endblock %}
                 </main>
             </div>

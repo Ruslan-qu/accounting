@@ -142,7 +142,7 @@ class SearchSalesType extends AbstractType
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
-                'attr' => ['style' => 'width: 80px'],
+                'attr' => ['style' => 'margin: 0 0 2% 3%'],
                 //'currency' => false,
                 //'divisor' => 100,
 
@@ -157,7 +157,7 @@ class SearchSalesType extends AbstractType
                         'message' => 'Форма содержит недопустимые символы'
                     ]),
                 ],
-                'attr' => ['style' => 'width: 80px'],
+                //'attr' => ['style' => 'width: 80px'],
             ])
             ->add('id_counterparty_sales', EntityType::class, [
                 'label' => 'Поставщик',
