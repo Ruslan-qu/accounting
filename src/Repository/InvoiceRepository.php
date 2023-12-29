@@ -1156,6 +1156,23 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
+    public function findOneByInvoiceJoinDetailsAvailability($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, a, s
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN d.id_in_stock s
+                WHERE i.id = :id'
+        )->setParameter('id', $id);
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
     public function findByCompleteSales(): array
     {
         $entityManager = $this->getEntityManager();

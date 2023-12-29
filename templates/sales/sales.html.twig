@@ -29,6 +29,8 @@
         {% set s_price_sales_search = '' %}
         {% set po_price_sales_search = '' %}
 
+        {% do form_widget(form_sales_search.quantity_sales) %}
+
         {% for value_part_numbers in app.flashes('part_numbers_sales_search') %}  
             {% set search_sales_part_numbers = value_part_numbers %}
         {% endfor %}
@@ -154,7 +156,7 @@
 {% endblock table_total_amount %}
 
 {% block tbody_total_amount %}
-<td>&nbsp;{{total_amount}}</td>
+<td>&nbsp;{{total_amount|number_format(2, '.', '')}}</td>
 {% endblock tbody_total_amount %}
 
 {% block table_thead_tr %}
@@ -176,6 +178,7 @@
             <th>Цена<br>шт<br>закуп</th>
             <th>Цена<br>общая<br>закуп</th>
             <th>Цена<br>общая<br>продажи</th>
+            <th>Прибыль</th>
             <th>Возврат</th>
 {% else %}
     <h2>Видите параметры в поиск.</h2> 
@@ -231,11 +234,17 @@
 
                             <td>&nbsp;{{ (sales_price.getPriceSold() / 100)|number_format(2, '.', '') }}</td>
 
-                            <form action="/refund_sales" name="refund_sales" method="get">
+                            <td>&nbsp;{{ ((sales_price.getPriceSold() / 100)
+                                -(((sales_price.getIdInvoice().getPrice() / 100) 
+                                        / sales_price.getIdInvoice().getQuantity())
+                                            * sales_price.getQuantitySold()))|number_format(2, '.', '') }}</td>
 
-                                <td><button class="refund" type="submit" name="refund_sales" value="{{ sales_price.getId() }}">Возврат</button></td>
-                                
+                            <form action="/quantity_return_product" name="quantity_return_product" method="post">
+
+                                <td><button class="refund" type="submit" name="quantity_return_product" value="{{ sales_price.getIdInvoice().getId() }}">Возврат</button></td>
+                                                            
                             </form>
+                            
                         </tr> 
                     
                 

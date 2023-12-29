@@ -396,14 +396,13 @@ class PriceController extends AbstractController
     public function deleteSaleList(ManagerRegistry $doctrine, Request $request): Response
     {
         $id_delete_sale_list = $request->request->all()['delete_sale_list'];
-
+        $delete_sold = $doctrine->getRepository(Sold::class)->findOneBy(['id_invoice' => $id_delete_sale_list]);
         $delete_sold_Invoice = $doctrine->getRepository(Invoice::class)->find($id_delete_sale_list);
 
         $delete_sold_Invoice->setSoldStatus(1);
 
-        $delete_sold_Invoice->setQuantitySold(0);
-
-        $delete_sold = $doctrine->getRepository(Sold::class)->findOneBy(['id_invoice' => $id_delete_sale_list]);
+        $quantity_sold = $delete_sold_Invoice->getQuantitySold() - $delete_sold->getQuantitySold();
+        $delete_sold_Invoice->setQuantitySold($quantity_sold);
 
         $entityManager = $doctrine->getManager();
         $entityManager->remove($delete_sold);
@@ -436,12 +435,12 @@ class PriceController extends AbstractController
 
         $doctrine->getManager()->flush();
 
-        $in_stock = $doctrine->getRepository(Availability::class)->find(2);
+
         foreach ($complete_sales_invoice as $key => $value) {
 
             $count_availability = $InvoiceRepository->findByCountAvailability($value->getIdDetails());
             if ($count_availability[0][1] == 0) {
-
+                $in_stock = $doctrine->getRepository(Availability::class)->find(2);
                 $value->getIdDetails()->setIdInStock($in_stock);
             }
         }

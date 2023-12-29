@@ -181,6 +181,10 @@ class SearchSalesType extends AbstractType
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
             ])
+            ->add('quantity_sales', IntegerType::class, [
+                'label' => 'Кол-во деталей на возврат',
+                'attr' => ['style' => 'width: 50px']
+            ])
             ->add('hidden_sales', HiddenType::class)
             ->add('button_sales', SubmitType::class);
     }

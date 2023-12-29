@@ -107,11 +107,17 @@ class SoldRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT s, i, d , m, o
+            'SELECT s, i, d, c, pm, pn, cb, b, a, ds, o
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
                 INNER JOIN i.id_details d
-                INNER JOIN i.id_manufacturer m
+                INNER JOIN i.id_counterparty c
+                INNER JOIN i.id_payment_method pm
+                INNER JOIN d.id_part_name pn
+                INNER JOIN d.id_car_brand cb
+                INNER JOIN d.id_body b
+                INNER JOIN d.id_axle a
+                INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o'
         );
         //dd($form_sales_search->getData());
@@ -160,7 +166,7 @@ class SoldRepository extends ServiceEntityRepository
                     foreach ($result as $key_result => $value_result) {
 
                         if (
-                            $value_result->getIdInvoice()->getIdDetails()->getIdManufacturer()->getManufacturers()
+                            $value_result->getIdInvoice()->getIdDetails()->getManufacturers()
                             == $value_form
                         ) {
 
@@ -359,11 +365,10 @@ class SoldRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT s, i, d , m, c, pm, pn, cb, b, a, ds, o
+            'SELECT s, i, d, c, pm, pn, cb, b, a, ds, o
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
                 INNER JOIN i.id_details d
-                INNER JOIN i.id_manufacturer m
                 INNER JOIN i.id_counterparty c
                 INNER JOIN i.id_payment_method pm
                 INNER JOIN d.id_part_name pn
@@ -373,6 +378,25 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o'
         );
+        //dd($query->getResult());
+        return $query->getResult();
+    }
+
+    /**
+     * @return Sold[] Returns an array of Sold objects
+     */
+    public function findOneByIdReturnProduct($id_return_product): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, i, d, si
+                FROM App\Entity\Sold s
+                INNER JOIN s.id_invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN d.id_in_stock si
+                WHERE i.id = :id'
+        )->setParameter('id', $id_return_product);
         //dd($query->getResult());
         return $query->getResult();
     }

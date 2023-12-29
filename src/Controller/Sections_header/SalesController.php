@@ -2,8 +2,10 @@
 
 namespace App\Controller\Sections_header;
 
+use App\Entity\Sold;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
+use App\Entity\Availability;
 use App\Entity\OriginalRooms;
 use App\Form\SearchSalesType;
 use App\Repository\SoldRepository;
@@ -30,20 +32,11 @@ class SalesController extends AbstractController
         /* Массив для передачи в твиг списка по поиску */
         $arr_sales = [];
 
-        /*Подключаем класс базы данных*/
-        $entity_invoice = new Invoice();
-        $entity_part_no = new IdDetailsManufacturer();
-        $entity_original_rooms = new OriginalRooms();
-        $entity_PartNo = new IdDetailsManufacturer();
-
         /*Подключаем формы */
         $form_sales_search = $this->createForm(SearchSalesType::class);
 
         /*Валидация формы */
         $form_sales_search->handleRequest($request);
-
-        /*Подключаем валидацию форм */
-        $errors_search_sales = $validator->validate($form_sales_search);
 
         if ($form_sales_search->isSubmitted()) {
             if ($form_sales_search->isValid()) {
@@ -61,32 +54,25 @@ class SalesController extends AbstractController
                         }
                     }
                 }
-                //dd($errors_search_original_number);
-                /* Выводим сообщения ошибки в форму поиска, через сессии  */
-                if ($errors_search_sales) {
-                    foreach ($errors_search_sales as $key) {
-                        $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath() . '_errors';
-                        $this->addFlash(
-                            $propertyPath,
-                            $message
-                        );
-                    }
-                }
             }
         } else {
             $arr_sales = $SoldRepository->findBySoldList();
         }
-
-        $total_amount = 0;
+        /* Общая сумма */
+        $total_amount_sale = 0;
+        $total_amount_purchase  = 0;
         foreach ($arr_sales as $key => $value) {
-            $total_amount += ($value->getPriceSold() / 100);
+            $total_amount_sale += ($value->getPriceSold() / 100);
+            $total_amount_purchase  += ((($value->getIdInvoice()->getPrice() / 100)
+                / $value->getIdInvoice()->getQuantity())
+                * $value->getQuantitySold());
         }
-        //dd($total_amount);
+        $total_amount_profit = $total_amount_sale - $total_amount_purchase;
+        //dd($arr_sales);
         return $this->render('sales/sales.html.twig', [
             'title_logo' => 'Продажи',
             'legend_search' => 'Поиск',
-            'total_amount' => $total_amount,
+            'total_amount' => $total_amount_profit,
             'form_sales_search' => $form_sales_search->createView(),
             'arr_sales' => $arr_sales,
 
@@ -95,8 +81,69 @@ class SalesController extends AbstractController
 
     /* функция сброса */
     #[Route('/reset_sales', name: 'reset_sales')]
-    public function resetPart(): Response
+    public function resetSales(): Response
     {
+        return $this->redirectToRoute('sales');
+    }
+
+    /* функция количества возврата товара */
+    #[Route('/quantity_return_product', name: 'quantity_return_product')]
+    public function quantityReturnProduct(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator,
+        SoldRepository $SoldRepository,
+    ): Response {
+
+        /*Подключаем формы */
+        $form_return_product = $this->createForm(SearchSalesType::class);
+
+        /*Валидация формы */
+        $form_return_product->handleRequest($request);
+
+        $id_return_product = $request->request->all()['quantity_return_product'];
+        $return_product = $SoldRepository->findOneByIdReturnProduct($id_return_product);
+
+
+        return $this->render('sales/quantity_return_product.html.twig', [
+            'title_logo' => 'Возврат детали',
+            'legend' => 'Возврат детали',
+            'form_return_product' => $form_return_product->createView(),
+            'return_product' => $return_product,
+        ]);
+    }
+
+    /* функция возврата товара */
+    #[Route('/return_product', name: 'return_product')]
+    public function returnProduct(
+        ManagerRegistry $doctrine,
+        Request $request,
+        InvoiceRepository $InvoiceRepository,
+    ): Response {
+
+        $id_return_product = $request->request->all()['return_product'];
+        $delete_return_product = $doctrine->getRepository(Sold::class)
+            ->findOneBy(['id_invoice' => $id_return_product]);
+        $return_product = $InvoiceRepository->findOneByInvoiceJoinDetailsAvailability($id_return_product);
+        //dd($return_product[0]->getIdDetails()->getIdInStock()->getId());
+
+        $quantity_sold = $return_product[0]->getQuantitySold() - $delete_return_product->getQuantitySold();
+
+        $return_product[0]->setQuantitySold($quantity_sold);
+
+        if ($return_product[0]->getSales() == 2) {
+            $return_product[0]->setSales(1);
+        }
+
+        if ($return_product[0]->getIdDetails()->getIdInStock()->getId() == 2) {
+            $in_stock = $doctrine->getRepository(Availability::class)->find(1);
+            $return_product[0]->getIdDetails()->setIdInStock($in_stock);
+        }
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($delete_return_product);
+        $entityManager->flush();
+
         return $this->redirectToRoute('sales');
     }
 }

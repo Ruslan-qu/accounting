@@ -42,7 +42,9 @@ return [
         '/delete_refund' => [[['_route' => 'delete_refund', '_controller' => 'App\\Controller\\Sections_header\\RefundController::deleteRefund'], null, null, null, false, false, null]],
         '/edit_activity' => [[['_route' => 'edit_activity', '_controller' => 'App\\Controller\\Sections_header\\RefundController::EditActivity'], null, null, null, false, false, null]],
         '/sales' => [[['_route' => 'sales', '_controller' => 'App\\Controller\\Sections_header\\SalesController::searchSales'], null, null, null, false, false, null]],
-        '/reset_sales' => [[['_route' => 'reset_sales', '_controller' => 'App\\Controller\\Sections_header\\SalesController::resetPart'], null, null, null, false, false, null]],
+        '/reset_sales' => [[['_route' => 'reset_sales', '_controller' => 'App\\Controller\\Sections_header\\SalesController::resetSales'], null, null, null, false, false, null]],
+        '/quantity_return_product' => [[['_route' => 'quantity_return_product', '_controller' => 'App\\Controller\\Sections_header\\SalesController::quantityReturnProduct'], null, null, null, false, false, null]],
+        '/return_product' => [[['_route' => 'return_product', '_controller' => 'App\\Controller\\Sections_header\\SalesController::returnProduct'], null, null, null, false, false, null]],
         '/health-check' => [[['_route' => 'health_check', '_controller' => 'App\\Controller\\Test\\HealthCheckAction'], null, ['GET' => 0], null, false, false, null]],
     ],
     [ // $regexpList
