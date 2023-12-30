@@ -390,11 +390,19 @@ class SoldRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT s, i, d, si
+            'SELECT s, i, d, c, pm, pn, cb, b, a, ds, si, o
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
-                INNER JOIN i.id_details d
+                INNER JOIN i.id_details d   
+                INNER JOIN i.id_counterparty c
+                INNER JOIN i.id_payment_method pm
+                INNER JOIN d.id_part_name pn
+                INNER JOIN d.id_car_brand cb
+                INNER JOIN d.id_body b
+                INNER JOIN d.id_axle a
+                INNER JOIN d.id_side ds
                 INNER JOIN d.id_in_stock si
+                INNER JOIN d.id_original_number o
                 WHERE i.id = :id'
         )->setParameter('id', $id_return_product);
         //dd($query->getResult());
