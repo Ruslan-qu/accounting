@@ -136,7 +136,7 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         ";
         // line 15
         echo "        ";
-        $context["id_return_product"] = ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", true, true, false, 15)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", false, false, false, 15), "")) : (""));
+        $context["id_return_product"] = ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", true, true, false, 15)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", false, false, false, 15), "")) : (""));
         // line 16
         echo "        
         ";
@@ -191,7 +191,7 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         ";
         // line 34
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", ["hidden_edit"], "method", false, false, false, 34));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", ["hidden_sales_return"], "method", false, false, false, 34));
         foreach ($context['_seq'] as $context["_key"] => $context["value_id_part"]) {
             echo "  
             ";
@@ -211,7 +211,7 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         ";
         // line 39
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "flashes", ["quantity_sales_search"], "method", false, false, false, 39));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "flashes", ["quantity_sales_return"], "method", false, false, false, 39));
         foreach ($context['_seq'] as $context["_key"] => $context["value_quantity_return_product"]) {
             echo "  
             ";
@@ -487,8 +487,8 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
     {#Форма поиска #}
     {{ form_start(form_return_product) }}
         {#Переменный для вывода данных в форме 
-        {{ dump(app.flashes()) }}#}
-        {% set id_return_product = arr_return_product.getIdInvoice().getId()|default('') %}
+        {{ dump(arr_return_product[0].getIdInvoice().getId()) }}#}
+        {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
         
         {% set quantity_return_product = '' %}
         
@@ -507,12 +507,12 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
         {% do form_widget(form_return_product.s_price_sales) %}
         {% do form_widget(form_return_product.po_price_sales) %}
 
-        {% for value_id_part in app.flashes('hidden_edit') %}  
+        {% for value_id_part in app.flashes('hidden_sales_return') %}  
             {% set id_edit_part = value_id_part %}
         {% endfor %}
         {{ form_widget(form_return_product.hidden_sales, {value : id_return_product}) }}
 
-        {% for value_quantity_return_product in app.flashes('quantity_sales_search') %}  
+        {% for value_quantity_return_product in app.flashes('quantity_sales_return') %}  
             {% set quantity_return_product = value_quantity_return_product %}
         {% endfor %}
         <th>{{ form_label(form_return_product.quantity_sales) }}<br>

@@ -11,11 +11,9 @@
     {#Форма поиска #}
     {{ form_start(form_return_product) }}
         {#Переменный для вывода данных в форме 
-        {{ dump(app.flashes()) }}#}
-        {% set id_return_product = '' %}
-        {% for return_product in arr_return_product %}
-        {% set id_return_product = return_product.getIdInvoice() %}
-        {% endfor %}
+        {{ dump(arr_return_product[0].getIdInvoice().getId()) }}#}
+        {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
+        
         {% set quantity_return_product = '' %}
         
         {% do form_widget(form_return_product.part_numbers_sales) %}
@@ -33,12 +31,12 @@
         {% do form_widget(form_return_product.s_price_sales) %}
         {% do form_widget(form_return_product.po_price_sales) %}
 
-        {% for value_id_part in app.flashes('hidden_edit') %}  
+        {% for value_id_part in app.flashes('hidden_sales_return') %}  
             {% set id_edit_part = value_id_part %}
         {% endfor %}
         {{ form_widget(form_return_product.hidden_sales, {value : id_return_product}) }}
 
-        {% for value_quantity_return_product in app.flashes('quantity_sales_search') %}  
+        {% for value_quantity_return_product in app.flashes('quantity_sales_return') %}  
             {% set quantity_return_product = value_quantity_return_product %}
         {% endfor %}
         <th>{{ form_label(form_return_product.quantity_sales) }}<br>

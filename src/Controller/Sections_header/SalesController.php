@@ -106,7 +106,7 @@ class SalesController extends AbstractController
 
 
 
-        dd($form_return_product);
+        //dd($request);
         if ($form_return_product->getData()) {
             $id_return_product = $form_return_product->getData()['hidden_sales'];
         } else {
@@ -114,7 +114,7 @@ class SalesController extends AbstractController
         }
         /*Открываем деталь по id */
         $arr_return_product = $SoldRepository->findOneByIdReturnProduct($id_return_product);
-
+        //dd($arr_return_product);
         /*Валидация формы */
         if ($form_return_product->isSubmitted()) {
 
