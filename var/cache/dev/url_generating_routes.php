@@ -46,6 +46,5 @@ return [
     'sales' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::searchSales'], [], [['text', '/sales']], [], [], []],
     'reset_sales' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::resetSales'], [], [['text', '/reset_sales']], [], [], []],
     'quantity_return_product' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::quantityReturnProduct'], [], [['text', '/quantity_return_product']], [], [], []],
-    'return_product' => [[], ['_controller' => 'App\\Controller\\Sections_header\\SalesController::returnProduct'], [], [['text', '/return_product']], [], [], []],
     'health_check' => [[], ['_controller' => 'App\\Controller\\Test\\HealthCheckAction'], [], [['text', '/health-check']], [], [], []],
 ];

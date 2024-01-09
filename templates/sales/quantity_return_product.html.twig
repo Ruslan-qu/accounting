@@ -10,8 +10,8 @@
 
     {#Форма поиска #}
     {{ form_start(form_return_product) }}
-        {#Переменный для вывода данных в форме 
-        {{ dump(arr_return_product[0].getIdInvoice().getId()) }}#}
+        {#Переменный для вывода данных в форме
+        {{ dump(app.flashes()) }}#} 
         {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
         
         {% set quantity_return_product = '' %}
@@ -31,8 +31,8 @@
         {% do form_widget(form_return_product.s_price_sales) %}
         {% do form_widget(form_return_product.po_price_sales) %}
 
-        {% for value_id_part in app.flashes('hidden_sales_return') %}  
-            {% set id_edit_part = value_id_part %}
+        {% for value_return_product in app.flashes('hidden_sales_return') %}  
+            {% set id_return_product = value_return_product %}
         {% endfor %}
         {{ form_widget(form_return_product.hidden_sales, {value : id_return_product}) }}
 
@@ -41,8 +41,8 @@
         {% endfor %}
         <th>{{ form_label(form_return_product.quantity_sales) }}<br>
         {{ form_widget(form_return_product.quantity_sales, {value : quantity_return_product}) }}<br>
-        {% for message_quantity_sales in app.flashes('[quantity_sales]') %}
-            {{ message_quantity_sales }}
+        {% for error_quantity_return in app.flashes('error_quantity_return_product') %}
+            {{ error_quantity_return }}
         {% endfor %}
         {{ form_errors(form_return_product.quantity_sales) }}</th>
 

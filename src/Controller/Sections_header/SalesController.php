@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -98,6 +99,9 @@ class SalesController extends AbstractController
         SoldRepository $SoldRepository,
     ): Response {
 
+        $session = new Session();
+        $session->start();
+
         /*Подключаем формы */
         $form_return_product = $this->createForm(SearchSalesType::class);
 
@@ -109,9 +113,13 @@ class SalesController extends AbstractController
         //dd($request);
         if ($form_return_product->getData()) {
             $id_return_product = $form_return_product->getData()['hidden_sales'];
-        } else {
+        } elseif ($request->request->all()) {
             $id_return_product = $request->request->all()['quantity_return_product'];
+            $session->set('id_return_product', $id_return_product);
+        } elseif ($session->get('id_return_product')) {
+            $id_return_product = $session->get('id_return_product');
         }
+
         /*Открываем деталь по id */
         $arr_return_product = $SoldRepository->findOneByIdReturnProduct($id_return_product);
         //dd($arr_return_product);
@@ -136,20 +144,41 @@ class SalesController extends AbstractController
             /* Валидация формы */
 
             if ($form_return_product->isValid() && !$errors->count()) {
+                // dd($form_return_product);
+                /* $id_return_product = $request->request->all()['return_product'];
+                $delete_return_product = $doctrine->getRepository(Sold::class)
+                    ->findOneBy(['id_invoice' => $id_return_product]);
+                $return_product = $InvoiceRepository->findOneByInvoiceJoinDetailsAvailability($id_return_product);*/
+                //dd($return_product[0]->getIdDetails()->getIdInStock()->getId());
 
-                /* $arr_sold_part[0]->setIdInvoice($arr_sold_part[0]->getIdInvoice());
 
-                $arr_sold_part[0]->setQuantitySold($quantity_sold);
 
-                $arr_sold_part[0]->setPriceSold($form_sold_edit->getData()->getPriceSold() * 100);
+                $quantity_sold = $arr_return_product[0]->getIdInvoice()->getQuantitySold()
+                    - $form_return_product->getData()['quantity_sales'];
 
-                $arr_sold_part[0]->setDateSold(new DateTime($request->request->all()['sold']['date_sold']));
+                $arr_return_product[0]->getIdInvoice()->setQuantitySold($quantity_sold);
 
-                $arr_sold_part[0]->getIdInvoice()->setQuantitySold($quantity_sold);
+                if ($arr_return_product[0]->getIdInvoice() == 2) {
+                    $arr_return_product[0]->getIdInvoice()->setSales(1);
+                }
 
-                $doctrine->getManager()->flush();
+                if ($arr_return_product[0]->getIdInvoice()->getIdDetails()->getIdInStock()->getId() == 2) {
+                    $in_stock = $doctrine->getRepository(Availability::class)->find(1);
+                    $arr_return_product[0]->getIdInvoice()->getIdDetails()->setIdInStock($in_stock);
+                }
 
-                return $this->redirectToRoute('sold_price');*/
+                $sum_sold = $arr_return_product[0]->getQuantitySold()
+                    - $form_return_product->getData()['quantity_sales'];
+                if ($sum_sold != 0) {
+                    $arr_return_product[0]->setQuantitySold($sum_sold);
+                    $doctrine->getManager()->flush();
+                } else {
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->remove($arr_return_product[0]);
+                    $entityManager->flush();
+                }
+
+                return $this->redirectToRoute('sales');
             } else {
 
                 /* Выводим вбитые данные в формы сохранения если форма не прошла валидацию, через сессии  */
@@ -163,14 +192,13 @@ class SalesController extends AbstractController
                         }
                     }
                 }
-
+                //dd($errors);
                 /* Выводим ошибки валидации, через сессии  */
                 if ($errors) {
                     foreach ($errors as $key) {
                         $message = $key->getmessage();
-                        $propertyPath = $key->getpropertyPath();
                         $this->addFlash(
-                            $propertyPath,
+                            'error_quantity_return_product',
                             $message
                         );
                     }
@@ -187,7 +215,7 @@ class SalesController extends AbstractController
     }
 
     /* функция возврата товара */
-    #[Route('/return_product', name: 'return_product')]
+    /*  #[Route('/return_product', name: 'return_product')]
     public function returnProduct(
         ManagerRegistry $doctrine,
         Request $request,
@@ -224,5 +252,5 @@ class SalesController extends AbstractController
 
 
         return $this->redirectToRoute('sales');
-    }
+    }*/
 }

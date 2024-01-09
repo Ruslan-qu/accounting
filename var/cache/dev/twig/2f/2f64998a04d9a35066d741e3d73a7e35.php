@@ -134,8 +134,10 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form_return_product"]) || array_key_exists("form_return_product", $context) ? $context["form_return_product"] : (function () { throw new RuntimeError('Variable "form_return_product" does not exist.', 12, $this->source); })()), 'form_start');
         echo "
         ";
+        // line 14
+        echo " 
+        ";
         // line 15
-        echo "        ";
         $context["id_return_product"] = ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", true, true, false, 15)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", false, false, false, 15), "")) : (""));
         // line 16
         echo "        
@@ -192,16 +194,16 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         // line 34
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", ["hidden_sales_return"], "method", false, false, false, 34));
-        foreach ($context['_seq'] as $context["_key"] => $context["value_id_part"]) {
+        foreach ($context['_seq'] as $context["_key"] => $context["value_return_product"]) {
             echo "  
             ";
             // line 35
-            $context["id_edit_part"] = $context["value_id_part"];
+            $context["id_return_product"] = $context["value_return_product"];
             // line 36
             echo "        ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_id_part'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_return_product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 37
         echo "        ";
@@ -234,16 +236,16 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         ";
         // line 44
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 44, $this->source); })()), "flashes", ["[quantity_sales]"], "method", false, false, false, 44));
-        foreach ($context['_seq'] as $context["_key"] => $context["message_quantity_sales"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 44, $this->source); })()), "flashes", ["error_quantity_return_product"], "method", false, false, false, 44));
+        foreach ($context['_seq'] as $context["_key"] => $context["error_quantity_return"]) {
             // line 45
             echo "            ";
-            echo twig_escape_filter($this->env, $context["message_quantity_sales"], "html", null, true);
+            echo twig_escape_filter($this->env, $context["error_quantity_return"], "html", null, true);
             echo "
         ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message_quantity_sales'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error_quantity_return'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 47
         echo "        ";
@@ -469,7 +471,7 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
 
     public function getDebugInfo()
     {
-        return array (  447 => 139,  443 => 137,  433 => 130,  428 => 128,  427 => 127,  422 => 125,  421 => 124,  420 => 123,  415 => 121,  414 => 120,  409 => 118,  404 => 116,  400 => 114,  398 => 113,  394 => 111,  392 => 110,  388 => 108,  386 => 107,  382 => 105,  380 => 104,  376 => 102,  374 => 101,  370 => 99,  368 => 98,  364 => 96,  362 => 95,  357 => 93,  352 => 91,  348 => 89,  346 => 88,  341 => 86,  338 => 85,  335 => 84,  330 => 83,  328 => 82,  318 => 81,  306 => 77,  285 => 58,  283 => 57,  273 => 55,  260 => 51,  255 => 49,  249 => 47,  240 => 45,  236 => 44,  232 => 43,  227 => 42,  221 => 41,  219 => 40,  213 => 39,  207 => 37,  201 => 36,  199 => 35,  193 => 34,  190 => 33,  187 => 32,  184 => 31,  181 => 30,  178 => 29,  175 => 28,  172 => 27,  169 => 26,  166 => 25,  163 => 24,  160 => 23,  157 => 22,  154 => 21,  151 => 20,  149 => 19,  146 => 18,  144 => 17,  141 => 16,  138 => 15,  133 => 12,  130 => 10,  120 => 9,  101 => 7,  82 => 5,  63 => 3,  40 => 1,);
+        return array (  449 => 139,  445 => 137,  435 => 130,  430 => 128,  429 => 127,  424 => 125,  423 => 124,  422 => 123,  417 => 121,  416 => 120,  411 => 118,  406 => 116,  402 => 114,  400 => 113,  396 => 111,  394 => 110,  390 => 108,  388 => 107,  384 => 105,  382 => 104,  378 => 102,  376 => 101,  372 => 99,  370 => 98,  366 => 96,  364 => 95,  359 => 93,  354 => 91,  350 => 89,  348 => 88,  343 => 86,  340 => 85,  337 => 84,  332 => 83,  330 => 82,  320 => 81,  308 => 77,  287 => 58,  285 => 57,  275 => 55,  262 => 51,  257 => 49,  251 => 47,  242 => 45,  238 => 44,  234 => 43,  229 => 42,  223 => 41,  221 => 40,  215 => 39,  209 => 37,  203 => 36,  201 => 35,  195 => 34,  192 => 33,  189 => 32,  186 => 31,  183 => 30,  180 => 29,  177 => 28,  174 => 27,  171 => 26,  168 => 25,  165 => 24,  162 => 23,  159 => 22,  156 => 21,  153 => 20,  151 => 19,  148 => 18,  146 => 17,  143 => 16,  141 => 15,  138 => 14,  133 => 12,  130 => 10,  120 => 9,  101 => 7,  82 => 5,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -486,8 +488,8 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
 
     {#Форма поиска #}
     {{ form_start(form_return_product) }}
-        {#Переменный для вывода данных в форме 
-        {{ dump(arr_return_product[0].getIdInvoice().getId()) }}#}
+        {#Переменный для вывода данных в форме
+        {{ dump(app.flashes()) }}#} 
         {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
         
         {% set quantity_return_product = '' %}
@@ -507,8 +509,8 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
         {% do form_widget(form_return_product.s_price_sales) %}
         {% do form_widget(form_return_product.po_price_sales) %}
 
-        {% for value_id_part in app.flashes('hidden_sales_return') %}  
-            {% set id_edit_part = value_id_part %}
+        {% for value_return_product in app.flashes('hidden_sales_return') %}  
+            {% set id_return_product = value_return_product %}
         {% endfor %}
         {{ form_widget(form_return_product.hidden_sales, {value : id_return_product}) }}
 
@@ -517,8 +519,8 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
         {% endfor %}
         <th>{{ form_label(form_return_product.quantity_sales) }}<br>
         {{ form_widget(form_return_product.quantity_sales, {value : quantity_return_product}) }}<br>
-        {% for message_quantity_sales in app.flashes('[quantity_sales]') %}
-            {{ message_quantity_sales }}
+        {% for error_quantity_return in app.flashes('error_quantity_return_product') %}
+            {{ error_quantity_return }}
         {% endfor %}
         {{ form_errors(form_return_product.quantity_sales) }}</th>
 
