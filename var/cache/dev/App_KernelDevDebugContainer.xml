@@ -418,6 +418,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -2812,7 +2816,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.QocKcgR"/>
+      <argument type="service" id=".service_locator.dHKzgM0"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3992,6 +3996,8 @@
     <service id=".abstract.instanceof.App\Repository\IdDetailsManufacturerRepository" class="App\Repository\IdDetailsManufacturerRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\InvoiceRepository" class="App\Repository\InvoiceRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\InvoiceRepository" class="App\Repository\InvoiceRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PaymentMethodRepository" class="App\Repository\PaymentMethodRepository" autowire="true" abstract="true"/>
@@ -4602,7 +4608,7 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.QocKcgR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dHKzgM0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AvailabilityRepository" type="service_closure" id="App\Repository\AvailabilityRepository"/>
@@ -4613,6 +4619,7 @@
         <argument key="App\Repository\DetailsListRepository" type="service_closure" id="App\Repository\DetailsListRepository"/>
         <argument key="App\Repository\IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\IdDetailsManufacturerRepository"/>
         <argument key="App\Repository\InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="App\Repository\KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
         <argument key="App\Repository\OriginalRoomsRepository" type="service_closure" id="App\Repository\OriginalRoomsRepository"/>
         <argument key="App\Repository\PaymentMethodRepository" type="service_closure" id="App\Repository\PaymentMethodRepository"/>
         <argument key="App\Repository\RefundActivityRepository" type="service_closure" id="App\Repository\RefundActivityRepository"/>

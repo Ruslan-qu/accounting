@@ -60,7 +60,7 @@ class SalesController extends AbstractController
                 }
             }
         } else {
-            $arr_sales = $SoldRepository->findBySoldList();
+            $arr_sales = $SoldRepository->findBySoldListNewDateTime();
         }
         /* Общая сумма */
         $total_amount_sale = 0;
@@ -108,9 +108,6 @@ class SalesController extends AbstractController
         /*Валидация формы */
         $form_return_product->handleRequest($request);
 
-
-
-        //dd($request);
         if ($form_return_product->getData()) {
             $id_return_product = $form_return_product->getData()['hidden_sales'];
         } elseif ($request->request->all()) {
@@ -122,7 +119,6 @@ class SalesController extends AbstractController
 
         /*Открываем деталь по id */
         $arr_return_product = $SoldRepository->findOneByIdReturnProduct($id_return_product);
-        //dd($arr_return_product);
         /*Валидация формы */
         if ($form_return_product->isSubmitted()) {
 
@@ -144,21 +140,12 @@ class SalesController extends AbstractController
             /* Валидация формы */
 
             if ($form_return_product->isValid() && !$errors->count()) {
-                // dd($form_return_product);
-                /* $id_return_product = $request->request->all()['return_product'];
-                $delete_return_product = $doctrine->getRepository(Sold::class)
-                    ->findOneBy(['id_invoice' => $id_return_product]);
-                $return_product = $InvoiceRepository->findOneByInvoiceJoinDetailsAvailability($id_return_product);*/
-                //dd($return_product[0]->getIdDetails()->getIdInStock()->getId());
-
-
 
                 $quantity_sold = $arr_return_product[0]->getIdInvoice()->getQuantitySold()
                     - $form_return_product->getData()['quantity_sales'];
-
                 $arr_return_product[0]->getIdInvoice()->setQuantitySold($quantity_sold);
 
-                if ($arr_return_product[0]->getIdInvoice() == 2) {
+                if ($arr_return_product[0]->getIdInvoice()->getSales() == 2) {
                     $arr_return_product[0]->getIdInvoice()->setSales(1);
                 }
 
@@ -167,10 +154,15 @@ class SalesController extends AbstractController
                     $arr_return_product[0]->getIdInvoice()->getIdDetails()->setIdInStock($in_stock);
                 }
 
-                $sum_sold = $arr_return_product[0]->getQuantitySold()
+                $sum_quantity_sold = $arr_return_product[0]->getQuantitySold()
                     - $form_return_product->getData()['quantity_sales'];
-                if ($sum_sold != 0) {
-                    $arr_return_product[0]->setQuantitySold($sum_sold);
+                if ($sum_quantity_sold != 0) {
+
+                    $sum_price_sold = ($arr_return_product[0]->getPriceSold()
+                        / $arr_return_product[0]->getQuantitySold()) * $sum_quantity_sold;
+                    $arr_return_product[0]->setPriceSold($sum_price_sold);
+                    $arr_return_product[0]->setQuantitySold($sum_quantity_sold);
+
                     $doctrine->getManager()->flush();
                 } else {
                     $entityManager = $doctrine->getManager();
@@ -213,44 +205,4 @@ class SalesController extends AbstractController
             'arr_return_product' => $arr_return_product,
         ]);
     }
-
-    /* функция возврата товара */
-    /*  #[Route('/return_product', name: 'return_product')]
-    public function returnProduct(
-        ManagerRegistry $doctrine,
-        Request $request,
-        InvoiceRepository $InvoiceRepository,
-    ): Response {
-
-        if ($request->request->all()) {
-
-
-
-            $id_return_product = $request->request->all()['return_product'];
-            $delete_return_product = $doctrine->getRepository(Sold::class)
-                ->findOneBy(['id_invoice' => $id_return_product]);
-            $return_product = $InvoiceRepository->findOneByInvoiceJoinDetailsAvailability($id_return_product);
-            //dd($return_product[0]->getIdDetails()->getIdInStock()->getId());
-
-            $quantity_sold = $return_product[0]->getQuantitySold() - $delete_return_product->getQuantitySold();
-
-            $return_product[0]->setQuantitySold($quantity_sold);
-
-            if ($return_product[0]->getSales() == 2) {
-                $return_product[0]->setSales(1);
-            }
-
-            if ($return_product[0]->getIdDetails()->getIdInStock()->getId() == 2) {
-                $in_stock = $doctrine->getRepository(Availability::class)->find(1);
-                $return_product[0]->getIdDetails()->setIdInStock($in_stock);
-            }
-
-            $entityManager = $doctrine->getManager();
-            $entityManager->remove($delete_return_product);
-            $entityManager->flush();
-        }
-
-
-        return $this->redirectToRoute('sales');
-    }*/
 }

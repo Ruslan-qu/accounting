@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Sold;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Sold>
@@ -360,8 +360,11 @@ class SoldRepository extends ServiceEntityRepository
     /**
      * @return Sold[] Returns an array of Sold objects
      */
-    public function findBySoldList(): array
+    public function findBySoldListNewDateTime(): array
     {
+        $date = new \DateTime();
+        $format_date = $date->format('Y-m-d');
+
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
@@ -376,8 +379,10 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_body b
                 INNER JOIN d.id_axle a
                 INNER JOIN d.id_side ds
-                INNER JOIN d.id_original_number o'
-        );
+                INNER JOIN d.id_original_number o
+                WHERE s.date_sold = :date_sold'
+        )->setParameter('date_sold', $format_date);
+
         //dd($query->getResult());
         return $query->getResult();
     }

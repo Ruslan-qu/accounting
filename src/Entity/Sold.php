@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SoldRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,6 +29,14 @@ class Sold
     private ?\DateTimeInterface $date_sold = null;
 
     private ?int $hidden_sold = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_sold', targetEntity: KuDir::class)]
+    private Collection $KuDirSold;
+
+    public function __construct()
+    {
+        $this->KuDirSold = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Sold
     public function setHiddenSold(?int $hidden_sold): static
     {
         $this->hidden_sold = $hidden_sold;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, KuDir>
+     */
+    public function getKuDirSold(): Collection
+    {
+        return $this->KuDirSold;
+    }
+
+    public function addKuDirSold(KuDir $kuDirSold): static
+    {
+        if (!$this->KuDirSold->contains($kuDirSold)) {
+            $this->KuDirSold->add($kuDirSold);
+            $kuDirSold->setIdSold($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKuDirSold(KuDir $kuDirSold): static
+    {
+        if ($this->KuDirSold->removeElement($kuDirSold)) {
+            // set the owning side to null (unless already changed)
+            if ($kuDirSold->getIdSold() === $this) {
+                $kuDirSold->setIdSold(null);
+            }
+        }
 
         return $this;
     }

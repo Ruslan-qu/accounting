@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block table_thead_tr %}
+{#{{ dump(arr_sales) }}
+{% if arr_sales %}#}
+            <th>Смена</th>
+            <th>№<br>Чека</th>
+            <th>Дата-<br>чека</th>
+            <th>Номер<br>накладной</th>
+            <th>Дата<br>накладной</th>
+            <th>Оплата<br>в кассу</th>
+            <th>Оплата<br>пост-ку</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+{#}% else %}
+    <h2>Видите параметры в поиск.</h2> 
+{% endif %}#}
+{% endblock table_thead_tr %}

@@ -1039,55 +1039,57 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
 
                             <td>";
                         // line 265
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 265) / 100) - (((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 265) / 100) / twig_get_attribute($this->env, $this->source,                         // line 266
-$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 266)) * twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 266))), "html", null, true);
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getPrice", [], "method", false, false, false, 265) / 100) - (((twig_get_attribute($this->env, $this->source,                         // line 266
+$context["incoming_documents"], "getPrice", [], "method", false, false, false, 266) / 100) / twig_get_attribute($this->env, $this->source,                         // line 267
+$context["incoming_documents"], "getQuantity", [], "method", false, false, false, 267)) * twig_get_attribute($this->env, $this->source,                         // line 268
+$context["incoming_documents"], "getQuantitySold", [], "method", false, false, false, 268))), 2, ".", ""), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 268
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdPaymentMethod", [], "method", false, false, false, 268), "getMethod", [], "method", false, false, false, 268), "html", null, true);
+                        // line 270
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getIdPaymentMethod", [], "method", false, false, false, 270), "getMethod", [], "method", false, false, false, 270), "html", null, true);
                         echo "</td>
 
 
                             <form action=\"/refund_part\" name=\"refund_part\" method=\"get\">
 
                                 <td><button class=\"refund\" type=\"submit\" name=\"refund_part\" value=\"";
-                        // line 273
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 273), "html", null, true);
+                        // line 275
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 275), "html", null, true);
                         echo "\">Возврат</button></td>
                                 
                             </form>
                             <form action=\"/delete_invoice\" name=\"delete_invoice\" method=\"post\">
 
                                 <td><button class=\"delete\" type=\"submit\" name=\"delete_invoice\" value=\"";
-                        // line 278
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 278), "html", null, true);
+                        // line 280
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["incoming_documents"], "getId", [], "method", false, false, false, 280), "html", null, true);
                         echo "\">Удалить</button></td>
                                 
                             </form>
                         ";
                     }
-                    // line 282
+                    // line 284
                     echo "                    </tr>   
                 ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['incoming_documents'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 284
+                // line 286
                 echo "            ";
             } else {
-                // line 285
+                // line 287
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 287
+            // line 289
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_invoice'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 288
+        // line 290
         echo "    
 ";
         
@@ -1110,7 +1112,7 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
 
     public function getDebugInfo()
     {
-        return array (  1091 => 288,  1085 => 287,  1081 => 285,  1078 => 284,  1071 => 282,  1064 => 278,  1056 => 273,  1048 => 268,  1043 => 266,  1042 => 265,  1037 => 263,  1036 => 262,  1031 => 260,  1026 => 258,  1023 => 257,  1018 => 254,  1013 => 252,  1008 => 250,  1003 => 248,  998 => 246,  995 => 245,  993 => 244,  992 => 243,  989 => 242,  984 => 241,  981 => 240,  976 => 239,  974 => 238,  964 => 237,  952 => 233,  945 => 231,  930 => 218,  927 => 217,  922 => 216,  920 => 215,  910 => 213,  893 => 205,  888 => 202,  886 => 201,  881 => 199,  877 => 198,  872 => 197,  866 => 196,  864 => 195,  858 => 194,  852 => 192,  843 => 190,  838 => 189,  829 => 187,  825 => 186,  819 => 185,  813 => 184,  811 => 183,  805 => 182,  801 => 181,  796 => 180,  791 => 179,  785 => 178,  783 => 177,  777 => 176,  771 => 174,  762 => 172,  758 => 171,  754 => 170,  749 => 169,  743 => 168,  741 => 167,  735 => 166,  729 => 164,  720 => 162,  716 => 161,  712 => 160,  707 => 159,  701 => 158,  699 => 157,  693 => 156,  688 => 154,  684 => 153,  679 => 152,  673 => 151,  671 => 150,  665 => 149,  660 => 147,  654 => 146,  648 => 145,  646 => 144,  640 => 143,  636 => 142,  631 => 141,  626 => 140,  620 => 139,  618 => 138,  612 => 137,  606 => 135,  597 => 133,  593 => 132,  589 => 131,  584 => 130,  578 => 129,  576 => 128,  570 => 127,  567 => 126,  564 => 125,  561 => 124,  558 => 123,  555 => 122,  552 => 121,  549 => 120,  546 => 119,  543 => 118,  540 => 117,  538 => 116,  533 => 114,  531 => 113,  521 => 112,  508 => 107,  503 => 104,  501 => 103,  496 => 101,  492 => 100,  487 => 99,  481 => 98,  479 => 97,  473 => 96,  467 => 94,  458 => 92,  453 => 91,  444 => 89,  440 => 88,  436 => 87,  431 => 86,  425 => 85,  423 => 84,  417 => 83,  411 => 81,  402 => 79,  398 => 78,  394 => 77,  389 => 76,  383 => 75,  381 => 74,  375 => 73,  369 => 71,  360 => 69,  356 => 68,  352 => 67,  347 => 66,  341 => 65,  339 => 64,  333 => 63,  327 => 61,  318 => 59,  314 => 58,  310 => 57,  305 => 56,  299 => 55,  297 => 54,  291 => 53,  286 => 51,  282 => 50,  277 => 49,  271 => 48,  269 => 47,  263 => 46,  258 => 44,  254 => 43,  249 => 42,  243 => 41,  241 => 40,  235 => 39,  229 => 37,  220 => 35,  216 => 34,  212 => 33,  207 => 32,  201 => 31,  199 => 30,  193 => 29,  190 => 28,  187 => 27,  184 => 26,  181 => 25,  179 => 24,  176 => 23,  173 => 22,  170 => 21,  167 => 20,  164 => 19,  162 => 18,  157 => 15,  154 => 14,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  1093 => 290,  1087 => 289,  1083 => 287,  1080 => 286,  1073 => 284,  1066 => 280,  1058 => 275,  1050 => 270,  1045 => 268,  1044 => 267,  1043 => 266,  1042 => 265,  1037 => 263,  1036 => 262,  1031 => 260,  1026 => 258,  1023 => 257,  1018 => 254,  1013 => 252,  1008 => 250,  1003 => 248,  998 => 246,  995 => 245,  993 => 244,  992 => 243,  989 => 242,  984 => 241,  981 => 240,  976 => 239,  974 => 238,  964 => 237,  952 => 233,  945 => 231,  930 => 218,  927 => 217,  922 => 216,  920 => 215,  910 => 213,  893 => 205,  888 => 202,  886 => 201,  881 => 199,  877 => 198,  872 => 197,  866 => 196,  864 => 195,  858 => 194,  852 => 192,  843 => 190,  838 => 189,  829 => 187,  825 => 186,  819 => 185,  813 => 184,  811 => 183,  805 => 182,  801 => 181,  796 => 180,  791 => 179,  785 => 178,  783 => 177,  777 => 176,  771 => 174,  762 => 172,  758 => 171,  754 => 170,  749 => 169,  743 => 168,  741 => 167,  735 => 166,  729 => 164,  720 => 162,  716 => 161,  712 => 160,  707 => 159,  701 => 158,  699 => 157,  693 => 156,  688 => 154,  684 => 153,  679 => 152,  673 => 151,  671 => 150,  665 => 149,  660 => 147,  654 => 146,  648 => 145,  646 => 144,  640 => 143,  636 => 142,  631 => 141,  626 => 140,  620 => 139,  618 => 138,  612 => 137,  606 => 135,  597 => 133,  593 => 132,  589 => 131,  584 => 130,  578 => 129,  576 => 128,  570 => 127,  567 => 126,  564 => 125,  561 => 124,  558 => 123,  555 => 122,  552 => 121,  549 => 120,  546 => 119,  543 => 118,  540 => 117,  538 => 116,  533 => 114,  531 => 113,  521 => 112,  508 => 107,  503 => 104,  501 => 103,  496 => 101,  492 => 100,  487 => 99,  481 => 98,  479 => 97,  473 => 96,  467 => 94,  458 => 92,  453 => 91,  444 => 89,  440 => 88,  436 => 87,  431 => 86,  425 => 85,  423 => 84,  417 => 83,  411 => 81,  402 => 79,  398 => 78,  394 => 77,  389 => 76,  383 => 75,  381 => 74,  375 => 73,  369 => 71,  360 => 69,  356 => 68,  352 => 67,  347 => 66,  341 => 65,  339 => 64,  333 => 63,  327 => 61,  318 => 59,  314 => 58,  310 => 57,  305 => 56,  299 => 55,  297 => 54,  291 => 53,  286 => 51,  282 => 50,  277 => 49,  271 => 48,  269 => 47,  263 => 46,  258 => 44,  254 => 43,  249 => 42,  243 => 41,  241 => 40,  235 => 39,  229 => 37,  220 => 35,  216 => 34,  212 => 33,  207 => 32,  201 => 31,  199 => 30,  193 => 29,  190 => 28,  187 => 27,  184 => 26,  181 => 25,  179 => 24,  176 => 23,  173 => 22,  170 => 21,  167 => 20,  164 => 19,  162 => 18,  157 => 15,  154 => 14,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -1379,8 +1381,10 @@ $context["incoming_documents"], "getQuantity", [], "method", false, false, false
                             <td>{{ ((incoming_documents.getPrice() / 100) 
                                         / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
-                                        / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
+                            <td>{{ ((incoming_documents.getPrice() / 100) 
+                                - (((incoming_documents.getPrice() / 100) 
+                                    / incoming_documents.getQuantity()) 
+                                    * incoming_documents.getQuantitySold()))|number_format(2, '.', '') }}</td>
 
                             <td>{{ incoming_documents.getIdPaymentMethod().getMethod() }}</td>
 

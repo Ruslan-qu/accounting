@@ -262,8 +262,10 @@
                             <td>{{ ((incoming_documents.getPrice() / 100) 
                                         / incoming_documents.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ (incoming_documents.getPrice() / 100) - (((incoming_documents.getPrice() / 100) 
-                                        / incoming_documents.getQuantity()) * incoming_documents.getQuantitySold()) }}</td>
+                            <td>{{ ((incoming_documents.getPrice() / 100) 
+                                - (((incoming_documents.getPrice() / 100) 
+                                    / incoming_documents.getQuantity()) 
+                                    * incoming_documents.getQuantitySold()))|number_format(2, '.', '') }}</td>
 
                             <td>{{ incoming_documents.getIdPaymentMethod().getMethod() }}</td>
 
