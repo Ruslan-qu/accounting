@@ -138,7 +138,7 @@ class __TwigTemplate_ee378963e31a2f2b645803ca1212aad5 extends Template
         echo " 
         ";
         // line 15
-        $context["id_return_product"] = ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", true, true, false, 15)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getIdInvoice", [], "method", false, true, false, 15), "getId", [], "method", false, false, false, 15), "")) : (""));
+        $context["id_return_product"] = ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getId", [], "method", true, true, false, 15)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["arr_return_product"] ?? null), 0, [], "array", false, true, false, 15), "getId", [], "method", false, false, false, 15), "")) : (""));
         // line 16
         echo "        
         ";
@@ -490,7 +490,7 @@ $context["return_product"], "getQuantitySold", [], "method", false, false, false
     {{ form_start(form_return_product) }}
         {#Переменный для вывода данных в форме
         {{ dump(app.flashes()) }}#} 
-        {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
+        {% set id_return_product = arr_return_product[0].getId()|default('') %}
         
         {% set quantity_return_product = '' %}
         

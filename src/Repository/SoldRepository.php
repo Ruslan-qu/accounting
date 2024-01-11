@@ -408,7 +408,7 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_side ds
                 INNER JOIN d.id_in_stock si
                 INNER JOIN d.id_original_number o
-                WHERE i.id = :id'
+                WHERE s.id = :id'
         )->setParameter('id', $id_return_product);
         //dd($query->getResult());
         return $query->getResult();

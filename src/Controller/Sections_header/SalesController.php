@@ -119,6 +119,7 @@ class SalesController extends AbstractController
 
         /*Открываем деталь по id */
         $arr_return_product = $SoldRepository->findOneByIdReturnProduct($id_return_product);
+        //dd($arr_return_product);
         /*Валидация формы */
         if ($form_return_product->isSubmitted()) {
 

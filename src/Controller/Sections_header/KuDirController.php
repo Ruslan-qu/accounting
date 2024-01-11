@@ -9,10 +9,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class KuDirController extends AbstractController
 {
     #[Route('/ku_dir', name: 'ku_dir')]
-    public function index(): Response
+    public function kuDir(): Response
     {
         return $this->render('ku_dir/ku_dir.html.twig', [
             'title_logo' => 'КуДир',
+        ]);
+    }
+
+    #[Route('/ku_dir_save', name: 'ku_dir_save')]
+    public function kuDirSave(): Response
+    {
+        return $this->render('ku_dir/ku_dir_save.html.twig', [
+            'title_logo' => 'КуДир сохранение',
         ]);
     }
 }

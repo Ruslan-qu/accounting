@@ -457,17 +457,18 @@ class __TwigTemplate_b8de75ceab45825ffa800627016304db extends Template
             <th>Кол-во</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
+            <th>Способ<br>оплаты</th>
             <th>Продать</th>
         ";
                 }
-                // line 108
+                // line 109
                 echo "    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['arr_search_price'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         } else {
-            // line 110
+            // line 111
             echo "    <h2>Видите параметры в поиск</h2> 
 ";
         }
@@ -479,7 +480,7 @@ class __TwigTemplate_b8de75ceab45825ffa800627016304db extends Template
 
     }
 
-    // line 114
+    // line 115
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -489,116 +490,123 @@ class __TwigTemplate_b8de75ceab45825ffa800627016304db extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 115
-        echo "    ";
         // line 116
+        echo "    ";
+        // line 117
         echo "      ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_price"]) || array_key_exists("arr_price", $context) ? $context["arr_price"] : (function () { throw new RuntimeError('Variable "arr_price" does not exist.', 116, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_price"]) || array_key_exists("arr_price", $context) ? $context["arr_price"] : (function () { throw new RuntimeError('Variable "arr_price" does not exist.', 117, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["arr_search_price"]) {
-            // line 117
+            // line 118
             echo "            ";
             if ($context["arr_search_price"]) {
-                // line 118
+                // line 119
                 echo "                ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable($context["arr_search_price"]);
                 foreach ($context['_seq'] as $context["_key"] => $context["price"]) {
-                    // line 119
+                    // line 120
                     echo "                   ";
-                    if (((((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 119), "getIdInStock", [], "method", false, false, false, 119), "getId", [], "method", false, false, false, 119) == 1) && (twig_get_attribute($this->env, $this->source,                     // line 120
-$context["price"], "getSales", [], "method", false, false, false, 120) == 1)) && (twig_get_attribute($this->env, $this->source,                     // line 121
-$context["price"], "getRefund", [], "method", false, false, false, 121) == 1)) && ((twig_get_attribute($this->env, $this->source,                     // line 122
-$context["price"], "getQuantity", [], "method", false, false, false, 122) - twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 122)) != 0))) {
-                        // line 123
+                    if (((((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 120), "getIdInStock", [], "method", false, false, false, 120), "getId", [], "method", false, false, false, 120) == 1) && (twig_get_attribute($this->env, $this->source,                     // line 121
+$context["price"], "getSales", [], "method", false, false, false, 121) == 1)) && (twig_get_attribute($this->env, $this->source,                     // line 122
+$context["price"], "getRefund", [], "method", false, false, false, 122) == 1)) && ((twig_get_attribute($this->env, $this->source,                     // line 123
+$context["price"], "getQuantity", [], "method", false, false, false, 123) - twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 123)) != 0))) {
+                        // line 124
                         echo "                        <tr>
                             <td>";
-                        // line 124
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 124), "getPartNumbers", [], "method", false, false, false, 124), "html", null, true);
+                        // line 125
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 125), "getPartNumbers", [], "method", false, false, false, 125), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 126
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 126), "getIdOriginalNumber", [], "method", false, false, false, 126), "getOriginalNumber", [], "method", false, false, false, 126), "html", null, true);
+                        // line 127
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 127), "getIdOriginalNumber", [], "method", false, false, false, 127), "getOriginalNumber", [], "method", false, false, false, 127), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 128
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdManufacturer", [], "method", false, false, false, 128), "getManufacturers", [], "method", false, false, false, 128), "html", null, true);
+                        // line 129
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdManufacturer", [], "method", false, false, false, 129), "getManufacturers", [], "method", false, false, false, 129), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 130
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 130), "getNameDetail", [], "method", false, false, false, 130), "html", null, true);
+                        // line 131
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, false, false, 131), "getNameDetail", [], "method", false, false, false, 131), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 132
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 132), "getIdPartName", [], "method", false, true, false, 132), "getPartName", [], "method", true, true, false, 132)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 132), "getIdPartName", [], "method", false, true, false, 132), "getPartName", [], "method", false, false, false, 132), "")) : ("")), "html", null, true);
+                        // line 133
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 133), "getIdPartName", [], "method", false, true, false, 133), "getPartName", [], "method", true, true, false, 133)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 133), "getIdPartName", [], "method", false, true, false, 133), "getPartName", [], "method", false, false, false, 133), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 134
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 134), "getIdCarBrand", [], "method", false, true, false, 134), "getCarBrand", [], "method", true, true, false, 134)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 134), "getIdCarBrand", [], "method", false, true, false, 134), "getCarBrand", [], "method", false, false, false, 134), "")) : ("")), "html", null, true);
+                        // line 135
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 135), "getIdCarBrand", [], "method", false, true, false, 135), "getCarBrand", [], "method", true, true, false, 135)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 135), "getIdCarBrand", [], "method", false, true, false, 135), "getCarBrand", [], "method", false, false, false, 135), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 136
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 136), "getIdSide", [], "method", false, true, false, 136), "getSide", [], "method", true, true, false, 136)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 136), "getIdSide", [], "method", false, true, false, 136), "getSide", [], "method", false, false, false, 136), "")) : ("")), "html", null, true);
+                        // line 137
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 137), "getIdSide", [], "method", false, true, false, 137), "getSide", [], "method", true, true, false, 137)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 137), "getIdSide", [], "method", false, true, false, 137), "getSide", [], "method", false, false, false, 137), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 138
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 138), "getIdBody", [], "method", false, true, false, 138), "getBody", [], "method", true, true, false, 138)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 138), "getIdBody", [], "method", false, true, false, 138), "getBody", [], "method", false, false, false, 138), "")) : ("")), "html", null, true);
+                        // line 139
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 139), "getIdBody", [], "method", false, true, false, 139), "getBody", [], "method", true, true, false, 139)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 139), "getIdBody", [], "method", false, true, false, 139), "getBody", [], "method", false, false, false, 139), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 140
-                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 140), "getIdAxle", [], "method", false, true, false, 140), "getAxle", [], "method", true, true, false, 140)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 140), "getIdAxle", [], "method", false, true, false, 140), "getAxle", [], "method", false, false, false, 140), "")) : ("")), "html", null, true);
+                        // line 141
+                        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 141), "getIdAxle", [], "method", false, true, false, 141), "getAxle", [], "method", true, true, false, 141)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdDetails", [], "method", false, true, false, 141), "getIdAxle", [], "method", false, true, false, 141), "getAxle", [], "method", false, false, false, 141), "")) : ("")), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 142
-                        echo twig_escape_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["price"], "getQuantity", [], "method", false, false, false, 142) - twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 142)), "html", null, true);
+                        // line 143
+                        echo twig_escape_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["price"], "getQuantity", [], "method", false, false, false, 143) - twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 143)), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 144
-                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 144) / 100) / twig_get_attribute($this->env, $this->source,                         // line 145
-$context["price"], "getQuantity", [], "method", false, false, false, 145)), 2, ".", ""), "html", null, true);
+                        // line 145
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 145) / 100) / twig_get_attribute($this->env, $this->source,                         // line 146
+$context["price"], "getQuantity", [], "method", false, false, false, 146)), 2, ".", ""), "html", null, true);
                         echo "</td>
 
                             <td>";
-                        // line 147
-                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 147) / 100) - (((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 147) / 100) / twig_get_attribute($this->env, $this->source,                         // line 148
-$context["price"], "getQuantity", [], "method", false, false, false, 148)) * twig_get_attribute($this->env, $this->source, $context["price"], "getQuantitySold", [], "method", false, false, false, 148))), 2, ".", ""), "html", null, true);
+                        // line 148
+                        echo twig_escape_filter($this->env, twig_number_format_filter($this->env, ((twig_get_attribute($this->env, $this->source, $context["price"], "getPrice", [], "method", false, false, false, 148) / 100) - (((twig_get_attribute($this->env, $this->source,                         // line 149
+$context["price"], "getPrice", [], "method", false, false, false, 149) / 100) / twig_get_attribute($this->env, $this->source,                         // line 150
+$context["price"], "getQuantity", [], "method", false, false, false, 150)) * twig_get_attribute($this->env, $this->source,                         // line 151
+$context["price"], "getQuantitySold", [], "method", false, false, false, 151))), 2, ".", ""), "html", null, true);
                         echo "</td>
+
+                            <td>&nbsp;";
+                        // line 153
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["price"], "getIdPaymentMethod", [], "method", false, false, false, 153), "getMethod", [], "method", false, false, false, 153), "html", null, true);
+                        echo "</td>           
 
                             <form action=\"/sold_price\" name=\"sold_price\" method=\"post\">
 
                                     <td><button class=\"sales\" type=\"submit\" name=\"sold_price\" value=\"";
-                        // line 152
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["price"], "getId", [], "method", false, false, false, 152), "html", null, true);
+                        // line 157
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["price"], "getId", [], "method", false, false, false, 157), "html", null, true);
                         echo "\">Продать</button></td>
                                     
                             </form>
                         </tr> 
                     ";
                     }
-                    // line 157
+                    // line 162
                     echo "                ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['price'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 158
+                // line 163
                 echo "            ";
             } else {
-                // line 159
+                // line 164
                 echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
             ";
             }
-            // line 161
+            // line 166
             echo "        ";
         }
         $_parent = $context['_parent'];
@@ -624,7 +632,7 @@ $context["price"], "getQuantity", [], "method", false, false, false, 148)) * twi
 
     public function getDebugInfo()
     {
-        return array (  602 => 161,  598 => 159,  595 => 158,  589 => 157,  581 => 152,  574 => 148,  573 => 147,  568 => 145,  567 => 144,  562 => 142,  557 => 140,  552 => 138,  547 => 136,  542 => 134,  537 => 132,  532 => 130,  527 => 128,  522 => 126,  517 => 124,  514 => 123,  512 => 122,  511 => 121,  510 => 120,  508 => 119,  503 => 118,  500 => 117,  495 => 116,  493 => 115,  483 => 114,  471 => 110,  464 => 108,  445 => 93,  440 => 92,  438 => 91,  428 => 90,  411 => 82,  406 => 80,  403 => 79,  401 => 78,  396 => 76,  392 => 75,  387 => 74,  381 => 73,  379 => 72,  373 => 71,  368 => 69,  364 => 68,  359 => 67,  353 => 66,  351 => 65,  345 => 64,  340 => 62,  336 => 61,  331 => 60,  325 => 59,  323 => 58,  317 => 57,  312 => 55,  308 => 54,  303 => 53,  297 => 52,  295 => 51,  289 => 50,  284 => 48,  280 => 47,  275 => 46,  269 => 45,  267 => 44,  261 => 43,  258 => 42,  256 => 41,  253 => 40,  251 => 39,  248 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  610 => 166,  606 => 164,  603 => 163,  597 => 162,  589 => 157,  582 => 153,  577 => 151,  576 => 150,  575 => 149,  574 => 148,  569 => 146,  568 => 145,  563 => 143,  558 => 141,  553 => 139,  548 => 137,  543 => 135,  538 => 133,  533 => 131,  528 => 129,  523 => 127,  518 => 125,  515 => 124,  513 => 123,  512 => 122,  511 => 121,  509 => 120,  504 => 119,  501 => 118,  496 => 117,  494 => 116,  484 => 115,  472 => 111,  465 => 109,  445 => 93,  440 => 92,  438 => 91,  428 => 90,  411 => 82,  406 => 80,  403 => 79,  401 => 78,  396 => 76,  392 => 75,  387 => 74,  381 => 73,  379 => 72,  373 => 71,  368 => 69,  364 => 68,  359 => 67,  353 => 66,  351 => 65,  345 => 64,  340 => 62,  336 => 61,  331 => 60,  325 => 59,  323 => 58,  317 => 57,  312 => 55,  308 => 54,  303 => 53,  297 => 52,  295 => 51,  289 => 50,  284 => 48,  280 => 47,  275 => 46,  269 => 45,  267 => 44,  261 => 43,  258 => 42,  256 => 41,  253 => 40,  251 => 39,  248 => 38,  246 => 37,  240 => 35,  231 => 33,  227 => 32,  223 => 31,  218 => 30,  212 => 29,  210 => 28,  204 => 27,  201 => 26,  198 => 25,  195 => 24,  192 => 23,  189 => 22,  186 => 21,  183 => 20,  180 => 19,  177 => 18,  175 => 17,  170 => 15,  168 => 14,  158 => 13,  140 => 11,  121 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -734,6 +742,7 @@ $context["price"], "getQuantity", [], "method", false, false, false, 148)) * twi
             <th>Кол-во</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
+            <th>Способ<br>оплаты</th>
             <th>Продать</th>
         {% endif %}
     {% endfor %}
@@ -775,8 +784,12 @@ $context["price"], "getQuantity", [], "method", false, false, false, 148)) * twi
                             <td>{{ ((price.getPrice() / 100) 
                                         / price.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ ((price.getPrice() / 100) - (((price.getPrice() / 100) 
-                                        / price.getQuantity()) * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
+                            <td>{{ ((price.getPrice() / 100) 
+                                - (((price.getPrice() / 100) 
+                                    / price.getQuantity()) 
+                                        * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
+
+                            <td>&nbsp;{{ price.getIdPaymentMethod().getMethod() }}</td>           
 
                             <form action=\"/sold_price\" name=\"sold_price\" method=\"post\">
 

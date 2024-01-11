@@ -33,6 +33,9 @@ class Sold
     #[ORM\OneToMany(mappedBy: 'id_sold', targetEntity: KuDir::class)]
     private Collection $KuDirSold;
 
+    #[ORM\ManyToOne(inversedBy: 'SoldKuDir')]
+    private ?KuDir $id_ku_dir = null;
+
     public function __construct()
     {
         $this->KuDirSold = new ArrayCollection();
@@ -103,32 +106,14 @@ class Sold
         return $this;
     }
 
-    /**
-     * @return Collection<int, KuDir>
-     */
-    public function getKuDirSold(): Collection
+    public function getIdKuDir(): ?KuDir
     {
-        return $this->KuDirSold;
+        return $this->id_ku_dir;
     }
 
-    public function addKuDirSold(KuDir $kuDirSold): static
+    public function setIdKuDir(?KuDir $id_ku_dir): static
     {
-        if (!$this->KuDirSold->contains($kuDirSold)) {
-            $this->KuDirSold->add($kuDirSold);
-            $kuDirSold->setIdSold($this);
-        }
-
-        return $this;
-    }
-
-    public function removeKuDirSold(KuDir $kuDirSold): static
-    {
-        if ($this->KuDirSold->removeElement($kuDirSold)) {
-            // set the owning side to null (unless already changed)
-            if ($kuDirSold->getIdSold() === $this) {
-                $kuDirSold->setIdSold(null);
-            }
-        }
+        $this->id_ku_dir = $id_ku_dir;
 
         return $this;
     }

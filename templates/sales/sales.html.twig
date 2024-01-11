@@ -152,11 +152,15 @@
 {% endblock form_search %}
 
 {% block table_total_amount %}
-    <th>Общая сумма</th>
+    {% if arr_sales %}
+        <th>Общая сумма</th>
+    {% endif %}
 {% endblock table_total_amount %}
 
 {% block tbody_total_amount %}
-<td>&nbsp;{{total_amount|number_format(2, '.', '')}}</td>
+    {% if arr_sales %}
+        <td>&nbsp;{{total_amount|number_format(2, '.', '')}}</td>
+    {% endif %}
 {% endblock tbody_total_amount %}
 
 {% block table_thead_tr %}
@@ -172,13 +176,14 @@
             <th>Кузов</th>
             <th>Перед<br>Зад</th>
             <th>Пос-<br>щик</th>
-            <th>Способ<br>оплаты</th>
             <th>Дата<br>продажи</th>
             <th>Кол-<br>во</th>
             <th>Цена<br>шт<br>закуп</th>
             <th>Цена<br>общая<br>закуп</th>
             <th>Цена<br>общая<br>продажи</th>
             <th>Прибыль</th>
+            <th>Способ<br>оплаты</th>
+            <th>КуДир</th>
             <th>Возврат</th>
 {% else %}
     <h2>Видите параметры в поиск.</h2> 
@@ -218,9 +223,6 @@
                             <td>&nbsp;{{ sales_price.getIdInvoice()
                                 .getIdCounterparty().getCounterparty() }}</td>
 
-                            <td>&nbsp;{{ sales_price.getIdInvoice()
-                                .getIdPaymentMethod().getMethod() }}</td>
-
                             <td>&nbsp;{{ sales_price.getDateSold()|date("d-m-Y") }}</td>   
 
                             <td>&nbsp;{{ sales_price.getQuantitySold() }}</td>
@@ -238,10 +240,19 @@
                                 -(((sales_price.getIdInvoice().getPrice() / 100) 
                                         / sales_price.getIdInvoice().getQuantity())
                                             * sales_price.getQuantitySold()))|number_format(2, '.', '') }}</td>
+                            
+                            <td>&nbsp;{{ sales_price.getIdInvoice()
+                                .getIdPaymentMethod().getMethod() }}</td>
+
+                            <form action="/ku_dir_save" name="ku_dir_save" method="post">
+
+                                <td><button class="save" type="submit" name="ku_dir_save" value="{{ sales_price.getIdInvoice().getId() }}">КуДир</button></td>
+                                                            
+                            </form>
 
                             <form action="/quantity_return_product" name="quantity_return_product" method="post">
 
-                                <td><button class="refund" type="submit" name="quantity_return_product" value="{{ sales_price.getIdInvoice().getId() }}">Возврат</button></td>
+                                <td><button class="refund" type="submit" name="quantity_return_product" value="{{ sales_price.getId() }}">Возврат</button></td>
                                                             
                             </form>
                             

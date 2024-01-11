@@ -18,7 +18,7 @@
                 <th>Марка</th>
                 <th>Сторона</th>
                 <th>Кузов</th>
-                <th>Перед Зад</th>
+                <th>Перед Зад</th>  
             </tr>
             <tr>
             
@@ -51,15 +51,14 @@
                 <th>Продать</th>
             </tr>
             <tr>
-
-                <th>{{ sold.getQuantity() - sold.getQuantitySold() }}</th>
+            <th>{{ sold.getQuantity() - sold.getQuantitySold() }}</th>
 
                 <th>{{ ((sold.getPrice() / 100) 
                         / sold.getQuantity())|number_format(2, '.', '') }}</th>
 
                 <th>{{ ((sold.getPrice() / 100) - (((sold.getPrice() / 100) 
                 / sold.getQuantity()) * sold.getQuantitySold()))|number_format(2, '.', '') }}</th>
-                                    
+                                
             {#Форма продажи детали#}
             {{ form_start(form_sold, {'action': path('sold_price')}) }}
             {#{{ dump(arr_sale_list[0].getDateSold()) }}#}
@@ -101,27 +100,31 @@
             {{ form_end(form_sold) }}
     {% else %}
 
-    <h2>Для продолжения продажи выберите прайс в меню или завершите продажу</h2>  
+    <h2>Для продолжения продажи выберите прайс в меню или завершите сделку</h2>  
 
     {% endfor %}               
 
 {% endblock form_save_edit_sales %}
 
 {% block form_search %}
-    {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
+    {% for sale_list in arr_sale_list %}
+        {% if sale_list %}
+        {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
 
-        {% do form_widget(form_complete_sales.hidden_sold) %}
-        {% do form_widget(form_complete_sales.id_invoice) %}
-        {% do form_widget(form_complete_sales.quantity_sold) %}
-        {% do form_widget(form_complete_sales.price_sold) %}
-        {% do form_widget(form_complete_sales.date_sold) %}
-                                            
-        <th>{{ form_widget(form_complete_sales.button
-            , {'label': 'Завершить сделку', 'attr': {'class': 'save'} }) }}</th>
-    
-    {{ form_end(form_complete_sales) }}
+            {% do form_widget(form_complete_sales.hidden_sold) %}
+            {% do form_widget(form_complete_sales.id_invoice) %}
+            {% do form_widget(form_complete_sales.quantity_sold) %}
+            {% do form_widget(form_complete_sales.price_sold) %}
+            {% do form_widget(form_complete_sales.date_sold) %}
+                                                
+            <th>{{ form_widget(form_complete_sales.button
+                , {'label': 'Завершить сделку', 'attr': {'class': 'save'} }) }}</th>
+        
+        {{ form_end(form_complete_sales) }}
 
-    <th>Цена общая - {{total_amount_transaction / 100}}</th>
+        <th>Цена общая - {{total_amount_transaction / 100}}</th>
+    {% endif %}
+    {% endfor %}
 {% endblock form_search %}
 
 {% block table_thead_tr %}

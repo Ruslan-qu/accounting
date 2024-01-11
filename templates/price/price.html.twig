@@ -103,6 +103,7 @@
             <th>Кол-во</th>
             <th>Цена шт</th>
             <th>Цена общая</th>
+            <th>Способ<br>оплаты</th>
             <th>Продать</th>
         {% endif %}
     {% endfor %}
@@ -144,8 +145,12 @@
                             <td>{{ ((price.getPrice() / 100) 
                                         / price.getQuantity())|number_format(2, '.', '') }}</td>
 
-                            <td>{{ ((price.getPrice() / 100) - (((price.getPrice() / 100) 
-                                        / price.getQuantity()) * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
+                            <td>{{ ((price.getPrice() / 100) 
+                                - (((price.getPrice() / 100) 
+                                    / price.getQuantity()) 
+                                        * price.getQuantitySold()))|number_format(2, '.', '') }}</td>
+
+                            <td>&nbsp;{{ price.getIdPaymentMethod().getMethod() }}</td>           
 
                             <form action="/sold_price" name="sold_price" method="post">
 

@@ -12,7 +12,7 @@
     {{ form_start(form_return_product) }}
         {#Переменный для вывода данных в форме
         {{ dump(app.flashes()) }}#} 
-        {% set id_return_product = arr_return_product[0].getIdInvoice().getId()|default('') %}
+        {% set id_return_product = arr_return_product[0].getId()|default('') %}
         
         {% set quantity_return_product = '' %}
         
@@ -72,10 +72,8 @@
             <th>Цена<br>общая<br>закуп</th>
             <th>Цена<br>шт<br>продажи</th>
             <th>Цена<br>общая<br>продажи</th>
-            
-{% else %}
-    <h2>Видите параметры в поиск.</h2> 
-{% endif %}
+
+        {% endif %}
 {% endblock table_thead_tr %}
 
 {% block tbody %}
@@ -128,13 +126,8 @@
                             / return_product.getQuantitySold())|number_format(2, '.', '') }}</td>         
 
                     <td>&nbsp;{{ (return_product.getPriceSold() / 100)|number_format(2, '.', '') }}</td>
-
-            
-
                     
-                </tr>   
-            {% else %}
-                <h2>Данные не найдены. Видите параметры в поиск</h2>  
+                </tr>    
             {% endif %}
         {% endfor %}
 {% endblock tbody %}
