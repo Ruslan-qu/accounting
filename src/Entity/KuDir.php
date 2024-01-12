@@ -28,6 +28,12 @@ class KuDir
     #[ORM\OneToMany(mappedBy: 'id_ku_dir', targetEntity: Sold::class)]
     private Collection $SoldKuDir;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $coming = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $expenditure = null;
+
     public function __construct()
     {
         $this->SoldKuDir = new ArrayCollection();
@@ -100,6 +106,30 @@ class KuDir
                 $soldKuDir->setIdKuDir(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getComing(): ?int
+    {
+        return $this->coming;
+    }
+
+    public function setComing(?int $coming): static
+    {
+        $this->coming = $coming;
+
+        return $this;
+    }
+
+    public function getExpenditure(): ?int
+    {
+        return $this->expenditure;
+    }
+
+    public function setExpenditure(?int $expenditure): static
+    {
+        $this->expenditure = $expenditure;
 
         return $this;
     }

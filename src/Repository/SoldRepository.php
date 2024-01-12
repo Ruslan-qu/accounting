@@ -49,7 +49,7 @@ class SoldRepository extends ServiceEntityRepository
     /**
      * @return Sold[] Returns an array of Sold objects
      */
-    public function findBySaleList(): array
+    public function findBySaleListCompleteSales(): array
     {
         $entityManager = $this->getEntityManager();
 

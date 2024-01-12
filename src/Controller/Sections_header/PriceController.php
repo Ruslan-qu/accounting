@@ -4,10 +4,12 @@ namespace App\Controller\Sections_header;
 
 use DateTime;
 use App\Entity\Sold;
+use App\Entity\KuDir;
 use App\Form\SoldType;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\Availability;
+use App\Form\CompleteSalesType;
 use App\Repository\SoldRepository;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
@@ -153,14 +155,14 @@ class PriceController extends AbstractController
 
         /* Подключаем форм */
         $form_sold = $this->createForm(SoldType::class, $entity_sold);
-        $form_complete_sales = $this->createForm(SoldType::class, $entity_sold);
+        $form_complete_sales = $this->createForm(CompleteSalesType::class);
 
         /*Валидация формы */
         $form_sold->handleRequest($request);
 
         /*Выводим список продоваемых деталей*/
-        $arr_sale_list[] = $SoldRepository->findBySaleList();
-
+        $arr_sale_list[] = $SoldRepository->findBySaleListCompleteSales();
+        dd($arr_sale_list);
         /*Выводим общую сумму */
         $total_amount_transaction = $SoldRepository->countTotalAmountPriceSold();
 
@@ -413,38 +415,80 @@ class PriceController extends AbstractController
 
     /* функция завершения сделки */
     #[Route('/complete_sales', name: 'complete_sales')]
-    public function completeSales(ManagerRegistry $doctrine, InvoiceRepository $InvoiceRepository): Response
-    {
-        /* Выводим список деталей на продажу */
-        $complete_sales_invoice = $InvoiceRepository->findByCompleteSales();
+    public function completeSales(
+        ManagerRegistry $doctrine,
+        Request $request,
+        SoldRepository $SoldRepository,
+        InvoiceRepository $InvoiceRepository
+    ): Response {
 
-        // dd($complete_sales_invoice);
-        foreach ($complete_sales_invoice as $key => $value) {
+        /* Подключаем сущности  */
+        $entity_ku_dir = new KuDir();
 
-            $value->setSoldStatus(1);
+        /* Подключаем форм */
+        $form_complete_sales = $this->createForm(CompleteSalesType::class);
 
-            $quantity_invoice = $value->getQuantity();
-            $invoice_quantity_sold = $value->getQuantitySold();
-            /* если количество на складе и количество проданных 
+        /*Валидация формы */
+        $form_complete_sales->handleRequest($request);
+
+        if ($form_complete_sales->isSubmitted()) {
+
+            if ($form_complete_sales->isValid()) {
+
+                //dd($form_complete_sales);
+                $entity_ku_dir->setReceiptChange(
+                    $form_complete_sales->getData()['receipt_change_complete_sales']
+                );
+                $entity_ku_dir->setReceiptNumber(
+                    $form_complete_sales->getData()['receipt_number_complete_sales']
+                );
+                $entity_ku_dir->setReceiptDate(
+                    $form_complete_sales->getData()['receipt_date_complete_sales']
+                );
+                $entity_ku_dir->setComing(
+                    $form_complete_sales->getData()['hidden_complete_sales']
+                );
+
+                $em = $doctrine->getManager();
+                $em->persist($entity_ku_dir);
+                $em->flush();
+
+                /* Выводим список деталей на продажу */
+                $complete_sales_invoice = $SoldRepository->findBySaleListCompleteSales();
+
+                dd($complete_sales_invoice);
+                foreach ($complete_sales_invoice as $key => $value) {
+
+                    $value->getIdInvoice()->setSoldStatus(1);
+
+                    $quantity_invoice = $value->getIdInvoice()->getQuantity();
+                    $invoice_quantity_sold = $value->getIdInvoice()->getQuantitySold();
+                    /* если количество на складе и количество проданных 
                         деталей равно, в ячейке продажи setSales(2) */
-            if ($invoice_quantity_sold == $quantity_invoice) {
+                    if ($invoice_quantity_sold == $quantity_invoice) {
 
-                $value->setSales(2);
+                        $value->getIdInvoice()->setSales(2);
+                    }
+                }
+
+                $doctrine->getManager()->flush();
+
+
+                foreach ($complete_sales_invoice as $key => $value) {
+
+                    $count_availability = $InvoiceRepository->findByCountAvailability(
+                        $value->getIdInvoice()->getIdDetails()
+                    );
+                    if ($count_availability[0][1] == 0) {
+                        $in_stock = $doctrine->getRepository(Availability::class)->find(2);
+                        $value->getIdInvoice()->getIdDetails()->setIdInStock($in_stock);
+                    }
+                }
+
+
+                $doctrine->getManager()->flush();
             }
         }
-
-        $doctrine->getManager()->flush();
-
-
-        foreach ($complete_sales_invoice as $key => $value) {
-
-            $count_availability = $InvoiceRepository->findByCountAvailability($value->getIdDetails());
-            if ($count_availability[0][1] == 0) {
-                $in_stock = $doctrine->getRepository(Availability::class)->find(2);
-                $value->getIdDetails()->setIdInStock($in_stock);
-            }
-        }
-        $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('price');
     }

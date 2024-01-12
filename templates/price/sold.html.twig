@@ -109,21 +109,37 @@
 {% block form_search %}
     {% for sale_list in arr_sale_list %}
         {% if sale_list %}
-        {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
+            {% set total_amount_transaction = (total_amount_transaction / 100) %}
 
-            {% do form_widget(form_complete_sales.hidden_sold) %}
-            {% do form_widget(form_complete_sales.id_invoice) %}
-            {% do form_widget(form_complete_sales.quantity_sold) %}
-            {% do form_widget(form_complete_sales.price_sold) %}
-            {% do form_widget(form_complete_sales.date_sold) %}
-                                                
-            <th>{{ form_widget(form_complete_sales.button
-                , {'label': 'Завершить сделку', 'attr': {'class': 'save'} }) }}</th>
-        
-        {{ form_end(form_complete_sales) }}
 
-        <th>Цена общая - {{total_amount_transaction / 100}}</th>
-    {% endif %}
+            <th>Цена общая - {{ total_amount_transaction }}</th>
+
+            {{ form_start(form_complete_sales, {'action': path('complete_sales')}) }}
+
+                <th>{{ form_label(form_complete_sales.id_payment_method_complete_sales) }}<br>
+                {{ form_widget(form_complete_sales.id_payment_method_complete_sales) }}
+                {{ form_errors(form_complete_sales.id_payment_method_complete_sales) }}</th>   
+                
+                <th>{{ form_label(form_complete_sales.receipt_change_complete_sales) }}<br>
+                {{ form_widget(form_complete_sales.receipt_change_complete_sales) }}
+                {{ form_errors(form_complete_sales.receipt_change_complete_sales) }}</th>   
+
+                <th>{{ form_label(form_complete_sales.receipt_number_complete_sales) }}<br>
+                {{ form_widget(form_complete_sales.receipt_number_complete_sales) }}
+                {{ form_errors(form_complete_sales.receipt_number_complete_sales) }}</th>   
+
+                <th>{{ form_label(form_complete_sales.receipt_date_complete_sales) }}<br>
+                {{ form_widget(form_complete_sales.receipt_date_complete_sales) }}
+                {{ form_errors(form_complete_sales.receipt_date_complete_sales) }}</th>  
+
+                 {{ form_widget(form_complete_sales.hidden_complete_sales, {value : total_amount_transaction}) }}
+                                                    
+                <th>{{ form_widget(form_complete_sales.button_complete_sales
+                    , {'label': 'Завершить сделку', 'attr': {'class': 'save'} }) }}</th>
+            
+            {{ form_end(form_complete_sales) }}  
+
+        {% endif %}
     {% endfor %}
 {% endblock form_search %}
 
