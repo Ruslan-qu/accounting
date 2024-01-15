@@ -162,7 +162,7 @@ class PriceController extends AbstractController
 
         /*Выводим список продоваемых деталей*/
         $arr_sale_list[] = $SoldRepository->findBySaleListCompleteSales();
-        dd($arr_sale_list);
+        //dd($arr_sale_list);
         /*Выводим общую сумму */
         $total_amount_transaction = $SoldRepository->countTotalAmountPriceSold();
 
@@ -224,17 +224,15 @@ class PriceController extends AbstractController
 
                 $entity_sold->setDateSold(new DateTime($request->request->all()['sold']['date_sold']));
 
+                /*Устанавливаем статус продажи для выведения общей сумму 
+                    всех продаж при одной сделки "1"- не выводится, "2"- выводится */
+                $entity_sold->setSoldStatus(2);
+
+                $arr_sold_part[0]->setQuantitySold($sum_quantity_sold);
+
                 $em = $doctrine->getManager();
                 $em->persist($entity_sold);
                 $em->flush();
-
-
-                $arr_sold_part[0]->setQuantitySold($sum_quantity_sold);
-                /*Устанавливаем статус продажи для выведения общей сумму 
-                    всех продаж при одной сделки "1"- не выводится, "2"- выводится */
-                $arr_sold_part[0]->setSoldStatus(2);
-
-                $doctrine->getManager()->flush();
 
                 return $this->redirectToRoute('sold_price');
             } else {
@@ -435,31 +433,61 @@ class PriceController extends AbstractController
 
             if ($form_complete_sales->isValid()) {
 
-                //dd($form_complete_sales);
-                $entity_ku_dir->setReceiptChange(
-                    $form_complete_sales->getData()['receipt_change_complete_sales']
-                );
-                $entity_ku_dir->setReceiptNumber(
-                    $form_complete_sales->getData()['receipt_number_complete_sales']
-                );
-                $entity_ku_dir->setReceiptDate(
-                    $form_complete_sales->getData()['receipt_date_complete_sales']
-                );
-                $entity_ku_dir->setComing(
-                    $form_complete_sales->getData()['hidden_complete_sales']
-                );
+                // dd($form_complete_sales->getData()['id_payment_method_complete_sales']);
+                $id_payment_method_complete_sales = $form_complete_sales
+                    ->getData()['id_payment_method_complete_sales']
+                    ->getId();
 
-                $em = $doctrine->getManager();
-                $em->persist($entity_ku_dir);
-                $em->flush();
+                if ($id_payment_method_complete_sales == 2) {
+
+                    $receipt_change_complete_sales = $form_complete_sales
+                        ->getData()['receipt_change_complete_sales'];
+                    $receipt_number_complete_sales = $form_complete_sales
+                        ->getData()['receipt_number_complete_sales'];
+
+                    $сount_receipt_change_number = $doctrine->getRepository(KuDir::class)
+                        ->count([
+                            'receipt_change' => $receipt_change_complete_sales,
+                            'receipt_number' => $receipt_number_complete_sales
+                        ]);
+
+                    if ($сount_receipt_change_number == 0) {
+                        $entity_ku_dir->setReceiptChange(
+                            $receipt_change_complete_sales
+                        );
+                        $entity_ku_dir->setReceiptNumber(
+                            $receipt_number_complete_sales
+                        );
+                        $entity_ku_dir->setReceiptDate(
+                            $form_complete_sales->getData()['receipt_date_complete_sales']
+                        );
+                        $entity_ku_dir->setComing(
+                            $form_complete_sales->getData()['hidden_complete_sales']
+                        );
+
+                        $em = $doctrine->getManager();
+                        $em->persist($entity_ku_dir);
+                        $em->flush();
+                    } else {
+
+                        /* Выводим ошибки валидации, через сессии  */
+
+                        $this->addFlash(
+                            'error_сount_receipt_change_number',
+                            'Смена или номер чека существует.'
+                        );
+                        return $this->redirectToRoute('sold_price');
+                    }
+                }
+
 
                 /* Выводим список деталей на продажу */
                 $complete_sales_invoice = $SoldRepository->findBySaleListCompleteSales();
 
-                dd($complete_sales_invoice);
+                //dd($complete_sales_invoice);
                 foreach ($complete_sales_invoice as $key => $value) {
 
-                    $value->getIdInvoice()->setSoldStatus(1);
+                    $value->setSoldStatus(1);
 
                     $quantity_invoice = $value->getIdInvoice()->getQuantity();
                     $invoice_quantity_sold = $value->getIdInvoice()->getQuantitySold();

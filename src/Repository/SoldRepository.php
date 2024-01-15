@@ -58,7 +58,7 @@ class SoldRepository extends ServiceEntityRepository
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
                 INNER JOIN i.id_details d
-                WHERE i.sold_status = :sold_status'
+                WHERE s.sold_status = :sold_status'
         )->setParameter('sold_status', '2');
         //dd($query->getResult());
         return $query->getResult();
@@ -93,7 +93,7 @@ class SoldRepository extends ServiceEntityRepository
             'SELECT SUM (s.price_sold)
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
-                WHERE i.sold_status = :sold_status'
+                WHERE s.sold_status = :sold_status'
         )->setParameter('sold_status', '2');
         //dd($query->getResult());
         return $query->getResult();
@@ -380,8 +380,12 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_axle a
                 INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o
-                WHERE s.date_sold = :date_sold'
-        )->setParameter('date_sold', $format_date);
+                WHERE s.date_sold = :date_sold
+                AND s.sold_status != :sold_status'
+        )->setParameters([
+            'date_sold' => $format_date,
+            'sold_status' => '2'
+        ]);
 
         //dd($query->getResult());
         return $query->getResult();

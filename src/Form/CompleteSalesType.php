@@ -21,7 +21,6 @@ class CompleteSalesType extends AbstractType
                 'label' => 'Способ оплаты',
                 'class' => PaymentMethod::class,
                 'choice_label' => 'method',
-                'required' => false,
             ])
             ->add('receipt_change_complete_sales', IntegerType::class, [
                 'label' => 'Смена чека',

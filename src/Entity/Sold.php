@@ -30,16 +30,8 @@ class Sold
 
     private ?int $hidden_sold = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_sold', targetEntity: KuDir::class)]
-    private Collection $KuDirSold;
-
-    #[ORM\ManyToOne(inversedBy: 'SoldKuDir')]
-    private ?KuDir $id_ku_dir = null;
-
-    public function __construct()
-    {
-        $this->KuDirSold = new ArrayCollection();
-    }
+    #[ORM\Column(nullable: true)]
+    private ?int $sold_status = null;
 
     public function getId(): ?int
     {
@@ -106,14 +98,14 @@ class Sold
         return $this;
     }
 
-    public function getIdKuDir(): ?KuDir
+    public function getSoldStatus(): ?int
     {
-        return $this->id_ku_dir;
+        return $this->sold_status;
     }
 
-    public function setIdKuDir(?KuDir $id_ku_dir): static
+    public function setSoldStatus(?int $sold_status): static
     {
-        $this->id_ku_dir = $id_ku_dir;
+        $this->sold_status = $sold_status;
 
         return $this;
     }

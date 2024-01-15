@@ -102,7 +102,10 @@
 
     <h2>Для продолжения продажи выберите прайс в меню или завершите сделку</h2>  
 
-    {% endfor %}               
+    {% endfor %}     
+    {% for message_error_сount_receipt_change_number in app.flashes('error_сount_receipt_change_number') %}  
+       <h2> {{ message_error_сount_receipt_change_number }}</h2> 
+    {% endfor %}    
 
 {% endblock form_save_edit_sales %}
 

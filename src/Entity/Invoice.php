@@ -59,7 +59,7 @@ class Invoice
     private ?RefundActivity $id_refund_activity = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $sold_status = null;
+    private ?int $ku_dir_status = null;
 
     #[ORM\OneToMany(mappedBy: 'id_invoice_refund_date', targetEntity: RefundDate::class, cascade: ['remove'])]
     private Collection $RefundDateInvoice;
@@ -249,14 +249,14 @@ class Invoice
         return $this;
     }
 
-    public function getSoldStatus(): ?int
+    public function getKuDirStatus(): ?int
     {
-        return $this->sold_status;
+        return $this->ku_dir_status;
     }
 
-    public function setSoldStatus(?int $sold_status): static
+    public function setKuDirStatus(?int $ku_dir_status): static
     {
-        $this->sold_status = $sold_status;
+        $this->ku_dir_status = $ku_dir_status;
 
         return $this;
     }

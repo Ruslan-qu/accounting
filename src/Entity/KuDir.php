@@ -80,36 +80,6 @@ class KuDir
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sold>
-     */
-    public function getSoldKuDir(): Collection
-    {
-        return $this->SoldKuDir;
-    }
-
-    public function addSoldKuDir(Sold $soldKuDir): static
-    {
-        if (!$this->SoldKuDir->contains($soldKuDir)) {
-            $this->SoldKuDir->add($soldKuDir);
-            $soldKuDir->setIdKuDir($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSoldKuDir(Sold $soldKuDir): static
-    {
-        if ($this->SoldKuDir->removeElement($soldKuDir)) {
-            // set the owning side to null (unless already changed)
-            if ($soldKuDir->getIdKuDir() === $this) {
-                $soldKuDir->setIdKuDir(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getComing(): ?int
     {
         return $this->coming;
