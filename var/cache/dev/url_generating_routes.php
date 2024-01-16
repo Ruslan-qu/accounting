@@ -26,6 +26,7 @@ return [
     'reset_invoice' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::Reset'], [], [['text', '/reset_invoice']], [], [], []],
     'delete_invoice' => [[], ['_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::deleteInvoice'], [], [['text', '/delete_invoice']], [], [], []],
     'ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::kuDir'], [], [['text', '/ku_dir']], [], [], []],
+    'reset_ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::resetKuDir'], [], [['text', '/reset_ku_dir']], [], [], []],
     'ku_dir_save' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::kuDirSave'], [], [['text', '/ku_dir_save']], [], [], []],
     'app_main_page' => [[], ['_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], [], [['text', '/']], [], [], []],
     'part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], [], [['text', '/part_no']], [], [], []],

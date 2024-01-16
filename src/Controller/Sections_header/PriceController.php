@@ -464,6 +464,7 @@ class PriceController extends AbstractController
                         $entity_ku_dir->setComing(
                             $form_complete_sales->getData()['hidden_complete_sales']
                         );
+                        $entity_ku_dir->setExpenditure(0);
 
                         $em = $doctrine->getManager();
                         $em->persist($entity_ku_dir);

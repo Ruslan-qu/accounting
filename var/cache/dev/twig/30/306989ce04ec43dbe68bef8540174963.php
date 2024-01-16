@@ -317,12 +317,12 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                                     </tr>
                                 </thead>
                                 <tbody>
-                                       <tr> 
+                                       
                                             ";
         // line 69
         $this->displayBlock('tbody_total_amount', $context, $blocks);
         // line 71
-        echo "                                        </tr>
+        echo "                                        
                                 </tbody>
                             </table> 
                         </div>
@@ -595,10 +595,10 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                                     </tr>
                                 </thead>
                                 <tbody>
-                                       <tr> 
+                                       
                                             {% block tbody_total_amount %}
                                             {% endblock tbody_total_amount %}
-                                        </tr>
+                                        
                                 </tbody>
                             </table> 
                         </div>

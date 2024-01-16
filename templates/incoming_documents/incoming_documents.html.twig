@@ -198,9 +198,7 @@
         {{ form_widget(form_search.search_id_payment_method, {value : id_payment_method_search}) }}
         {{ form_errors(form_search.search_id_payment_method) }}</th>
 
-        {% do form_widget(form_search.button) %}
-
-        <th><button class="search" type="submit" name="search">Поиск</button></th>
+        <th>{{ form_widget(form_search.button_search_invoice, { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
         
     {{ form_end(form_search) }}
 

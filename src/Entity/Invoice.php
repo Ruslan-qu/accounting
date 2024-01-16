@@ -64,6 +64,9 @@ class Invoice
     #[ORM\OneToMany(mappedBy: 'id_invoice_refund_date', targetEntity: RefundDate::class, cascade: ['remove'])]
     private Collection $RefundDateInvoice;
 
+    #[ORM\ManyToOne(inversedBy: 'invoiceKuDir')]
+    private ?KuDir $id_ku_dir = null;
+
     public function __construct()
     {
         $this->solds = new ArrayCollection();
@@ -287,6 +290,18 @@ class Invoice
                 $refundDateInvoice->setIdInvoiceRefundDate(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdKuDir(): ?KuDir
+    {
+        return $this->id_ku_dir;
+    }
+
+    public function setIdKuDir(?KuDir $id_ku_dir): static
+    {
+        $this->id_ku_dir = $id_ku_dir;
 
         return $this;
     }

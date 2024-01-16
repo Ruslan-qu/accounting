@@ -129,7 +129,7 @@ class SearchInvoiceType extends AbstractType
                     'style' => 'padding: 1px 3px 1px 5px'
                 ]
             ])
-            ->add('button', SubmitType::class);
+            ->add('button_search_invoice', SubmitType::class);
 
         /*->add('search_name_details', TextareaType::class, [
                 'label' => 'Описание детали',

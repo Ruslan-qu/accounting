@@ -45,4 +45,20 @@ class KuDirRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * @return KuDir[] Returns Returns an array of KuDir objects
+     */
+    public function findByListUnrecordedKuDir(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT k
+                FROM App\Entity\KuDir k
+                WHERE k.expenditure = :expenditure'
+        )->setParameter('expenditure', 0);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
 }

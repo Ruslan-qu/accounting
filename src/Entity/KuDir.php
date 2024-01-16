@@ -25,18 +25,18 @@ class KuDir
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $receipt_date = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_ku_dir', targetEntity: Sold::class)]
-    private Collection $SoldKuDir;
-
     #[ORM\Column(nullable: true)]
     private ?int $coming = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $expenditure = null;
 
+    #[ORM\OneToMany(mappedBy: 'id_ku_dir', targetEntity: Invoice::class)]
+    private Collection $invoiceKuDir;
+
     public function __construct()
     {
-        $this->SoldKuDir = new ArrayCollection();
+        $this->invoiceKuDir = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +100,36 @@ class KuDir
     public function setExpenditure(?int $expenditure): static
     {
         $this->expenditure = $expenditure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Invoice>
+     */
+    public function getInvoiceKuDir(): Collection
+    {
+        return $this->invoiceKuDir;
+    }
+
+    public function addInvoiceKuDir(Invoice $invoiceKuDir): static
+    {
+        if (!$this->invoiceKuDir->contains($invoiceKuDir)) {
+            $this->invoiceKuDir->add($invoiceKuDir);
+            $invoiceKuDir->setIdKuDir($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoiceKuDir(Invoice $invoiceKuDir): static
+    {
+        if ($this->invoiceKuDir->removeElement($invoiceKuDir)) {
+            // set the owning side to null (unless already changed)
+            if ($invoiceKuDir->getIdKuDir() === $this) {
+                $invoiceKuDir->setIdKuDir(null);
+            }
+        }
 
         return $this;
     }
