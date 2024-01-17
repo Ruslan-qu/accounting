@@ -33,6 +33,8 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
             'form_search' => [$this, 'block_form_search'],
             'table_total_amount' => [$this, 'block_table_total_amount'],
             'tbody_total_amount' => [$this, 'block_tbody_total_amount'],
+            'table_ku_dir_invoice' => [$this, 'block_table_ku_dir_invoice'],
+            'tbody_ku_dir_invoice' => [$this, 'block_tbody_ku_dir_invoice'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
         ];
@@ -547,7 +549,7 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
 
         <th>";
         // line 124
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 124, $this->source); })()), "button_search_invoice_ku_dir", [], "any", false, false, false, 124), 'widget', ["label" => "Поиск", "attr" => ["class" => "search"]]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 124, $this->source); })()), "button_search_invoice_ku_dir", [], "any", false, false, false, 124), 'widget', ["label" => "Поиск счет-фактуру", "attr" => ["class" => "search"]]);
         // line 125
         echo "</th>
         
@@ -576,16 +578,18 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_total_amount"));
 
         // line 132
-        echo "            <th>Id<br>КуДир</th>
-            <th>Смена<br>Чека</th>
-            <th>№<br>Чека</th>
-            <th>Дата<br>чека</th>
-            <th>Оплата<br>в кассу</th>
-            <th>Оплата<br>пост-ку</th>
-            <th>Изменить</th>
-            <th>Удалить</th>
-
-";
+        echo "    ";
+        if ((isset($context["arr_ku_dir"]) || array_key_exists("arr_ku_dir", $context) ? $context["arr_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_ku_dir" does not exist.', 132, $this->source); })())) {
+            // line 133
+            echo "        <th>Id<br>КуДир</th>
+        <th>Смена<br>Чека</th>
+        <th>№<br>Чека</th>
+        <th>Дата<br>чека</th>
+        <th>Оплата<br>в кассу</th>
+        <th>Оплата<br>пост-ку</th>
+        <th>Сохранить<br>в КуДир</th>
+    ";
+        }
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -604,64 +608,105 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
 
+        // line 145
+        echo " ";
+        $context["invoice_id_ku_dir"] = "";
         // line 146
-        echo "      ";
+        echo "
+";
+        // line 147
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\DumpExtension']->dump($this->env, $context, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["arr_invoice_id_ku_dir"]) || array_key_exists("arr_invoice_id_ku_dir", $context) ? $context["arr_invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_id_ku_dir" does not exist.', 147, $this->source); })()), 0, [], "array", false, false, false, 147), "getIdKuDir", [], "method", false, false, false, 147), "getId", [], "method", false, false, false, 147));
+        echo "
+
+";
+        // line 150
+        echo "    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_ku_dir"]) || array_key_exists("arr_ku_dir", $context) ? $context["arr_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_ku_dir" does not exist.', 146, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_ku_dir"]) || array_key_exists("arr_ku_dir", $context) ? $context["arr_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_ku_dir" does not exist.', 150, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["list_ku_dir"]) {
-            // line 147
-            echo "            ";
-            if ($context["list_ku_dir"]) {
-                // line 148
-                echo "               
-                        <tr>
-                            <td>&nbsp;";
-                // line 150
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getId", [], "method", false, false, false, 150), "html", null, true);
-                echo "</td>
-
-                            <td>&nbsp;";
-                // line 152
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptChange", [], "method", false, false, false, 152), "html", null, true);
-                echo "</td>
-
-                            <td>&nbsp;";
-                // line 154
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptNumber", [], "method", false, false, false, 154), "html", null, true);
-                echo "</td>
-
-                            <td>&nbsp;";
-                // line 156
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptDate", [], "method", false, false, false, 156), "d-m-Y"), "html", null, true);
-                echo "</td>
-
-                            <td>&nbsp;";
-                // line 158
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getComing", [], "method", false, false, false, 158), "html", null, true);
-                echo "</td>
-
-                           <td>&nbsp;";
-                // line 160
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getExpenditure", [], "method", false, false, false, 160), "html", null, true);
-                echo "</td>
-                        </tr> 
-                    
-                
-            ";
-            } else {
-                // line 165
-                echo "                <h2>Данные не найдены. Видите параметры в поиск</h2>  
-            ";
-            }
-            // line 167
+            // line 151
             echo "        ";
+            if ($context["list_ku_dir"]) {
+                // line 152
+                echo "               
+            <tr>
+                <td>&nbsp;";
+                // line 154
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getId", [], "method", false, false, false, 154), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 156
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptChange", [], "method", false, false, false, 156), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 158
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptNumber", [], "method", false, false, false, 158), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 160
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getReceiptDate", [], "method", false, false, false, 160), "d-m-Y"), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 162
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getComing", [], "method", false, false, false, 162), "html", null, true);
+                echo "</td>
+                ";
+                // line 163
+                $context['_parent'] = $context;
+                $context['_seq'] = twig_ensure_traversable((isset($context["arr_invoice_id_ku_dir"]) || array_key_exists("arr_invoice_id_ku_dir", $context) ? $context["arr_invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_id_ku_dir" does not exist.', 163, $this->source); })()));
+                foreach ($context['_seq'] as $context["_key"] => $context["list_invoice_id_ku_dir"]) {
+                    // line 164
+                    echo "                    ";
+                    $context["invoice_id_ku_dir"] = twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdKuDir", [], "method", false, false, false, 164), "getId", [], "method", false, false, false, 164);
+                    // line 165
+                    echo "
+                ";
+                    // line 166
+                    if ((twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getId", [], "method", false, false, false, 166) == (isset($context["invoice_id_ku_dir"]) || array_key_exists("invoice_id_ku_dir", $context) ? $context["invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "invoice_id_ku_dir" does not exist.', 166, $this->source); })()))) {
+                        // line 167
+                        echo "                <td>&nbsp;";
+                        echo twig_escape_filter($this->env, (isset($context["total_amount_expenditure"]) || array_key_exists("total_amount_expenditure", $context) ? $context["total_amount_expenditure"] : (function () { throw new RuntimeError('Variable "total_amount_expenditure" does not exist.', 167, $this->source); })()), "html", null, true);
+                        echo "</td>
+";
+                    } else {
+                        // line 169
+                        echo "    <td>&nbsp;";
+                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getExpenditure", [], "method", false, false, false, 169), "html", null, true);
+                        echo "</td>
+";
+                    }
+                    // line 171
+                    echo "           ";
+                }
+                $_parent = $context['_parent'];
+                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['list_invoice_id_ku_dir'], $context['_parent'], $context['loop']);
+                $context = array_intersect_key($context, $_parent) + $_parent;
+                echo "      
+
+                <form action=\"/ku_dir_save\" name=\"ku_dir_save\" method=\"post\">
+
+                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\" 
+                        value=\"";
+                // line 176
+                echo twig_escape_filter($this->env, (isset($context["total_amount_expenditure"]) || array_key_exists("total_amount_expenditure", $context) ? $context["total_amount_expenditure"] : (function () { throw new RuntimeError('Variable "total_amount_expenditure" does not exist.', 176, $this->source); })()), "html", null, true);
+                echo "\">Сохранить</button></td>
+                                
+                </form>
+
+            </tr> 
+                                     
+        ";
+            }
+            // line 183
+            echo "    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['list_ku_dir'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 168
-        echo "
-";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -670,7 +715,118 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
 
     }
 
-    // line 171
+    // line 186
+    public function block_table_ku_dir_invoice($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
+
+        // line 187
+        echo "    ";
+        if ((isset($context["arr_invoice_id_ku_dir"]) || array_key_exists("arr_invoice_id_ku_dir", $context) ? $context["arr_invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_id_ku_dir" does not exist.', 187, $this->source); })())) {
+            // line 188
+            echo "
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+
+    ";
+        }
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 201
+    public function block_tbody_ku_dir_invoice($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        // line 202
+        echo "    ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_invoice_id_ku_dir"]) || array_key_exists("arr_invoice_id_ku_dir", $context) ? $context["arr_invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_id_ku_dir" does not exist.', 202, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["list_invoice_id_ku_dir"]) {
+            // line 203
+            echo "        ";
+            if ($context["list_invoice_id_ku_dir"]) {
+                echo "              
+            <tr>
+                <td>&nbsp;";
+                // line 205
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getNumberDocument", [], "method", false, false, false, 205), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 207
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getDataInvoice", [], "method", false, false, false, 207), "d-m-Y"), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 209
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdCounterparty", [], "method", false, false, false, 209), "getCounterparty", [], "method", false, false, false, 209), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 211
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdDetails", [], "method", false, false, false, 211), "getPartNumbers", [], "method", false, false, false, 211), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 213
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdManufacturer", [], "method", false, false, false, 213), "getManufacturers", [], "method", false, false, false, 213), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 215
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getQuantity", [], "method", false, false, false, 215), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 217
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getPrice", [], "method", false, false, false, 217) / 100), 2, ".", ""), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 219
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdKuDir", [], "method", false, false, false, 219), "getId", [], "method", false, false, false, 219), "html", null, true);
+                echo "</td>
+
+            </tr>  
+        ";
+            }
+            // line 223
+            echo "    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['list_invoice_id_ku_dir'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 226
     public function block_table_thead_tr($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -680,16 +836,23 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
 
-        // line 174
-        echo "            <th>Номер<br>накладной</th>
-            <th>Дата<br>накладной</th>
-            <th>Поставщик</th>
-            <th>№ Детали</th>
-            <th>Производитель</th>
-            <th>Кол-во</th>
-            <th>Цена общая</th>
-            <th>КуДир</th>
-";
+        // line 228
+        echo "    ";
+        if ((isset($context["arr_invoice_ku_dir"]) || array_key_exists("arr_invoice_ku_dir", $context) ? $context["arr_invoice_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_ku_dir" does not exist.', 228, $this->source); })())) {
+            // line 229
+            echo "
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+        <th>КуДир</th>
+
+    ";
+        }
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -698,7 +861,7 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
 
     }
 
-    // line 187
+    // line 243
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -708,10 +871,78 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 188
-        echo "
+        // line 245
+        echo "    ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_invoice_ku_dir"]) || array_key_exists("arr_invoice_ku_dir", $context) ? $context["arr_invoice_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_ku_dir" does not exist.', 245, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["list_invoice_ku_dir"]) {
+            // line 246
+            echo "        ";
+            if ($context["list_invoice_ku_dir"]) {
+                // line 247
+                echo "               
+            <tr>
+                <td>&nbsp;";
+                // line 249
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getNumberDocument", [], "method", false, false, false, 249), "html", null, true);
+                echo "</td>
 
-                                        ";
+                <td>&nbsp;";
+                // line 251
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getDataInvoice", [], "method", false, false, false, 251), "d-m-Y"), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 253
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getIdCounterparty", [], "method", false, false, false, 253), "getCounterparty", [], "method", false, false, false, 253), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 255
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getIdDetails", [], "method", false, false, false, 255), "getPartNumbers", [], "method", false, false, false, 255), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 257
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getIdManufacturer", [], "method", false, false, false, 257), "getManufacturers", [], "method", false, false, false, 257), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 259
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getQuantity", [], "method", false, false, false, 259), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 261
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getPrice", [], "method", false, false, false, 261) / 100), 2, ".", ""), "html", null, true);
+                echo "</td>
+
+                <form action=\"/id_ku_dir_save\" name=\"id_ku_dir_save\" method=\"post\">
+
+                    <td><input type=\"number\" name=\"id_ku_dir\"></td>
+
+                    <td><button class=\"save\" type=\"submit\" name=\"id_invoice\" 
+                        value=\"";
+                // line 268
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_invoice_ku_dir"], "getId", [], "method", false, false, false, 268), "html", null, true);
+                echo "\">КуДир</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        ";
+            } else {
+                // line 275
+                echo "            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        ";
+            }
+            // line 277
+            echo "    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['list_invoice_ku_dir'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -732,7 +963,7 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
 
     public function getDebugInfo()
     {
-        return array (  712 => 188,  702 => 187,  684 => 174,  674 => 171,  663 => 168,  657 => 167,  653 => 165,  645 => 160,  640 => 158,  635 => 156,  630 => 154,  625 => 152,  620 => 150,  616 => 148,  613 => 147,  608 => 146,  598 => 143,  579 => 132,  569 => 131,  556 => 127,  552 => 125,  550 => 124,  545 => 122,  541 => 121,  538 => 120,  532 => 119,  530 => 118,  524 => 117,  520 => 116,  516 => 115,  514 => 114,  509 => 113,  503 => 112,  501 => 111,  495 => 110,  489 => 108,  480 => 106,  476 => 105,  472 => 104,  471 => 103,  466 => 102,  460 => 101,  458 => 100,  452 => 99,  446 => 97,  437 => 95,  433 => 94,  429 => 93,  428 => 92,  423 => 91,  417 => 90,  415 => 89,  409 => 88,  404 => 86,  400 => 85,  399 => 84,  394 => 83,  388 => 82,  386 => 81,  380 => 80,  375 => 78,  371 => 77,  368 => 76,  362 => 75,  360 => 74,  354 => 73,  350 => 72,  346 => 71,  344 => 70,  339 => 69,  333 => 68,  331 => 67,  325 => 66,  319 => 64,  310 => 62,  306 => 61,  302 => 60,  301 => 59,  296 => 58,  290 => 57,  288 => 56,  282 => 55,  279 => 54,  276 => 53,  273 => 52,  270 => 51,  267 => 50,  264 => 49,  261 => 48,  258 => 47,  255 => 46,  253 => 45,  248 => 43,  246 => 42,  236 => 41,  219 => 33,  215 => 31,  213 => 30,  210 => 29,  208 => 28,  203 => 26,  198 => 25,  194 => 24,  189 => 23,  185 => 22,  180 => 20,  176 => 19,  172 => 18,  167 => 16,  163 => 15,  159 => 14,  153 => 12,  143 => 11,  124 => 9,  105 => 7,  86 => 5,  67 => 3,  44 => 1,);
+        return array (  941 => 277,  937 => 275,  927 => 268,  917 => 261,  912 => 259,  907 => 257,  902 => 255,  897 => 253,  892 => 251,  887 => 249,  883 => 247,  880 => 246,  875 => 245,  865 => 243,  843 => 229,  840 => 228,  830 => 226,  816 => 223,  809 => 219,  804 => 217,  799 => 215,  794 => 213,  789 => 211,  784 => 209,  779 => 207,  774 => 205,  768 => 203,  763 => 202,  753 => 201,  732 => 188,  729 => 187,  719 => 186,  705 => 183,  695 => 176,  683 => 171,  677 => 169,  671 => 167,  669 => 166,  666 => 165,  663 => 164,  659 => 163,  655 => 162,  650 => 160,  645 => 158,  640 => 156,  635 => 154,  631 => 152,  628 => 151,  623 => 150,  618 => 147,  615 => 146,  612 => 145,  602 => 143,  584 => 133,  581 => 132,  571 => 131,  558 => 127,  554 => 125,  552 => 124,  547 => 122,  543 => 121,  540 => 120,  534 => 119,  532 => 118,  526 => 117,  522 => 116,  518 => 115,  516 => 114,  511 => 113,  505 => 112,  503 => 111,  497 => 110,  491 => 108,  482 => 106,  478 => 105,  474 => 104,  473 => 103,  468 => 102,  462 => 101,  460 => 100,  454 => 99,  448 => 97,  439 => 95,  435 => 94,  431 => 93,  430 => 92,  425 => 91,  419 => 90,  417 => 89,  411 => 88,  406 => 86,  402 => 85,  401 => 84,  396 => 83,  390 => 82,  388 => 81,  382 => 80,  377 => 78,  373 => 77,  370 => 76,  364 => 75,  362 => 74,  356 => 73,  352 => 72,  348 => 71,  346 => 70,  341 => 69,  335 => 68,  333 => 67,  327 => 66,  321 => 64,  312 => 62,  308 => 61,  304 => 60,  303 => 59,  298 => 58,  292 => 57,  290 => 56,  284 => 55,  281 => 54,  278 => 53,  275 => 52,  272 => 51,  269 => 50,  266 => 49,  263 => 48,  260 => 47,  257 => 46,  255 => 45,  250 => 43,  248 => 42,  238 => 41,  221 => 33,  217 => 31,  215 => 30,  212 => 29,  210 => 28,  205 => 26,  200 => 25,  196 => 24,  191 => 23,  187 => 22,  182 => 20,  178 => 19,  174 => 18,  169 => 16,  165 => 15,  161 => 14,  155 => 12,  145 => 11,  126 => 9,  107 => 7,  88 => 5,  69 => 3,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -861,71 +1092,159 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
         {{ form_errors(form_ku_dir_invoice_search.by_price_invoice_ku_dir) }}</th>
 
         <th>{{ form_widget(form_ku_dir_invoice_search.button_search_invoice_ku_dir, 
-            { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+            { 'label': 'Поиск счет-фактуру', 'attr': {'class': 'search'} }) }}</th>
         
     {{ form_end(form_ku_dir_invoice_search) }}
     
 {% endblock form_search %}
 
 {% block table_total_amount %}
-            <th>Id<br>КуДир</th>
-            <th>Смена<br>Чека</th>
-            <th>№<br>Чека</th>
-            <th>Дата<br>чека</th>
-            <th>Оплата<br>в кассу</th>
-            <th>Оплата<br>пост-ку</th>
-            <th>Изменить</th>
-            <th>Удалить</th>
-
+    {% if arr_ku_dir %}
+        <th>Id<br>КуДир</th>
+        <th>Смена<br>Чека</th>
+        <th>№<br>Чека</th>
+        <th>Дата<br>чека</th>
+        <th>Оплата<br>в кассу</th>
+        <th>Оплата<br>пост-ку</th>
+        <th>Сохранить<br>в КуДир</th>
+    {% endif %}
 {% endblock table_total_amount %}
 
 {% block tbody_total_amount %}
-{#{{ dump(arr_ku_dir) }}#}
+{#{{ dump(arr_invoice_id_ku_dir) }}#}
+ {% set invoice_id_ku_dir = '' %}
+
+{{ dump(arr_invoice_id_ku_dir[0].getIdKuDir().getId()) }}
+
 {#выводит таблицу по поиску#}
-      {% for list_ku_dir in arr_ku_dir %}
-            {% if list_ku_dir %}
+    {% for list_ku_dir in arr_ku_dir %}
+        {% if list_ku_dir %}
                
-                        <tr>
-                            <td>&nbsp;{{ list_ku_dir.getId() }}</td>
+            <tr>
+                <td>&nbsp;{{ list_ku_dir.getId() }}</td>
 
-                            <td>&nbsp;{{ list_ku_dir.getReceiptChange() }}</td>
+                <td>&nbsp;{{ list_ku_dir.getReceiptChange() }}</td>
 
-                            <td>&nbsp;{{ list_ku_dir.getReceiptNumber() }}</td>
+                <td>&nbsp;{{ list_ku_dir.getReceiptNumber() }}</td>
 
-                            <td>&nbsp;{{ list_ku_dir.getReceiptDate()|date(\"d-m-Y\") }}</td>
+                <td>&nbsp;{{ list_ku_dir.getReceiptDate()|date(\"d-m-Y\") }}</td>
 
-                            <td>&nbsp;{{ list_ku_dir.getComing() }}</td>
+                <td>&nbsp;{{ list_ku_dir.getComing() }}</td>
+                {% for list_invoice_id_ku_dir in arr_invoice_id_ku_dir %}
+                    {% set invoice_id_ku_dir = list_invoice_id_ku_dir.getIdKuDir().getId() %}
 
-                           <td>&nbsp;{{ list_ku_dir.getExpenditure() }}</td>
-                        </tr> 
-                    
-                
-            {% else %}
-                <h2>Данные не найдены. Видите параметры в поиск</h2>  
-            {% endif %}
-        {% endfor %}
+                {% if list_ku_dir.getId() == invoice_id_ku_dir %}
+                <td>&nbsp;{{ total_amount_expenditure }}</td>
+{% else %}
+    <td>&nbsp;{{ list_ku_dir.getExpenditure() }}</td>
+{% endif %}
+           {% endfor %}      
 
+                <form action=\"/ku_dir_save\" name=\"ku_dir_save\" method=\"post\">
+
+                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\" 
+                        value=\"{{ total_amount_expenditure }}\">Сохранить</button></td>
+                                
+                </form>
+
+            </tr> 
+                                     
+        {% endif %}
+    {% endfor %}
 {% endblock tbody_total_amount %}
 
+{% block table_ku_dir_invoice %}
+    {% if arr_invoice_id_ku_dir %}
+
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+
+    {% endif %}
+{% endblock table_ku_dir_invoice %}
+
+{% block tbody_ku_dir_invoice %}
+    {% for list_invoice_id_ku_dir in arr_invoice_id_ku_dir %}
+        {% if list_invoice_id_ku_dir %}              
+            <tr>
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getNumberDocument() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getDataInvoice()|date(\"d-m-Y\") }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdCounterparty().getCounterparty() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdDetails().getPartNumbers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdManufacturer().getManufacturers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getQuantity() }}</td>
+
+                <td>&nbsp;{{ (list_invoice_id_ku_dir.getPrice() / 100)|number_format(2, '.', '') }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdKuDir().getId() }}</td>
+
+            </tr>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody_ku_dir_invoice %}
+
 {% block table_thead_tr %}
-{#{{ dump(arr_sales) }}
-{% if arr_sales %}#}
-            <th>Номер<br>накладной</th>
-            <th>Дата<br>накладной</th>
-            <th>Поставщик</th>
-            <th>№ Детали</th>
-            <th>Производитель</th>
-            <th>Кол-во</th>
-            <th>Цена общая</th>
-            <th>КуДир</th>
-{#}% else %}
-    <h2>Видите параметры в поиск.</h2> 
-{% endif %}#}
+{#{{ dump(arr_sales) }}#}
+    {% if arr_invoice_ku_dir %}
+
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+        <th>КуДир</th>
+
+    {% endif %}
 {% endblock table_thead_tr %}
 
 {% block tbody %}
+{#{{ dump(arr_invoice_ku_dir) }}#}
+    {% for list_invoice_ku_dir in arr_invoice_ku_dir %}
+        {% if list_invoice_ku_dir %}
+               
+            <tr>
+                <td>&nbsp;{{ list_invoice_ku_dir.getNumberDocument() }}</td>
 
+                <td>&nbsp;{{ list_invoice_ku_dir.getDataInvoice()|date(\"d-m-Y\") }}</td>
 
-                                        {% endblock tbody %}", "ku_dir/ku_dir.html.twig", "/var/www/templates/ku_dir/ku_dir.html.twig");
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdCounterparty().getCounterparty() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdDetails().getPartNumbers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdManufacturer().getManufacturers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getQuantity() }}</td>
+
+                <td>&nbsp;{{ (list_invoice_ku_dir.getPrice() / 100)|number_format(2, '.', '') }}</td>
+
+                <form action=\"/id_ku_dir_save\" name=\"id_ku_dir_save\" method=\"post\">
+
+                    <td><input type=\"number\" name=\"id_ku_dir\"></td>
+
+                    <td><button class=\"save\" type=\"submit\" name=\"id_invoice\" 
+                        value=\"{{ list_invoice_ku_dir.getId() }}\">КуДир</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        {% else %}
+            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody %}", "ku_dir/ku_dir.html.twig", "/var/www/templates/ku_dir/ku_dir.html.twig");
     }
 }

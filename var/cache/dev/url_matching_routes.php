@@ -25,6 +25,7 @@ return [
         '/delete_invoice' => [[['_route' => 'delete_invoice', '_controller' => 'App\\Controller\\Sections_header\\IncomingDocumentsController::deleteInvoice'], null, null, null, false, false, null]],
         '/ku_dir' => [[['_route' => 'ku_dir', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::kuDir'], null, null, null, false, false, null]],
         '/reset_ku_dir' => [[['_route' => 'reset_ku_dir', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::resetKuDir'], null, null, null, false, false, null]],
+        '/id_ku_dir_save' => [[['_route' => 'id_ku_dir_save', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::statusChangesKuDir'], null, null, null, false, false, null]],
         '/ku_dir_save' => [[['_route' => 'ku_dir_save', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::kuDirSave'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_main_page', '_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], null, null, null, false, false, null]],
         '/part_no' => [[['_route' => 'part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], null, null, null, false, false, null]],

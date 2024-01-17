@@ -72,7 +72,19 @@
                                 </tbody>
                             </table> 
                         </div>
-                        <div class="table">  
+                        <div class="table"> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_ku_dir_invoice %}
+                                        {% endblock table_ku_dir_invoice %}	
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% block tbody_ku_dir_invoice %}
+                                        {% endblock tbody_ku_dir_invoice %} 
+                                </tbody>
+                            </table> 
                             <table>
                                 <thead>
                                     <tr>

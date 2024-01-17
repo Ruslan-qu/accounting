@@ -2,10 +2,14 @@
 
 namespace App\Controller\Sections_header;
 
+use App\Entity\KuDir;
+use App\Entity\Invoice;
 use App\Form\KuDirType;
 use App\Form\SearchInvoiceType;
 use App\Repository\KuDirRepository;
 use App\Form\KuDirSearchInvoiceType;
+use App\Repository\InvoiceRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,11 +23,14 @@ class KuDirController extends AbstractController
     public function kuDir(
         Request $request,
         ValidatorInterface $validator,
+        InvoiceRepository $InvoiceRepository,
         KuDirRepository $KuDirRepository,
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
         $arr_ku_dir = [];
+        $arr_invoice_ku_dir = [];
+        $arr_invoice_id_ku_dir = [];
 
         /*Подключаем формы */
         $form_ku_dir_search = $this->createForm(KuDirType::class);
@@ -32,6 +39,8 @@ class KuDirController extends AbstractController
         /*Валидация формы */
         $form_ku_dir_search->handleRequest($request);
         $form_ku_dir_invoice_search->handleRequest($request);
+
+        $arr_invoice_id_ku_dir = $InvoiceRepository->findByInvoiceIdKuDir();
 
         if ($form_ku_dir_search->isSubmitted()) {
             if ($form_ku_dir_search->isValid()) {
@@ -42,6 +51,20 @@ class KuDirController extends AbstractController
             $arr_ku_dir = $KuDirRepository->findByListUnrecordedKuDir();
         }
 
+        if ($form_ku_dir_invoice_search->isSubmitted()) {
+            if ($form_ku_dir_invoice_search->isValid()) {
+
+                //$arr_invoice_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
+            }
+        } else {
+            $arr_invoice_ku_dir = $InvoiceRepository->findBySearchInvoiceKuDir();
+        }
+        /* Общая сумма расходов */
+        $total_amount_expenditure = 0;
+        foreach ($arr_invoice_id_ku_dir as $key => $value) {
+            $total_amount_expenditure += ($value->getPrice() / 100);
+        }
+
         return $this->render('ku_dir/ku_dir.html.twig', [
             'title_logo' => 'КуДир',
             'legend' => 'Поиск КуДир',
@@ -49,6 +72,9 @@ class KuDirController extends AbstractController
             'form_ku_dir_search' => $form_ku_dir_search->createView(),
             'form_ku_dir_invoice_search' => $form_ku_dir_invoice_search->createView(),
             'arr_ku_dir' => $arr_ku_dir,
+            'arr_invoice_ku_dir' => $arr_invoice_ku_dir,
+            'arr_invoice_id_ku_dir' => $arr_invoice_id_ku_dir,
+            'total_amount_expenditure' => $total_amount_expenditure,
         ]);
     }
 
@@ -59,6 +85,31 @@ class KuDirController extends AbstractController
         return $this->redirectToRoute('ku_dir');
     }
 
+    /* функция сохранения id_ku_dir */
+    #[Route('/id_ku_dir_save', name: 'id_ku_dir_save')]
+    public function statusChangesKuDir(
+        ManagerRegistry $doctrine,
+        Request $request,
+    ): Response {
+        //dd($request->request->all());
+
+        $id_ku_dir = $request->request->all()['id_ku_dir'];
+
+        if (!empty($id_ku_dir)) {
+
+            $find_id_ku_dir = $doctrine->getRepository(KuDir::class)->find($id_ku_dir);
+
+            $id_invoice = $request->request->all()['id_invoice'];
+            $find_id_invoice = $doctrine->getRepository(Invoice::class)->find($id_invoice);
+            $find_id_invoice->setIdKuDir($find_id_ku_dir);
+            $find_id_invoice->setKuDirStatus(1);
+
+            $doctrine->getManager()->flush();
+        }
+        return $this->redirectToRoute('ku_dir');
+    }
+
+    /* функция сохранения ku_dir */
     #[Route('/ku_dir_save', name: 'ku_dir_save')]
     public function kuDirSave(): Response
     {

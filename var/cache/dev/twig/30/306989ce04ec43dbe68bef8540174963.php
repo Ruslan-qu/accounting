@@ -40,6 +40,8 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
             'form_search' => [$this, 'block_form_search'],
             'table_total_amount' => [$this, 'block_table_total_amount'],
             'tbody_total_amount' => [$this, 'block_tbody_total_amount'],
+            'table_ku_dir_invoice' => [$this, 'block_table_ku_dir_invoice'],
+            'tbody_ku_dir_invoice' => [$this, 'block_tbody_ku_dir_invoice'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
         ];
@@ -81,7 +83,7 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
         ";
         // line 14
         $this->displayBlock('body', $context, $blocks);
-        // line 93
+        // line 105
         echo "    </body>
 </html>
 ";
@@ -173,7 +175,7 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                     ";
         // line 36
         $this->displayBlock('main', $context, $blocks);
-        // line 90
+        // line 102
         echo "                </main>
             </div>
         ";
@@ -326,13 +328,13 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                                 </tbody>
                             </table> 
                         </div>
-                        <div class=\"table\">  
+                        <div class=\"table\"> 
                             <table>
                                 <thead>
                                     <tr>
                                         ";
         // line 79
-        $this->displayBlock('table_thead_tr', $context, $blocks);
+        $this->displayBlock('table_ku_dir_invoice', $context, $blocks);
         // line 80
         echo "\t
                                     </tr>
@@ -340,8 +342,26 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                                 <tbody>
                                         ";
         // line 84
-        $this->displayBlock('tbody', $context, $blocks);
+        $this->displayBlock('tbody_ku_dir_invoice', $context, $blocks);
         // line 85
+        echo " 
+                                </tbody>
+                            </table> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        ";
+        // line 91
+        $this->displayBlock('table_thead_tr', $context, $blocks);
+        // line 92
+        echo "\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        ";
+        // line 96
+        $this->displayBlock('tbody', $context, $blocks);
+        // line 97
         echo " 
                                 </tbody>
                             </table> 
@@ -472,14 +492,14 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
     }
 
     // line 79
-    public function block_table_thead_tr($context, array $blocks = [])
+    public function block_table_ku_dir_invoice($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
 
         // line 80
         echo "                                        ";
@@ -492,6 +512,46 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
     }
 
     // line 84
+    public function block_tbody_ku_dir_invoice($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        // line 85
+        echo "                                        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 91
+    public function block_table_thead_tr($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+
+        // line 92
+        echo "                                        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 96
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -501,7 +561,7 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 85
+        // line 97
         echo "                                        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -523,7 +583,7 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
 
     public function getDebugInfo()
     {
-        return array (  505 => 85,  495 => 84,  485 => 80,  475 => 79,  465 => 70,  455 => 69,  445 => 64,  435 => 63,  425 => 54,  415 => 53,  397 => 50,  387 => 43,  377 => 42,  359 => 39,  345 => 85,  343 => 84,  337 => 80,  335 => 79,  325 => 71,  323 => 69,  316 => 64,  314 => 63,  304 => 55,  302 => 53,  296 => 50,  288 => 44,  286 => 42,  280 => 39,  276 => 37,  266 => 36,  248 => 18,  233 => 28,  229 => 27,  225 => 26,  221 => 25,  217 => 24,  213 => 23,  209 => 22,  202 => 18,  199 => 17,  189 => 16,  177 => 90,  175 => 36,  170 => 33,  168 => 16,  165 => 15,  155 => 14,  145 => 11,  135 => 10,  125 => 8,  115 => 7,  97 => 5,  85 => 93,  83 => 14,  79 => 12,  77 => 10,  74 => 9,  72 => 7,  68 => 6,  64 => 5,  58 => 1,);
+        return array (  565 => 97,  555 => 96,  545 => 92,  535 => 91,  525 => 85,  515 => 84,  505 => 80,  495 => 79,  485 => 70,  475 => 69,  465 => 64,  455 => 63,  445 => 54,  435 => 53,  417 => 50,  407 => 43,  397 => 42,  379 => 39,  365 => 97,  363 => 96,  357 => 92,  355 => 91,  347 => 85,  345 => 84,  339 => 80,  337 => 79,  327 => 71,  325 => 69,  318 => 64,  316 => 63,  306 => 55,  304 => 53,  298 => 50,  290 => 44,  288 => 42,  282 => 39,  278 => 37,  268 => 36,  250 => 18,  235 => 28,  231 => 27,  227 => 26,  223 => 25,  219 => 24,  215 => 23,  211 => 22,  204 => 18,  201 => 17,  191 => 16,  179 => 102,  177 => 36,  172 => 33,  170 => 16,  167 => 15,  157 => 14,  147 => 11,  137 => 10,  127 => 8,  117 => 7,  99 => 5,  87 => 105,  85 => 14,  81 => 12,  79 => 10,  76 => 9,  74 => 7,  70 => 6,  66 => 5,  60 => 1,);
     }
 
     public function getSourceContext()
@@ -602,7 +662,19 @@ class __TwigTemplate_63977c489c3ded688d4523e6651e390c extends Template
                                 </tbody>
                             </table> 
                         </div>
-                        <div class=\"table\">  
+                        <div class=\"table\"> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_ku_dir_invoice %}
+                                        {% endblock table_ku_dir_invoice %}\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% block tbody_ku_dir_invoice %}
+                                        {% endblock tbody_ku_dir_invoice %} 
+                                </tbody>
+                            </table> 
                             <table>
                                 <thead>
                                     <tr>

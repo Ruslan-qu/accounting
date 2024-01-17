@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Invoice;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Invoice>
@@ -1200,6 +1200,59 @@ class InvoiceRepository extends ServiceEntityRepository
                 AND i.Sales != :Sales
                 AND i.refund != :refund'
         )->setParameters(['id_details' => $id_details, 'Sales' => 2, 'refund' => 2]);
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findBySearchInvoiceKuDir(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, d, c
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN i.id_counterparty c
+                WHERE i.ku_dir_status = :ku_dir_status
+                AND i.Sales = :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'ku_dir_status' => '2',
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByInvoiceIdKuDir(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, d, c, k
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_details d
+                INNER JOIN i.id_counterparty c
+                INNER JOIN i.id_ku_dir k
+                WHERE i.ku_dir_status != :ku_dir_status
+                AND i.id_ku_dir != :id_ku_dir
+                AND k.expenditure = :expenditure
+                AND i.Sales = :Sales
+                AND i.refund != :refund'
+        )->setParameters([
+            'id_ku_dir' => '0',
+            'ku_dir_status' => '2',
+            'expenditure' => '0',
+            'Sales' => '2',
+            'refund' => '2'
+        ]);
+        //dd($query->getResult());
         return $query->getResult();
     }
 }

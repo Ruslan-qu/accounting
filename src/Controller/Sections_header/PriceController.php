@@ -496,6 +496,7 @@ class PriceController extends AbstractController
                         деталей равно, в ячейке продажи setSales(2) */
                     if ($invoice_quantity_sold == $quantity_invoice) {
 
+                        $value->getIdInvoice()->setKuDirStatus(2);
                         $value->getIdInvoice()->setSales(2);
                     }
                 }
