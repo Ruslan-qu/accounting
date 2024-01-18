@@ -160,20 +160,22 @@
                 <td>&nbsp;{{ list_ku_dir.getReceiptDate()|date("d-m-Y") }}</td>
 
                 <td>&nbsp;{{ list_ku_dir.getComing() }}</td>
-                {% for list_invoice_id_ku_dir in arr_invoice_id_ku_dir %}
-                    {% set invoice_id_ku_dir = list_invoice_id_ku_dir.getIdKuDir().getId() %}
+                {% for key, total_amount_expenditure in arr_total_amount_expenditure %}
 
-                {% if list_ku_dir.getId() == invoice_id_ku_dir %}
-                <td>&nbsp;{{ total_amount_expenditure }}</td>
-{% else %}
-    <td>&nbsp;{{ list_ku_dir.getExpenditure() }}</td>
-{% endif %}
-           {% endfor %}      
+                    {% if list_ku_dir.getId() == key %}
+
+                        <td>&nbsp;{{ total_amount_expenditure }}</td>
+
+                    {% else %}
+
+                        <td>&nbsp;{{ list_ku_dir.getExpenditure() }}</td>
+                        
+                    {% endif %}
+                {% endfor %}      
 
                 <form action="/ku_dir_save" name="ku_dir_save" method="post">
 
-                    <td><button class="save" type="submit" name="expenditure" 
-                        value="{{ total_amount_expenditure }}">Сохранить</button></td>
+                    <td><button class="save" type="submit" name="expenditure">Сохранить</button></td>
                                 
                 </form>
 

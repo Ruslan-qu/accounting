@@ -59,12 +59,22 @@ class KuDirController extends AbstractController
         } else {
             $arr_invoice_ku_dir = $InvoiceRepository->findBySearchInvoiceKuDir();
         }
+        // dd($arr_invoice_id_ku_dir);
         /* Общая сумма расходов */
-        $total_amount_expenditure = 0;
+        //$total_amount_expenditure = 0;
+        // $arr_id_ku_dir = [];
+        $arr_total_amount_expenditure = [];
         foreach ($arr_invoice_id_ku_dir as $key => $value) {
-            $total_amount_expenditure += ($value->getPrice() / 100);
+            //$arr_total_amount_expenditure[$key] .= ($value->getPrice() / 100);
+            if (array_key_exists($value->getIdKuDir()->getId(), $arr_total_amount_expenditure)) {
+                //dd($arr_total_amount_expenditure);
+                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] += ($value->getPrice() / 100);
+            } else {
+                //$arr_id_ku_dir[$key] .= $value->getIdKuDir()->getId();
+                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
+            }
         }
-
+        // dd($arr_total_amount_expenditure);
         return $this->render('ku_dir/ku_dir.html.twig', [
             'title_logo' => 'КуДир',
             'legend' => 'Поиск КуДир',
@@ -74,7 +84,7 @@ class KuDirController extends AbstractController
             'arr_ku_dir' => $arr_ku_dir,
             'arr_invoice_ku_dir' => $arr_invoice_ku_dir,
             'arr_invoice_id_ku_dir' => $arr_invoice_id_ku_dir,
-            'total_amount_expenditure' => $total_amount_expenditure,
+            'arr_total_amount_expenditure' => $arr_total_amount_expenditure,
         ]);
     }
 

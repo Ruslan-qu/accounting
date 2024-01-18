@@ -657,43 +657,35 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
                 ";
                 // line 163
                 $context['_parent'] = $context;
-                $context['_seq'] = twig_ensure_traversable((isset($context["arr_invoice_id_ku_dir"]) || array_key_exists("arr_invoice_id_ku_dir", $context) ? $context["arr_invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "arr_invoice_id_ku_dir" does not exist.', 163, $this->source); })()));
-                foreach ($context['_seq'] as $context["_key"] => $context["list_invoice_id_ku_dir"]) {
+                $context['_seq'] = twig_ensure_traversable((isset($context["arr_total_amount_expenditure"]) || array_key_exists("arr_total_amount_expenditure", $context) ? $context["arr_total_amount_expenditure"] : (function () { throw new RuntimeError('Variable "arr_total_amount_expenditure" does not exist.', 163, $this->source); })()));
+                foreach ($context['_seq'] as $context["key"] => $context["total_amount_expenditure"]) {
                     // line 164
-                    echo "                    ";
-                    $context["invoice_id_ku_dir"] = twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["list_invoice_id_ku_dir"], "getIdKuDir", [], "method", false, false, false, 164), "getId", [], "method", false, false, false, 164);
-                    // line 165
                     echo "
-                ";
-                    // line 166
-                    if ((twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getId", [], "method", false, false, false, 166) == (isset($context["invoice_id_ku_dir"]) || array_key_exists("invoice_id_ku_dir", $context) ? $context["invoice_id_ku_dir"] : (function () { throw new RuntimeError('Variable "invoice_id_ku_dir" does not exist.', 166, $this->source); })()))) {
+                    ";
+                    // line 165
+                    if ((twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getId", [], "method", false, false, false, 165) == $context["key"])) {
+                        // line 166
+                        echo "
+                        <td>&nbsp;";
                         // line 167
-                        echo "                <td>&nbsp;";
-                        echo twig_escape_filter($this->env, (isset($context["total_amount_expenditure"]) || array_key_exists("total_amount_expenditure", $context) ? $context["total_amount_expenditure"] : (function () { throw new RuntimeError('Variable "total_amount_expenditure" does not exist.', 167, $this->source); })()), "html", null, true);
+                        echo twig_escape_filter($this->env, $context["total_amount_expenditure"], "html", null, true);
                         echo "</td>
-";
-                    } else {
-                        // line 169
-                        echo "    <td>&nbsp;";
-                        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["list_ku_dir"], "getExpenditure", [], "method", false, false, false, 169), "html", null, true);
-                        echo "</td>
-";
+
+                    
+                        
+                    ";
                     }
-                    // line 171
-                    echo "           ";
+                    // line 172
+                    echo "                ";
                 }
                 $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['list_invoice_id_ku_dir'], $context['_parent'], $context['loop']);
+                unset($context['_seq'], $context['_iterated'], $context['key'], $context['total_amount_expenditure'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
                 echo "      
 
                 <form action=\"/ku_dir_save\" name=\"ku_dir_save\" method=\"post\">
 
-                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\" 
-                        value=\"";
-                // line 176
-                echo twig_escape_filter($this->env, (isset($context["total_amount_expenditure"]) || array_key_exists("total_amount_expenditure", $context) ? $context["total_amount_expenditure"] : (function () { throw new RuntimeError('Variable "total_amount_expenditure" does not exist.', 176, $this->source); })()), "html", null, true);
-                echo "\">Сохранить</button></td>
+                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\">Сохранить</button></td>
                                 
                 </form>
 
@@ -963,7 +955,7 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
 
     public function getDebugInfo()
     {
-        return array (  941 => 277,  937 => 275,  927 => 268,  917 => 261,  912 => 259,  907 => 257,  902 => 255,  897 => 253,  892 => 251,  887 => 249,  883 => 247,  880 => 246,  875 => 245,  865 => 243,  843 => 229,  840 => 228,  830 => 226,  816 => 223,  809 => 219,  804 => 217,  799 => 215,  794 => 213,  789 => 211,  784 => 209,  779 => 207,  774 => 205,  768 => 203,  763 => 202,  753 => 201,  732 => 188,  729 => 187,  719 => 186,  705 => 183,  695 => 176,  683 => 171,  677 => 169,  671 => 167,  669 => 166,  666 => 165,  663 => 164,  659 => 163,  655 => 162,  650 => 160,  645 => 158,  640 => 156,  635 => 154,  631 => 152,  628 => 151,  623 => 150,  618 => 147,  615 => 146,  612 => 145,  602 => 143,  584 => 133,  581 => 132,  571 => 131,  558 => 127,  554 => 125,  552 => 124,  547 => 122,  543 => 121,  540 => 120,  534 => 119,  532 => 118,  526 => 117,  522 => 116,  518 => 115,  516 => 114,  511 => 113,  505 => 112,  503 => 111,  497 => 110,  491 => 108,  482 => 106,  478 => 105,  474 => 104,  473 => 103,  468 => 102,  462 => 101,  460 => 100,  454 => 99,  448 => 97,  439 => 95,  435 => 94,  431 => 93,  430 => 92,  425 => 91,  419 => 90,  417 => 89,  411 => 88,  406 => 86,  402 => 85,  401 => 84,  396 => 83,  390 => 82,  388 => 81,  382 => 80,  377 => 78,  373 => 77,  370 => 76,  364 => 75,  362 => 74,  356 => 73,  352 => 72,  348 => 71,  346 => 70,  341 => 69,  335 => 68,  333 => 67,  327 => 66,  321 => 64,  312 => 62,  308 => 61,  304 => 60,  303 => 59,  298 => 58,  292 => 57,  290 => 56,  284 => 55,  281 => 54,  278 => 53,  275 => 52,  272 => 51,  269 => 50,  266 => 49,  263 => 48,  260 => 47,  257 => 46,  255 => 45,  250 => 43,  248 => 42,  238 => 41,  221 => 33,  217 => 31,  215 => 30,  212 => 29,  210 => 28,  205 => 26,  200 => 25,  196 => 24,  191 => 23,  187 => 22,  182 => 20,  178 => 19,  174 => 18,  169 => 16,  165 => 15,  161 => 14,  155 => 12,  145 => 11,  126 => 9,  107 => 7,  88 => 5,  69 => 3,  46 => 1,);
+        return array (  933 => 277,  929 => 275,  919 => 268,  909 => 261,  904 => 259,  899 => 257,  894 => 255,  889 => 253,  884 => 251,  879 => 249,  875 => 247,  872 => 246,  867 => 245,  857 => 243,  835 => 229,  832 => 228,  822 => 226,  808 => 223,  801 => 219,  796 => 217,  791 => 215,  786 => 213,  781 => 211,  776 => 209,  771 => 207,  766 => 205,  760 => 203,  755 => 202,  745 => 201,  724 => 188,  721 => 187,  711 => 186,  697 => 183,  679 => 172,  671 => 167,  668 => 166,  666 => 165,  663 => 164,  659 => 163,  655 => 162,  650 => 160,  645 => 158,  640 => 156,  635 => 154,  631 => 152,  628 => 151,  623 => 150,  618 => 147,  615 => 146,  612 => 145,  602 => 143,  584 => 133,  581 => 132,  571 => 131,  558 => 127,  554 => 125,  552 => 124,  547 => 122,  543 => 121,  540 => 120,  534 => 119,  532 => 118,  526 => 117,  522 => 116,  518 => 115,  516 => 114,  511 => 113,  505 => 112,  503 => 111,  497 => 110,  491 => 108,  482 => 106,  478 => 105,  474 => 104,  473 => 103,  468 => 102,  462 => 101,  460 => 100,  454 => 99,  448 => 97,  439 => 95,  435 => 94,  431 => 93,  430 => 92,  425 => 91,  419 => 90,  417 => 89,  411 => 88,  406 => 86,  402 => 85,  401 => 84,  396 => 83,  390 => 82,  388 => 81,  382 => 80,  377 => 78,  373 => 77,  370 => 76,  364 => 75,  362 => 74,  356 => 73,  352 => 72,  348 => 71,  346 => 70,  341 => 69,  335 => 68,  333 => 67,  327 => 66,  321 => 64,  312 => 62,  308 => 61,  304 => 60,  303 => 59,  298 => 58,  292 => 57,  290 => 56,  284 => 55,  281 => 54,  278 => 53,  275 => 52,  272 => 51,  269 => 50,  266 => 49,  263 => 48,  260 => 47,  257 => 46,  255 => 45,  250 => 43,  248 => 42,  238 => 41,  221 => 33,  217 => 31,  215 => 30,  212 => 29,  210 => 28,  205 => 26,  200 => 25,  196 => 24,  191 => 23,  187 => 22,  182 => 20,  178 => 19,  174 => 18,  169 => 16,  165 => 15,  161 => 14,  155 => 12,  145 => 11,  126 => 9,  107 => 7,  88 => 5,  69 => 3,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -1130,20 +1122,20 @@ class __TwigTemplate_a2f9c4772cc556a9878e70d65ded1166 extends Template
                 <td>&nbsp;{{ list_ku_dir.getReceiptDate()|date(\"d-m-Y\") }}</td>
 
                 <td>&nbsp;{{ list_ku_dir.getComing() }}</td>
-                {% for list_invoice_id_ku_dir in arr_invoice_id_ku_dir %}
-                    {% set invoice_id_ku_dir = list_invoice_id_ku_dir.getIdKuDir().getId() %}
+                {% for key, total_amount_expenditure in arr_total_amount_expenditure %}
 
-                {% if list_ku_dir.getId() == invoice_id_ku_dir %}
-                <td>&nbsp;{{ total_amount_expenditure }}</td>
-{% else %}
-    <td>&nbsp;{{ list_ku_dir.getExpenditure() }}</td>
-{% endif %}
-           {% endfor %}      
+                    {% if list_ku_dir.getId() == key %}
+
+                        <td>&nbsp;{{ total_amount_expenditure }}</td>
+
+                    
+                        
+                    {% endif %}
+                {% endfor %}      
 
                 <form action=\"/ku_dir_save\" name=\"ku_dir_save\" method=\"post\">
 
-                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\" 
-                        value=\"{{ total_amount_expenditure }}\">Сохранить</button></td>
+                    <td><button class=\"save\" type=\"submit\" name=\"expenditure\">Сохранить</button></td>
                                 
                 </form>
 
