@@ -120,9 +120,9 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o'
         );
-        //dd($form_sales_search->getData());
+
         $result = $query->getResult();
-        // dd($result);
+
         $array_filter_form = array_filter($form_sales_search->getData());
 
         if ($array_filter_form) {

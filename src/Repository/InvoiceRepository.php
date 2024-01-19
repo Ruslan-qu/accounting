@@ -1206,7 +1206,7 @@ class InvoiceRepository extends ServiceEntityRepository
     /**
      * @return Invoice[] Returns an array of Invoice objects
      */
-    public function findBySearchInvoiceKuDir(): array
+    public function findBySearchInvoiceKuDir($form_ku_dir_invoice_search): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -1217,14 +1217,135 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN i.id_counterparty c
                 WHERE i.ku_dir_status = :ku_dir_status
                 AND i.Sales = :Sales
-                AND i.refund != :refund'
+                AND i.refund != :refund
+                AND i.id_payment_method = :id_payment_method'
         )->setParameters([
             'ku_dir_status' => '2',
             'Sales' => '2',
-            'refund' => '2'
+            'refund' => '2',
+            'id_payment_method' => '2',
         ]);
         //dd($query->getResult());
-        return $query->getResult();
+
+        $result = $query->getResult();
+
+        $array_filter_form = array_filter($form_ku_dir_invoice_search->getData());
+
+        if ($array_filter_form) {
+
+            foreach ($array_filter_form as $key_form => $value_form) {
+
+                if ($key_form == 'from_data_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getDataInvoice() >= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'by_data_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getDataInvoice() <= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'from_price_invoice_ku_dir') {
+
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        $price_from = ($value_result->getPrice() / 100);
+
+                        if ($price_from >= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'by_price_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        $price_po = ($value_result->getPrice() / 100);
+
+                        if ($price_po <= $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'search_number_document_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getNumberDocument() == $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'search_id_counterparty_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getIdCounterparty() == $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'search_id_details_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getIdDetails()->getPartNumbers() == $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+
+                if ($key_form == 'search_id_manufacturer_invoice_ku_dir') {
+
+                    foreach ($result as $key_result => $value_result) {
+
+                        if ($value_result->getIdDetails()->getManufacturers() == $value_form) {
+
+                            $result[$key_result] = $value_result;
+                        } else {
+                            unset($result[$key_result]);
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
     }
 
     /**

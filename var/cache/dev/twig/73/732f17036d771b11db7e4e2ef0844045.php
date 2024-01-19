@@ -644,7 +644,7 @@ class __TwigTemplate_2b0d693e5fcf8a97c64dca9ddf24d937 extends Template
         echo "    ";
         if ((isset($context["arr_sales"]) || array_key_exists("arr_sales", $context) ? $context["arr_sales"] : (function () { throw new RuntimeError('Variable "arr_sales" does not exist.', 155, $this->source); })())) {
             // line 156
-            echo "        <th>Общая сумма</th>
+            echo "        <th>Общая прибыль</th>
     ";
         }
         
@@ -1058,7 +1058,7 @@ $context["sales_price"], "getQuantitySold", [], "method", false, false, false, 2
 
 {% block table_total_amount %}
     {% if arr_sales %}
-        <th>Общая сумма</th>
+        <th>Общая прибыль</th>
     {% endif %}
 {% endblock table_total_amount %}
 
