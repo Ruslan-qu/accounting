@@ -104,10 +104,14 @@ class SoldRepository extends ServiceEntityRepository
      */
     public function findByListSoldParts($form_sales_search): array
     {
-        $entityManager = $this->getEntityManager();
+        $array_filter_form = array_filter($form_sales_search->getData());
 
-        $query = $entityManager->createQuery(
-            'SELECT s, i, d, c, pm, pn, cb, b, a, ds, o
+        if ($array_filter_form) {
+
+            $entityManager = $this->getEntityManager();
+
+            $query = $entityManager->createQuery(
+                'SELECT s, i, d, c, pm, pn, cb, b, a, ds, o
                 FROM App\Entity\Sold s
                 INNER JOIN s.id_invoice i
                 INNER JOIN i.id_details d
@@ -119,13 +123,11 @@ class SoldRepository extends ServiceEntityRepository
                 INNER JOIN d.id_axle a
                 INNER JOIN d.id_side ds
                 INNER JOIN d.id_original_number o'
-        );
+            );
 
-        $result = $query->getResult();
+            $result = $query->getResult();
 
-        $array_filter_form = array_filter($form_sales_search->getData());
 
-        if ($array_filter_form) {
 
             foreach ($array_filter_form as $key_form => $value_form) {
 
@@ -352,6 +354,8 @@ class SoldRepository extends ServiceEntityRepository
                     }
                 }
             }
+        } else {
+            $result = [];
         }
 
         return $result;

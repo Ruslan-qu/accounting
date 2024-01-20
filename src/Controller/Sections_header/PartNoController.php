@@ -28,9 +28,6 @@ class PartNoController extends AbstractController
         IdDetailsManufacturerRepository $IdDetailsManufacturerRepository
     ): Response {
 
-        /* Массив для передачи в твиг списка по поиску */
-        $arr_part_no = [];
-
         /*Подключаем класс базы данных*/
         $entity_part_no = new IdDetailsManufacturer();
         $entity_original_number = new OriginalRooms();
@@ -49,10 +46,12 @@ class PartNoController extends AbstractController
         $errors_search_part_no = $validator->validate($form_p_n_search);
         $errors_search_original_number = $validator->validate($form_original_number_search);
 
-        //dd($request);
+        $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)->findAll();
         /*Валидация формы */
         if ($form_p_n_search->isSubmitted() && $form_original_number_search->isSubmitted()) {
             if ($form_p_n_search->isValid() && $form_original_number_search->isValid()) {
+
+                unset($arr_part_no);
 
                 /* собераем список по поиску */
                 $part_numbers_search = strtolower(preg_replace(
@@ -110,6 +109,9 @@ class PartNoController extends AbstractController
                     $arr_part_no[] = $IdDetailsManufacturerRepository
                         ->findBySearchPart($id_in_stock_search, $array_filter_part_no, $form_p_n_search);
                 }
+                if (empty($arr_part_no)) {
+                    return $this->redirectToRoute('part_no');
+                }
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
@@ -149,8 +151,6 @@ class PartNoController extends AbstractController
 
                 return $this->redirectToRoute('part_no');
             }
-        } else {
-            $arr_part_no[] = $doctrine->getRepository(IdDetailsManufacturer::class)->findAll();
         }
         //dd($arr_part_no);
         return $this->render('part_no/part_no.html.twig', [

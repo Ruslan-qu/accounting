@@ -1208,10 +1208,14 @@ class InvoiceRepository extends ServiceEntityRepository
      */
     public function findBySearchInvoiceKuDir($form_ku_dir_invoice_search): array
     {
-        $entityManager = $this->getEntityManager();
+        $array_filter_form = array_filter($form_ku_dir_invoice_search->getData());
 
-        $query = $entityManager->createQuery(
-            'SELECT i, d, c
+        if ($array_filter_form) {
+
+            $entityManager = $this->getEntityManager();
+
+            $query = $entityManager->createQuery(
+                'SELECT i, d, c
                 FROM App\Entity\Invoice i
                 INNER JOIN i.id_details d
                 INNER JOIN i.id_counterparty c
@@ -1219,19 +1223,17 @@ class InvoiceRepository extends ServiceEntityRepository
                 AND i.Sales = :Sales
                 AND i.refund != :refund
                 AND i.id_payment_method = :id_payment_method'
-        )->setParameters([
-            'ku_dir_status' => '2',
-            'Sales' => '2',
-            'refund' => '2',
-            'id_payment_method' => '2',
-        ]);
-        //dd($query->getResult());
+            )->setParameters([
+                'ku_dir_status' => '2',
+                'Sales' => '2',
+                'refund' => '2',
+                'id_payment_method' => '2',
+            ]);
+            //dd($query->getResult());
 
-        $result = $query->getResult();
+            $result = $query->getResult();
 
-        $array_filter_form = array_filter($form_ku_dir_invoice_search->getData());
 
-        if ($array_filter_form) {
 
             foreach ($array_filter_form as $key_form => $value_form) {
 
@@ -1344,6 +1346,8 @@ class InvoiceRepository extends ServiceEntityRepository
                     }
                 }
             }
+        } else {
+            $result = [];
         }
         return $result;
     }

@@ -33,19 +33,24 @@ class SalesController extends AbstractController
         SoldRepository $SoldRepository,
     ): Response {
 
-        /* Массив для передачи в твиг списка по поиску */
-        $arr_sales = [];
-
         /*Подключаем формы */
         $form_sales_search = $this->createForm(SearchSalesType::class);
 
         /*Валидация формы */
         $form_sales_search->handleRequest($request);
 
+        $arr_sales = $SoldRepository->findBySoldListNewDateTime();
+
         if ($form_sales_search->isSubmitted()) {
             if ($form_sales_search->isValid()) {
 
+                unset($arr_sales);
+
                 $arr_sales = $SoldRepository->findByListSoldParts($form_sales_search);
+
+                if (empty($arr_sales)) {
+                    return $this->redirectToRoute('sales');
+                }
             } else {
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
                 $value_form_part_no = $request->request->all();
@@ -59,8 +64,6 @@ class SalesController extends AbstractController
                     }
                 }
             }
-        } else {
-            $arr_sales = $SoldRepository->findBySoldListNewDateTime();
         }
         /* Общая сумма */
         $total_amount_sale = 0;

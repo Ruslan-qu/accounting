@@ -28,9 +28,8 @@ class KuDirController extends AbstractController
     ): Response {
 
         /* Массив для передачи в твиг списка по поиску */
-        $arr_ku_dir = [];
         $arr_invoice_ku_dir = [];
-        $arr_invoice_id_ku_dir = [];
+
 
         /*Подключаем формы */
         $form_ku_dir_search = $this->createForm(KuDirType::class);
@@ -50,6 +49,18 @@ class KuDirController extends AbstractController
 
                 $arr_invoice_ku_dir = $InvoiceRepository
                     ->findBySearchInvoiceKuDir($form_ku_dir_invoice_search);
+            } else {
+                /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
+                $value_form_part_no = $request->request->all();
+                if ($value_form_part_no) {
+                    foreach ($value_form_part_no as $key => $values) {
+                        if (is_iterable($values)) {
+                            foreach ($values as $key => $value) {
+                                $this->addFlash($key, $value);
+                            }
+                        }
+                    }
+                }
             }
         }
         /* Общая сумма расходов */
@@ -64,7 +75,7 @@ class KuDirController extends AbstractController
                 $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
             }
         }
-        dd($arr_invoice_ku_dir);
+        //dd($arr_invoice_ku_dir);
         return $this->render('ku_dir/ku_dir.html.twig', [
             'title_logo' => 'Сохранение в КуДир',
             'legend' => 'Навигатор по КуДир',

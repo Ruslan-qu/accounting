@@ -62,9 +62,6 @@
         <th>{{ form_label(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir) }}<br>
         {{ form_widget(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir, 
             {value : number_document_search_ku_dir}) }}<br>
-        {% for message in app.flashes('children[search_number_document_invoice_ku_dir].data') %}
-        {{ message }}
-        {% endfor %}
         {{ form_errors(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir) }}</th>
 
         {% for value_data_invoice_search in app.flashes('from_data_invoice_ku_dir') %}  
@@ -95,9 +92,6 @@
         <th>{{ form_label(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir) }}<br>
         {{ form_widget(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir, 
             {value : details_search_ku_dir}) }}<br>
-        {% for message in app.flashes('children[search_id_details_invoice_ku_dir].data') %}
-        {{ message }}
-        {% endfor %}
         {{ form_errors(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir) }}</th>
 
         {% for value_id_manufacturer_search in app.flashes('search_id_manufacturer_invoice_ku_dir') %}  
@@ -106,9 +100,6 @@
         <th>{{ form_label(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir) }}<br>
         {{ form_widget(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir, 
             {value : manufacturer_search_ku_dir}) }}<br>
-        {% for message in app.flashes('children[search_id_manufacturer_invoice_ku_dir].data') %}
-        {{ message }}
-        {% endfor %}
         {{ form_errors(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir) }}</th>
 
         {% for value_s_price_search in app.flashes('from_price_invoice_ku_dir') %}  

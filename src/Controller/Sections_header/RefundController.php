@@ -39,11 +39,11 @@ class RefundController extends AbstractController
         $errors_refund = $validator->validate($form_search_refund);
 
         /* Массив для передачи в твиг списка по поиску */
-        $arr_refund = [];
+        $arr_refund[] = $RefundDateRepository->findByRefund();
 
         if ($form_search_refund->isSubmitted()) {
             if ($form_search_refund->isValid()) {
-                //dd($form_search_refund->getData());
+                unset($arr_sales);
                 /* собераем списка по поиску */
                 $number_document_search = $form_search_refund->getData()['search_number_document_refund'];
                 $s_data_invoice_search = $form_search_refund->getData()['s_data_invoice_refund'];
@@ -100,6 +100,10 @@ class RefundController extends AbstractController
                     $arr_refund[] = $RefundDateRepository
                         ->findByActivityRefund($activity_refund);
                 }
+
+                if (empty($arr_refund)) {
+                    return $this->redirectToRoute('refund');
+                }
             } else {
 
                 /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
@@ -127,9 +131,6 @@ class RefundController extends AbstractController
                 }
                 return $this->redirectToRoute('refund');
             }
-        } else {
-
-            $arr_refund[] = $RefundDateRepository->findByRefund();
         }
 
         //dd($arr_refund);

@@ -35,7 +35,7 @@ class CounterpartyController extends AbstractController
         /*Валидация формы */
         $form_counterparty_search->handleRequest($request);
 
-        // dd($request->request->all()['counterparty_search']['counterparty_search']);
+        $arr_counterparty_search = $doctrine->getRepository(Counterparty::class)->findAll();
         /*Валидация формы */
         if ($form_counterparty_search->isSubmitted()) {
             if ($form_counterparty_search->isValid()) {
@@ -43,16 +43,13 @@ class CounterpartyController extends AbstractController
                 /* собераем список по поиску */
                 $counterparty_search = $request->request->all()['counterparty_search']['counterparty_search'];
                 if ($counterparty_search) {
+                    unset($arr_counterparty_search);
                     $arr_counterparty_search[] = $doctrine->getRepository(Counterparty::class)
                         ->find($counterparty_search);
-                } else {
-                    $arr_counterparty_search = [];
                 }
             }
-        } else {
-            $arr_counterparty_search = $doctrine->getRepository(Counterparty::class)->findAll();
         }
-
+        // dd($arr_counterparty_search);
         return $this->render('counterparty/counterparty.html.twig', [
             'title_logo' => 'Контрагент',
             'legend' => 'Добавить нового поставщика',
