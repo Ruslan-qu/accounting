@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_save_edit_sales %}
+
+    <form action="/ku_dir" name="save_ku_dir" method="post">
+    <th><button class="save" type="submit" name="save_ku_dir">Передти в<br>сохранение в КуДир</button></th>
+    </form>
+
+    <form action="/reset_ku_dir" name="reset_ku_dir">
+    <th><button class="reset" type="submit" name="reset_ku_dir">Сбросить</button></th>
+    </form>
+
+{% endblock form_save_edit_sales %}
+
+{% block form_search %}
+    {#Форма поиска счет-фактур#}
+    {{ form_start(form_ku_dir_search) }}
+{#{{ dump(app.flashes()) }}#}
+        <th>{{ form_label(form_ku_dir_search.receipt_change) }}<br>
+        {{ form_widget(form_ku_dir_search.receipt_change) }}
+        {{ form_errors(form_ku_dir_search.receipt_change) }}</th>   
+                
+        <th>{{ form_label(form_ku_dir_search.receipt_number) }}<br>
+        {{ form_widget(form_ku_dir_search.receipt_number) }}
+        {{ form_errors(form_ku_dir_search.receipt_number) }}</th>   
+
+        <th>{{ form_label(form_ku_dir_search.receipt_from_date) }}<br>
+        {{'с '}}{{ form_widget(form_ku_dir_search.receipt_from_date) }}
+        {{ form_errors(form_ku_dir_search.receipt_from_date) }}<br>
+        {{'по '}}{{ form_widget(form_ku_dir_search.receipt_by_date) }}<br>
+        {{ form_errors(form_ku_dir_search.receipt_by_date) }}</th>
+
+        <th>{{ form_widget(form_ku_dir_search.button_ku_dir, 
+            { 'label': 'Поиск', 'attr': {'class': 'search'} }) }}</th>
+        
+    {{ form_end(form_ku_dir_search) }}
+    
+{% endblock form_search %}
+
+{% block table_total_amount %}
+   {#} {% if arr_ku_dir %}#}
+        <th>Общий<br>приход</th>
+        <th>Общий<br>расход</th>
+        <th>Общий<br>остаток</th>
+        <th>Период</th>
+    {#{% endif %}#}
+{% endblock table_total_amount %}
+
+{% block table_ku_dir_invoice %}
+   {#} {% if arr_invoice_id_ku_dir %}#}
+
+        <th>Последняя<br>cмена</th>
+        <th>Последний<br>№ чека</th>
+        <th>Последняя<br>дата чека</th>
+
+    {#{% endif %}#}
+{% endblock table_ku_dir_invoice %}
+
+{% block table_thead_tr %}
+{#{{ dump(arr_sales) }}
+{% if arr_sales %}#}
+            <th>Смена</th>
+            <th>№<br>Чека</th>
+            <th>Дата-<br>чека</th>
+            <th>Номер<br>накладной</th>
+            <th>Дата<br>накладной</th>
+            <th>Оплата<br>в кассу</th>
+            <th>Оплата<br>пост-ку</th>
+            <th>Остаток</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+{#}% else %}
+    <h2>Видите параметры в поиск.</h2> 
+{% endif %}#}
+{% endblock table_thead_tr %}

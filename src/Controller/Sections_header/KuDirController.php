@@ -5,6 +5,7 @@ namespace App\Controller\Sections_header;
 use App\Entity\KuDir;
 use App\Entity\Invoice;
 use App\Form\KuDirType;
+use App\Form\SaveKuDirType;
 use App\Form\SearchInvoiceType;
 use App\Repository\KuDirRepository;
 use App\Form\KuDirSearchInvoiceType;
@@ -32,11 +33,10 @@ class KuDirController extends AbstractController
 
 
         /*Подключаем формы */
-        $form_ku_dir_search = $this->createForm(KuDirType::class);
         $form_ku_dir_invoice_search = $this->createForm(KuDirSearchInvoiceType::class);
+        $form_ku_dir_manual_saving = $this->createForm(SaveKuDirType::class);
 
         /*Валидация формы */
-        $form_ku_dir_search->handleRequest($request);
         $form_ku_dir_invoice_search->handleRequest($request);
 
         $arr_invoice_id_ku_dir = $InvoiceRepository->findByInvoiceIdKuDir();
@@ -76,12 +76,12 @@ class KuDirController extends AbstractController
             }
         }
         //dd($arr_invoice_ku_dir);
-        return $this->render('ku_dir/ku_dir.html.twig', [
+        return $this->render('ku_dir/ku_dir_save.html.twig', [
             'title_logo' => 'Сохранение в КуДир',
             'legend' => 'Навигатор по КуДир',
-            'legend_search' => 'Поиск счет-фактуру',
-            'form_ku_dir_search' => $form_ku_dir_search->createView(),
+            'legend_search' => 'Поиск счет-фактуру и сохранение в КуДир',
             'form_ku_dir_invoice_search' => $form_ku_dir_invoice_search->createView(),
+            'form_ku_dir_manual_saving' => $form_ku_dir_manual_saving->createView(),
             'arr_ku_dir' => $arr_ku_dir,
             'arr_invoice_ku_dir' => $arr_invoice_ku_dir,
             'arr_invoice_id_ku_dir' => $arr_invoice_id_ku_dir,
@@ -108,7 +108,7 @@ class KuDirController extends AbstractController
 
         if (!empty($id_invoice)) {
             $find_id_invoice = $doctrine->getRepository(Invoice::class)->find($id_invoice);
-            // $find_id_invoice->setIdKuDir(0);
+
             $find_id_invoice->setKuDirStatus(2);
             $doctrine->getManager()->flush();
         }
@@ -161,49 +161,30 @@ class KuDirController extends AbstractController
         return $this->redirectToRoute('ku_dir');
     }
 
-    /*функция поиска счет-фактуры для сохранения в КуДир */
-    #[Route('/ku_dirb', name: 'ku_dirb')]
-    public function searchKuDir(
+    /*функция ручное сохранение в КуДир */
+    #[Route('/ku_dir_manual_saving', name: 'ku_dir_manual_saving')]
+    public function manualSavingKuDir(
         Request $request,
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
         KuDirRepository $KuDirRepository,
     ): Response {
 
-        /* Массив для передачи в твиг списка по поиску */
-        $arr_ku_dir = [];
-        $arr_invoice_ku_dir = [];
-        $arr_invoice_id_ku_dir = [];
-
         /*Подключаем формы */
-        $form_ku_dir_search = $this->createForm(KuDirType::class);
-        $form_ku_dir_invoice_search = $this->createForm(KuDirSearchInvoiceType::class);
+        $form_ku_dir_manual_saving = $this->createForm(SaveKuDirType::class);
 
         /*Валидация формы */
-        $form_ku_dir_search->handleRequest($request);
-        $form_ku_dir_invoice_search->handleRequest($request);
+        $form_ku_dir_manual_saving->handleRequest($request);
 
-        $arr_invoice_id_ku_dir = $InvoiceRepository->findByInvoiceIdKuDir();
-
-        if ($form_ku_dir_search->isSubmitted()) {
-            if ($form_ku_dir_search->isValid()) {
+        if ($form_ku_dir_manual_saving->isSubmitted()) {
+            if ($form_ku_dir_manual_saving->isValid()) {
 
                 //$arr_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
             }
-        } else {
-            $arr_ku_dir = $KuDirRepository->findByListUnrecordedKuDir();
         }
 
-        if ($form_ku_dir_invoice_search->isSubmitted()) {
-            if ($form_ku_dir_invoice_search->isValid()) {
-
-                //$arr_invoice_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
-            }
-        } else {
-            //$arr_invoice_ku_dir = $InvoiceRepository->findBySearchInvoiceKuDir();
-        }
         // dd($arr_invoice_id_ku_dir);
-        /* Общая сумма расходов */
+        /* Общая сумма расходов 
         $arr_total_amount_expenditure = [];
         foreach ($arr_invoice_id_ku_dir as $key => $value) {
 
@@ -214,18 +195,55 @@ class KuDirController extends AbstractController
 
                 $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
             }
+        }*/
+
+        return $this->redirectToRoute('ku_dir');
+    }
+
+    /*функция поиска в КуДир */
+    #[Route('/search_ku_dir', name: 'search_ku_dir')]
+    public function searchKuDir(
+        Request $request,
+        ValidatorInterface $validator,
+        InvoiceRepository $InvoiceRepository,
+        KuDirRepository $KuDirRepository,
+    ): Response {
+
+        /*Подключаем формы */
+        $form_ku_dir_search = $this->createForm(KuDirType::class);
+
+        /*Валидация формы */
+        $form_ku_dir_search->handleRequest($request);
+
+        $arr_ku_dir = $KuDirRepository->findByListUnrecordedKuDir();
+
+        if ($form_ku_dir_search->isSubmitted()) {
+            if ($form_ku_dir_search->isValid()) {
+
+                //$arr_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
+            }
         }
 
-        return $this->render('ku_dir/ku_dir.html.twig', [
-            'title_logo' => 'Сохранение в КуДир',
+        // dd($arr_invoice_id_ku_dir);
+        /* Общая сумма расходов 
+        $arr_total_amount_expenditure = [];
+        foreach ($arr_invoice_id_ku_dir as $key => $value) {
+
+            if (array_key_exists($value->getIdKuDir()->getId(), $arr_total_amount_expenditure)) {
+
+                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] += ($value->getPrice() / 100);
+            } else {
+
+                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
+            }
+        }*/
+
+        return $this->render('ku_dir/ku_dir_search.html.twig', [
+            'title_logo' => 'Поиск по КуДир',
             'legend' => 'Навигатор по КуДир',
-            'legend_search' => 'Поиск счет-фактуру',
+            'legend_search' => 'Поиск по КуДир',
             'form_ku_dir_search' => $form_ku_dir_search->createView(),
-            'form_ku_dir_invoice_search' => $form_ku_dir_invoice_search->createView(),
             'arr_ku_dir' => $arr_ku_dir,
-            'arr_invoice_ku_dir' => $arr_invoice_ku_dir,
-            'arr_invoice_id_ku_dir' => $arr_invoice_id_ku_dir,
-            'arr_total_amount_expenditure' => $arr_total_amount_expenditure,
         ]);
     }
 }

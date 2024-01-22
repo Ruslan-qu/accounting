@@ -4,19 +4,327 @@
 
 {% block logo %}{{title_logo}}{% endblock %}
 
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block legend_search %}{{legend_search}}{% endblock legend_search %}
+
+{% block form_save_edit_sales %}
+
+    <form action="/search_ku_dir" name="search_ku_dir" method="post">
+    <th><button class="search" type="submit" name="search_ku_dir">Передти в<br>поиск по КуДир</button></th>
+    </form>
+
+    <form action="/reset_ku_dir" name="reset_ku_dir">
+    <th><button class="reset" type="submit" name="reset_ku_dir">Сбросить</button></th>
+    </form>
+
+{% endblock form_save_edit_sales %}
+
+{% block form_search %}
+{#Форма сохранения в КуДир#}
+    {{ form_start(form_ku_dir_manual_saving, {'action': path('ku_dir_manual_saving')}) }}
+    {#{{ dump(app.flashes()) }}#}
+        {% set receipt_change_manual_savin = '' %}
+        {% set receipt_number_manual_savin = '' %}
+        {% set receipt_date_manual_savin = '' %}
+        {% set coming_manual_savin = '' %}
+        {% set expenditure_manual_savin = '' %}
+
+        {% for value_receipt_change_save in app.flashes('receipt_change_save') %}  
+        {% set receipt_change_manual_savin = value_receipt_change_save %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_manual_saving.receipt_change_save) }}<br>
+        {{ form_widget(form_ku_dir_manual_saving.receipt_change_save, 
+            {value : receipt_change_manual_savin}) }}
+        {{ form_errors(form_ku_dir_manual_saving.receipt_change_save) }}</th>
+
+        {% for value_receipt_number_save in app.flashes('receipt_number_save') %}  
+        {% set receipt_number_manual_savin = value_receipt_number_save %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_manual_saving.receipt_number_save) }}<br>
+        {{ form_widget(form_ku_dir_manual_saving.receipt_number_save, 
+            {value : receipt_number_manual_savin}) }}
+        {{ form_errors(form_ku_dir_manual_saving.receipt_number_save) }}</th> 
+
+        {% for value_receipt_date_save in app.flashes('receipt_date_save') %}  
+        {% set receipt_date_manual_savin = value_receipt_date_save %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_manual_saving.receipt_date_save) }}<br>
+        {{ form_widget(form_ku_dir_manual_saving.receipt_date_save, 
+            {value : receipt_date_manual_savin}) }}
+        {{ form_errors(form_ku_dir_manual_saving.receipt_date_save) }}</th>
+
+        {% for value_coming_save in app.flashes('coming_save') %}  
+        {% set coming_manual_savin = value_coming_save %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_manual_saving.coming_save) }}<br>
+        {{ form_widget(form_ku_dir_manual_saving.coming_save, 
+            {value : coming_manual_savin}) }}
+        {{ form_errors(form_ku_dir_manual_saving.coming_save) }}</th> 
+
+        {% for value_expenditure_save in app.flashes('expenditure_save') %}  
+        {% set expenditure_manual_savin = value_expenditure_save %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_manual_saving.expenditure_save) }}<br>
+        {{ form_widget(form_ku_dir_manual_saving.expenditure_save, 
+            {value : expenditure_manual_savin}) }}
+        {% for message in app.flashes('children[expenditure_save].data') %}
+        {{ message }}
+        {% endfor %}
+        {{ form_errors(form_ku_dir_manual_saving.expenditure_save) }}</th> 
+
+        <th>{{ form_widget(form_ku_dir_manual_saving.button_save_ku_dir, 
+            { 'label': 'Сохранить в КуДир', 'attr': {'class': 'save'} }) }}</th>
+        
+    {{ form_end(form_ku_dir_manual_saving) }}
+
+    </tr>
+    
+    <tr>
+    {#Форма поиска счет-фактур#}
+    {{ form_start(form_ku_dir_invoice_search) }}
+{#{{ dump(app.flashes()) }}#}
+        {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
+        {% set number_document_search_ku_dir = '' %}
+        {% set from__data_invoice_search_ku_dir = '' %}
+        {% set by_data_invoice_search_ku_dir = '' %}
+        {% set counterparty_search_ku_dir = '' %}
+        {% set details_search_ku_dir = '' %}
+        {% set manufacturer_search_ku_dir = '' %}
+        {% set from__price_search_ku_dir = '' %}
+        {% set by_price_search_ku_dir = '' %}
+
+        {% for value_number_document_search in app.flashes('search_number_document_invoice_ku_dir') %}  
+        {% set number_document_search_ku_dir = value_number_document_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir) }}<br>
+        {{ form_widget(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir, 
+            {value : number_document_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir) }}</th>
+
+        {% for value_data_invoice_search in app.flashes('from_data_invoice_ku_dir') %}  
+        {% set from__data_invoice_search_ku_dir = value_data_invoice_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.from_data_invoice_ku_dir) }}<br>
+        {{'с '}}{{ form_widget(form_ku_dir_invoice_search.from_data_invoice_ku_dir, 
+            {value : from__data_invoice_search_ku_dir}) }}
+        {{ form_errors(form_ku_dir_invoice_search.from_data_invoice_ku_dir) }}<br>
+        {% for value_price in app.flashes('by_data_invoice_ku_dir') %}  
+        {% set by_data_invoice_search_ku_dir = value_price %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_ku_dir_invoice_search.by_data_invoice_ku_dir, 
+            {value : by_data_invoice_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.by_data_invoice_ku_dir) }}</th>
+
+        {% for value_id_counterparty_search in app.flashes('search_id_counterparty_invoice_ku_dir') %}  
+        {% set counterparty_search_ku_dir = value_id_counterparty_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.search_id_counterparty_invoice_ku_dir) }}<br>
+        {{ form_widget(form_ku_dir_invoice_search.search_id_counterparty_invoice_ku_dir, 
+            {value : counterparty_search_ku_dir}) }}
+        {{ form_errors(form_ku_dir_invoice_search.search_id_counterparty_invoice_ku_dir) }}</th>
+
+        {% for value_id_details_search in app.flashes('search_id_details_invoice_ku_dir') %}  
+        {% set details_search_ku_dir = value_id_details_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir) }}<br>
+        {{ form_widget(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir, 
+            {value : details_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.search_id_details_invoice_ku_dir) }}</th>
+
+        {% for value_id_manufacturer_search in app.flashes('search_id_manufacturer_invoice_ku_dir') %}  
+        {% set manufacturer_search_ku_dir = value_id_manufacturer_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir) }}<br>
+        {{ form_widget(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir, 
+            {value : manufacturer_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.search_id_manufacturer_invoice_ku_dir) }}</th>
+
+        {% for value_s_price_search in app.flashes('from_price_invoice_ku_dir') %}  
+        {% set from__price_search_ku_dir = value_s_price_search %}
+        {% endfor %}
+        <th>{{ form_label(form_ku_dir_invoice_search.from_price_invoice_ku_dir) }}<br>
+        {{'с '}}{{ form_widget(form_ku_dir_invoice_search.from_price_invoice_ku_dir, 
+            {value : from__price_search_ku_dir}) }}
+        {{ form_errors(form_ku_dir_invoice_search.from_price_invoice_ku_dir) }}<br>
+        {% for value_po_price_search in app.flashes('by_price_invoice_ku_dir') %}  
+        {% set by_price_search_ku_dir = value_po_price_search %}
+        {% endfor %}
+        {{'по '}}{{ form_widget(form_ku_dir_invoice_search.by_price_invoice_ku_dir, 
+            {value : by_price_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.by_price_invoice_ku_dir) }}</th>
+
+        <th>{{ form_widget(form_ku_dir_invoice_search.button_search_invoice_ku_dir, 
+            { 'label': 'Поиск счет-фактуру', 'attr': {'class': 'search'} }) }}</th>
+        
+    {{ form_end(form_ku_dir_invoice_search) }}
+    
+{% endblock form_search %}
+
+{% block table_total_amount %}
+    {% if arr_ku_dir %}
+        <th>Id<br>КуДир</th>
+        <th>Смена<br>Чека</th>
+        <th>№<br>Чека</th>
+        <th>Дата<br>чека</th>
+        <th>Оплата<br>в кассу</th>
+        <th>Оплата<br>пост-ку</th>
+        <th>Остаток</th>
+        <th>Сохранить<br>в КуДир</th>
+    {% endif %}
+{% endblock table_total_amount %}
+
+{% block tbody_total_amount %}
+{#{{ dump(arr_invoice_id_ku_dir) }}#}
+
+{#выводит таблицу по поиску#}
+    {% for list_ku_dir in arr_ku_dir %}
+        {% if list_ku_dir %}
+            {% set expenditure_total_amount = 0 %}
+            {% set remains = 0 %}
+            <tr>
+                <td>&nbsp;{{ list_ku_dir.getId() }}</td>
+
+                <td>&nbsp;{{ list_ku_dir.getReceiptChange() }}</td>
+
+                <td>&nbsp;{{ list_ku_dir.getReceiptNumber() }}</td>
+
+                <td>&nbsp;{{ list_ku_dir.getReceiptDate()|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ list_ku_dir.getComing() }}</td>
+
+                {% for key, total_amount_expenditure in arr_total_amount_expenditure %}
+
+                    {% if list_ku_dir.getId() == key %}
+
+                        {% set expenditure_total_amount = total_amount_expenditure %}
+
+                    {% endif %}        
+                    
+                {% endfor %}  
+                <td>&nbsp;{{ expenditure_total_amount }}</td>
+
+                {% if expenditure_total_amount != 0 %}
+
+                    {% set remains = (list_ku_dir.getComing() - expenditure_total_amount) %}
+
+                {% endif %} 
+
+                <td>&nbsp;{{ remains }}</td>
+
+                <form action="/ku_dir_save" name="ku_dir_save" method="post">
+
+                    <input type="hidden" name="id_ku_dir" value="{{ list_ku_dir.getId() }}"></input>
+
+                    <td><button class="save" type="submit" name="expenditure" 
+                        value="{{ expenditure_total_amount }}">Сохранить</button></td>
+                                
+                </form>
+
+            </tr> 
+                                     
+        {% endif %}
+    {% endfor %}
+{% endblock tbody_total_amount %}
+
+{% block table_ku_dir_invoice %}
+    {% if arr_invoice_id_ku_dir %}
+
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+        <th>Удалить</th>
+
+    {% endif %}
+{% endblock table_ku_dir_invoice %}
+
+{% block tbody_ku_dir_invoice %}
+    {% for list_invoice_id_ku_dir in arr_invoice_id_ku_dir %}
+        {% if list_invoice_id_ku_dir %}              
+            <tr>
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getNumberDocument() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getDataInvoice()|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdCounterparty().getCounterparty() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdDetails().getPartNumbers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdManufacturer().getManufacturers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getQuantity() }}</td>
+
+                <td>&nbsp;{{ (list_invoice_id_ku_dir.getPrice() / 100)|number_format(2, '.', '') }}</td>
+
+                <td>&nbsp;{{ list_invoice_id_ku_dir.getIdKuDir().getId() }}</td>
+
+                <form action="/delete_list_invoice_id_ku_dir" name="delete_list_invoice_id_ku_dir" method="post">
+
+                    <td><button class="delete" type="submit" name="id_invoice" 
+                        value="{{ list_invoice_id_ku_dir.getId() }}">Удалить</button></td>
+                                
+                </form>
+
+            </tr>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody_ku_dir_invoice %}
+
 {% block table_thead_tr %}
-{#{{ dump(arr_sales) }}
-{% if arr_sales %}#}
-            <th>Смена</th>
-            <th>№<br>Чека</th>
-            <th>Дата-<br>чека</th>
-            <th>Номер<br>накладной</th>
-            <th>Дата<br>накладной</th>
-            <th>Оплата<br>в кассу</th>
-            <th>Оплата<br>пост-ку</th>
-            <th>Изменить</th>
-            <th>Удалить</th>
-{#}% else %}
-    <h2>Видите параметры в поиск.</h2> 
-{% endif %}#}
+{#{{ dump(arr_sales) }}#}
+    {% if arr_invoice_ku_dir %}
+
+        <th>Номер<br>накладной</th>
+        <th>Дата<br>накладной</th>
+        <th>Поставщик</th>
+        <th>№ Детали</th>
+        <th>Производитель</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Id<br>КуДир</th>
+        <th>КуДир</th>
+
+    {% endif %}
 {% endblock table_thead_tr %}
+
+{% block tbody %}
+{#{{ dump(arr_invoice_ku_dir) }}#}
+    {% for list_invoice_ku_dir in arr_invoice_ku_dir %}
+        {% if list_invoice_ku_dir %}
+               
+            <tr>
+                <td>&nbsp;{{ list_invoice_ku_dir.getNumberDocument() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getDataInvoice()|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdCounterparty().getCounterparty() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdDetails().getPartNumbers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getIdManufacturer().getManufacturers() }}</td>
+
+                <td>&nbsp;{{ list_invoice_ku_dir.getQuantity() }}</td>
+
+                <td>&nbsp;{{ (list_invoice_ku_dir.getPrice() / 100)|number_format(2, '.', '') }}</td>
+
+                <form action="/id_ku_dir_save" name="id_ku_dir_save" method="post">
+
+                    <td><input type="number" name="id_ku_dir"></td>
+
+                    <td><button class="save" type="submit" name="id_invoice" 
+                        value="{{ list_invoice_ku_dir.getId() }}">КуДир</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        {% else %}
+            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody %}

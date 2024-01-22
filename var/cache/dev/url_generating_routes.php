@@ -30,7 +30,7 @@ return [
     'delete_list_invoice_id_ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::deleteListInvoiceIdKuDir'], [], [['text', '/delete_list_invoice_id_ku_dir']], [], [], []],
     'id_ku_dir_save' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::statusChangesKuDir'], [], [['text', '/id_ku_dir_save']], [], [], []],
     'ku_dir_save' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::kuDirSave'], [], [['text', '/ku_dir_save']], [], [], []],
-    'ku_dirb' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::searchKuDir'], [], [['text', '/ku_dirb']], [], [], []],
+    'search_ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::searchKuDir'], [], [['text', '/search_ku_dir']], [], [], []],
     'app_main_page' => [[], ['_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], [], [['text', '/']], [], [], []],
     'part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], [], [['text', '/part_no']], [], [], []],
     'save_part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::savePart'], [], [['text', '/save_part_no']], [], [], []],

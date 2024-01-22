@@ -383,6 +383,9 @@
     <service id="App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -1047,6 +1050,7 @@
         <argument>App\Form\KuDirType</argument>
         <argument>App\Form\OriginalRoomsType</argument>
         <argument>App\Form\PartNoType</argument>
+        <argument>App\Form\SaveKuDirType</argument>
         <argument>App\Form\SearchInvoiceType</argument>
         <argument>App\Form\SearchRefundType</argument>
         <argument>App\Form\SearchSalesType</argument>
@@ -2038,7 +2042,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.5c8gTDk"/>
+      <argument type="service" id=".service_locator.olVgxmN"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3990,6 +3994,8 @@
     <service id=".abstract.instanceof.App\Form\OriginalRoomsType" class="App\Form\OriginalRoomsType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchRefundType" class="App\Form\SearchRefundType" autowire="true" abstract="true"/>
@@ -4623,7 +4629,7 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.5c8gTDk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.olVgxmN" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CompleteSalesType" type="service_closure" id="App\Form\CompleteSalesType"/>
@@ -4634,6 +4640,7 @@
         <argument key="App\Form\KuDirType" type="service_closure" id="App\Form\KuDirType"/>
         <argument key="App\Form\OriginalRoomsType" type="service_closure" id="App\Form\OriginalRoomsType"/>
         <argument key="App\Form\PartNoType" type="service_closure" id="App\Form\PartNoType"/>
+        <argument key="App\Form\SaveKuDirType" type="service_closure" id="App\Form\SaveKuDirType"/>
         <argument key="App\Form\SearchInvoiceType" type="service_closure" id="App\Form\SearchInvoiceType"/>
         <argument key="App\Form\SearchRefundType" type="service_closure" id="App\Form\SearchRefundType"/>
         <argument key="App\Form\SearchSalesType" type="service_closure" id="App\Form\SearchSalesType"/>
@@ -5760,7 +5767,7 @@
     <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
     <service id=".service_locator.UViLgYx" alias=".service_locator.Fybs5kB"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
-    <service id=".service_locator.81uGLDL" alias=".service_locator.5c8gTDk"/>
+    <service id=".service_locator.pgge.Fd" alias=".service_locator.olVgxmN"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="validator" alias="debug.validator"/>
