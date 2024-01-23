@@ -34,6 +34,9 @@ class KuDir
     #[ORM\OneToMany(mappedBy: 'id_ku_dir', targetEntity: Invoice::class)]
     private Collection $invoiceKuDir;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $status_ku_dir = null;
+
     public function __construct()
     {
         $this->invoiceKuDir = new ArrayCollection();
@@ -130,6 +133,18 @@ class KuDir
                 $invoiceKuDir->setIdKuDir(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatusKuDir(): ?int
+    {
+        return $this->status_ku_dir;
+    }
+
+    public function setStatusKuDir(?int $status_ku_dir): static
+    {
+        $this->status_ku_dir = $status_ku_dir;
 
         return $this;
     }

@@ -56,8 +56,24 @@ class KuDirRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT k
                 FROM App\Entity\KuDir k
-                WHERE k.expenditure = :expenditure'
-        )->setParameter('expenditure', 0);
+                WHERE k.status_ku_dir = :status_ku_dir'
+        )->setParameter('status_ku_dir', 2);
+        //dd($query->getResult());
+        return $query->getResult();
+    }
+
+    /**
+     * @return KuDir[] Returns Returns an array of KuDir objects
+     */
+    public function findOneByLastCheckKuDir(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT k
+                FROM App\Entity\KuDir k
+                ORDER BY k.id DESC'
+        )->setMaxResults(1);
         //dd($query->getResult());
         return $query->getResult();
     }

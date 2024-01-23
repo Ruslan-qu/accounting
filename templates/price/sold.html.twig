@@ -103,8 +103,8 @@
     <h2>Для продолжения продажи выберите прайс в меню или завершите сделку</h2>  
 
     {% endfor %}     
-    {% for message_error_сount_receipt_change_number in app.flashes('error_сount_receipt_change_number') %}  
-       <h2> {{ message_error_сount_receipt_change_number }}</h2> 
+    {% for message in app.flashes('error_сount_receipt_change_number') %}  
+       <h2> {{ message }}</h2> 
     {% endfor %}    
 
 {% endblock form_save_edit_sales %}
@@ -145,6 +145,20 @@
         {% endif %}
     {% endfor %}
 {% endblock form_search %}
+
+{% block table_total_amount %}
+    {% if last_check %}
+        <th>Последний чек<br>Смена Номер</th>
+    {% endif %}
+{% endblock table_total_amount %}
+   
+{% block tbody_total_amount %}
+    {% if last_check %}
+            <th>{{ last_check[0].getReceiptChange() }} 
+             &nbsp; &nbsp; &nbsp; : &nbsp; &nbsp; &nbsp;
+                {{ last_check[0].getReceiptNumber() }}</th>
+    {% endif %}
+{% endblock tbody_total_amount %}
 
 {% block table_thead_tr %}
  

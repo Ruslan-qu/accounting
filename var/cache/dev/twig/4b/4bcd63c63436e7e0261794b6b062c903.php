@@ -32,7 +32,6 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
             'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'form_search' => [$this, 'block_form_search'],
             'table_total_amount' => [$this, 'block_table_total_amount'],
-            'table_ku_dir_invoice' => [$this, 'block_table_ku_dir_invoice'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
         ];
     }
@@ -279,33 +278,6 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     }
 
-    // line 57
-    public function block_table_ku_dir_invoice($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
-
-        // line 58
-        echo "   ";
-        // line 59
-        echo "
-        <th>Последняя<br>cмена</th>
-        <th>Последний<br>№ чека</th>
-        <th>Последняя<br>дата чека</th>
-
-    ";
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-    }
-
     // line 67
     public function block_table_thead_tr($context, array $blocks = [])
     {
@@ -348,7 +320,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     public function getDebugInfo()
     {
-        return array (  320 => 70,  310 => 67,  295 => 59,  293 => 58,  283 => 57,  269 => 50,  267 => 49,  257 => 48,  244 => 44,  240 => 42,  238 => 41,  233 => 39,  228 => 38,  224 => 37,  219 => 36,  215 => 35,  210 => 33,  206 => 32,  202 => 31,  197 => 29,  193 => 28,  188 => 27,  183 => 25,  181 => 24,  171 => 23,  152 => 12,  142 => 11,  123 => 9,  104 => 7,  85 => 5,  66 => 3,  43 => 1,);
+        return array (  292 => 70,  282 => 67,  268 => 50,  266 => 49,  256 => 48,  243 => 44,  239 => 42,  237 => 41,  232 => 39,  227 => 38,  223 => 37,  218 => 36,  214 => 35,  209 => 33,  205 => 32,  201 => 31,  196 => 29,  192 => 28,  187 => 27,  182 => 25,  180 => 24,  170 => 23,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -409,15 +381,15 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
-{% block table_ku_dir_invoice %}
-   {#} {% if arr_invoice_id_ku_dir %}#}
+{#{% block table_ku_dir_invoice %}
+    {% if arr_invoice_id_ku_dir %}
 
         <th>Последняя<br>cмена</th>
         <th>Последний<br>№ чека</th>
         <th>Последняя<br>дата чека</th>
 
-    {#{% endif %}#}
-{% endblock table_ku_dir_invoice %}
+    {% endif %}
+{% endblock table_ku_dir_invoice %}#}
 
 {% block table_thead_tr %}
 {#{{ dump(arr_sales) }}

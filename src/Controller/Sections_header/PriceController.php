@@ -11,6 +11,7 @@ use App\Form\PartNoType;
 use App\Entity\Availability;
 use App\Form\CompleteSalesType;
 use App\Repository\SoldRepository;
+use App\Repository\KuDirRepository;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -148,6 +149,7 @@ class PriceController extends AbstractController
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
         SoldRepository $SoldRepository,
+        KuDirRepository $KuDirRepository,
     ): Response {
 
         /* Подключаем сущности  */
@@ -165,6 +167,8 @@ class PriceController extends AbstractController
         //dd($arr_sale_list);
         /*Выводим общую сумму */
         $total_amount_transaction = $SoldRepository->countTotalAmountPriceSold();
+
+        $last_check = $KuDirRepository->findOneByLastCheckKuDir();
 
         if (!empty($_POST['sold_price'])) {
 
@@ -269,6 +273,7 @@ class PriceController extends AbstractController
             'total_amount_transaction' => $total_amount_transaction[0][1],
             'form_sold' => $form_sold->createView(),
             'form_complete_sales' => $form_complete_sales->createView(),
+            'last_check' => $last_check,
             'arr_sold_part' => $arr_sold_part,
             'arr_sale_list' => $arr_sale_list,
         ]);
@@ -429,6 +434,7 @@ class PriceController extends AbstractController
         /*Валидация формы */
         $form_complete_sales->handleRequest($request);
 
+
         if ($form_complete_sales->isSubmitted()) {
 
             if ($form_complete_sales->isValid()) {
@@ -465,6 +471,8 @@ class PriceController extends AbstractController
                             $form_complete_sales->getData()['hidden_complete_sales']
                         );
                         $entity_ku_dir->setExpenditure(0);
+
+                        $entity_ku_dir->setStatusKuDir(2);
 
                         $em = $doctrine->getManager();
                         $em->persist($entity_ku_dir);

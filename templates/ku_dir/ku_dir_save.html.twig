@@ -21,7 +21,17 @@
 {% endblock form_save_edit_sales %}
 
 {% block form_search %}
-{#Форма сохранения в КуДир#}
+    {% for message in app.flashes('error_сount_receipt_change_number') %}  
+       <h2> {{ message }}</h2> 
+    {% endfor %} 
+     {% if last_check %}
+        <th>Последний чек<br>Смена Номер<br>
+            {{ last_check[0].getReceiptChange() }} 
+             &nbsp; &nbsp; &nbsp; : &nbsp; &nbsp; &nbsp;
+                {{ last_check[0].getReceiptNumber() }}</th>
+    {% endif %}
+        
+    {#Форма сохранения в КуДир#}
     {{ form_start(form_ku_dir_manual_saving, {'action': path('ku_dir_manual_saving')}) }}
     {#{{ dump(app.flashes()) }}#}
         {% set receipt_change_manual_savin = '' %}
@@ -67,8 +77,8 @@
         {% endfor %}
         <th>{{ form_label(form_ku_dir_manual_saving.expenditure_save) }}<br>
         {{ form_widget(form_ku_dir_manual_saving.expenditure_save, 
-            {value : expenditure_manual_savin}) }}
-        {% for message in app.flashes('children[expenditure_save].data') %}
+            {value : expenditure_manual_savin}) }}<br>
+        {% for message in app.flashes('children[expenditure_save]') %}
         {{ message }}
         {% endfor %}
         {{ form_errors(form_ku_dir_manual_saving.expenditure_save) }}</th> 

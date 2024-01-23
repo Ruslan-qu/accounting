@@ -39,6 +39,8 @@ class KuDirController extends AbstractController
         /*Валидация формы */
         $form_ku_dir_invoice_search->handleRequest($request);
 
+        $last_check = $KuDirRepository->findOneByLastCheckKuDir();
+
         $arr_invoice_id_ku_dir = $InvoiceRepository->findByInvoiceIdKuDir();
 
         $arr_ku_dir = $KuDirRepository->findByListUnrecordedKuDir();
@@ -82,6 +84,7 @@ class KuDirController extends AbstractController
             'legend_search' => 'Поиск счет-фактуру и сохранение в КуДир',
             'form_ku_dir_invoice_search' => $form_ku_dir_invoice_search->createView(),
             'form_ku_dir_manual_saving' => $form_ku_dir_manual_saving->createView(),
+            'last_check' => $last_check,
             'arr_ku_dir' => $arr_ku_dir,
             'arr_invoice_ku_dir' => $arr_invoice_ku_dir,
             'arr_invoice_id_ku_dir' => $arr_invoice_id_ku_dir,
@@ -147,16 +150,12 @@ class KuDirController extends AbstractController
         Request $request,
     ): Response {
 
-        $expenditure = $request->request->all()['expenditure'];
+        $id_ku_dir = $request->request->all()['id_ku_dir'];
+        $find_id_ku_dir = $doctrine->getRepository(KuDir::class)->find($id_ku_dir);
+        $find_id_ku_dir->setExpenditure($request->request->all()['expenditure'] * 100);
+        $find_id_ku_dir->setStatusKuDir(1);
+        $doctrine->getManager()->flush();
 
-        if ($expenditure != 0) {
-
-            $id_ku_dir = $request->request->all()['id_ku_dir'];
-            $find_id_ku_dir = $doctrine->getRepository(KuDir::class)->find($id_ku_dir);
-            $find_id_ku_dir->setExpenditure($expenditure * 100);
-
-            $doctrine->getManager()->flush();
-        }
 
         return $this->redirectToRoute('ku_dir');
     }
@@ -164,11 +163,15 @@ class KuDirController extends AbstractController
     /*функция ручное сохранение в КуДир */
     #[Route('/ku_dir_manual_saving', name: 'ku_dir_manual_saving')]
     public function manualSavingKuDir(
+        ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator,
         InvoiceRepository $InvoiceRepository,
         KuDirRepository $KuDirRepository,
     ): Response {
+
+        /* Подключаем сущности  */
+        $entity_ku_dir = new KuDir();
 
         /*Подключаем формы */
         $form_ku_dir_manual_saving = $this->createForm(SaveKuDirType::class);
@@ -176,26 +179,85 @@ class KuDirController extends AbstractController
         /*Валидация формы */
         $form_ku_dir_manual_saving->handleRequest($request);
 
+        /* Подключаем валидацию  */
+        $errors_form_ku_dir_manual_saving = $validator->validate($form_ku_dir_manual_saving);
+
         if ($form_ku_dir_manual_saving->isSubmitted()) {
-            if ($form_ku_dir_manual_saving->isValid()) {
 
-                //$arr_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
-            }
-        }
+            $receipt_change_save = $form_ku_dir_manual_saving
+                ->getData()['receipt_change_save'];
+            $receipt_number_save = $form_ku_dir_manual_saving
+                ->getData()['receipt_number_save'];
 
-        // dd($arr_invoice_id_ku_dir);
-        /* Общая сумма расходов 
-        $arr_total_amount_expenditure = [];
-        foreach ($arr_invoice_id_ku_dir as $key => $value) {
+            $сount_receipt_change_number = $doctrine->getRepository(KuDir::class)
+                ->count([
+                    'receipt_change' => $receipt_change_save,
+                    'receipt_number' => $receipt_number_save
+                ]);
+            if ($form_ku_dir_manual_saving->isValid() && $сount_receipt_change_number == 0) {
 
-            if (array_key_exists($value->getIdKuDir()->getId(), $arr_total_amount_expenditure)) {
 
-                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] += ($value->getPrice() / 100);
+                $entity_ku_dir->setReceiptChange(
+                    $receipt_change_save
+                );
+                $entity_ku_dir->setReceiptNumber(
+                    $receipt_number_save
+                );
+                $entity_ku_dir->setReceiptDate(
+                    $form_ku_dir_manual_saving->getData()['receipt_date_save']
+                );
+                $entity_ku_dir->setComing(
+                    $form_ku_dir_manual_saving->getData()['coming_save']
+                );
+                $expenditure_save = strtolower(preg_replace(
+                    '#\s#',
+                    '',
+                    $form_ku_dir_manual_saving->getData()['expenditure_save']
+                ));
+                if ($expenditure_save) {
+                    $entity_ku_dir->setExpenditure($expenditure_save);
+                };
+                $entity_ku_dir->setStatusKuDir(1);
+
+                $em = $doctrine->getManager();
+                $em->persist($entity_ku_dir);
+                $em->flush();
             } else {
 
-                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
+                /* Выводим вбитые данные в форму поиска если форма не прошла валидацию, через сессии */
+                $value_form_part_no = $request->request->all();
+                if ($value_form_part_no) {
+                    foreach ($value_form_part_no as $key => $values) {
+                        if (is_iterable($values)) {
+                            foreach ($values as $key => $value) {
+                                $this->addFlash($key, $value);
+                            }
+                        }
+                    }
+                }
+
+                /* Выводим ошибки валидации, через сессии  */
+                if ($сount_receipt_change_number != 0) {
+                    $this->addFlash(
+                        'error_сount_receipt_change_number',
+                        'Смена или номер чека существует.'
+                    );
+                }
+
+
+                /* Выводим ошибки валидации, через сессии */
+                if ($errors_form_ku_dir_manual_saving) {
+                    foreach ($errors_form_ku_dir_manual_saving as $key) {
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }
             }
-        }*/
+        }
 
         return $this->redirectToRoute('ku_dir');
     }
@@ -214,13 +276,11 @@ class KuDirController extends AbstractController
 
         /*Валидация формы */
         $form_ku_dir_search->handleRequest($request);
-
-        $arr_ku_dir = $KuDirRepository->findByListUnrecordedKuDir();
-
+        dd($form_ku_dir_search);
         if ($form_ku_dir_search->isSubmitted()) {
             if ($form_ku_dir_search->isValid()) {
 
-                //$arr_ku_dir = $KuDirRepository->findByListSoldParts($form_sales_search);
+                $arr_ku_dir = $InvoiceRepository->findBySearchKuDir($form_ku_dir_search);
             }
         }
 
@@ -243,7 +303,7 @@ class KuDirController extends AbstractController
             'legend' => 'Навигатор по КуДир',
             'legend_search' => 'Поиск по КуДир',
             'form_ku_dir_search' => $form_ku_dir_search->createView(),
-            'arr_ku_dir' => $arr_ku_dir,
+
         ]);
     }
 }

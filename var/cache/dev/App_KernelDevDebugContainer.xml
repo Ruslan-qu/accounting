@@ -484,7 +484,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.Fybs5kB"/>
+      <argument type="service" id=".service_locator.pzgMFKT"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1713,7 +1713,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.Fybs5kB"/>
+      <argument type="service" id=".service_locator.pzgMFKT"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -4446,6 +4446,15 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
+    <service id=".service_locator.6tQeCMB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="validator" type="service_closure" id="debug.validator"/>
+      </argument>
+    </service>
     <service id=".service_locator.16FGhqR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4461,10 +4470,11 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.FECJdp3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.axXzMBt" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
         <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
@@ -4495,7 +4505,16 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.Fybs5kB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.FECJdp3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="validator" type="service_closure" id="debug.validator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.pzgMFKT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Sections_header\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
@@ -4509,6 +4528,7 @@
         <argument key="App\Controller\Sections_header\KuDirController::deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\KuDirController::kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController::kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
         <argument key="App\Controller\Sections_header\KuDirController::searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController::statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4519,7 +4539,7 @@
         <argument key="App\Controller\Sections_header\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PriceController::editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
         <argument key="App\Controller\Sections_header\PriceController::searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\Sections_header\PriceController::soldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\Sections_header\PriceController::soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
         <argument key="App\Controller\Sections_header\RefundController::EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController::EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
         <argument key="App\Controller\Sections_header\RefundController::SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
@@ -4541,6 +4561,7 @@
         <argument key="App\Controller\Sections_header\KuDirController:deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\KuDirController:kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController:kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
         <argument key="App\Controller\Sections_header\KuDirController:searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController:statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4551,7 +4572,7 @@
         <argument key="App\Controller\Sections_header\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PriceController:editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
         <argument key="App\Controller\Sections_header\PriceController:searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\Sections_header\PriceController:soldPrice" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\Sections_header\PriceController:soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
         <argument key="App\Controller\Sections_header\RefundController:EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\RefundController:EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
         <argument key="App\Controller\Sections_header\RefundController:SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
@@ -5742,7 +5763,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.Fybs5kB"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.pzgMFKT"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5759,13 +5780,15 @@
     <service id=".service_locator.49ahYN1" alias=".service_locator.k0Abh5g"/>
     <service id=".service_locator.o6IkleW" alias=".service_locator.AOBeOHN"/>
     <service id=".service_locator.nTUmRVr" alias=".service_locator.hEJ63K8"/>
+    <service id=".service_locator.f6TPyZV" alias=".service_locator.6tQeCMB"/>
     <service id=".service_locator.y9JlpNl" alias=".service_locator.16FGhqR"/>
     <service id=".service_locator.K8JWs5c" alias=".service_locator.Sj9YQbw"/>
-    <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
+    <service id=".service_locator.fj2OVkz" alias=".service_locator.axXzMBt"/>
     <service id=".service_locator.2_UOsCe" alias=".service_locator.4vTIIZS"/>
     <service id=".service_locator.QMNftrP" alias=".service_locator.wkuYef5"/>
     <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
-    <service id=".service_locator.UViLgYx" alias=".service_locator.Fybs5kB"/>
+    <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
+    <service id=".service_locator.ZeD4VPo" alias=".service_locator.pzgMFKT"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
     <service id=".service_locator.pgge.Fd" alias=".service_locator.olVgxmN"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
@@ -5784,12 +5807,14 @@
     <service id=".service_locator..01V9I4" alias=".service_locator.k0Abh5g"/>
     <service id=".service_locator.9d60zGE" alias=".service_locator.AOBeOHN"/>
     <service id=".service_locator.X42Vubo" alias=".service_locator.hEJ63K8"/>
+    <service id=".service_locator.LY4iNJl" alias=".service_locator.6tQeCMB"/>
     <service id=".service_locator.pO.gOFO" alias=".service_locator.16FGhqR"/>
     <service id=".service_locator.76TjQWA" alias=".service_locator.Sj9YQbw"/>
-    <service id=".service_locator.jdO2PI1" alias=".service_locator.FECJdp3"/>
+    <service id=".service_locator.tMaJddQ" alias=".service_locator.axXzMBt"/>
     <service id=".service_locator.i2LCHhB" alias=".service_locator.4vTIIZS"/>
     <service id=".service_locator.l7a7VT6" alias=".service_locator.wkuYef5"/>
     <service id=".service_locator.j5cfWqX" alias=".service_locator.HvY69Ot"/>
+    <service id=".service_locator.jdO2PI1" alias=".service_locator.FECJdp3"/>
     <service id=".service_locator.HxfGI0d" alias=".service_locator.O2p6Lk7"/>
     <service id=".service_locator.3bxtozr" alias=".service_locator._ju.bgC"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>

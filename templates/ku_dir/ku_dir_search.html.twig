@@ -54,15 +54,15 @@
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
-{% block table_ku_dir_invoice %}
-   {#} {% if arr_invoice_id_ku_dir %}#}
+{#{% block table_ku_dir_invoice %}
+    {% if arr_invoice_id_ku_dir %}
 
         <th>Последняя<br>cмена</th>
         <th>Последний<br>№ чека</th>
         <th>Последняя<br>дата чека</th>
 
-    {#{% endif %}#}
-{% endblock table_ku_dir_invoice %}
+    {% endif %}
+{% endblock table_ku_dir_invoice %}#}
 
 {% block table_thead_tr %}
 {#{{ dump(arr_sales) }}

@@ -24,6 +24,7 @@ class KuDir extends \App\Entity\KuDir implements \Doctrine\Persistence\Proxy
         "\0".parent::class."\0".'receipt_change' => [parent::class, 'receipt_change', null],
         "\0".parent::class."\0".'receipt_date' => [parent::class, 'receipt_date', null],
         "\0".parent::class."\0".'receipt_number' => [parent::class, 'receipt_number', null],
+        "\0".parent::class."\0".'status_ku_dir' => [parent::class, 'status_ku_dir', null],
         'coming' => [parent::class, 'coming', null],
         'expenditure' => [parent::class, 'expenditure', null],
         'id' => [parent::class, 'id', null],
@@ -31,6 +32,7 @@ class KuDir extends \App\Entity\KuDir implements \Doctrine\Persistence\Proxy
         'receipt_change' => [parent::class, 'receipt_change', null],
         'receipt_date' => [parent::class, 'receipt_date', null],
         'receipt_number' => [parent::class, 'receipt_number', null],
+        'status_ku_dir' => [parent::class, 'status_ku_dir', null],
     ];
 
     /**
