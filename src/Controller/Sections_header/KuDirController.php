@@ -111,8 +111,8 @@ class KuDirController extends AbstractController
 
         if (!empty($id_invoice)) {
             $find_id_invoice = $doctrine->getRepository(Invoice::class)->find($id_invoice);
-
             $find_id_invoice->setKuDirStatus(2);
+            $find_id_invoice->setIdKuDir(NULL);
             $doctrine->getManager()->flush();
         }
 

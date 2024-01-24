@@ -1222,7 +1222,8 @@ class InvoiceRepository extends ServiceEntityRepository
                 WHERE i.ku_dir_status = :ku_dir_status
                 AND i.Sales = :Sales
                 AND i.refund != :refund
-                AND i.id_payment_method = :id_payment_method'
+                AND i.id_payment_method = :id_payment_method
+                AND i.id_ku_dir is NULL'
             )->setParameters([
                 'ku_dir_status' => '2',
                 'Sales' => '2',

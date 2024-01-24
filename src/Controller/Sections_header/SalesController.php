@@ -6,7 +6,9 @@ use App\Entity\Sold;
 use App\Entity\Invoice;
 use App\Form\PartNoType;
 use App\Entity\Availability;
+use App\Entity\Counterparty;
 use App\Entity\OriginalRooms;
+use App\Entity\PaymentMethod;
 use App\Form\SearchSalesType;
 use App\Repository\SoldRepository;
 use App\Entity\IdDetailsManufacturer;
@@ -105,6 +107,9 @@ class SalesController extends AbstractController
         $session = new Session();
         $session->start();
 
+        /* Подключаем сущности  */
+        $entity_incoming_documents = new Invoice();
+
         /*Подключаем формы */
         $form_return_product = $this->createForm(SearchSalesType::class);
 
@@ -144,14 +149,58 @@ class SalesController extends AbstractController
             /* Валидация формы */
 
             if ($form_return_product->isValid() && !$errors->count()) {
+                //dd($arr_return_product[0]);
 
-                $quantity_sold = $arr_return_product[0]->getIdInvoice()->getQuantitySold()
-                    - $form_return_product->getData()['quantity_sales'];
-                $arr_return_product[0]->getIdInvoice()->setQuantitySold($quantity_sold);
+                $id_payment_method = $arr_return_product[0]->getIdInvoice()->getIdPaymentMethod()->getId();
+                $id_ku_dir = $arr_return_product[0]->getIdInvoice()->getIdKuDir()->getId();
 
-                if ($arr_return_product[0]->getIdInvoice()->getSales() == 2) {
-                    $arr_return_product[0]->getIdInvoice()->setSales(1);
+                if ($id_payment_method == 2 && $id_ku_dir != 0) {
+
+                    $entity_incoming_documents->setDataInvoice($arr_return_product[0]
+                        ->getIdInvoice()->getDataInvoice());
+
+                    $id_counterparty = $doctrine->getRepository(Counterparty::class)->find(2);
+                    $entity_incoming_documents->setIdCounterparty($id_counterparty);
+
+                    $entity_incoming_documents->setQuantity($form_return_product
+                        ->getData()['quantity_sales']);
+
+                    $price = ($arr_return_product[0]->getIdInvoice()->getPrice()
+                        / $arr_return_product[0]->getIdInvoice()->getQuantity())
+                        * $form_return_product->getData()['quantity_sales'];
+                    $entity_incoming_documents->setPrice($price);
+
+                    $entity_incoming_documents->setQuantitySold(0);
+
+                    $entity_incoming_documents->setSales(1);
+
+                    $entity_incoming_documents->setRefund(1);
+
+                    $entity_incoming_documents->setIdDetails($arr_return_product[0]
+                        ->getIdInvoice()->getIdDetails());
+
+                    $entity_incoming_documents->setIdManufacturer($arr_return_product[0]
+                        ->getIdInvoice()->getIdManufacturer());
+
+                    $entity_incoming_documents->setNumberDocument($arr_return_product[0]
+                        ->getIdInvoice()->getNumberDocument());
+
+                    $id_payment_method = $doctrine->getRepository(PaymentMethod::class)->find(1);
+                    $entity_incoming_documents->setIdPaymentMethod($id_payment_method);
+
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->persist($entity_incoming_documents);
+                    $entityManager->flush();
+                } else {
+                    $quantity_sold = $arr_return_product[0]->getIdInvoice()->getQuantitySold()
+                        - $form_return_product->getData()['quantity_sales'];
+                    $arr_return_product[0]->getIdInvoice()->setQuantitySold($quantity_sold);
+
+                    if ($arr_return_product[0]->getIdInvoice()->getSales() == 2) {
+                        $arr_return_product[0]->getIdInvoice()->setSales(1);
+                    }
                 }
+
 
                 if ($arr_return_product[0]->getIdInvoice()->getIdDetails()->getIdInStock()->getId() == 2) {
                     $in_stock = $doctrine->getRepository(Availability::class)->find(1);
