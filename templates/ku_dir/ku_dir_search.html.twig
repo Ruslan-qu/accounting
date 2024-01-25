@@ -14,8 +14,8 @@
     <th><button class="save" type="submit" name="save_ku_dir">Передти в<br>сохранение в КуДир</button></th>
     </form>
 
-    <form action="/reset_ku_dir" name="reset_ku_dir">
-    <th><button class="reset" type="submit" name="reset_ku_dir">Сбросить</button></th>
+    <form action="/reset_ku_dir_search" name="reset_ku_dir_search">
+    <th><button class="reset" type="submit" name="reset_ku_dir_search">Сбросить</button></th>
     </form>
 
 {% endblock form_save_edit_sales %}
@@ -54,6 +54,19 @@
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
+{% block tbody_total_amount %}
+    <tr>
+    {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}
+              {#}  <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_coming]|default('') }}</td>
+
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_expenditure]|default('') }}</td>
+
+                <td>&nbsp;{{ (arr_total_amount_coming_expenditure[total_amount_coming]
+                    - arr_total_amount_coming_expenditure[total_amount_expenditure])|default('')  }}</td>#}
+                
+    </tr> 
+{% endblock tbody_total_amount %}
+
 {#{% block table_ku_dir_invoice %}
     {% if arr_invoice_id_ku_dir %}
 
@@ -65,8 +78,8 @@
 {% endblock table_ku_dir_invoice %}#}
 
 {% block table_thead_tr %}
-{#{{ dump(arr_sales) }}
-{% if arr_sales %}#}
+{#{{ dump(arr_sales) }}#}
+{% if arr_ku_dir_search %}
             <th>Смена</th>
             <th>№<br>Чека</th>
             <th>Дата-<br>чека</th>
@@ -77,7 +90,52 @@
             <th>Остаток</th>
             <th>Изменить</th>
             <th>Удалить</th>
-{#}% else %}
+{% else %}
     <h2>Видите параметры в поиск.</h2> 
-{% endif %}#}
+{% endif %}
 {% endblock table_thead_tr %}
+
+{% block tbody %}
+{#{{ dump(arr_invoice_ku_dir) }}#}
+    {% for ku_dir_search in arr_ku_dir_search %}
+        {% if ku_dir_search %}
+               
+            <tr>
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptChange() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptNumber() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptDate()|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getNumberDocument() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getDataInvoice()|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getComing() }}</td>
+
+                <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getExpenditure() / 100)|number_format(2, '.', '')}}</td>
+
+                <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getComing() 
+                    - (ku_dir_search.getIdKuDir().getExpenditure() / 100))|number_format(2, '.', '')}}</td>
+
+                <form action="/ku_dir_edit" name="ku_dir_edit" method="post">
+
+                    <td><button class="edit" type="submit" name="ku_dir_edit" 
+                        value="{{ ku_dir_search.getId() }}">Изменить</button></td>
+                                
+                </form>
+
+                <form action="/ku_dir_delete" name="ku_dir_delete" method="post">
+
+                    <td><button class="delete" type="submit" name="ku_dir_delete" 
+                        value="{{ ku_dir_search.getId() }}">Удалить</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        {% else %}
+            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody %}

@@ -32,7 +32,9 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
             'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'form_search' => [$this, 'block_form_search'],
             'table_total_amount' => [$this, 'block_table_total_amount'],
+            'tbody_total_amount' => [$this, 'block_tbody_total_amount'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
+            'tbody' => [$this, 'block_tbody'],
         ];
     }
 
@@ -153,8 +155,8 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
     <th><button class=\"save\" type=\"submit\" name=\"save_ku_dir\">Передти в<br>сохранение в КуДир</button></th>
     </form>
 
-    <form action=\"/reset_ku_dir\" name=\"reset_ku_dir\">
-    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir\">Сбросить</button></th>
+    <form action=\"/reset_ku_dir_search\" name=\"reset_ku_dir_search\">
+    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir_search\">Сбросить</button></th>
     </form>
 
 ";
@@ -278,7 +280,36 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     }
 
-    // line 67
+    // line 57
+    public function block_tbody_total_amount($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
+
+        // line 58
+        echo "    <tr>
+    ";
+        // line 59
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\DumpExtension']->dump($this->env, $context, twig_get_attribute($this->env, $this->source, (isset($context["arr_total_amount_coming_expenditure"]) || array_key_exists("arr_total_amount_coming_expenditure", $context) ? $context["arr_total_amount_coming_expenditure"] : (function () { throw new RuntimeError('Variable "arr_total_amount_coming_expenditure" does not exist.', 59, $this->source); })()), "total_amount_coming", [], "any", false, false, false, 59));
+        echo "
+              ";
+        // line 66
+        echo "                
+    </tr> 
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 80
     public function block_table_thead_tr($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -288,8 +319,10 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
 
-        // line 70
-        echo "            <th>Смена</th>
+        // line 82
+        if ((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 82, $this->source); })())) {
+            // line 83
+            echo "            <th>Смена</th>
             <th>№<br>Чека</th>
             <th>Дата-<br>чека</th>
             <th>Номер<br>накладной</th>
@@ -300,6 +333,115 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
             <th>Изменить</th>
             <th>Удалить</th>
 ";
+        } else {
+            // line 94
+            echo "    <h2>Видите параметры в поиск.</h2> 
+";
+        }
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 98
+    public function block_tbody($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
+
+        // line 100
+        echo "    ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 100, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["ku_dir_search"]) {
+            // line 101
+            echo "        ";
+            if ($context["ku_dir_search"]) {
+                // line 102
+                echo "               
+            <tr>
+                <td>&nbsp;";
+                // line 104
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 104), "getReceiptChange", [], "method", false, false, false, 104), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 106
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 106), "getReceiptNumber", [], "method", false, false, false, 106), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 108
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 108), "getReceiptDate", [], "method", false, false, false, 108), "d-m-Y"), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 110
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getNumberDocument", [], "method", false, false, false, 110), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 112
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getDataInvoice", [], "method", false, false, false, 112), "d-m-Y"), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 114
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 114), "getComing", [], "method", false, false, false, 114), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 116
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 116), "getExpenditure", [], "method", false, false, false, 116) / 100), 2, ".", ""), "html", null, true);
+                echo "</td>
+
+                <td>&nbsp;";
+                // line 118
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 118), "getComing", [], "method", false, false, false, 118) - (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,                 // line 119
+$context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119), "getExpenditure", [], "method", false, false, false, 119) / 100)), 2, ".", ""), "html", null, true);
+                echo "</td>
+
+                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"post\">
+
+                    <td><button class=\"edit\" type=\"submit\" name=\"ku_dir_edit\" 
+                        value=\"";
+                // line 124
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getId", [], "method", false, false, false, 124), "html", null, true);
+                echo "\">Изменить</button></td>
+                                
+                </form>
+
+                <form action=\"/ku_dir_delete\" name=\"ku_dir_delete\" method=\"post\">
+
+                    <td><button class=\"delete\" type=\"submit\" name=\"ku_dir_delete\" 
+                        value=\"";
+                // line 131
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getId", [], "method", false, false, false, 131), "html", null, true);
+                echo "\">Удалить</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        ";
+            } else {
+                // line 138
+                echo "            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        ";
+            }
+            // line 140
+            echo "    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ku_dir_search'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -320,7 +462,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     public function getDebugInfo()
     {
-        return array (  292 => 70,  282 => 67,  268 => 50,  266 => 49,  256 => 48,  243 => 44,  239 => 42,  237 => 41,  232 => 39,  227 => 38,  223 => 37,  218 => 36,  214 => 35,  209 => 33,  205 => 32,  201 => 31,  196 => 29,  192 => 28,  187 => 27,  182 => 25,  180 => 24,  170 => 23,  151 => 12,  141 => 11,  122 => 9,  103 => 7,  84 => 5,  65 => 3,  42 => 1,);
+        return array (  440 => 140,  436 => 138,  426 => 131,  416 => 124,  408 => 119,  407 => 118,  402 => 116,  397 => 114,  392 => 112,  387 => 110,  382 => 108,  377 => 106,  372 => 104,  368 => 102,  365 => 101,  360 => 100,  350 => 98,  338 => 94,  325 => 83,  323 => 82,  313 => 80,  301 => 66,  297 => 59,  294 => 58,  284 => 57,  270 => 50,  268 => 49,  258 => 48,  245 => 44,  241 => 42,  239 => 41,  234 => 39,  229 => 38,  225 => 37,  220 => 36,  216 => 35,  211 => 33,  207 => 32,  203 => 31,  198 => 29,  194 => 28,  189 => 27,  184 => 25,  182 => 24,  172 => 23,  153 => 12,  143 => 11,  124 => 9,  105 => 7,  86 => 5,  67 => 3,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -341,8 +483,8 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
     <th><button class=\"save\" type=\"submit\" name=\"save_ku_dir\">Передти в<br>сохранение в КуДир</button></th>
     </form>
 
-    <form action=\"/reset_ku_dir\" name=\"reset_ku_dir\">
-    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir\">Сбросить</button></th>
+    <form action=\"/reset_ku_dir_search\" name=\"reset_ku_dir_search\">
+    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir_search\">Сбросить</button></th>
     </form>
 
 {% endblock form_save_edit_sales %}
@@ -381,6 +523,19 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
+{% block tbody_total_amount %}
+    <tr>
+    {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}
+              {#}  <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_coming]|default('') }}</td>
+
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_expenditure]|default('') }}</td>
+
+                <td>&nbsp;{{ (arr_total_amount_coming_expenditure[total_amount_coming]
+                    - arr_total_amount_coming_expenditure[total_amount_expenditure])|default('')  }}</td>#}
+                
+    </tr> 
+{% endblock tbody_total_amount %}
+
 {#{% block table_ku_dir_invoice %}
     {% if arr_invoice_id_ku_dir %}
 
@@ -392,8 +547,8 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 {% endblock table_ku_dir_invoice %}#}
 
 {% block table_thead_tr %}
-{#{{ dump(arr_sales) }}
-{% if arr_sales %}#}
+{#{{ dump(arr_sales) }}#}
+{% if arr_ku_dir_search %}
             <th>Смена</th>
             <th>№<br>Чека</th>
             <th>Дата-<br>чека</th>
@@ -404,9 +559,54 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
             <th>Остаток</th>
             <th>Изменить</th>
             <th>Удалить</th>
-{#}% else %}
+{% else %}
     <h2>Видите параметры в поиск.</h2> 
-{% endif %}#}
-{% endblock table_thead_tr %}", "ku_dir/ku_dir_search.html.twig", "/var/www/templates/ku_dir/ku_dir_search.html.twig");
+{% endif %}
+{% endblock table_thead_tr %}
+
+{% block tbody %}
+{#{{ dump(arr_invoice_ku_dir) }}#}
+    {% for ku_dir_search in arr_ku_dir_search %}
+        {% if ku_dir_search %}
+               
+            <tr>
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptChange() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptNumber() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getReceiptDate()|date(\"d-m-Y\") }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getNumberDocument() }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getDataInvoice()|date(\"d-m-Y\") }}</td>
+
+                <td>&nbsp;{{ ku_dir_search.getIdKuDir().getComing() }}</td>
+
+                <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getExpenditure() / 100)|number_format(2, '.', '')}}</td>
+
+                <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getComing() 
+                    - (ku_dir_search.getIdKuDir().getExpenditure() / 100))|number_format(2, '.', '')}}</td>
+
+                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"post\">
+
+                    <td><button class=\"edit\" type=\"submit\" name=\"ku_dir_edit\" 
+                        value=\"{{ ku_dir_search.getId() }}\">Изменить</button></td>
+                                
+                </form>
+
+                <form action=\"/ku_dir_delete\" name=\"ku_dir_delete\" method=\"post\">
+
+                    <td><button class=\"delete\" type=\"submit\" name=\"ku_dir_delete\" 
+                        value=\"{{ ku_dir_search.getId() }}\">Удалить</button></td>
+                                
+                </form>
+            </tr> 
+                    
+                
+        {% else %}
+            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
+        {% endif %}
+    {% endfor %}
+{% endblock tbody %}", "ku_dir/ku_dir_search.html.twig", "/var/www/templates/ku_dir/ku_dir_search.html.twig");
     }
 }

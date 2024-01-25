@@ -93,8 +93,8 @@ class KuDirController extends AbstractController
     }
 
     /* функция сброса */
-    #[Route('/reset_ku_dir', name: 'reset_ku_dir')]
-    public function resetKuDir(): Response
+    #[Route('/reset_ku_dir_save', name: 'reset_ku_dir_save')]
+    public function resetKuDirSave(): Response
     {
         return $this->redirectToRoute('ku_dir');
     }
@@ -276,34 +276,46 @@ class KuDirController extends AbstractController
 
         /*Валидация формы */
         $form_ku_dir_search->handleRequest($request);
-        dd($form_ku_dir_search);
+
+        $arr_ku_dir_search = $InvoiceRepository->findByMonthlyTableKuDir();
+
         if ($form_ku_dir_search->isSubmitted()) {
             if ($form_ku_dir_search->isValid()) {
-
-                $arr_ku_dir = $InvoiceRepository->findBySearchKuDir($form_ku_dir_search);
+                //dd($form_ku_dir_search);
+                $arr_ku_dir_search = $InvoiceRepository->findBySearchKuDir($form_ku_dir_search);
             }
         }
 
-        // dd($arr_invoice_id_ku_dir);
-        /* Общая сумма расходов 
-        $arr_total_amount_expenditure = [];
-        foreach ($arr_invoice_id_ku_dir as $key => $value) {
+        //dd($arr_ku_dir_search[0]);
+        /* Общая сумма расходов */
+        $total_amount_coming = 0;
+        $total_amount_expenditure = 0;
+        foreach ($arr_ku_dir_search as $key => $value) {
 
-            if (array_key_exists($value->getIdKuDir()->getId(), $arr_total_amount_expenditure)) {
+            $total_amount_coming += $value->getIdKuDir()->getComing();
 
-                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] += ($value->getPrice() / 100);
-            } else {
-
-                $arr_total_amount_expenditure[$value->getIdKuDir()->getId()] = ($value->getPrice() / 100);
-            }
-        }*/
+            $total_amount_expenditure += ($value->getIdKuDir()->getExpenditure() / 100);
+        }
+        $arr_total_amount_coming_expenditure = [
+            'total_amount_coming' => $total_amount_coming,
+            'total_amount_expenditure' => $total_amount_expenditure
+        ];
 
         return $this->render('ku_dir/ku_dir_search.html.twig', [
             'title_logo' => 'Поиск по КуДир',
             'legend' => 'Навигатор по КуДир',
             'legend_search' => 'Поиск по КуДир',
             'form_ku_dir_search' => $form_ku_dir_search->createView(),
+            'arr_ku_dir_search' => $arr_ku_dir_search,
+            'arr_total_amount_coming_expenditure' => $arr_total_amount_coming_expenditure,
 
         ]);
+    }
+
+    /* функция сброса */
+    #[Route('/reset_ku_dir_search', name: 'reset_ku_dir_search')]
+    public function resetKuDirSearch(): Response
+    {
+        return $this->redirectToRoute('search_ku_dir');
     }
 }

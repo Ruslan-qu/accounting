@@ -157,8 +157,8 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
     <th><button class=\"search\" type=\"submit\" name=\"search_ku_dir\">Передти в<br>поиск по КуДир</button></th>
     </form>
 
-    <form action=\"/reset_ku_dir\" name=\"reset_ku_dir\">
-    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir\">Сбросить</button></th>
+    <form action=\"/reset_ku_dir_save\" name=\"reset_ku_dir_save\">
+    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir_save\">Сбросить</button></th>
     </form>
 
 ";
@@ -424,10 +424,10 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
         $context["number_document_search_ku_dir"] = "";
         // line 99
         echo "        ";
-        $context["from__data_invoice_search_ku_dir"] = "";
+        $context["from__date_invoice_search_ku_dir"] = "";
         // line 100
         echo "        ";
-        $context["by_data_invoice_search_ku_dir"] = "";
+        $context["by_date_invoice_search_ku_dir"] = "";
         // line 101
         echo "        ";
         $context["counterparty_search_ku_dir"] = "";
@@ -477,41 +477,41 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
         ";
         // line 115
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 115, $this->source); })()), "flashes", ["from_data_invoice_ku_dir"], "method", false, false, false, 115));
-        foreach ($context['_seq'] as $context["_key"] => $context["value_data_invoice_search"]) {
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 115, $this->source); })()), "flashes", ["from_date_invoice_ku_dir"], "method", false, false, false, 115));
+        foreach ($context['_seq'] as $context["_key"] => $context["value_date_invoice_search"]) {
             echo "  
         ";
             // line 116
-            $context["from__data_invoice_search_ku_dir"] = $context["value_data_invoice_search"];
+            $context["from__date_invoice_search_ku_dir"] = $context["value_date_invoice_search"];
             // line 117
             echo "        ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_data_invoice_search'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value_date_invoice_search'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 118
         echo "        <th>";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 118, $this->source); })()), "from_data_invoice_ku_dir", [], "any", false, false, false, 118), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 118, $this->source); })()), "from_date_invoice_ku_dir", [], "any", false, false, false, 118), 'label');
         echo "<br>
         ";
         // line 119
         echo "с ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 119, $this->source); })()), "from_data_invoice_ku_dir", [], "any", false, false, false, 119), 'widget', ["value" =>         // line 120
-(isset($context["from__data_invoice_search_ku_dir"]) || array_key_exists("from__data_invoice_search_ku_dir", $context) ? $context["from__data_invoice_search_ku_dir"] : (function () { throw new RuntimeError('Variable "from__data_invoice_search_ku_dir" does not exist.', 120, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 119, $this->source); })()), "from_date_invoice_ku_dir", [], "any", false, false, false, 119), 'widget', ["value" =>         // line 120
+(isset($context["from__date_invoice_search_ku_dir"]) || array_key_exists("from__date_invoice_search_ku_dir", $context) ? $context["from__date_invoice_search_ku_dir"] : (function () { throw new RuntimeError('Variable "from__date_invoice_search_ku_dir" does not exist.', 120, $this->source); })())]);
         echo "
         ";
         // line 121
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 121, $this->source); })()), "from_data_invoice_ku_dir", [], "any", false, false, false, 121), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 121, $this->source); })()), "from_date_invoice_ku_dir", [], "any", false, false, false, 121), 'errors');
         echo "<br>
         ";
         // line 122
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 122, $this->source); })()), "flashes", ["by_data_invoice_ku_dir"], "method", false, false, false, 122));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 122, $this->source); })()), "flashes", ["by_date_invoice_ku_dir"], "method", false, false, false, 122));
         foreach ($context['_seq'] as $context["_key"] => $context["value_price"]) {
             echo "  
         ";
             // line 123
-            $context["by_data_invoice_search_ku_dir"] = $context["value_price"];
+            $context["by_date_invoice_search_ku_dir"] = $context["value_price"];
             // line 124
             echo "        ";
         }
@@ -521,12 +521,12 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
         // line 125
         echo "        ";
         echo "по ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 125, $this->source); })()), "by_data_invoice_ku_dir", [], "any", false, false, false, 125), 'widget', ["value" =>         // line 126
-(isset($context["by_data_invoice_search_ku_dir"]) || array_key_exists("by_data_invoice_search_ku_dir", $context) ? $context["by_data_invoice_search_ku_dir"] : (function () { throw new RuntimeError('Variable "by_data_invoice_search_ku_dir" does not exist.', 126, $this->source); })())]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 125, $this->source); })()), "by_date_invoice_ku_dir", [], "any", false, false, false, 125), 'widget', ["value" =>         // line 126
+(isset($context["by_date_invoice_search_ku_dir"]) || array_key_exists("by_date_invoice_search_ku_dir", $context) ? $context["by_date_invoice_search_ku_dir"] : (function () { throw new RuntimeError('Variable "by_date_invoice_search_ku_dir" does not exist.', 126, $this->source); })())]);
         echo "<br>
         ";
         // line 127
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 127, $this->source); })()), "by_data_invoice_ku_dir", [], "any", false, false, false, 127), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form_ku_dir_invoice_search"]) || array_key_exists("form_ku_dir_invoice_search", $context) ? $context["form_ku_dir_invoice_search"] : (function () { throw new RuntimeError('Variable "form_ku_dir_invoice_search" does not exist.', 127, $this->source); })()), "by_date_invoice_ku_dir", [], "any", false, false, false, 127), 'errors');
         echo "</th>
 
         ";
@@ -1144,8 +1144,8 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
     <th><button class=\"search\" type=\"submit\" name=\"search_ku_dir\">Передти в<br>поиск по КуДир</button></th>
     </form>
 
-    <form action=\"/reset_ku_dir\" name=\"reset_ku_dir\">
-    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir\">Сбросить</button></th>
+    <form action=\"/reset_ku_dir_save\" name=\"reset_ku_dir_save\">
+    <th><button class=\"reset\" type=\"submit\" name=\"reset_ku_dir_save\">Сбросить</button></th>
     </form>
 
 {% endblock form_save_edit_sales %}
@@ -1226,8 +1226,8 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
 {#{{ dump(app.flashes()) }}#}
         {#Переменный для вывода данных в форме когда форма не прошла валидацию#}
         {% set number_document_search_ku_dir = '' %}
-        {% set from__data_invoice_search_ku_dir = '' %}
-        {% set by_data_invoice_search_ku_dir = '' %}
+        {% set from__date_invoice_search_ku_dir = '' %}
+        {% set by_date_invoice_search_ku_dir = '' %}
         {% set counterparty_search_ku_dir = '' %}
         {% set details_search_ku_dir = '' %}
         {% set manufacturer_search_ku_dir = '' %}
@@ -1242,19 +1242,19 @@ class __TwigTemplate_b27614636994e65baec884a37949626f extends Template
             {value : number_document_search_ku_dir}) }}<br>
         {{ form_errors(form_ku_dir_invoice_search.search_number_document_invoice_ku_dir) }}</th>
 
-        {% for value_data_invoice_search in app.flashes('from_data_invoice_ku_dir') %}  
-        {% set from__data_invoice_search_ku_dir = value_data_invoice_search %}
+        {% for value_date_invoice_search in app.flashes('from_date_invoice_ku_dir') %}  
+        {% set from__date_invoice_search_ku_dir = value_date_invoice_search %}
         {% endfor %}
-        <th>{{ form_label(form_ku_dir_invoice_search.from_data_invoice_ku_dir) }}<br>
-        {{'с '}}{{ form_widget(form_ku_dir_invoice_search.from_data_invoice_ku_dir, 
-            {value : from__data_invoice_search_ku_dir}) }}
-        {{ form_errors(form_ku_dir_invoice_search.from_data_invoice_ku_dir) }}<br>
-        {% for value_price in app.flashes('by_data_invoice_ku_dir') %}  
-        {% set by_data_invoice_search_ku_dir = value_price %}
+        <th>{{ form_label(form_ku_dir_invoice_search.from_date_invoice_ku_dir) }}<br>
+        {{'с '}}{{ form_widget(form_ku_dir_invoice_search.from_date_invoice_ku_dir, 
+            {value : from__date_invoice_search_ku_dir}) }}
+        {{ form_errors(form_ku_dir_invoice_search.from_date_invoice_ku_dir) }}<br>
+        {% for value_price in app.flashes('by_date_invoice_ku_dir') %}  
+        {% set by_date_invoice_search_ku_dir = value_price %}
         {% endfor %}
-        {{'по '}}{{ form_widget(form_ku_dir_invoice_search.by_data_invoice_ku_dir, 
-            {value : by_data_invoice_search_ku_dir}) }}<br>
-        {{ form_errors(form_ku_dir_invoice_search.by_data_invoice_ku_dir) }}</th>
+        {{'по '}}{{ form_widget(form_ku_dir_invoice_search.by_date_invoice_ku_dir, 
+            {value : by_date_invoice_search_ku_dir}) }}<br>
+        {{ form_errors(form_ku_dir_invoice_search.by_date_invoice_ku_dir) }}</th>
 
         {% for value_id_counterparty_search in app.flashes('search_id_counterparty_invoice_ku_dir') %}  
         {% set counterparty_search_ku_dir = value_id_counterparty_search %}

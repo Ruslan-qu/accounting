@@ -19,7 +19,7 @@ class KuDirSearchInvoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('from_data_invoice_ku_dir', DateType::class, [
+            ->add('from_date_invoice_ku_dir', DateType::class, [
                 'label' => 'Дата нак-ой',
                 'widget' => 'single_text',
                 'required' => false,
@@ -27,7 +27,7 @@ class KuDirSearchInvoiceType extends AbstractType
                     'style' => 'margin: 0 0 2% 7%'
                 ]
             ])
-            ->add('by_data_invoice_ku_dir', DateType::class, [
+            ->add('by_date_invoice_ku_dir', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
                 'required' => false,

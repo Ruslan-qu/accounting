@@ -1238,7 +1238,7 @@ class InvoiceRepository extends ServiceEntityRepository
 
             foreach ($array_filter_form as $key_form => $value_form) {
 
-                if ($key_form == 'from_data_invoice_ku_dir') {
+                if ($key_form == 'from_date_invoice_ku_dir') {
 
                     foreach ($result as $key_result => $value_result) {
 
@@ -1251,7 +1251,7 @@ class InvoiceRepository extends ServiceEntityRepository
                     }
                 }
 
-                if ($key_form == 'by_data_invoice_ku_dir') {
+                if ($key_form == 'by_date_invoice_ku_dir') {
 
                     foreach ($result as $key_result => $value_result) {
 
@@ -1367,12 +1367,11 @@ class InvoiceRepository extends ServiceEntityRepository
                 INNER JOIN i.id_counterparty c
                 INNER JOIN i.id_ku_dir k
                 WHERE i.ku_dir_status != :ku_dir_status
-                AND i.id_ku_dir != :id_ku_dir
+                AND i.id_ku_dir is not NULL
                 AND k.status_ku_dir = :status_ku_dir
                 AND i.Sales = :Sales
                 AND i.refund != :refund'
         )->setParameters([
-            'id_ku_dir' => '0',
             'ku_dir_status' => '2',
             'status_ku_dir' => '2',
             'Sales' => '2',
@@ -1397,17 +1396,16 @@ class InvoiceRepository extends ServiceEntityRepository
                 'SELECT i, k
                 FROM App\Entity\Invoice i
                 INNER JOIN i.id_ku_dir k
-                WHERE i.ku_dir_status != :ku_dir_status
+                WHERE k.status_ku_dir != :status_ku_dir
                 AND i.Sales = :Sales
                 AND i.refund != :refund
-                AND i.id_ku_dir > :id_ku_dir'
+                AND i.id_ku_dir is not NULL'
             )->setParameters([
-                'ku_dir_status' => '2',
+                'status_ku_dir' => '2',
                 'Sales' => '2',
                 'refund' => '2',
-                'id_ku_dir' => '0',
             ]);
-            //dd($query->getResult());
+
 
             $result = $query->getResult();
 
@@ -1415,11 +1413,11 @@ class InvoiceRepository extends ServiceEntityRepository
 
             foreach ($array_filter_form as $key_form => $value_form) {
 
-                if ($key_form == 'from_data_invoice_ku_dir') {
+                if ($key_form == 'receipt_from_date') {
 
                     foreach ($result as $key_result => $value_result) {
 
-                        if ($value_result->getDataInvoice() >= $value_form) {
+                        if ($value_result->getIdKuDir()->getReceiptDate() >= $value_form) {
 
                             $result[$key_result] = $value_result;
                         } else {
@@ -1428,11 +1426,11 @@ class InvoiceRepository extends ServiceEntityRepository
                     }
                 }
 
-                if ($key_form == 'by_data_invoice_ku_dir') {
+                if ($key_form == 'receipt_by_date') {
 
                     foreach ($result as $key_result => $value_result) {
-
-                        if ($value_result->getDataInvoice() <= $value_form) {
+                        //dd($value_form);
+                        if ($value_result->getIdKuDir()->getReceiptDate() <= $value_form) {
 
                             $result[$key_result] = $value_result;
                         } else {
@@ -1441,14 +1439,11 @@ class InvoiceRepository extends ServiceEntityRepository
                     }
                 }
 
-                if ($key_form == 'from_price_invoice_ku_dir') {
-
+                if ($key_form == 'receipt_change') {
 
                     foreach ($result as $key_result => $value_result) {
 
-                        $price_from = ($value_result->getPrice() / 100);
-
-                        if ($price_from >= $value_form) {
+                        if ($value_result->getIdKuDir()->getReceiptChange() == $value_form) {
 
                             $result[$key_result] = $value_result;
                         } else {
@@ -1457,65 +1452,11 @@ class InvoiceRepository extends ServiceEntityRepository
                     }
                 }
 
-                if ($key_form == 'by_price_invoice_ku_dir') {
+                if ($key_form == 'receipt_number') {
 
                     foreach ($result as $key_result => $value_result) {
 
-                        $price_po = ($value_result->getPrice() / 100);
-
-                        if ($price_po <= $value_form) {
-
-                            $result[$key_result] = $value_result;
-                        } else {
-                            unset($result[$key_result]);
-                        }
-                    }
-                }
-
-                if ($key_form == 'search_number_document_invoice_ku_dir') {
-
-                    foreach ($result as $key_result => $value_result) {
-
-                        if ($value_result->getNumberDocument() == $value_form) {
-
-                            $result[$key_result] = $value_result;
-                        } else {
-                            unset($result[$key_result]);
-                        }
-                    }
-                }
-
-                if ($key_form == 'search_id_counterparty_invoice_ku_dir') {
-
-                    foreach ($result as $key_result => $value_result) {
-
-                        if ($value_result->getIdCounterparty() == $value_form) {
-
-                            $result[$key_result] = $value_result;
-                        } else {
-                            unset($result[$key_result]);
-                        }
-                    }
-                }
-
-                if ($key_form == 'search_id_details_invoice_ku_dir') {
-
-                    foreach ($result as $key_result => $value_result) {
-
-                        if ($value_result->getIdDetails()->getPartNumbers() == $value_form) {
-
-                            $result[$key_result] = $value_result;
-                        } else {
-                            unset($result[$key_result]);
-                        }
-                    }
-                }
-
-                if ($key_form == 'search_id_manufacturer_invoice_ku_dir') {
-
-                    foreach ($result as $key_result => $value_result) {
-
-                        if ($value_result->getIdDetails()->getManufacturers() == $value_form) {
+                        if ($value_result->getIdKuDir()->getReceiptNumber() == $value_form) {
 
                             $result[$key_result] = $value_result;
                         } else {
@@ -1528,5 +1469,36 @@ class InvoiceRepository extends ServiceEntityRepository
             $result = [];
         }
         return $result;
+    }
+
+    /**
+     * @return Invoice[] Returns an array of Invoice objects
+     */
+    public function findByMonthlyTableKuDir(): array
+    {
+        $month = new \DateTime('midnight first day of this month');
+        $format_month = $month->format('Y-m-d');
+        //dd($month);
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT i, k
+                FROM App\Entity\Invoice i
+                INNER JOIN i.id_ku_dir k
+                WHERE i.ku_dir_status != :ku_dir_status
+                AND i.id_ku_dir is not NULL
+                AND k.status_ku_dir != :status_ku_dir
+                AND i.Sales = :Sales
+                AND i.refund != :refund
+                AND k.receipt_date >= :receipt_date'
+        )->setParameters([
+            'ku_dir_status' => '2',
+            'status_ku_dir' => '2',
+            'Sales' => '2',
+            'refund' => '2',
+            'receipt_date' => $format_month,
+        ]);
+        //dd($query->getResult());
+        return $query->getResult();
     }
 }
