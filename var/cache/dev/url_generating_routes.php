@@ -33,6 +33,8 @@ return [
     'ku_dir_manual_saving' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::manualSavingKuDir'], [], [['text', '/ku_dir_manual_saving']], [], [], []],
     'search_ku_dir' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::searchKuDir'], [], [['text', '/search_ku_dir']], [], [], []],
     'reset_ku_dir_search' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::resetKuDirSearch'], [], [['text', '/reset_ku_dir_search']], [], [], []],
+    'ku_dir_edit' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::editKuDir'], [], [['text', '/ku_dir_edit']], [], [], []],
+    'ku_dir_edit_save' => [[], ['_controller' => 'App\\Controller\\Sections_header\\KuDirController::saveEditKuDir'], [], [['text', '/ku_dir_edit/save']], [], [], []],
     'app_main_page' => [[], ['_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], [], [['text', '/']], [], [], []],
     'part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], [], [['text', '/part_no']], [], [], []],
     'save_part_no' => [[], ['_controller' => 'App\\Controller\\Sections_header\\PartNoController::savePart'], [], [['text', '/save_part_no']], [], [], []],

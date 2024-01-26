@@ -1478,6 +1478,8 @@ class InvoiceRepository extends ServiceEntityRepository
     {
         $month = new \DateTime('midnight first day of this month');
         $format_month = $month->format('Y-m-d');
+        $day_month = new \DateTime();
+        $format_month = $month->format('Y-m-d');
         //dd($month);
         $entityManager = $this->getEntityManager();
 
@@ -1490,13 +1492,15 @@ class InvoiceRepository extends ServiceEntityRepository
                 AND k.status_ku_dir != :status_ku_dir
                 AND i.Sales = :Sales
                 AND i.refund != :refund
-                AND k.receipt_date >= :receipt_date'
+                AND k.receipt_date >= :beginning_month_receipt_date
+                AND k.receipt_date <= :day_month_receipt_date'
         )->setParameters([
             'ku_dir_status' => '2',
             'status_ku_dir' => '2',
             'Sales' => '2',
             'refund' => '2',
-            'receipt_date' => $format_month,
+            'beginning_month_receipt_date' => $format_month,
+            'day_month_receipt_date' => $day_month,
         ]);
         //dd($query->getResult());
         return $query->getResult();

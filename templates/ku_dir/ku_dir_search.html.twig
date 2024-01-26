@@ -50,19 +50,24 @@
         <th>Общий<br>приход</th>
         <th>Общий<br>расход</th>
         <th>Общий<br>остаток</th>
-        <th>Период</th>
+        <th>Дата<br>с</th>
+        <th>Дата<br>по</th>
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
 {% block tbody_total_amount %}
     <tr>
-    {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}
-              {#}  <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_coming]|default('') }}</td>
+   {#} {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}#}
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure.total_amount_coming|default('') }}</td>
 
-                <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_expenditure]|default('') }}</td>
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure.total_amount_expenditure|default('') }}</td>
 
-                <td>&nbsp;{{ (arr_total_amount_coming_expenditure[total_amount_coming]
-                    - arr_total_amount_coming_expenditure[total_amount_expenditure])|default('')  }}</td>#}
+                <td>&nbsp;{{ (arr_total_amount_coming_expenditure.total_amount_coming
+                    - arr_total_amount_coming_expenditure.total_amount_expenditure)|default('')  }}</td>
+
+                <td>&nbsp;{{ date('midnight first day of this month')|date("d-m-Y") }}</td>
+
+                <td>&nbsp;{{ date()|date("d-m-Y") }}</td>
                 
     </tr> 
 {% endblock tbody_total_amount %}
@@ -118,10 +123,10 @@
                 <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getComing() 
                     - (ku_dir_search.getIdKuDir().getExpenditure() / 100))|number_format(2, '.', '')}}</td>
 
-                <form action="/ku_dir_edit" name="ku_dir_edit" method="post">
+                <form action="/ku_dir_edit" name="ku_dir_edit" method="GET">
 
                     <td><button class="edit" type="submit" name="ku_dir_edit" 
-                        value="{{ ku_dir_search.getId() }}">Изменить</button></td>
+                        value="{{ ku_dir_search.getIdKuDir().getId() }}">Изменить</button></td>
                                 
                 </form>
 

@@ -270,7 +270,8 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
         echo "        <th>Общий<br>приход</th>
         <th>Общий<br>расход</th>
         <th>Общий<br>остаток</th>
-        <th>Период</th>
+        <th>Дата<br>с</th>
+        <th>Дата<br>по</th>
     ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -280,7 +281,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     }
 
-    // line 57
+    // line 58
     public function block_tbody_total_amount($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -290,15 +291,35 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
 
-        // line 58
-        echo "    <tr>
-    ";
         // line 59
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\DumpExtension']->dump($this->env, $context, twig_get_attribute($this->env, $this->source, (isset($context["arr_total_amount_coming_expenditure"]) || array_key_exists("arr_total_amount_coming_expenditure", $context) ? $context["arr_total_amount_coming_expenditure"] : (function () { throw new RuntimeError('Variable "arr_total_amount_coming_expenditure" does not exist.', 59, $this->source); })()), "total_amount_coming", [], "any", false, false, false, 59));
-        echo "
-              ";
-        // line 66
-        echo "                
+        echo "    <tr>
+   ";
+        // line 61
+        echo "                <td>&nbsp;";
+        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, ($context["arr_total_amount_coming_expenditure"] ?? null), "total_amount_coming", [], "any", true, true, false, 61)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, ($context["arr_total_amount_coming_expenditure"] ?? null), "total_amount_coming", [], "any", false, false, false, 61), "")) : ("")), "html", null, true);
+        echo "</td>
+
+                <td>&nbsp;";
+        // line 63
+        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, ($context["arr_total_amount_coming_expenditure"] ?? null), "total_amount_expenditure", [], "any", true, true, false, 63)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, ($context["arr_total_amount_coming_expenditure"] ?? null), "total_amount_expenditure", [], "any", false, false, false, 63), "")) : ("")), "html", null, true);
+        echo "</td>
+
+                <td>&nbsp;";
+        // line 65
+        echo twig_escape_filter($this->env, _twig_default_filter((twig_get_attribute($this->env, $this->source, (isset($context["arr_total_amount_coming_expenditure"]) || array_key_exists("arr_total_amount_coming_expenditure", $context) ? $context["arr_total_amount_coming_expenditure"] : (function () { throw new RuntimeError('Variable "arr_total_amount_coming_expenditure" does not exist.', 65, $this->source); })()), "total_amount_coming", [], "any", false, false, false, 65) - twig_get_attribute($this->env, $this->source,         // line 66
+(isset($context["arr_total_amount_coming_expenditure"]) || array_key_exists("arr_total_amount_coming_expenditure", $context) ? $context["arr_total_amount_coming_expenditure"] : (function () { throw new RuntimeError('Variable "arr_total_amount_coming_expenditure" does not exist.', 66, $this->source); })()), "total_amount_expenditure", [], "any", false, false, false, 66)), ""), "html", null, true);
+        echo "</td>
+
+                <td>&nbsp;";
+        // line 68
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_date_converter($this->env, "midnight first day of this month"), "d-m-Y"), "html", null, true);
+        echo "</td>
+
+                <td>&nbsp;";
+        // line 70
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_date_converter($this->env), "d-m-Y"), "html", null, true);
+        echo "</td>
+                
     </tr> 
 ";
         
@@ -309,7 +330,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     }
 
-    // line 80
+    // line 85
     public function block_table_thead_tr($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -319,9 +340,9 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
 
-        // line 82
-        if ((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 82, $this->source); })())) {
-            // line 83
+        // line 87
+        if ((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 87, $this->source); })())) {
+            // line 88
             echo "            <th>Смена</th>
             <th>№<br>Чека</th>
             <th>Дата-<br>чека</th>
@@ -334,7 +355,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
             <th>Удалить</th>
 ";
         } else {
-            // line 94
+            // line 99
             echo "    <h2>Видите параметры в поиск.</h2> 
 ";
         }
@@ -346,7 +367,7 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
 
     }
 
-    // line 98
+    // line 103
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -356,64 +377,64 @@ class __TwigTemplate_f2ddd5495b838210d345ebe2f05cb5e7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 100
+        // line 105
         echo "    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 100, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["arr_ku_dir_search"]) || array_key_exists("arr_ku_dir_search", $context) ? $context["arr_ku_dir_search"] : (function () { throw new RuntimeError('Variable "arr_ku_dir_search" does not exist.', 105, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["ku_dir_search"]) {
-            // line 101
+            // line 106
             echo "        ";
             if ($context["ku_dir_search"]) {
-                // line 102
+                // line 107
                 echo "               
             <tr>
                 <td>&nbsp;";
-                // line 104
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 104), "getReceiptChange", [], "method", false, false, false, 104), "html", null, true);
+                // line 109
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 109), "getReceiptChange", [], "method", false, false, false, 109), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 106
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 106), "getReceiptNumber", [], "method", false, false, false, 106), "html", null, true);
+                // line 111
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 111), "getReceiptNumber", [], "method", false, false, false, 111), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 108
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 108), "getReceiptDate", [], "method", false, false, false, 108), "d-m-Y"), "html", null, true);
+                // line 113
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 113), "getReceiptDate", [], "method", false, false, false, 113), "d-m-Y"), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 110
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getNumberDocument", [], "method", false, false, false, 110), "html", null, true);
+                // line 115
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getNumberDocument", [], "method", false, false, false, 115), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 112
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getDataInvoice", [], "method", false, false, false, 112), "d-m-Y"), "html", null, true);
+                // line 117
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getDataInvoice", [], "method", false, false, false, 117), "d-m-Y"), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 114
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 114), "getComing", [], "method", false, false, false, 114), "html", null, true);
+                // line 119
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119), "getComing", [], "method", false, false, false, 119), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 116
-                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 116), "getExpenditure", [], "method", false, false, false, 116) / 100), 2, ".", ""), "html", null, true);
+                // line 121
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 121), "getExpenditure", [], "method", false, false, false, 121) / 100), 2, ".", ""), "html", null, true);
                 echo "</td>
 
                 <td>&nbsp;";
-                // line 118
-                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 118), "getComing", [], "method", false, false, false, 118) - (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,                 // line 119
-$context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119), "getExpenditure", [], "method", false, false, false, 119) / 100)), 2, ".", ""), "html", null, true);
+                // line 123
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 123), "getComing", [], "method", false, false, false, 123) - (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,                 // line 124
+$context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 124), "getExpenditure", [], "method", false, false, false, 124) / 100)), 2, ".", ""), "html", null, true);
                 echo "</td>
 
-                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"post\">
+                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"GET\">
 
                     <td><button class=\"edit\" type=\"submit\" name=\"ku_dir_edit\" 
                         value=\"";
-                // line 124
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getId", [], "method", false, false, false, 124), "html", null, true);
+                // line 129
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 129), "getId", [], "method", false, false, false, 129), "html", null, true);
                 echo "\">Изменить</button></td>
                                 
                 </form>
@@ -422,8 +443,8 @@ $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119)
 
                     <td><button class=\"delete\" type=\"submit\" name=\"ku_dir_delete\" 
                         value=\"";
-                // line 131
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getId", [], "method", false, false, false, 131), "html", null, true);
+                // line 136
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["ku_dir_search"], "getId", [], "method", false, false, false, 136), "html", null, true);
                 echo "\">Удалить</button></td>
                                 
                 </form>
@@ -432,11 +453,11 @@ $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119)
                 
         ";
             } else {
-                // line 138
+                // line 143
                 echo "            <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
         ";
             }
-            // line 140
+            // line 145
             echo "    ";
         }
         $_parent = $context['_parent'];
@@ -462,7 +483,7 @@ $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119)
 
     public function getDebugInfo()
     {
-        return array (  440 => 140,  436 => 138,  426 => 131,  416 => 124,  408 => 119,  407 => 118,  402 => 116,  397 => 114,  392 => 112,  387 => 110,  382 => 108,  377 => 106,  372 => 104,  368 => 102,  365 => 101,  360 => 100,  350 => 98,  338 => 94,  325 => 83,  323 => 82,  313 => 80,  301 => 66,  297 => 59,  294 => 58,  284 => 57,  270 => 50,  268 => 49,  258 => 48,  245 => 44,  241 => 42,  239 => 41,  234 => 39,  229 => 38,  225 => 37,  220 => 36,  216 => 35,  211 => 33,  207 => 32,  203 => 31,  198 => 29,  194 => 28,  189 => 27,  184 => 25,  182 => 24,  172 => 23,  153 => 12,  143 => 11,  124 => 9,  105 => 7,  86 => 5,  67 => 3,  44 => 1,);
+        return array (  461 => 145,  457 => 143,  447 => 136,  437 => 129,  429 => 124,  428 => 123,  423 => 121,  418 => 119,  413 => 117,  408 => 115,  403 => 113,  398 => 111,  393 => 109,  389 => 107,  386 => 106,  381 => 105,  371 => 103,  359 => 99,  346 => 88,  344 => 87,  334 => 85,  320 => 70,  315 => 68,  310 => 66,  309 => 65,  304 => 63,  298 => 61,  295 => 59,  285 => 58,  270 => 50,  268 => 49,  258 => 48,  245 => 44,  241 => 42,  239 => 41,  234 => 39,  229 => 38,  225 => 37,  220 => 36,  216 => 35,  211 => 33,  207 => 32,  203 => 31,  198 => 29,  194 => 28,  189 => 27,  184 => 25,  182 => 24,  172 => 23,  153 => 12,  143 => 11,  124 => 9,  105 => 7,  86 => 5,  67 => 3,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -519,19 +540,24 @@ $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119)
         <th>Общий<br>приход</th>
         <th>Общий<br>расход</th>
         <th>Общий<br>остаток</th>
-        <th>Период</th>
+        <th>Дата<br>с</th>
+        <th>Дата<br>по</th>
     {#{% endif %}#}
 {% endblock table_total_amount %}
 
 {% block tbody_total_amount %}
     <tr>
-    {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}
-              {#}  <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_coming]|default('') }}</td>
+   {#} {{ dump(arr_total_amount_coming_expenditure.total_amount_coming) }}#}
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure.total_amount_coming|default('') }}</td>
 
-                <td>&nbsp;{{ arr_total_amount_coming_expenditure[total_amount_expenditure]|default('') }}</td>
+                <td>&nbsp;{{ arr_total_amount_coming_expenditure.total_amount_expenditure|default('') }}</td>
 
-                <td>&nbsp;{{ (arr_total_amount_coming_expenditure[total_amount_coming]
-                    - arr_total_amount_coming_expenditure[total_amount_expenditure])|default('')  }}</td>#}
+                <td>&nbsp;{{ (arr_total_amount_coming_expenditure.total_amount_coming
+                    - arr_total_amount_coming_expenditure.total_amount_expenditure)|default('')  }}</td>
+
+                <td>&nbsp;{{ date('midnight first day of this month')|date(\"d-m-Y\") }}</td>
+
+                <td>&nbsp;{{ date()|date(\"d-m-Y\") }}</td>
                 
     </tr> 
 {% endblock tbody_total_amount %}
@@ -587,10 +613,10 @@ $context["ku_dir_search"], "getIdKuDir", [], "method", false, false, false, 119)
                 <td>&nbsp;{{ (ku_dir_search.getIdKuDir().getComing() 
                     - (ku_dir_search.getIdKuDir().getExpenditure() / 100))|number_format(2, '.', '')}}</td>
 
-                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"post\">
+                <form action=\"/ku_dir_edit\" name=\"ku_dir_edit\" method=\"GET\">
 
                     <td><button class=\"edit\" type=\"submit\" name=\"ku_dir_edit\" 
-                        value=\"{{ ku_dir_search.getId() }}\">Изменить</button></td>
+                        value=\"{{ ku_dir_search.getIdKuDir().getId() }}\">Изменить</button></td>
                                 
                 </form>
 

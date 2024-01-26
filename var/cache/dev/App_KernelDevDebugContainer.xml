@@ -371,6 +371,9 @@
     <service id="App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -484,7 +487,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.pzgMFKT"/>
+      <argument type="service" id=".service_locator.VqCHtcP"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1046,6 +1049,7 @@
         <argument>App\Form\CounterpartySearchType</argument>
         <argument>App\Form\CounterpartyType</argument>
         <argument>App\Form\IncomingDocumentsType</argument>
+        <argument>App\Form\KuDirEditType</argument>
         <argument>App\Form\KuDirSearchInvoiceType</argument>
         <argument>App\Form\KuDirType</argument>
         <argument>App\Form\OriginalRoomsType</argument>
@@ -1713,7 +1717,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.pzgMFKT"/>
+      <argument type="service" id=".service_locator.VqCHtcP"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -2042,7 +2046,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.olVgxmN"/>
+      <argument type="service" id=".service_locator.8GsxKp9"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3986,6 +3990,8 @@
     <service id=".abstract.instanceof.App\Form\CounterpartyType" class="App\Form\CounterpartyType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirType" class="App\Form\KuDirType" autowire="true" abstract="true"/>
@@ -4514,7 +4520,7 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.pzgMFKT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.VqCHtcP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Sections_header\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
@@ -4526,9 +4532,11 @@
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController::searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
         <argument key="App\Controller\Sections_header\KuDirController::deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\KuDirController::editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\KuDirController::kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController::kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\Sections_header\KuDirController::saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\KuDirController::searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController::statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4559,9 +4567,11 @@
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\IncomingDocumentsController:searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
         <argument key="App\Controller\Sections_header\KuDirController:deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\Sections_header\KuDirController:editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\KuDirController:kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController:kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\Sections_header\KuDirController:saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\Sections_header\KuDirController:searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
         <argument key="App\Controller\Sections_header\KuDirController:statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\Sections_header\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -4650,13 +4660,14 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.olVgxmN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.8GsxKp9" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CompleteSalesType" type="service_closure" id="App\Form\CompleteSalesType"/>
         <argument key="App\Form\CounterpartySearchType" type="service_closure" id="App\Form\CounterpartySearchType"/>
         <argument key="App\Form\CounterpartyType" type="service_closure" id="App\Form\CounterpartyType"/>
         <argument key="App\Form\IncomingDocumentsType" type="service_closure" id="App\Form\IncomingDocumentsType"/>
+        <argument key="App\Form\KuDirEditType" type="service_closure" id="App\Form\KuDirEditType"/>
         <argument key="App\Form\KuDirSearchInvoiceType" type="service_closure" id="App\Form\KuDirSearchInvoiceType"/>
         <argument key="App\Form\KuDirType" type="service_closure" id="App\Form\KuDirType"/>
         <argument key="App\Form\OriginalRoomsType" type="service_closure" id="App\Form\OriginalRoomsType"/>
@@ -5763,7 +5774,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.pzgMFKT"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.VqCHtcP"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5788,9 +5799,9 @@
     <service id=".service_locator.QMNftrP" alias=".service_locator.wkuYef5"/>
     <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
     <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
-    <service id=".service_locator.ZeD4VPo" alias=".service_locator.pzgMFKT"/>
+    <service id=".service_locator.iVF.nKj" alias=".service_locator.VqCHtcP"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
-    <service id=".service_locator.pgge.Fd" alias=".service_locator.olVgxmN"/>
+    <service id=".service_locator.1MkpuWJ" alias=".service_locator.8GsxKp9"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="validator" alias="debug.validator"/>

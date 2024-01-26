@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title_logo}}{% endblock %}
+
+{% block logo %}{{title_logo}}{% endblock %}
+
+{% block legend %}{{legend}}{% endblock legend%}
+
+{% block form_save_edit_sales %}
+{#{{ dump(arr_ku_dir) }}#}                               
+    {#Форма продажи детали#}
+    {{ form_start(form_ku_dir_edit, {'action': path('ku_dir_edit_save')}) }}
+            
+        {% set edit_receipt_change = arr_ku_dir.getReceiptChange()|default('') %}
+        {% set edit_receipt_number = arr_ku_dir.getReceiptNumber()|default('') %}
+        {% set edit_receipt_date = arr_ku_dir.getReceiptDate()|date("Y-m-d")|default('') %}
+        {% set edit_coming = arr_ku_dir.getComing()|default('') %}
+        {% set edit_expenditure = (arr_ku_dir.getExpenditure() / 100)|default('') %}
+        {% set edit_hidden = arr_ku_dir.getId()|default('') %}
+
+        <th>{{ form_label(form_ku_dir_edit.receipt_change_edit) }}<br>
+        {{ form_widget(form_ku_dir_edit.receipt_change_edit, {value : edit_receipt_change}) }}<br>
+        {{ form_errors(form_ku_dir_edit.receipt_change_edit) }}</th>
+
+        <th>{{ form_label(form_ku_dir_edit.receipt_number_edit) }}<br>
+        {{ form_widget(form_ku_dir_edit.receipt_number_edit, {value : edit_receipt_number}) }}<br>
+        {{ form_errors(form_ku_dir_edit.receipt_number_edit) }}</th>
+
+        <th>{{ form_label(form_ku_dir_edit.receipt_date_edit) }}<br>
+        {{ form_widget(form_ku_dir_edit.receipt_date_edit, {value : edit_receipt_date}) }}<br>
+        {{ form_errors(form_ku_dir_edit.receipt_date_edit) }}</th>
+
+        <th>{{ form_label(form_ku_dir_edit.coming_edit) }}<br>
+        {{ form_widget(form_ku_dir_edit.coming_edit, {value : edit_coming}) }}<br>
+        {{ form_errors(form_ku_dir_edit.coming_edit) }}</th>
+
+        <th>{{ form_label(form_ku_dir_edit.expenditure_edit) }}<br>
+        {% do form_widget(form_ku_dir_edit.expenditure_edit) %}
+        &nbsp;{{ edit_expenditure }}
+        {{ form_errors(form_ku_dir_edit.expenditure_edit) }}</th>
+
+        {{ form_widget(form_ku_dir_edit.hidden_ku_dir_edit, {value : edit_hidden}) }}
+                                            
+        <th>{{ form_widget(form_ku_dir_edit.button_ku_dir_edit, 
+            {'label': 'Изменить', 'attr': {'class': 'edit'} }) }}</th>
+
+        
+
+    {{ form_end(form_ku_dir_edit) }}
+
+{% endblock form_save_edit_sales %}
+
+{% block form_search %}{% endblock form_search %}
+
+{% block table_thead_tr %}{% endblock table_thead_tr %}
+
+{% block tbody %}{% endblock tbody %}

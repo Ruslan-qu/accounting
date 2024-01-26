@@ -5,6 +5,7 @@ namespace App\Controller\Sections_header;
 use App\Entity\KuDir;
 use App\Entity\Invoice;
 use App\Form\KuDirType;
+use App\Form\KuDirEditType;
 use App\Form\SaveKuDirType;
 use App\Form\SearchInvoiceType;
 use App\Repository\KuDirRepository;
@@ -273,12 +274,11 @@ class KuDirController extends AbstractController
 
         /*Подключаем формы */
         $form_ku_dir_search = $this->createForm(KuDirType::class);
-
-        /*Валидация формы */
         $form_ku_dir_search->handleRequest($request);
 
         $arr_ku_dir_search = $InvoiceRepository->findByMonthlyTableKuDir();
 
+        /*Валидация формы */
         if ($form_ku_dir_search->isSubmitted()) {
             if ($form_ku_dir_search->isValid()) {
                 //dd($form_ku_dir_search);
@@ -316,6 +316,81 @@ class KuDirController extends AbstractController
     #[Route('/reset_ku_dir_search', name: 'reset_ku_dir_search')]
     public function resetKuDirSearch(): Response
     {
+        return $this->redirectToRoute('search_ku_dir');
+    }
+
+    /* функция вывода данных для редактирования */
+    #[Route('/ku_dir_edit', name: 'ku_dir_edit', methods: ['GET'])]
+    public function editKuDir(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator
+    ): Response {
+        //dd($request->query->get('ku_dir_edit'));
+        /* Подключаем форм */
+        $form_ku_dir_edit = $this->createForm(KuDirEditType::class);
+
+
+
+        $id_ku_dir = $request->query->get('ku_dir_edit');
+
+        if (!empty($id_ku_dir)) {
+
+            /*Открываем по id */
+            $arr_ku_dir = $doctrine->getRepository(KuDir::class)->find($id_ku_dir);
+        } else {
+            return $this->redirectToRoute('search_ku_dir');
+        }
+
+        return $this->render('ku_dir/edit_ku_dir.html.twig', [
+            'title_logo' => 'Редактируем КуДир',
+            'legend' => 'Редактируем КуДир',
+            'form_ku_dir_edit' => $form_ku_dir_edit->createView(),
+            'arr_ku_dir' => $arr_ku_dir,
+        ]);
+    }
+
+    /* функция сохранения данных после редактирования */
+    #[Route('/ku_dir_edit/save', name: 'ku_dir_edit_save')]
+    public function saveEditKuDir(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator
+    ): Response {
+        //dd($request);
+        /* Подключаем форм */
+        $form_ku_dir_edit = $this->createForm(KuDirEditType::class);
+        $form_ku_dir_edit->handleRequest($request);
+
+        /*Валидация формы */
+        if ($form_ku_dir_edit->isSubmitted()) {
+
+            if ($form_ku_dir_edit->isValid()) {
+
+                $id_ku_dir_edit_save = $form_ku_dir_edit->getData()['hidden_ku_dir_edit'];
+
+                $ku_dir = $doctrine->getRepository(KuDir::class)->find($id_ku_dir_edit_save);
+                $receipt_change_save = $form_ku_dir_edit
+                    ->getData()['receipt_change_edit'];
+                $receipt_number_save = $form_ku_dir_edit
+                    ->getData()['receipt_number_edit'];
+
+                $сount_receipt_change_number = $doctrine->getRepository(KuDir::class)
+                    ->count([
+                        'receipt_change' => $receipt_change_save,
+                        'receipt_number' => $receipt_number_save
+                    ]);
+                if ($сount_receipt_change_number == 0) {
+                    $ku_dir->setReceiptChange($form_ku_dir_edit->getData()['receipt_change_edit']);
+                    $ku_dir->setReceiptNumber($form_ku_dir_edit->getData()['receipt_number_edit']);
+                }
+                $ku_dir->setReceiptDate($form_ku_dir_edit->getData()['receipt_date_edit']);
+                $ku_dir->setComing($form_ku_dir_edit->getData()['coming_edit']);
+
+                $doctrine->getManager()->flush();
+            }
+        }
+
         return $this->redirectToRoute('search_ku_dir');
     }
 }

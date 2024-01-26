@@ -31,6 +31,8 @@ return [
         '/ku_dir_manual_saving' => [[['_route' => 'ku_dir_manual_saving', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::manualSavingKuDir'], null, null, null, false, false, null]],
         '/search_ku_dir' => [[['_route' => 'search_ku_dir', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::searchKuDir'], null, null, null, false, false, null]],
         '/reset_ku_dir_search' => [[['_route' => 'reset_ku_dir_search', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::resetKuDirSearch'], null, null, null, false, false, null]],
+        '/ku_dir_edit' => [[['_route' => 'ku_dir_edit', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::editKuDir'], null, ['GET' => 0], null, false, false, null]],
+        '/ku_dir_edit/save' => [[['_route' => 'ku_dir_edit_save', '_controller' => 'App\\Controller\\Sections_header\\KuDirController::saveEditKuDir'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_main_page', '_controller' => 'App\\Controller\\Sections_header\\MainPageController::index'], null, null, null, false, false, null]],
         '/part_no' => [[['_route' => 'part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::searchPart'], null, null, null, false, false, null]],
         '/save_part_no' => [[['_route' => 'save_part_no', '_controller' => 'App\\Controller\\Sections_header\\PartNoController::savePart'], null, null, null, false, false, null]],
