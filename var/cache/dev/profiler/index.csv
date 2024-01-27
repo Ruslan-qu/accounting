@@ -6891,3 +6891,11 @@ a7102a,172.18.0.1,POST,http://localhost:888/search_ku_dir,1706285002,,200
 768c4e,172.18.0.1,GET,http://localhost:888/ku_dir_edit?ku_dir_edit=13,1706285028,,200
 1a87da,172.18.0.1,POST,http://localhost:888/ku_dir_edit/save,1706285040,,302
 e77113,172.18.0.1,GET,http://localhost:888/search_ku_dir,1706285041,,200
+cb13a4,172.18.0.1,GET,http://localhost:888/,1706351728,,200
+2fddfb,172.18.0.1,GET,http://localhost:888/ku_dir,1706351917,,200
+fc00cf,172.18.0.1,POST,http://localhost:888/search_ku_dir,1706351923,,200
+2d59d5,172.18.0.1,POST,http://localhost:888/search_ku_dir,1706353005,,200
+644c0f,172.18.0.1,GET,http://localhost:888/incoming_documents,1706353021,,200
+a4a299,172.18.0.1,POST,http://localhost:888/incoming_documents,1706353030,,200
+2ec985,172.18.0.1,GET,http://localhost:888/price,1706353035,,200
+96166e,172.18.0.1,POST,http://localhost:888/price,1706353042,,200

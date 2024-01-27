@@ -94,7 +94,6 @@
             <th>Оплата<br>пост-ку</th>
             <th>Остаток</th>
             <th>Изменить</th>
-            <th>Удалить</th>
 {% else %}
     <h2>Видите параметры в поиск.</h2> 
 {% endif %}
@@ -129,16 +128,7 @@
                         value="{{ ku_dir_search.getIdKuDir().getId() }}">Изменить</button></td>
                                 
                 </form>
-
-                <form action="/ku_dir_delete" name="ku_dir_delete" method="post">
-
-                    <td><button class="delete" type="submit" name="ku_dir_delete" 
-                        value="{{ ku_dir_search.getId() }}">Удалить</button></td>
-                                
-                </form>
-            </tr> 
-                    
-                
+            </tr>         
         {% else %}
             <h2>Данные не найдены. Видите параметры в Поиск счет-фактуру</h2>  
         {% endif %}
