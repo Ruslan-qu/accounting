@@ -302,60 +302,60 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
-    <service id="App\Controller\Sections_header\CounterpartyController" class="App\Controller\Sections_header\CounterpartyController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\CounterpartyController" class="App\Controller\CounterpartyController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\CounterpartyController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\CounterpartyController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\IncomingDocumentsController" class="App\Controller\Sections_header\IncomingDocumentsController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\IncomingDocumentsController" class="App\Controller\IncomingDocumentsController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\IncomingDocumentsController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\IncomingDocumentsController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\KuDirController" class="App\Controller\Sections_header\KuDirController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\KuDirController" class="App\Controller\KuDirController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\KuDirController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\KuDirController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\MainPageController" class="App\Controller\Sections_header\MainPageController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\MainPageController" class="App\Controller\MainPageController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\MainPageController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\MainPageController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\PartNoController" class="App\Controller\Sections_header\PartNoController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\PartNoController" class="App\Controller\PartNoController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\PartNoController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\PartNoController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\PriceController" class="App\Controller\Sections_header\PriceController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\PriceController" class="App\Controller\PriceController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\PriceController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\PriceController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\RefundController" class="App\Controller\Sections_header\RefundController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\RefundController" class="App\Controller\RefundController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\RefundController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\RefundController"/>
       </call>
     </service>
-    <service id="App\Controller\Sections_header\SalesController" class="App\Controller\Sections_header\SalesController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\SalesController" class="App\Controller\SalesController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Sections_header\SalesController"/>
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SalesController"/>
       </call>
     </service>
     <service id="App\Controller\Test\HealthCheckAction" class="App\Controller\Test\HealthCheckAction" autowire="true" autoconfigure="true"/>
@@ -487,7 +487,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.VqCHtcP"/>
+      <argument type="service" id=".service_locator.yoc1WkM"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1717,7 +1717,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.VqCHtcP"/>
+      <argument type="service" id=".service_locator.yoc1WkM"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -3958,30 +3958,30 @@
         <argument>Start a log server that displays logs in real time</argument>
       </call>
     </service>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\CounterpartyController" class="App\Controller\Sections_header\CounterpartyController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\CounterpartyController" class="App\Controller\Sections_header\CounterpartyController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\CounterpartyController" class="App\Controller\Sections_header\CounterpartyController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\IncomingDocumentsController" class="App\Controller\Sections_header\IncomingDocumentsController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\IncomingDocumentsController" class="App\Controller\Sections_header\IncomingDocumentsController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\IncomingDocumentsController" class="App\Controller\Sections_header\IncomingDocumentsController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\KuDirController" class="App\Controller\Sections_header\KuDirController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\KuDirController" class="App\Controller\Sections_header\KuDirController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\KuDirController" class="App\Controller\Sections_header\KuDirController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\MainPageController" class="App\Controller\Sections_header\MainPageController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\MainPageController" class="App\Controller\Sections_header\MainPageController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\MainPageController" class="App\Controller\Sections_header\MainPageController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\PartNoController" class="App\Controller\Sections_header\PartNoController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\PartNoController" class="App\Controller\Sections_header\PartNoController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\PartNoController" class="App\Controller\Sections_header\PartNoController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\PriceController" class="App\Controller\Sections_header\PriceController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\PriceController" class="App\Controller\Sections_header\PriceController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\PriceController" class="App\Controller\Sections_header\PriceController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\RefundController" class="App\Controller\Sections_header\RefundController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\RefundController" class="App\Controller\Sections_header\RefundController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\RefundController" class="App\Controller\Sections_header\RefundController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Sections_header\SalesController" class="App\Controller\Sections_header\SalesController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Sections_header\SalesController" class="App\Controller\Sections_header\SalesController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Sections_header\SalesController" class="App\Controller\Sections_header\SalesController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CounterpartyController" class="App\Controller\CounterpartyController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CounterpartyController" class="App\Controller\CounterpartyController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CounterpartyController" class="App\Controller\CounterpartyController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\IncomingDocumentsController" class="App\Controller\IncomingDocumentsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\IncomingDocumentsController" class="App\Controller\IncomingDocumentsController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\IncomingDocumentsController" class="App\Controller\IncomingDocumentsController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\KuDirController" class="App\Controller\KuDirController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\KuDirController" class="App\Controller\KuDirController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\KuDirController" class="App\Controller\KuDirController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MainPageController" class="App\Controller\MainPageController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MainPageController" class="App\Controller\MainPageController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MainPageController" class="App\Controller\MainPageController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PartNoController" class="App\Controller\PartNoController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PartNoController" class="App\Controller\PartNoController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\PartNoController" class="App\Controller\PartNoController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PriceController" class="App\Controller\PriceController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PriceController" class="App\Controller\PriceController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\PriceController" class="App\Controller\PriceController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\RefundController" class="App\Controller\RefundController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\RefundController" class="App\Controller\RefundController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\RefundController" class="App\Controller\RefundController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CompleteSalesType" class="App\Form\CompleteSalesType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CompleteSalesType" class="App\Form\CompleteSalesType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CounterpartySearchType" class="App\Form\CounterpartySearchType" autowire="true" abstract="true"/>
@@ -4520,75 +4520,75 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.VqCHtcP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.yoc1WkM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\Sections_header\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController::SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController::SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController::deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController::Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController::SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController::searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
-        <argument key="App\Controller\Sections_header\KuDirController::deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\KuDirController::editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\KuDirController::kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
-        <argument key="App\Controller\Sections_header\KuDirController::kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
-        <argument key="App\Controller\Sections_header\KuDirController::saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\KuDirController::searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
-        <argument key="App\Controller\Sections_header\KuDirController::statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PartNoController::editPart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController::savePart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController::searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
-        <argument key="App\Controller\Sections_header\PriceController::completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
-        <argument key="App\Controller\Sections_header\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PriceController::editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\Sections_header\PriceController::searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\Sections_header\PriceController::soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
-        <argument key="App\Controller\Sections_header\RefundController::EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\RefundController::EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\Sections_header\RefundController::SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
-        <argument key="App\Controller\Sections_header\RefundController::deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\SalesController::quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\Sections_header\SalesController::searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController::SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController::SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController::deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\IncomingDocumentsController::Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\IncomingDocumentsController::SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\IncomingDocumentsController::searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
+        <argument key="App\Controller\KuDirController::deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\KuDirController::editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\KuDirController::kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController::kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\KuDirController::saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\KuDirController::searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController::statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PartNoController::editPart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\PartNoController::savePart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\PartNoController::searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
+        <argument key="App\Controller\PriceController::completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
+        <argument key="App\Controller\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PriceController::editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\PriceController::searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
+        <argument key="App\Controller\PriceController::soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
+        <argument key="App\Controller\RefundController::EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\RefundController::EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\RefundController::SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
+        <argument key="App\Controller\RefundController::deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\SalesController::quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\SalesController::searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
-        <argument key="App\Controller\Sections_header\CounterpartyController:EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController:SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController:SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\CounterpartyController:deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController:Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController:SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\IncomingDocumentsController:searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
-        <argument key="App\Controller\Sections_header\KuDirController:deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\KuDirController:editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\KuDirController:kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
-        <argument key="App\Controller\Sections_header\KuDirController:kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
-        <argument key="App\Controller\Sections_header\KuDirController:saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\KuDirController:searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
-        <argument key="App\Controller\Sections_header\KuDirController:statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PartNoController:editPart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController:savePart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\Sections_header\PartNoController:searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
-        <argument key="App\Controller\Sections_header\PriceController:completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
-        <argument key="App\Controller\Sections_header\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\PriceController:editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\Sections_header\PriceController:searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\Sections_header\PriceController:soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
-        <argument key="App\Controller\Sections_header\RefundController:EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\RefundController:EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\Sections_header\RefundController:SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
-        <argument key="App\Controller\Sections_header\RefundController:deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\Sections_header\SalesController:quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\Sections_header\SalesController:searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\CounterpartyController:EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController:SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController:SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\CounterpartyController:deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\IncomingDocumentsController:Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\IncomingDocumentsController:SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\IncomingDocumentsController:searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
+        <argument key="App\Controller\KuDirController:deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\KuDirController:editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\KuDirController:kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController:kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\KuDirController:saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\KuDirController:searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController:statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PartNoController:editPart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\PartNoController:savePart" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\PartNoController:searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
+        <argument key="App\Controller\PriceController:completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
+        <argument key="App\Controller\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\PriceController:editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\PriceController:searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
+        <argument key="App\Controller\PriceController:soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
+        <argument key="App\Controller\RefundController:EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\RefundController:EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\RefundController:SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
+        <argument key="App\Controller\RefundController:deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\SalesController:quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
+        <argument key="App\Controller\SalesController:searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -4869,51 +4869,51 @@
         <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\CounterpartyController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\CounterpartyController"/>
-      <argument>App\Controller\Sections_header\CounterpartyController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\CounterpartyController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CounterpartyController"/>
+      <argument>App\Controller\CounterpartyController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\IncomingDocumentsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\IncomingDocumentsController"/>
-      <argument>App\Controller\Sections_header\IncomingDocumentsController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\IncomingDocumentsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\IncomingDocumentsController"/>
+      <argument>App\Controller\IncomingDocumentsController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\KuDirController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\KuDirController"/>
-      <argument>App\Controller\Sections_header\KuDirController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\KuDirController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\KuDirController"/>
+      <argument>App\Controller\KuDirController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\MainPageController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\MainPageController"/>
-      <argument>App\Controller\Sections_header\MainPageController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\MainPageController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MainPageController"/>
+      <argument>App\Controller\MainPageController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\PartNoController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\PartNoController"/>
-      <argument>App\Controller\Sections_header\PartNoController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\PartNoController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PartNoController"/>
+      <argument>App\Controller\PartNoController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\PriceController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\PriceController"/>
-      <argument>App\Controller\Sections_header\PriceController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\PriceController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PriceController"/>
+      <argument>App\Controller\PriceController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\RefundController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\RefundController"/>
-      <argument>App\Controller\Sections_header\RefundController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\RefundController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\RefundController"/>
+      <argument>App\Controller\RefundController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\Sections_header\SalesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Sections_header\SalesController"/>
-      <argument>App\Controller\Sections_header\SalesController</argument>
+    <service id=".service_locator.O2p6Lk7.App\Controller\SalesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SalesController"/>
+      <argument>App\Controller\SalesController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -5774,7 +5774,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.VqCHtcP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.yoc1WkM"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5799,7 +5799,7 @@
     <service id=".service_locator.QMNftrP" alias=".service_locator.wkuYef5"/>
     <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
     <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
-    <service id=".service_locator.iVF.nKj" alias=".service_locator.VqCHtcP"/>
+    <service id=".service_locator.OyB0_mz" alias=".service_locator.yoc1WkM"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
     <service id=".service_locator.1MkpuWJ" alias=".service_locator.8GsxKp9"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>

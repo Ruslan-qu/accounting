@@ -6899,3 +6899,13 @@ fc00cf,172.18.0.1,POST,http://localhost:888/search_ku_dir,1706351923,,200
 a4a299,172.18.0.1,POST,http://localhost:888/incoming_documents,1706353030,,200
 2ec985,172.18.0.1,GET,http://localhost:888/price,1706353035,,200
 96166e,172.18.0.1,POST,http://localhost:888/price,1706353042,,200
+e1fba2,172.18.0.1,GET,http://localhost:888/,1706792823,,200
+9318dc,172.18.0.1,GET,http://localhost:888/incoming_documents,1706796519,,200
+37e851,172.18.0.1,GET,http://localhost:888/incoming_documents,1706797095,,200
+1a4e00,172.18.0.1,GET,http://localhost:888/price,1706797099,,200
+f48563,172.18.0.1,GET,http://localhost:888/sales,1706797103,,200
+daa6f0,172.18.0.1,GET,http://localhost:888/refund,1706797106,,200
+1fc84d,172.18.0.1,GET,http://localhost:888/counterparty,1706797108,,200
+60d588,172.18.0.1,GET,http://localhost:888/part_no,1706797111,,200
+201b7b,172.18.0.1,GET,http://localhost:888/ku_dir,1706797115,,200
+99337b,172.18.0.1,GET,http://localhost:888/incoming_documents,1706797119,,200
