@@ -2,10 +2,11 @@
 
 namespace App\Entity\EntitiesRefund;
 
-use App\Repository\RefundActivityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryRefund\RefundActivityRepository;
 
 #[ORM\Entity(repositoryClass: RefundActivityRepository::class)]
 class RefundActivity

@@ -3,25 +3,25 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\Sold;
-use App\Entity\KuDir;
-use App\Form\SoldType;
-use App\Entity\Invoice;
-use App\Form\PartNoType;
-use App\Entity\Availability;
-use App\Form\CompleteSalesType;
-use App\Repository\SoldRepository;
-use App\Repository\KuDirRepository;
-use App\Entity\IdDetailsManufacturer;
-use App\Repository\InvoiceRepository;
+use App\Form\FormsPrice\SoldType;
+use App\Entity\EntitiesPrice\Sold;
+use App\Entity\EntitiesKuDir\KuDir;
+use App\Form\FormsPartNo\PartNoType;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\FormsPrice\CompleteSalesType;
+use App\Entity\EntitiesPartNo\Availability;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryPrice\SoldRepository;
 use Symfony\Component\Validator\Constraints\Range;
+use App\Repository\RepositoryKuDir\KuDirRepository;
+use App\Entity\EntitiesPartNo\IdDetailsManufacturer;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Repository\RepositoryIncomingDocuments\InvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PriceController extends AbstractController

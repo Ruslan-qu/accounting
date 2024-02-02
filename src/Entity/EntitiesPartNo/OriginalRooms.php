@@ -3,9 +3,9 @@
 namespace App\Entity\EntitiesPartNo;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\OriginalRoomsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\RepositoryPartNo\OriginalRoomsRepository;
 
 #[ORM\Entity(repositoryClass: OriginalRoomsRepository::class)]
 class OriginalRooms

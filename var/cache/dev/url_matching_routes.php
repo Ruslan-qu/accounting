@@ -20,6 +20,7 @@ return [
         '/edit_counterparty' => [[['_route' => 'edit_counterparty', '_controller' => 'App\\Controller\\CounterpartyController::EditCounterparty'], null, null, null, false, false, null]],
         '/incoming_documents' => [[['_route' => 'incoming_documents', '_controller' => 'App\\Controller\\IncomingDocumentsController::searchIncomingDocuments'], null, null, null, false, false, null]],
         '/save_incoming_documents' => [[['_route' => 'save_incoming_documents', '_controller' => 'App\\Controller\\IncomingDocumentsController::SalesIncomingDocuments'], null, null, null, false, false, null]],
+        '/saving_file' => [[['_route' => 'saving_file', '_controller' => 'App\\Controller\\IncomingDocumentsController::saveFile'], null, null, null, false, false, null]],
         '/refund_part' => [[['_route' => 'refund_part', '_controller' => 'App\\Controller\\IncomingDocumentsController::Refund'], null, ['GET' => 0], null, false, false, null]],
         '/reset_invoice' => [[['_route' => 'reset_invoice', '_controller' => 'App\\Controller\\IncomingDocumentsController::Reset'], null, null, null, false, false, null]],
         '/delete_invoice' => [[['_route' => 'delete_invoice', '_controller' => 'App\\Controller\\IncomingDocumentsController::deleteInvoice'], null, null, null, false, false, null]],

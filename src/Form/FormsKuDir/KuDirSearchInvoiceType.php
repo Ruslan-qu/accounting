@@ -2,9 +2,9 @@
 
 namespace App\Form\FormsKuDir;
 
-use App\Entity\Counterparty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\EntitiesCounterparty\Counterparty;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;

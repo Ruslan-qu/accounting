@@ -2,10 +2,10 @@
 
 namespace App\Entity\EntitiesPartNo;
 
-use App\Repository\BodiesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\RepositoryPartNo\BodiesRepository;
 
 #[ORM\Entity(repositoryClass: BodiesRepository::class)]
 class Bodies

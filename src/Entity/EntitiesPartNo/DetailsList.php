@@ -3,9 +3,9 @@
 namespace App\Entity\EntitiesPartNo;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\DetailsListRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\RepositoryPartNo\DetailsListRepository;
 
 #[ORM\Entity(repositoryClass: DetailsListRepository::class)]
 class DetailsList

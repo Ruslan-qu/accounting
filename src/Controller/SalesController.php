@@ -3,23 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Sold;
-use App\Entity\Invoice;
 use App\Form\PartNoType;
-use App\Entity\Availability;
-use App\Entity\Counterparty;
 use App\Entity\OriginalRooms;
-use App\Entity\PaymentMethod;
-use App\Form\SearchSalesType;
-use App\Repository\SoldRepository;
 use App\Entity\IdDetailsManufacturer;
 use App\Repository\InvoiceRepository;
+use App\Form\FormsSales\SearchSalesType;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\EntitiesPartNo\Availability;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\EntitiesCounterparty\Counterparty;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryPrice\SoldRepository;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\HttpFoundation\Session\Session;
+use App\Entity\EntitiesIncomingDocuments\PaymentMethod;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,10 +28,7 @@ class SalesController extends AbstractController
 {
     #[Route('/sales', name: 'sales')]
     public function searchSales(
-        ManagerRegistry $doctrine,
         Request $request,
-        ValidatorInterface $validator,
-        InvoiceRepository $InvoiceRepository,
         SoldRepository $SoldRepository,
     ): Response {
 

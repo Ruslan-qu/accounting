@@ -2,11 +2,11 @@
 
 namespace App\Entity\EntitiesCounterparty;
 
-use App\Entity\Invoice;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CounterpartyRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryCounterparty\CounterpartyRepository;
 
 #[ORM\Entity(repositoryClass: CounterpartyRepository::class)]
 class Counterparty

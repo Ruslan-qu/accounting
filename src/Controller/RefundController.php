@@ -2,30 +2,28 @@
 
 namespace App\Controller;
 
-use App\Entity\Invoice;
-use App\Entity\RefundDate;
-use App\Entity\Availability;
-use App\Entity\RefundActivity;
-use App\Form\SearchRefundType;
 use App\Form\SearchInvoiceType;
 use App\Entity\IdDetailsManufacturer;
-use App\Repository\InvoiceRepository;
-use App\Repository\RefundDateRepository;
+use App\Entity\EntitiesRefund\RefundDate;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\FormsRefund\SearchRefundType;
+use App\Entity\EntitiesPartNo\Availability;
+use App\Entity\EntitiesRefund\RefundActivity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryRefund\RefundDateRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Repository\RepositoryIncomingDocuments\InvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RefundController extends AbstractController
 {
     #[Route('/refund', name: 'refund')]
     public function SearchRefund(
-        ManagerRegistry $doctrine,
         Request $request,
         ValidatorInterface $validator,
-        InvoiceRepository $InvoiceRepository,
         RefundDateRepository $RefundDateRepository,
     ): Response {
 

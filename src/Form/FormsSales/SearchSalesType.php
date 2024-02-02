@@ -2,19 +2,19 @@
 
 namespace App\Form\FormsSales;
 
-use App\Entity\Axles;
-use App\Entity\Sides;
-use App\Entity\Bodies;
-use App\Entity\CarBrands;
-use App\Entity\DetailsList;
-use App\Entity\Counterparty;
 use App\Entity\OriginalRooms;
-use App\Entity\PaymentMethod;
+use App\Entity\EntitiesPartNo\Axles;
+use App\Entity\EntitiesPartNo\Sides;
+use App\Entity\EntitiesPartNo\Bodies;
+use App\Entity\EntitiesPartNo\CarBrands;
 use Symfony\Component\Form\AbstractType;
+use App\Entity\EntitiesPartNo\DetailsList;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\EntitiesCounterparty\Counterparty;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\EntitiesIncomingDocuments\PaymentMethod;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

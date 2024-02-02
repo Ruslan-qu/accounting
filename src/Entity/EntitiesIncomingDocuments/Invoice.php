@@ -4,11 +4,16 @@ namespace App\Entity\EntitiesIncomingDocuments;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\InvoiceRepository;
+use App\Entity\EntitiesPrice\Sold;
+use App\Entity\EntitiesKuDir\KuDir;
+use App\Entity\EntitiesRefund\RefundDate;
 use Doctrine\Common\Collections\Collection;
+use App\Entity\EntitiesRefund\RefundActivity;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\EntitiesCounterparty\Counterparty;
+use App\Entity\EntitiesPartNo\IdDetailsManufacturer;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\RepositoryIncomingDocuments\InvoiceRepository;
 
 #[ORM\Entity(repositoryClass: InvoiceRepository::class)]
 class Invoice

@@ -22,6 +22,7 @@ return [
     'edit_counterparty' => [[], ['_controller' => 'App\\Controller\\CounterpartyController::EditCounterparty'], [], [['text', '/edit_counterparty']], [], [], []],
     'incoming_documents' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::searchIncomingDocuments'], [], [['text', '/incoming_documents']], [], [], []],
     'save_incoming_documents' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::SalesIncomingDocuments'], [], [['text', '/save_incoming_documents']], [], [], []],
+    'saving_file' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::saveFile'], [], [['text', '/saving_file']], [], [], []],
     'refund_part' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::Refund'], [], [['text', '/refund_part']], [], [], []],
     'reset_invoice' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::Reset'], [], [['text', '/reset_invoice']], [], [], []],
     'delete_invoice' => [[], ['_controller' => 'App\\Controller\\IncomingDocumentsController::deleteInvoice'], [], [['text', '/delete_invoice']], [], [], []],

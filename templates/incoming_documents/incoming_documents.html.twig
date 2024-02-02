@@ -105,6 +105,21 @@
         <th><button class="save" type="submit" name="save">Сохранить</button></th>     
 
     {{ form_end(form_i_d) }}
+
+    </tr>
+    <tr>
+
+    {#Форма сохранения счет-фактур из файла#}
+    {{ form_start(form_save_file, {'action': path('saving_file')}) }}
+
+    <th>{{ form_label(form_save_file.file_save) }}<br>
+        {{ form_widget(form_save_file.file_save) }}
+        {{ form_errors(form_save_file.file_save) }}</th>
+
+    <th>{{ form_widget(form_save_file.button_save_file, 
+        {'label': 'Сохранить', 'attr': {'class': 'save'} }) }}</th>
+    
+    {{ form_end(form_save_file) }}
    
 {% endblock form_save_edit_sales %}
 

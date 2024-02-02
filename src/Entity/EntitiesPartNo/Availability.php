@@ -2,10 +2,10 @@
 
 namespace App\Entity\EntitiesPartNo;
 
-use App\Repository\AvailabilityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\RepositoryPartNo\AvailabilityRepository;
 
 #[ORM\Entity(repositoryClass: AvailabilityRepository::class)]
 class Availability

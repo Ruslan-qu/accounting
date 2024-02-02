@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Counterparty;
-use App\Form\CounterpartyType;
-use App\Form\CounterpartySearchType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\FormsCounterparty\CounterpartyType;
+use App\Entity\EntitiesCounterparty\Counterparty;
+use App\Form\FormsCounterparty\CounterpartySearchType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

@@ -35,9 +35,13 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
             'logo' => [$this, 'block_logo'],
             'main' => [$this, 'block_main'],
             'legend' => [$this, 'block_legend'],
-            'form' => [$this, 'block_form'],
+            'form_save_edit_sales' => [$this, 'block_form_save_edit_sales'],
             'legend_search' => [$this, 'block_legend_search'],
             'form_search' => [$this, 'block_form_search'],
+            'table_total_amount' => [$this, 'block_table_total_amount'],
+            'tbody_total_amount' => [$this, 'block_tbody_total_amount'],
+            'table_ku_dir_invoice' => [$this, 'block_table_ku_dir_invoice'],
+            'tbody_ku_dir_invoice' => [$this, 'block_tbody_ku_dir_invoice'],
             'table_thead_tr' => [$this, 'block_table_thead_tr'],
             'tbody' => [$this, 'block_tbody'],
         ];
@@ -79,7 +83,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
         ";
         // line 14
         $this->displayBlock('body', $context, $blocks);
-        // line 82
+        // line 105
         echo "    </body>
 </html>
 ";
@@ -164,14 +168,14 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                 ";
         // line 16
         $this->displayBlock('header', $context, $blocks);
-        // line 36
+        // line 33
         echo "            </header>
             <div class=\"center_block_main\">
                 <main>
                     ";
-        // line 39
+        // line 36
         $this->displayBlock('main', $context, $blocks);
-        // line 79
+        // line 102
         echo "                </main>
             </div>
         ";
@@ -225,17 +229,14 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                             <li><a href=\"";
         // line 27
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("part_no");
-        echo "\">№ Детали</a></li>
+        echo "\">Детали</a></li>
                             <li><a href=\"";
         // line 28
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ku_dir");
         echo "\">КуДир</a></li>
                         </ul>
                     </nav>
-
-
-
-                    <button class=\"green\">Войти</button>
+                <button class=\"green\">Войти</button>
                 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -263,7 +264,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 39
+    // line 36
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -273,19 +274,19 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 40
+        // line 37
         echo "                        <div class=\"form\">
                             <fieldset>
                                 <legend>";
-        // line 42
+        // line 39
         $this->displayBlock('legend', $context, $blocks);
         echo "</legend>
                                     <table>
                                         <tr>
                                             ";
-        // line 45
-        $this->displayBlock('form', $context, $blocks);
-        // line 47
+        // line 42
+        $this->displayBlock('form_save_edit_sales', $context, $blocks);
+        // line 44
         echo "                                        </tr>
                                     </table> 
                            <fieldset>
@@ -293,40 +294,78 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                         <div class=\"form_search\">
                             <fieldset>
                                 <legend>";
-        // line 53
+        // line 50
         $this->displayBlock('legend_search', $context, $blocks);
         echo "</legend>
                                     <table>
                                         <tr>
                                             ";
-        // line 56
+        // line 53
         $this->displayBlock('form_search', $context, $blocks);
-        // line 58
+        // line 55
         echo "                                        </tr>
                                     </table> 
                            <fieldset>
-                        </div> 
-                        <div class=\"table\">  
+                        </div>
+                         <div class=\"total_amount\">  
                             <table>
                                 <thead>
                                     <tr>
                                         ";
-        // line 66
-        $this->displayBlock('table_thead_tr', $context, $blocks);
-        // line 67
+        // line 63
+        $this->displayBlock('table_total_amount', $context, $blocks);
+        // line 64
         echo "\t
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                        ";
-        // line 72
-        $this->displayBlock('tbody', $context, $blocks);
-        // line 74
-        echo "                                    
+                                       
+                                            ";
+        // line 69
+        $this->displayBlock('tbody_total_amount', $context, $blocks);
+        // line 71
+        echo "                                        
                                 </tbody>
                             </table> 
-                        </div> 
+                        </div>
+                        <div class=\"table\"> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        ";
+        // line 79
+        $this->displayBlock('table_ku_dir_invoice', $context, $blocks);
+        // line 80
+        echo "\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        ";
+        // line 84
+        $this->displayBlock('tbody_ku_dir_invoice', $context, $blocks);
+        // line 85
+        echo " 
+                                </tbody>
+                            </table> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        ";
+        // line 91
+        $this->displayBlock('table_thead_tr', $context, $blocks);
+        // line 92
+        echo "\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        ";
+        // line 96
+        $this->displayBlock('tbody', $context, $blocks);
+        // line 97
+        echo " 
+                                </tbody>
+                            </table> 
+                        </div>   
                     ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -336,7 +375,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 42
+    // line 39
     public function block_legend($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -354,17 +393,17 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 45
-    public function block_form($context, array $blocks = [])
+    // line 42
+    public function block_form_save_edit_sales($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_save_edit_sales"));
 
-        // line 46
+        // line 43
         echo "                                            ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -374,7 +413,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 53
+    // line 50
     public function block_legend_search($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -392,7 +431,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 56
+    // line 53
     public function block_form_search($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -402,7 +441,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "form_search"));
 
-        // line 57
+        // line 54
         echo "                                            ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -412,17 +451,17 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 66
-    public function block_table_thead_tr($context, array $blocks = [])
+    // line 63
+    public function block_table_total_amount($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_total_amount"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_total_amount"));
 
-        // line 67
+        // line 64
         echo "                                        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -432,7 +471,87 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     }
 
-    // line 72
+    // line 69
+    public function block_tbody_total_amount($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_total_amount"));
+
+        // line 70
+        echo "                                            ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 79
+    public function block_table_ku_dir_invoice($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_ku_dir_invoice"));
+
+        // line 80
+        echo "                                        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 84
+    public function block_tbody_ku_dir_invoice($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody_ku_dir_invoice"));
+
+        // line 85
+        echo "                                        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 91
+    public function block_table_thead_tr($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "table_thead_tr"));
+
+        // line 92
+        echo "                                        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 96
     public function block_tbody($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -442,7 +561,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "tbody"));
 
-        // line 73
+        // line 97
         echo "                                        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -464,7 +583,7 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
 
     public function getDebugInfo()
     {
-        return array (  446 => 73,  436 => 72,  426 => 67,  416 => 66,  406 => 57,  396 => 56,  378 => 53,  368 => 46,  358 => 45,  340 => 42,  326 => 74,  324 => 72,  317 => 67,  315 => 66,  305 => 58,  303 => 56,  297 => 53,  289 => 47,  287 => 45,  281 => 42,  277 => 40,  267 => 39,  249 => 18,  231 => 28,  227 => 27,  223 => 26,  219 => 25,  215 => 24,  211 => 23,  207 => 22,  200 => 18,  197 => 17,  187 => 16,  175 => 79,  173 => 39,  168 => 36,  166 => 16,  163 => 15,  153 => 14,  143 => 11,  133 => 10,  123 => 8,  113 => 7,  95 => 5,  83 => 82,  81 => 14,  77 => 12,  75 => 10,  72 => 9,  70 => 7,  66 => 6,  62 => 5,  56 => 1,);
+        return array (  565 => 97,  555 => 96,  545 => 92,  535 => 91,  525 => 85,  515 => 84,  505 => 80,  495 => 79,  485 => 70,  475 => 69,  465 => 64,  455 => 63,  445 => 54,  435 => 53,  417 => 50,  407 => 43,  397 => 42,  379 => 39,  365 => 97,  363 => 96,  357 => 92,  355 => 91,  347 => 85,  345 => 84,  339 => 80,  337 => 79,  327 => 71,  325 => 69,  318 => 64,  316 => 63,  306 => 55,  304 => 53,  298 => 50,  290 => 44,  288 => 42,  282 => 39,  278 => 37,  268 => 36,  250 => 18,  235 => 28,  231 => 27,  227 => 26,  223 => 25,  219 => 24,  215 => 23,  211 => 22,  204 => 18,  201 => 17,  191 => 16,  179 => 102,  177 => 36,  172 => 33,  170 => 16,  167 => 15,  157 => 14,  147 => 11,  137 => 10,  127 => 8,  117 => 7,  99 => 5,  87 => 105,  85 => 14,  81 => 12,  79 => 10,  76 => 9,  74 => 7,  70 => 6,  66 => 5,  60 => 1,);
     }
 
     public function getSourceContext()
@@ -495,14 +614,11 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                             <li><a href=\"{{ path('sales')}}\">Продажи</a></li>
                             <li><a href=\"{{ path('refund')}}\">Возвраты</a></li>
                             <li><a href=\"{{ path('counterparty')}}\">Контрагент</a></li>
-                            <li><a href=\"{{ path('part_no')}}\">№ Детали</a></li>
+                            <li><a href=\"{{ path('part_no')}}\">Детали</a></li>
                             <li><a href=\"{{ path('ku_dir')}}\">КуДир</a></li>
                         </ul>
                     </nav>
-
-
-
-                    <button class=\"green\">Войти</button>
+                <button class=\"green\">Войти</button>
                 {% endblock %}
             </header>
             <div class=\"center_block_main\">
@@ -513,8 +629,8 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                                 <legend>{% block legend %}{% endblock legend%}</legend>
                                     <table>
                                         <tr>
-                                            {% block form %}
-                                            {% endblock %}
+                                            {% block form_save_edit_sales %}
+                                            {% endblock form_save_edit_sales %}
                                         </tr>
                                     </table> 
                            <fieldset>
@@ -529,23 +645,49 @@ class __TwigTemplate_c587101b1f97901153e6ff1b0c802a25 extends Template
                                         </tr>
                                     </table> 
                            <fieldset>
-                        </div> 
-                        <div class=\"table\">  
+                        </div>
+                         <div class=\"total_amount\">  
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_total_amount %}
+                                        {% endblock table_total_amount %}\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       
+                                            {% block tbody_total_amount %}
+                                            {% endblock tbody_total_amount %}
+                                        
+                                </tbody>
+                            </table> 
+                        </div>
+                        <div class=\"table\"> 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% block table_ku_dir_invoice %}
+                                        {% endblock table_ku_dir_invoice %}\t
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% block tbody_ku_dir_invoice %}
+                                        {% endblock tbody_ku_dir_invoice %} 
+                                </tbody>
+                            </table> 
                             <table>
                                 <thead>
                                     <tr>
                                         {% block table_thead_tr %}
-                                        {% endblock %}\t
+                                        {% endblock table_thead_tr %}\t
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
                                         {% block tbody %}
-                                        {% endblock %}
-                                    
+                                        {% endblock tbody %} 
                                 </tbody>
                             </table> 
-                        </div> 
+                        </div>   
                     {% endblock %}
                 </main>
             </div>

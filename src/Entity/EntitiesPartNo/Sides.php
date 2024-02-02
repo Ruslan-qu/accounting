@@ -2,10 +2,10 @@
 
 namespace App\Entity\EntitiesPartNo;
 
-use App\Repository\SidesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\RepositoryPartNo\SidesRepository;
 
 #[ORM\Entity(repositoryClass: SidesRepository::class)]
 class Sides

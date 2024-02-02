@@ -2,11 +2,12 @@
 
 namespace App\Entity\EntitiesPrice;
 
-use App\Repository\SoldRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryPrice\SoldRepository;
 
 #[ORM\Entity(repositoryClass: SoldRepository::class)]
 class Sold

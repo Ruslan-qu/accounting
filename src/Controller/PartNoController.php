@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
-use App\Form\PartNoType;
-use App\Entity\OriginalRooms;
-use App\Form\OriginalRoomsType;
-use App\Entity\IdDetailsManufacturer;
+use App\Form\FormsPartNo\PartNoType;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\FormsPartNo\OriginalRoomsType;
 use Symfony\Component\Validator\Validation;
+use App\Entity\EntitiesPartNo\OriginalRooms;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\IdDetailsManufacturerRepository;
+use App\Entity\EntitiesPartNo\IdDetailsManufacturer;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository;
 
 class PartNoController extends AbstractController
 {

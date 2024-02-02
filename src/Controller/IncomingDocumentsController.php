@@ -5,26 +5,27 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Sold;
 use DateTimeImmutable;
-use App\Entity\Invoice;
-use App\Form\PartNoType;
-use App\Entity\RefundDate;
-use App\Entity\Availability;
 use App\Entity\SearchInvoice;
-use App\Entity\RefundActivity;
-use App\Form\CounterpartyType;
-use App\Form\SearchInvoiceType;
-use App\Form\IncomingDocumentsType;
-use App\Entity\IdDetailsManufacturer;
-use App\Repository\InvoiceRepository;
+use App\Form\FormsPartNo\PartNoType;
+use App\Entity\EntitiesRefund\RefundDate;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\EntitiesPartNo\Availability;
 use Symfony\Component\Validator\Validation;
+use App\Entity\EntitiesRefund\RefundActivity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\FormsCounterparty\CounterpartyType;
 use App\Entity\EntitiesCounterparty\Counterparty;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Entity\EntitiesPartNo\IdDetailsManufacturer;
 use Symfony\Component\HttpFoundation\Session\Session;
+use App\Form\FormsIncomingDocuments\SearchInvoiceType;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Form\FormsIncomingDocuments\SavingFromFileType;
+use App\Form\FormsIncomingDocuments\IncomingDocumentsType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Repository\RepositoryIncomingDocuments\InvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /*класс сохраняет, поиск по данным, продажу */
 
@@ -47,6 +48,7 @@ class IncomingDocumentsController extends AbstractController
         $form_incoming_documents = $this->createForm(IncomingDocumentsType::class, $entity_incoming_documents);
         $form_part_no = $this->createForm(PartNoType::class, $entity_part_no);
         $form_search_invoice = $this->createForm(SearchInvoiceType::class);
+        $form_save_file = $this->createForm(SavingFromFileType::class);
 
         /*Валидация формы */
         $form_search_invoice->handleRequest($request);
@@ -166,6 +168,7 @@ class IncomingDocumentsController extends AbstractController
             'form_search' => $form_search_invoice->createView(),
             'form_i_d' => $form_incoming_documents->createView(),
             'form_p_n' => $form_part_no->createView(),
+            'form_save_file' => $form_save_file->createView(),
             'arr_incoming_documents' => $arr_incoming_documents,
         ]);
     }
@@ -306,6 +309,54 @@ class IncomingDocumentsController extends AbstractController
             }
 
             return $this->redirectToRoute('incoming_documents');
+        }
+    }
+
+    /*функция сохранения счет-фактур , номера , производителей, описания деталей */
+    #[Route('/saving_file', name: 'saving_file')]
+    public function saveFile(
+        ManagerRegistry $doctrine,
+        Request $request,
+        ValidatorInterface $validator
+    ): Response {
+
+        /* Подключаем сущности  */
+        $entity_incoming_documents = new Invoice();
+        $entity_counterparty = new Counterparty();
+        $entity_part_no = new IdDetailsManufacturer();
+
+
+        /* Подключаем форм */
+        $form_save_file = $this->createForm(SavingFromFileType::class);
+        $form_save_file->handleRequest($request);
+
+        /* Подключаем валидацию  */
+        // $errors_save_File = $validator->validate($form_save_File);
+        //dd($request);
+        /*Валидация формы ручного сохранения счет-фактур из файла */
+        if ($form_save_file->isSubmitted()) {
+            if ($form_save_file->isValid()) {
+
+                $lines = file($form_save_file['file_save']->getData()->getPathname());
+                dd($lines);
+
+                //return $this->redirectToRoute('incoming_documents');
+            } else {
+
+                /* Выводим ошибки валидации, через сессии */
+                /* if ($errors_incoming_documents) {
+                    foreach ($errors_incoming_documents as $key) {
+                        $message = $key->getmessage();
+                        $propertyPath = $key->getpropertyPath();
+                        $this->addFlash(
+                            $propertyPath,
+                            $message
+                        );
+                    }
+                }*/
+
+                return $this->redirectToRoute('incoming_documents');
+            }
         }
     }
 

@@ -2,11 +2,11 @@
 
 namespace App\Form\FormsRefund;
 
-use App\Entity\Counterparty;
 use App\Entity\PaymentMethod;
-use App\Entity\RefundActivity;
 use Symfony\Component\Form\AbstractType;
+use App\Entity\EntitiesRefund\RefundActivity;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\EntitiesCounterparty\Counterparty;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;

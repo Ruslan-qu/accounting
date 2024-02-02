@@ -2,18 +2,18 @@
 
 namespace App\Form\FormsPartNo;
 
-use App\Entity\Axles;
-use App\Entity\Sides;
-use App\Entity\Bodies;
-use App\Entity\CarBrands;
-use App\Entity\DetailsList;
-use App\Entity\Availability;
-use App\Entity\OriginalRooms;
-use App\Entity\IdDetailsManufacturer;
+use App\Entity\EntitiesPartNo\Axles;
+use App\Entity\EntitiesPartNo\Sides;
+use App\Entity\EntitiesPartNo\Bodies;
+use App\Entity\EntitiesPartNo\CarBrands;
 use Symfony\Component\Form\AbstractType;
+use App\Entity\EntitiesPartNo\DetailsList;
+use App\Entity\EntitiesPartNo\Availability;
+use App\Entity\EntitiesPartNo\OriginalRooms;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
+use App\Entity\EntitiesPartNo\IdDetailsManufacturer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

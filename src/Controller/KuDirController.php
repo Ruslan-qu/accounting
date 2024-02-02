@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\KuDir;
-use App\Entity\Invoice;
-use App\Form\KuDirType;
-use App\Form\KuDirEditType;
-use App\Form\SaveKuDirType;
-use App\Form\SearchInvoiceType;
-use App\Repository\KuDirRepository;
-use App\Form\KuDirSearchInvoiceType;
-use App\Repository\InvoiceRepository;
+use App\Form\FormsKuDir\KuDirType;
+use App\Entity\EntitiesKuDir\KuDir;
+use App\Form\FormsKuDir\KuDirEditType;
+use App\Form\FormsKuDir\SaveKuDirType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Form\FormsKuDir\KuDirSearchInvoiceType;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
+use App\Repository\RepositoryKuDir\KuDirRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Repository\RepositoryIncomingDocuments\InvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository;
 
 class KuDirController extends AbstractController
 {

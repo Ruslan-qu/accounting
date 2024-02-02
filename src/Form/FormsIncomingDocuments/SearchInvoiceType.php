@@ -2,14 +2,14 @@
 
 namespace App\Form\FormsIncomingDocuments;
 
-use App\Entity\Counterparty;
-use App\Entity\PaymentMethod;
 use App\Entity\SearchInvoice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\EntitiesCounterparty\Counterparty;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\EntitiesIncomingDocuments\PaymentMethod;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

@@ -2,8 +2,8 @@
 
 namespace App\Form\FormsPrice;
 
-use App\Entity\Sold;
 use DateTimeImmutable;
+use App\Entity\EntitiesPrice\Sold;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;

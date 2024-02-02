@@ -359,110 +359,110 @@
       </call>
     </service>
     <service id="App\Controller\Test\HealthCheckAction" class="App\Controller\Test\HealthCheckAction" autowire="true" autoconfigure="true"/>
-    <service id="App\Form\CompleteSalesType" class="App\Form\CompleteSalesType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsCounterparty\CounterpartySearchType" class="App\Form\FormsCounterparty\CounterpartySearchType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\CounterpartySearchType" class="App\Form\CounterpartySearchType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsCounterparty\CounterpartyType" class="App\Form\FormsCounterparty\CounterpartyType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\CounterpartyType" class="App\Form\CounterpartyType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsIncomingDocuments\IncomingDocumentsType" class="App\Form\FormsIncomingDocuments\IncomingDocumentsType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsIncomingDocuments\SavingFromFileType" class="App\Form\FormsIncomingDocuments\SavingFromFileType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsIncomingDocuments\SearchInvoiceType" class="App\Form\FormsIncomingDocuments\SearchInvoiceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsKuDir\KuDirEditType" class="App\Form\FormsKuDir\KuDirEditType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\KuDirType" class="App\Form\KuDirType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsKuDir\KuDirSearchInvoiceType" class="App\Form\FormsKuDir\KuDirSearchInvoiceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\OriginalRoomsType" class="App\Form\OriginalRoomsType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsKuDir\KuDirType" class="App\Form\FormsKuDir\KuDirType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsKuDir\SaveKuDirType" class="App\Form\FormsKuDir\SaveKuDirType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsPartNo\OriginalRoomsType" class="App\Form\FormsPartNo\OriginalRoomsType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsPartNo\PartNoType" class="App\Form\FormsPartNo\PartNoType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\SearchRefundType" class="App\Form\SearchRefundType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsPrice\CompleteSalesType" class="App\Form\FormsPrice\CompleteSalesType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\SearchSalesType" class="App\Form\SearchSalesType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsPrice\SoldType" class="App\Form\FormsPrice\SoldType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\SoldType" class="App\Form\SoldType" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsRefund\SearchRefundType" class="App\Form\FormsRefund\SearchRefundType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Repository\AvailabilityRepository" class="App\Repository\AvailabilityRepository" autowire="true" autoconfigure="true">
+    <service id="App\Form\FormsSales\SearchSalesType" class="App\Form\FormsSales\SearchSalesType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Repository\RepositoryCounterparty\CounterpartyRepository" class="App\Repository\RepositoryCounterparty\CounterpartyRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\AxlesRepository" class="App\Repository\AxlesRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository" class="App\Repository\RepositoryIncomingDocuments\InvoiceRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\BodiesRepository" class="App\Repository\BodiesRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" class="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\CarBrandsRepository" class="App\Repository\CarBrandsRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryKuDir\KuDirRepository" class="App\Repository\RepositoryKuDir\KuDirRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\CounterpartyRepository" class="App\Repository\CounterpartyRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\AvailabilityRepository" class="App\Repository\RepositoryPartNo\AvailabilityRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\DetailsListRepository" class="App\Repository\DetailsListRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\AxlesRepository" class="App\Repository\RepositoryPartNo\AxlesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\IdDetailsManufacturerRepository" class="App\Repository\IdDetailsManufacturerRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\BodiesRepository" class="App\Repository\RepositoryPartNo\BodiesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\InvoiceRepository" class="App\Repository\InvoiceRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\CarBrandsRepository" class="App\Repository\RepositoryPartNo\CarBrandsRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\DetailsListRepository" class="App\Repository\RepositoryPartNo\DetailsListRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" class="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\PaymentMethodRepository" class="App\Repository\PaymentMethodRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\OriginalRoomsRepository" class="App\Repository\RepositoryPartNo\OriginalRoomsRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\RefundActivityRepository" class="App\Repository\RefundActivityRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPartNo\SidesRepository" class="App\Repository\RepositoryPartNo\SidesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryPrice\SoldRepository" class="App\Repository\RepositoryPrice\SoldRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryRefund\RefundActivityRepository" class="App\Repository\RepositoryRefund\RefundActivityRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\SoldRepository" class="App\Repository\SoldRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\RepositoryRefund\RefundDateRepository" class="App\Repository\RepositoryRefund\RefundDateRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
-    </service>
-    <service id="App\TwigExtension\MbStrtolowerPregReplaceExtension" class="App\TwigExtension\MbStrtolowerPregReplaceExtension" autowire="true" autoconfigure="true">
-      <tag name="twig.extension"/>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -487,7 +487,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.yoc1WkM"/>
+      <argument type="service" id=".service_locator.7nwjJs3"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1041,24 +1041,31 @@
       <argument type="service" id="form.registry"/>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type</argument>
-        <argument>App\Form</argument>
+        <argument>App\Form\FormsCounterparty</argument>
+        <argument>App\Form\FormsIncomingDocuments</argument>
+        <argument>App\Form\FormsKuDir</argument>
+        <argument>App\Form\FormsPartNo</argument>
+        <argument>App\Form\FormsPrice</argument>
+        <argument>App\Form\FormsRefund</argument>
+        <argument>App\Form\FormsSales</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
-        <argument>App\Form\CompleteSalesType</argument>
-        <argument>App\Form\CounterpartySearchType</argument>
-        <argument>App\Form\CounterpartyType</argument>
-        <argument>App\Form\IncomingDocumentsType</argument>
-        <argument>App\Form\KuDirEditType</argument>
-        <argument>App\Form\KuDirSearchInvoiceType</argument>
-        <argument>App\Form\KuDirType</argument>
-        <argument>App\Form\OriginalRoomsType</argument>
-        <argument>App\Form\PartNoType</argument>
-        <argument>App\Form\SaveKuDirType</argument>
-        <argument>App\Form\SearchInvoiceType</argument>
-        <argument>App\Form\SearchRefundType</argument>
-        <argument>App\Form\SearchSalesType</argument>
-        <argument>App\Form\SoldType</argument>
+        <argument>App\Form\FormsCounterparty\CounterpartySearchType</argument>
+        <argument>App\Form\FormsCounterparty\CounterpartyType</argument>
+        <argument>App\Form\FormsIncomingDocuments\IncomingDocumentsType</argument>
+        <argument>App\Form\FormsIncomingDocuments\SavingFromFileType</argument>
+        <argument>App\Form\FormsIncomingDocuments\SearchInvoiceType</argument>
+        <argument>App\Form\FormsKuDir\KuDirEditType</argument>
+        <argument>App\Form\FormsKuDir\KuDirSearchInvoiceType</argument>
+        <argument>App\Form\FormsKuDir\KuDirType</argument>
+        <argument>App\Form\FormsKuDir\SaveKuDirType</argument>
+        <argument>App\Form\FormsPartNo\OriginalRoomsType</argument>
+        <argument>App\Form\FormsPartNo\PartNoType</argument>
+        <argument>App\Form\FormsPrice\CompleteSalesType</argument>
+        <argument>App\Form\FormsPrice\SoldType</argument>
+        <argument>App\Form\FormsRefund\SearchRefundType</argument>
+        <argument>App\Form\FormsSales\SearchSalesType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
@@ -1717,7 +1724,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.yoc1WkM"/>
+      <argument type="service" id=".service_locator.7nwjJs3"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -2046,7 +2053,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.8GsxKp9"/>
+      <argument type="service" id=".service_locator.gsQ8.IP"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -2836,7 +2843,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.dHKzgM0"/>
+      <argument type="service" id=".service_locator.caBR9Un"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3508,9 +3515,6 @@
         <argument type="service" id="twig.extension.dump"/>
       </call>
       <call method="addExtension">
-        <argument type="service" id="App\TwigExtension\MbStrtolowerPregReplaceExtension"/>
-      </call>
-      <call method="addExtension">
         <argument type="service" id="doctrine.twig.doctrine_extension"/>
       </call>
       <call method="addExtension">
@@ -3982,66 +3986,66 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SalesController" class="App\Controller\SalesController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CompleteSalesType" class="App\Form\CompleteSalesType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\CompleteSalesType" class="App\Form\CompleteSalesType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CounterpartySearchType" class="App\Form\CounterpartySearchType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\CounterpartySearchType" class="App\Form\CounterpartySearchType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CounterpartyType" class="App\Form\CounterpartyType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\CounterpartyType" class="App\Form\CounterpartyType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\IncomingDocumentsType" class="App\Form\IncomingDocumentsType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\KuDirEditType" class="App\Form\KuDirEditType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\KuDirSearchInvoiceType" class="App\Form\KuDirSearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\KuDirType" class="App\Form\KuDirType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\KuDirType" class="App\Form\KuDirType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\OriginalRoomsType" class="App\Form\OriginalRoomsType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\OriginalRoomsType" class="App\Form\OriginalRoomsType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\PartNoType" class="App\Form\PartNoType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\SaveKuDirType" class="App\Form\SaveKuDirType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\SearchInvoiceType" class="App\Form\SearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchRefundType" class="App\Form\SearchRefundType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\SearchRefundType" class="App\Form\SearchRefundType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchSalesType" class="App\Form\SearchSalesType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\SearchSalesType" class="App\Form\SearchSalesType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SoldType" class="App\Form\SoldType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\SoldType" class="App\Form\SoldType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AvailabilityRepository" class="App\Repository\AvailabilityRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\AvailabilityRepository" class="App\Repository\AvailabilityRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AxlesRepository" class="App\Repository\AxlesRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\AxlesRepository" class="App\Repository\AxlesRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BodiesRepository" class="App\Repository\BodiesRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\BodiesRepository" class="App\Repository\BodiesRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CarBrandsRepository" class="App\Repository\CarBrandsRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\CarBrandsRepository" class="App\Repository\CarBrandsRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CounterpartyRepository" class="App\Repository\CounterpartyRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\CounterpartyRepository" class="App\Repository\CounterpartyRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DetailsListRepository" class="App\Repository\DetailsListRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\DetailsListRepository" class="App\Repository\DetailsListRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\IdDetailsManufacturerRepository" class="App\Repository\IdDetailsManufacturerRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\IdDetailsManufacturerRepository" class="App\Repository\IdDetailsManufacturerRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\InvoiceRepository" class="App\Repository\InvoiceRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\InvoiceRepository" class="App\Repository\InvoiceRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\KuDirRepository" class="App\Repository\KuDirRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\OriginalRoomsRepository" class="App\Repository\OriginalRoomsRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PaymentMethodRepository" class="App\Repository\PaymentMethodRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\PaymentMethodRepository" class="App\Repository\PaymentMethodRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RefundActivityRepository" class="App\Repository\RefundActivityRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\RefundActivityRepository" class="App\Repository\RefundActivityRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\RefundDateRepository" class="App\Repository\RefundDateRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\SidesRepository" class="App\Repository\SidesRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SoldRepository" class="App\Repository\SoldRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\SoldRepository" class="App\Repository\SoldRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Twig\Extension\ExtensionInterface.0.App\TwigExtension\MbStrtolowerPregReplaceExtension" class="App\TwigExtension\MbStrtolowerPregReplaceExtension" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\TwigExtension\MbStrtolowerPregReplaceExtension" class="App\TwigExtension\MbStrtolowerPregReplaceExtension" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsCounterparty\CounterpartySearchType" class="App\Form\FormsCounterparty\CounterpartySearchType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsCounterparty\CounterpartySearchType" class="App\Form\FormsCounterparty\CounterpartySearchType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsCounterparty\CounterpartyType" class="App\Form\FormsCounterparty\CounterpartyType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsCounterparty\CounterpartyType" class="App\Form\FormsCounterparty\CounterpartyType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsIncomingDocuments\IncomingDocumentsType" class="App\Form\FormsIncomingDocuments\IncomingDocumentsType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsIncomingDocuments\IncomingDocumentsType" class="App\Form\FormsIncomingDocuments\IncomingDocumentsType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsIncomingDocuments\SavingFromFileType" class="App\Form\FormsIncomingDocuments\SavingFromFileType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsIncomingDocuments\SavingFromFileType" class="App\Form\FormsIncomingDocuments\SavingFromFileType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsIncomingDocuments\SearchInvoiceType" class="App\Form\FormsIncomingDocuments\SearchInvoiceType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsIncomingDocuments\SearchInvoiceType" class="App\Form\FormsIncomingDocuments\SearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsKuDir\KuDirEditType" class="App\Form\FormsKuDir\KuDirEditType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsKuDir\KuDirEditType" class="App\Form\FormsKuDir\KuDirEditType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsKuDir\KuDirSearchInvoiceType" class="App\Form\FormsKuDir\KuDirSearchInvoiceType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsKuDir\KuDirSearchInvoiceType" class="App\Form\FormsKuDir\KuDirSearchInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsKuDir\KuDirType" class="App\Form\FormsKuDir\KuDirType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsKuDir\KuDirType" class="App\Form\FormsKuDir\KuDirType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsKuDir\SaveKuDirType" class="App\Form\FormsKuDir\SaveKuDirType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsKuDir\SaveKuDirType" class="App\Form\FormsKuDir\SaveKuDirType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsPartNo\OriginalRoomsType" class="App\Form\FormsPartNo\OriginalRoomsType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsPartNo\OriginalRoomsType" class="App\Form\FormsPartNo\OriginalRoomsType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsPartNo\PartNoType" class="App\Form\FormsPartNo\PartNoType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsPartNo\PartNoType" class="App\Form\FormsPartNo\PartNoType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsPrice\CompleteSalesType" class="App\Form\FormsPrice\CompleteSalesType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsPrice\CompleteSalesType" class="App\Form\FormsPrice\CompleteSalesType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsPrice\SoldType" class="App\Form\FormsPrice\SoldType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsPrice\SoldType" class="App\Form\FormsPrice\SoldType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsRefund\SearchRefundType" class="App\Form\FormsRefund\SearchRefundType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsRefund\SearchRefundType" class="App\Form\FormsRefund\SearchRefundType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormsSales\SearchSalesType" class="App\Form\FormsSales\SearchSalesType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FormsSales\SearchSalesType" class="App\Form\FormsSales\SearchSalesType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryCounterparty\CounterpartyRepository" class="App\Repository\RepositoryCounterparty\CounterpartyRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryCounterparty\CounterpartyRepository" class="App\Repository\RepositoryCounterparty\CounterpartyRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryIncomingDocuments\InvoiceRepository" class="App\Repository\RepositoryIncomingDocuments\InvoiceRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryIncomingDocuments\InvoiceRepository" class="App\Repository\RepositoryIncomingDocuments\InvoiceRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" class="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" class="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryKuDir\KuDirRepository" class="App\Repository\RepositoryKuDir\KuDirRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryKuDir\KuDirRepository" class="App\Repository\RepositoryKuDir\KuDirRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\AvailabilityRepository" class="App\Repository\RepositoryPartNo\AvailabilityRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\AvailabilityRepository" class="App\Repository\RepositoryPartNo\AvailabilityRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\AxlesRepository" class="App\Repository\RepositoryPartNo\AxlesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\AxlesRepository" class="App\Repository\RepositoryPartNo\AxlesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\BodiesRepository" class="App\Repository\RepositoryPartNo\BodiesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\BodiesRepository" class="App\Repository\RepositoryPartNo\BodiesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\CarBrandsRepository" class="App\Repository\RepositoryPartNo\CarBrandsRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\CarBrandsRepository" class="App\Repository\RepositoryPartNo\CarBrandsRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\DetailsListRepository" class="App\Repository\RepositoryPartNo\DetailsListRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\DetailsListRepository" class="App\Repository\RepositoryPartNo\DetailsListRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" class="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" class="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\OriginalRoomsRepository" class="App\Repository\RepositoryPartNo\OriginalRoomsRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\OriginalRoomsRepository" class="App\Repository\RepositoryPartNo\OriginalRoomsRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPartNo\SidesRepository" class="App\Repository\RepositoryPartNo\SidesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPartNo\SidesRepository" class="App\Repository\RepositoryPartNo\SidesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryPrice\SoldRepository" class="App\Repository\RepositoryPrice\SoldRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryPrice\SoldRepository" class="App\Repository\RepositoryPrice\SoldRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryRefund\RefundActivityRepository" class="App\Repository\RepositoryRefund\RefundActivityRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryRefund\RefundActivityRepository" class="App\Repository\RepositoryRefund\RefundActivityRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepositoryRefund\RefundDateRepository" class="App\Repository\RepositoryRefund\RefundDateRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\RepositoryRefund\RefundDateRepository" class="App\Repository\RepositoryRefund\RefundDateRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.7nzbL4K" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4429,131 +4433,127 @@
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.k0Abh5g" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.7DBoiXF" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.AOBeOHN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ms_7f9Z" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.hEJ63K8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rGPmLAm" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="KuDirRepository" type="service_closure" id="App\Repository\RepositoryKuDir\KuDirRepository"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.6tQeCMB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.jFaokal" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
-        <argument key="doctrine" type="service_closure" id="doctrine"/>
-        <argument key="validator" type="service_closure" id="debug.validator"/>
-      </argument>
-    </service>
-    <service id=".service_locator.16FGhqR" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\IdDetailsManufacturerRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="KuDirRepository" type="service_closure" id="App\Repository\RepositoryKuDir\KuDirRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.Sj9YQbw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.X6ECqyi" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="validator" type="service_closure" id="debug.validator"/>
-      </argument>
-    </service>
-    <service id=".service_locator.axXzMBt" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
-        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.4vTIIZS" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.3r7sRWX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="validator" type="service_closure" id="debug.validator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.lnU._zX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="KuDirRepository" type="service_closure" id="App\Repository\RepositoryKuDir\KuDirRepository"/>
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\RepositoryPrice\SoldRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.wkuYef5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tjlWKb2" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
-        <argument key="doctrine" type="service_closure" id="doctrine"/>
-      </argument>
-    </service>
-    <service id=".service_locator.HvY69Ot" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="RefundDateRepository" type="service_closure" id="App\Repository\RefundDateRepository"/>
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\RepositoryPrice\SoldRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.FECJdp3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.2OWCZjk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\RepositoryPrice\SoldRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gKFi.ZU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="RefundDateRepository" type="service_closure" id="App\Repository\RepositoryRefund\RefundDateRepository"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.yoc1WkM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CUqvNoJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="SoldRepository" type="service_closure" id="App\Repository\RepositoryPrice\SoldRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.7nwjJs3" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CounterpartyController::EditCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\CounterpartyController::SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\CounterpartyController::SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\CounterpartyController::deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\IncomingDocumentsController::Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\IncomingDocumentsController::Refund" type="service_closure" id=".service_locator.ms_7f9Z"/>
         <argument key="App\Controller\IncomingDocumentsController::SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\IncomingDocumentsController::deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\IncomingDocumentsController::searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
+        <argument key="App\Controller\IncomingDocumentsController::saveFile" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\IncomingDocumentsController::searchIncomingDocuments" type="service_closure" id=".service_locator.7DBoiXF"/>
         <argument key="App\Controller\KuDirController::deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\KuDirController::editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\KuDirController::kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController::kuDir" type="service_closure" id=".service_locator.rGPmLAm"/>
         <argument key="App\Controller\KuDirController::kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\KuDirController::manualSavingKuDir" type="service_closure" id=".service_locator.jFaokal"/>
         <argument key="App\Controller\KuDirController::saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\KuDirController::searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController::searchKuDir" type="service_closure" id=".service_locator.rGPmLAm"/>
         <argument key="App\Controller\KuDirController::statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\PartNoController::deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\PartNoController::editPart" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\PartNoController::savePart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\PartNoController::searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
-        <argument key="App\Controller\PriceController::completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
+        <argument key="App\Controller\PartNoController::searchPart" type="service_closure" id=".service_locator.X6ECqyi"/>
+        <argument key="App\Controller\PriceController::completeSales" type="service_closure" id=".service_locator.2OWCZjk"/>
         <argument key="App\Controller\PriceController::deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\PriceController::editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\PriceController::searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\PriceController::soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
+        <argument key="App\Controller\PriceController::editSoldPrice" type="service_closure" id=".service_locator.tjlWKb2"/>
+        <argument key="App\Controller\PriceController::searchPrice" type="service_closure" id=".service_locator.3r7sRWX"/>
+        <argument key="App\Controller\PriceController::soldPrice" type="service_closure" id=".service_locator.lnU._zX"/>
         <argument key="App\Controller\RefundController::EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\RefundController::EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\RefundController::SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
+        <argument key="App\Controller\RefundController::EditRefund" type="service_closure" id=".service_locator.ms_7f9Z"/>
+        <argument key="App\Controller\RefundController::SearchRefund" type="service_closure" id=".service_locator.gKFi.ZU"/>
         <argument key="App\Controller\RefundController::deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\SalesController::quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\SalesController::searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\SalesController::quantityReturnProduct" type="service_closure" id=".service_locator.tjlWKb2"/>
+        <argument key="App\Controller\SalesController::searchSales" type="service_closure" id=".service_locator.CUqvNoJ"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -4562,33 +4562,34 @@
         <argument key="App\Controller\CounterpartyController:SalesCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\CounterpartyController:SearchCounterparty" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\CounterpartyController:deleteCounterparty" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\IncomingDocumentsController:Refund" type="service_closure" id=".service_locator.AOBeOHN"/>
+        <argument key="App\Controller\IncomingDocumentsController:Refund" type="service_closure" id=".service_locator.ms_7f9Z"/>
         <argument key="App\Controller\IncomingDocumentsController:SalesIncomingDocuments" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\IncomingDocumentsController:deleteInvoice" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\IncomingDocumentsController:searchIncomingDocuments" type="service_closure" id=".service_locator.k0Abh5g"/>
+        <argument key="App\Controller\IncomingDocumentsController:saveFile" type="service_closure" id=".service_locator.arTJFd8"/>
+        <argument key="App\Controller\IncomingDocumentsController:searchIncomingDocuments" type="service_closure" id=".service_locator.7DBoiXF"/>
         <argument key="App\Controller\KuDirController:deleteListInvoiceIdKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\KuDirController:editKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\KuDirController:kuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController:kuDir" type="service_closure" id=".service_locator.rGPmLAm"/>
         <argument key="App\Controller\KuDirController:kuDirSave" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.6tQeCMB"/>
+        <argument key="App\Controller\KuDirController:manualSavingKuDir" type="service_closure" id=".service_locator.jFaokal"/>
         <argument key="App\Controller\KuDirController:saveEditKuDir" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\KuDirController:searchKuDir" type="service_closure" id=".service_locator.hEJ63K8"/>
+        <argument key="App\Controller\KuDirController:searchKuDir" type="service_closure" id=".service_locator.rGPmLAm"/>
         <argument key="App\Controller\KuDirController:statusChangesKuDir" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\PartNoController:deletePart" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\PartNoController:editPart" type="service_closure" id=".service_locator.arTJFd8"/>
         <argument key="App\Controller\PartNoController:savePart" type="service_closure" id=".service_locator.arTJFd8"/>
-        <argument key="App\Controller\PartNoController:searchPart" type="service_closure" id=".service_locator.16FGhqR"/>
-        <argument key="App\Controller\PriceController:completeSales" type="service_closure" id=".service_locator.wkuYef5"/>
+        <argument key="App\Controller\PartNoController:searchPart" type="service_closure" id=".service_locator.X6ECqyi"/>
+        <argument key="App\Controller\PriceController:completeSales" type="service_closure" id=".service_locator.2OWCZjk"/>
         <argument key="App\Controller\PriceController:deleteSaleList" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\PriceController:editSoldPrice" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\PriceController:searchPrice" type="service_closure" id=".service_locator.Sj9YQbw"/>
-        <argument key="App\Controller\PriceController:soldPrice" type="service_closure" id=".service_locator.axXzMBt"/>
+        <argument key="App\Controller\PriceController:editSoldPrice" type="service_closure" id=".service_locator.tjlWKb2"/>
+        <argument key="App\Controller\PriceController:searchPrice" type="service_closure" id=".service_locator.3r7sRWX"/>
+        <argument key="App\Controller\PriceController:soldPrice" type="service_closure" id=".service_locator.lnU._zX"/>
         <argument key="App\Controller\RefundController:EditActivity" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\RefundController:EditRefund" type="service_closure" id=".service_locator.AOBeOHN"/>
-        <argument key="App\Controller\RefundController:SearchRefund" type="service_closure" id=".service_locator.HvY69Ot"/>
+        <argument key="App\Controller\RefundController:EditRefund" type="service_closure" id=".service_locator.ms_7f9Z"/>
+        <argument key="App\Controller\RefundController:SearchRefund" type="service_closure" id=".service_locator.gKFi.ZU"/>
         <argument key="App\Controller\RefundController:deleteRefund" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\SalesController:quantityReturnProduct" type="service_closure" id=".service_locator.4vTIIZS"/>
-        <argument key="App\Controller\SalesController:searchSales" type="service_closure" id=".service_locator.FECJdp3"/>
+        <argument key="App\Controller\SalesController:quantityReturnProduct" type="service_closure" id=".service_locator.tjlWKb2"/>
+        <argument key="App\Controller\SalesController:searchSales" type="service_closure" id=".service_locator.CUqvNoJ"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -4660,23 +4661,24 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.8GsxKp9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.gsQ8.IP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Form\CompleteSalesType" type="service_closure" id="App\Form\CompleteSalesType"/>
-        <argument key="App\Form\CounterpartySearchType" type="service_closure" id="App\Form\CounterpartySearchType"/>
-        <argument key="App\Form\CounterpartyType" type="service_closure" id="App\Form\CounterpartyType"/>
-        <argument key="App\Form\IncomingDocumentsType" type="service_closure" id="App\Form\IncomingDocumentsType"/>
-        <argument key="App\Form\KuDirEditType" type="service_closure" id="App\Form\KuDirEditType"/>
-        <argument key="App\Form\KuDirSearchInvoiceType" type="service_closure" id="App\Form\KuDirSearchInvoiceType"/>
-        <argument key="App\Form\KuDirType" type="service_closure" id="App\Form\KuDirType"/>
-        <argument key="App\Form\OriginalRoomsType" type="service_closure" id="App\Form\OriginalRoomsType"/>
-        <argument key="App\Form\PartNoType" type="service_closure" id="App\Form\PartNoType"/>
-        <argument key="App\Form\SaveKuDirType" type="service_closure" id="App\Form\SaveKuDirType"/>
-        <argument key="App\Form\SearchInvoiceType" type="service_closure" id="App\Form\SearchInvoiceType"/>
-        <argument key="App\Form\SearchRefundType" type="service_closure" id="App\Form\SearchRefundType"/>
-        <argument key="App\Form\SearchSalesType" type="service_closure" id="App\Form\SearchSalesType"/>
-        <argument key="App\Form\SoldType" type="service_closure" id="App\Form\SoldType"/>
+        <argument key="App\Form\FormsCounterparty\CounterpartySearchType" type="service_closure" id="App\Form\FormsCounterparty\CounterpartySearchType"/>
+        <argument key="App\Form\FormsCounterparty\CounterpartyType" type="service_closure" id="App\Form\FormsCounterparty\CounterpartyType"/>
+        <argument key="App\Form\FormsIncomingDocuments\IncomingDocumentsType" type="service_closure" id="App\Form\FormsIncomingDocuments\IncomingDocumentsType"/>
+        <argument key="App\Form\FormsIncomingDocuments\SavingFromFileType" type="service_closure" id="App\Form\FormsIncomingDocuments\SavingFromFileType"/>
+        <argument key="App\Form\FormsIncomingDocuments\SearchInvoiceType" type="service_closure" id="App\Form\FormsIncomingDocuments\SearchInvoiceType"/>
+        <argument key="App\Form\FormsKuDir\KuDirEditType" type="service_closure" id="App\Form\FormsKuDir\KuDirEditType"/>
+        <argument key="App\Form\FormsKuDir\KuDirSearchInvoiceType" type="service_closure" id="App\Form\FormsKuDir\KuDirSearchInvoiceType"/>
+        <argument key="App\Form\FormsKuDir\KuDirType" type="service_closure" id="App\Form\FormsKuDir\KuDirType"/>
+        <argument key="App\Form\FormsKuDir\SaveKuDirType" type="service_closure" id="App\Form\FormsKuDir\SaveKuDirType"/>
+        <argument key="App\Form\FormsPartNo\OriginalRoomsType" type="service_closure" id="App\Form\FormsPartNo\OriginalRoomsType"/>
+        <argument key="App\Form\FormsPartNo\PartNoType" type="service_closure" id="App\Form\FormsPartNo\PartNoType"/>
+        <argument key="App\Form\FormsPrice\CompleteSalesType" type="service_closure" id="App\Form\FormsPrice\CompleteSalesType"/>
+        <argument key="App\Form\FormsPrice\SoldType" type="service_closure" id="App\Form\FormsPrice\SoldType"/>
+        <argument key="App\Form\FormsRefund\SearchRefundType" type="service_closure" id="App\Form\FormsRefund\SearchRefundType"/>
+        <argument key="App\Form\FormsSales\SearchSalesType" type="service_closure" id="App\Form\FormsSales\SearchSalesType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
@@ -4694,24 +4696,24 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.dHKzgM0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.caBR9Un" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Repository\AvailabilityRepository" type="service_closure" id="App\Repository\AvailabilityRepository"/>
-        <argument key="App\Repository\AxlesRepository" type="service_closure" id="App\Repository\AxlesRepository"/>
-        <argument key="App\Repository\BodiesRepository" type="service_closure" id="App\Repository\BodiesRepository"/>
-        <argument key="App\Repository\CarBrandsRepository" type="service_closure" id="App\Repository\CarBrandsRepository"/>
-        <argument key="App\Repository\CounterpartyRepository" type="service_closure" id="App\Repository\CounterpartyRepository"/>
-        <argument key="App\Repository\DetailsListRepository" type="service_closure" id="App\Repository\DetailsListRepository"/>
-        <argument key="App\Repository\IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\IdDetailsManufacturerRepository"/>
-        <argument key="App\Repository\InvoiceRepository" type="service_closure" id="App\Repository\InvoiceRepository"/>
-        <argument key="App\Repository\KuDirRepository" type="service_closure" id="App\Repository\KuDirRepository"/>
-        <argument key="App\Repository\OriginalRoomsRepository" type="service_closure" id="App\Repository\OriginalRoomsRepository"/>
-        <argument key="App\Repository\PaymentMethodRepository" type="service_closure" id="App\Repository\PaymentMethodRepository"/>
-        <argument key="App\Repository\RefundActivityRepository" type="service_closure" id="App\Repository\RefundActivityRepository"/>
-        <argument key="App\Repository\RefundDateRepository" type="service_closure" id="App\Repository\RefundDateRepository"/>
-        <argument key="App\Repository\SidesRepository" type="service_closure" id="App\Repository\SidesRepository"/>
-        <argument key="App\Repository\SoldRepository" type="service_closure" id="App\Repository\SoldRepository"/>
+        <argument key="App\Repository\RepositoryCounterparty\CounterpartyRepository" type="service_closure" id="App\Repository\RepositoryCounterparty\CounterpartyRepository"/>
+        <argument key="App\Repository\RepositoryIncomingDocuments\InvoiceRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\InvoiceRepository"/>
+        <argument key="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository" type="service_closure" id="App\Repository\RepositoryIncomingDocuments\PaymentMethodRepository"/>
+        <argument key="App\Repository\RepositoryKuDir\KuDirRepository" type="service_closure" id="App\Repository\RepositoryKuDir\KuDirRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\AvailabilityRepository" type="service_closure" id="App\Repository\RepositoryPartNo\AvailabilityRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\AxlesRepository" type="service_closure" id="App\Repository\RepositoryPartNo\AxlesRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\BodiesRepository" type="service_closure" id="App\Repository\RepositoryPartNo\BodiesRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\CarBrandsRepository" type="service_closure" id="App\Repository\RepositoryPartNo\CarBrandsRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\DetailsListRepository" type="service_closure" id="App\Repository\RepositoryPartNo\DetailsListRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository" type="service_closure" id="App\Repository\RepositoryPartNo\IdDetailsManufacturerRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\OriginalRoomsRepository" type="service_closure" id="App\Repository\RepositoryPartNo\OriginalRoomsRepository"/>
+        <argument key="App\Repository\RepositoryPartNo\SidesRepository" type="service_closure" id="App\Repository\RepositoryPartNo\SidesRepository"/>
+        <argument key="App\Repository\RepositoryPrice\SoldRepository" type="service_closure" id="App\Repository\RepositoryPrice\SoldRepository"/>
+        <argument key="App\Repository\RepositoryRefund\RefundActivityRepository" type="service_closure" id="App\Repository\RepositoryRefund\RefundActivityRepository"/>
+        <argument key="App\Repository\RepositoryRefund\RefundDateRepository" type="service_closure" id="App\Repository\RepositoryRefund\RefundDateRepository"/>
       </argument>
     </service>
     <service id=".service_locator.KLVvNIq" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -5774,7 +5776,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.yoc1WkM"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.7nwjJs3"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -5788,20 +5790,19 @@
     <service id="Psr\Log\LoggerInterface $debugLogger" alias="monolog.logger.debug"/>
     <service id="Psr\Log\LoggerInterface $deprecationLogger" alias="monolog.logger.deprecation"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
-    <service id=".service_locator.49ahYN1" alias=".service_locator.k0Abh5g"/>
-    <service id=".service_locator.o6IkleW" alias=".service_locator.AOBeOHN"/>
-    <service id=".service_locator.nTUmRVr" alias=".service_locator.hEJ63K8"/>
-    <service id=".service_locator.f6TPyZV" alias=".service_locator.6tQeCMB"/>
-    <service id=".service_locator.y9JlpNl" alias=".service_locator.16FGhqR"/>
-    <service id=".service_locator.K8JWs5c" alias=".service_locator.Sj9YQbw"/>
-    <service id=".service_locator.fj2OVkz" alias=".service_locator.axXzMBt"/>
-    <service id=".service_locator.2_UOsCe" alias=".service_locator.4vTIIZS"/>
-    <service id=".service_locator.QMNftrP" alias=".service_locator.wkuYef5"/>
-    <service id=".service_locator.IIkXmpo" alias=".service_locator.HvY69Ot"/>
-    <service id=".service_locator.DS5_PfQ" alias=".service_locator.FECJdp3"/>
-    <service id=".service_locator.OyB0_mz" alias=".service_locator.yoc1WkM"/>
+    <service id=".service_locator.dCVTqFX" alias=".service_locator.7DBoiXF"/>
+    <service id=".service_locator.gIWOCez" alias=".service_locator.ms_7f9Z"/>
+    <service id=".service_locator.kGTFSF0" alias=".service_locator.rGPmLAm"/>
+    <service id=".service_locator.aSsrRXF" alias=".service_locator.jFaokal"/>
+    <service id=".service_locator.UU_gcmV" alias=".service_locator.X6ECqyi"/>
+    <service id=".service_locator.0hV6hjS" alias=".service_locator.3r7sRWX"/>
+    <service id=".service_locator.6wc2Jhh" alias=".service_locator.lnU._zX"/>
+    <service id=".service_locator.aTBH4iJ" alias=".service_locator.tjlWKb2"/>
+    <service id=".service_locator.9irRwJ7" alias=".service_locator.2OWCZjk"/>
+    <service id=".service_locator.B6s2_vN" alias=".service_locator.gKFi.ZU"/>
+    <service id=".service_locator.8aDeWuN" alias=".service_locator.7nwjJs3"/>
     <service id=".service_locator.zOrwI6F" alias=".service_locator.nrgc8tJ"/>
-    <service id=".service_locator.1MkpuWJ" alias=".service_locator.8GsxKp9"/>
+    <service id=".service_locator.ob7QPVc" alias=".service_locator.gsQ8.IP"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="validator" alias="debug.validator"/>
@@ -5815,17 +5816,17 @@
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
     <service id=".service_locator.HNibOYA" alias=".service_locator.arTJFd8"/>
     <service id=".service_locator.eQ296SW" alias=".service_locator.o6sN0hZ"/>
-    <service id=".service_locator..01V9I4" alias=".service_locator.k0Abh5g"/>
-    <service id=".service_locator.9d60zGE" alias=".service_locator.AOBeOHN"/>
-    <service id=".service_locator.X42Vubo" alias=".service_locator.hEJ63K8"/>
-    <service id=".service_locator.LY4iNJl" alias=".service_locator.6tQeCMB"/>
-    <service id=".service_locator.pO.gOFO" alias=".service_locator.16FGhqR"/>
-    <service id=".service_locator.76TjQWA" alias=".service_locator.Sj9YQbw"/>
-    <service id=".service_locator.tMaJddQ" alias=".service_locator.axXzMBt"/>
-    <service id=".service_locator.i2LCHhB" alias=".service_locator.4vTIIZS"/>
-    <service id=".service_locator.l7a7VT6" alias=".service_locator.wkuYef5"/>
-    <service id=".service_locator.j5cfWqX" alias=".service_locator.HvY69Ot"/>
-    <service id=".service_locator.jdO2PI1" alias=".service_locator.FECJdp3"/>
+    <service id=".service_locator.VHmeS_9" alias=".service_locator.7DBoiXF"/>
+    <service id=".service_locator.pJLJOZ5" alias=".service_locator.ms_7f9Z"/>
+    <service id=".service_locator.6hf7lCc" alias=".service_locator.rGPmLAm"/>
+    <service id=".service_locator.Ve7xajB" alias=".service_locator.jFaokal"/>
+    <service id=".service_locator.iYRvEMi" alias=".service_locator.X6ECqyi"/>
+    <service id=".service_locator.kiFy9Pq" alias=".service_locator.3r7sRWX"/>
+    <service id=".service_locator.wvFblCE" alias=".service_locator.lnU._zX"/>
+    <service id=".service_locator.6Q_IMcZ" alias=".service_locator.tjlWKb2"/>
+    <service id=".service_locator.kwYpOMv" alias=".service_locator.2OWCZjk"/>
+    <service id=".service_locator.F4Ad5_p" alias=".service_locator.gKFi.ZU"/>
+    <service id=".service_locator.CMXUBRL" alias=".service_locator.CUqvNoJ"/>
     <service id=".service_locator.HxfGI0d" alias=".service_locator.O2p6Lk7"/>
     <service id=".service_locator.3bxtozr" alias=".service_locator._ju.bgC"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>

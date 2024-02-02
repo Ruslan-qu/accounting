@@ -2,15 +2,15 @@
 
 namespace App\Form\FormsIncomingDocuments;
 
-use App\Entity\Invoice;
-use App\Entity\Counterparty;
-use App\Entity\PaymentMethod;
-use App\Entity\RefundActivity;
 use Symfony\Component\Form\AbstractType;
+use App\Entity\EntitiesRefund\RefundActivity;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\EntitiesCounterparty\Counterparty;
+use App\Entity\EntitiesIncomingDocuments\Invoice;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\EntitiesIncomingDocuments\PaymentMethod;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
