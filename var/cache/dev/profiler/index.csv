@@ -6928,3 +6928,9 @@ f12021,172.18.0.1,GET,http://localhost:888/ku_dir,1706884684,,200
 ef8233,172.18.0.1,GET,http://localhost:888/incoming_documents,1706884689,,200
 4b3a81,172.18.0.1,GET,http://localhost:888/incoming_documents,1706888244,,200
 dbfc9f,172.18.0.1,GET,http://localhost:888/incoming_documents,1706888800,,200
+e88483,172.18.0.1,GET,http://localhost:888/,1707043065,,200
+1ea843,172.18.0.1,GET,http://localhost:888/incoming_documents,1707043093,,200
+004dc4,172.18.0.1,GET,http://localhost:888/saving_file,1707043555,f0d278,500
+f0d278,172.18.0.1,POST,http://localhost:888/saving_file,1707043555,,500
+fc5f31,172.18.0.1,GET,http://localhost:888/,1707044113,,200
+20478d,172.18.0.1,GET,http://localhost:888/incoming_documents,1707044121,,200

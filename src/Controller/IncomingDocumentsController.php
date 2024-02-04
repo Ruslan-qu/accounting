@@ -336,8 +336,8 @@ class IncomingDocumentsController extends AbstractController
         /*Валидация формы ручного сохранения счет-фактур из файла */
         if ($form_save_file->isSubmitted()) {
             if ($form_save_file->isValid()) {
-
-                $lines = file($form_save_file['file_save']->getData()->getPathname());
+                //dd($form_save_file['file_save']->getData());
+                $lines = file($form_save_file['file_save']->getData()->getRealPath());
                 dd($lines);
 
                 //return $this->redirectToRoute('incoming_documents');
